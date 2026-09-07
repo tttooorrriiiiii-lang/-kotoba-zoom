@@ -1,29 +1,47 @@
 <!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ことばズーム｜抽象化・具体化ゲーム</title><style>
 :root{--bg:#f7f5ef;--ink:#20211e;--muted:#706f68;--line:#d9d5ca;--up:#eef0ff;--down:#fff0ea}*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 15% 5%,#e9eaff 0,transparent 28%),radial-gradient(circle at 85% 95%,#ffe8df 0,transparent 30%),var(--bg);color:var(--ink);font-family:Inter,"Hiragino Sans","Yu Gothic",sans-serif}button,input{font:inherit}button{cursor:pointer}.app{max-width:980px;margin:auto;padding:20px 14px 44px}header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px}.brand{display:flex;gap:10px;align-items:center}.logo{width:42px;height:42px;border:2px solid;border-radius:14px;display:grid;place-items:center;background:#fff;font-weight:900}h1{font-size:20px;margin:0}.sub{font-size:11px;color:var(--muted);margin-top:2px}.ghost{border:1px solid var(--line);background:#fff9;border-radius:999px;padding:8px 10px}.layout{display:grid;grid-template-columns:minmax(0,1fr) 280px;gap:16px}.main,.panel{background:#fffdf8e8;border:1px solid var(--line);box-shadow:0 18px 50px #2221}.main{border-radius:28px;padding:18px}.stage{min-height:610px;display:flex;flex-direction:column;align-items:center;justify-content:center}.level{font-size:10px;font-weight:900;letter-spacing:.12em;color:var(--muted);margin:8px}.zoom{width:min(430px,96%);border:1px solid var(--line);border-radius:18px;padding:14px 16px;text-align:left;display:flex;justify-content:space-between;align-items:center}.zoom.up{background:var(--up)}.zoom.down{background:var(--down)}.zoom b{font-size:15px}.zoom small{color:var(--muted)}.line{height:28px;width:2px;background:var(--line)}.card{width:min(500px,98%);border:2px solid;border-radius:26px;background:#fff;box-shadow:0 13px 0 #e7e3d8;padding:24px 18px;text-align:center}.eyebrow{font-size:10px;color:var(--muted);font-weight:900;letter-spacing:.1em}.word{font-size:clamp(36px,8vw,58px);font-weight:900;margin:8px 0}.reason{font-size:12px;line-height:1.6;color:var(--muted)}.status{display:inline-block;margin-top:9px;border-radius:999px;padding:6px 9px;background:#f0eee8;font-size:10px;font-weight:800}.status.good{background:#eaf6ec;color:#315e3b}.status.warn{background:#fff0d6;color:#795821}.start{display:flex;gap:8px;width:min(540px,100%);margin-top:18px}.start input{flex:1;border:1px solid var(--line);border-radius:13px;padding:12px;background:#fff}.primary{border:0;border-radius:13px;padding:11px 14px;background:#20231f;color:#fff;font-weight:900}.side{display:flex;flex-direction:column;gap:12px}.panel{border-radius:20px;padding:15px}.panel h2{font-size:13px;margin:0 0 10px}.panel p{font-size:11px;line-height:1.6;color:var(--muted);margin:0}.quest{background:#202520;color:#fff}.quest p{color:#c9d0ca}.bar{height:7px;background:#404640;border-radius:999px;margin:10px 0;overflow:hidden}.bar i{display:block;height:100%;width:0;background:#fff}.history{display:flex;flex-direction:column;gap:7px;max-height:330px;overflow:auto}.h{display:grid;grid-template-columns:26px 1fr;gap:7px}.dot{width:26px;height:26px;border-radius:9px;display:grid;place-items:center;background:#eeeae0;font-size:11px;font-weight:900}.dot.up{background:#e8eaff}.dot.down{background:#ffe8e0}.hc{border-bottom:1px solid #ece8df;padding-bottom:7px}.hc b{font-size:12px}.hc span{display:block;font-size:10px;color:var(--muted);margin-top:2px}.modal{position:fixed;inset:0;background:#15151055;display:none;place-items:center;padding:18px;z-index:10}.modal.show{display:grid}.dialog{width:min(480px,100%);max-height:84vh;overflow:auto;background:#fff;border-radius:22px;padding:18px}.dialog h3{margin:0 0 5px}.help{font-size:11px;color:var(--muted);line-height:1.5}.choices{display:grid;gap:7px;margin:13px 0}.choice{border:1px solid var(--line);background:#faf9f5;border-radius:13px;padding:11px;text-align:left}.top{display:flex;justify-content:space-between;gap:8px}.cw{font-weight:900}.score{font-size:9px;background:#ece9e2;border-radius:999px;padding:4px 6px;white-space:nowrap}.meta{font-size:9px;color:var(--muted);margin-top:5px}.manual{display:flex;gap:7px}.manual input{flex:1;border:1px solid var(--line);border-radius:11px;padding:10px}.close{float:right;border:0;background:none;font-size:20px}.credit{text-align:center;font-size:9px;color:var(--muted);line-height:1.6;margin-top:12px}@media(max-width:760px){.layout{grid-template-columns:1fr}.stage{min-height:570px}.side{display:grid;grid-template-columns:1fr 1fr}.quest{grid-column:1/-1}}@media(max-width:520px){.app{padding:12px 10px 36px}.sub{display:none}.main{padding:12px;border-radius:21px}.side{grid-template-columns:1fr}.quest{grid-column:auto}.start{flex-direction:column}.primary{width:100%}}
-</style></head><body><div class="app"><header><div class="brand"><div class="logo">↕</div><div><h1>ことばズーム</h1><div class="sub">意味を保ったまま、抽象へ・具体へ。</div></div></div><button class="ghost" id="random">🎲 おまかせ</button></header><div class="layout"><main class="main"><section class="stage"><div class="level">ZOOM OUT · 抽象へ</div><button class="zoom up" id="up"><span><b>↑ 抽象化する</b><br><small>つまり何？ 何のため？</small></span><strong>−</strong></button><div class="line"></div><div class="card"><div class="eyebrow" id="eyebrow">START WORD</div><div class="word" id="word">カフェ</div><div class="reason" id="reason">ConceptNetの上位・下位概念を軸に、意味の階段を自動で探すで。</div><div class="status" id="status">🌱 ↑か↓を押してみてな</div></div><div class="line"></div><button class="zoom down" id="down"><span><b>↓ 具体化する</b><br><small>どんな？ どこで？ 何の種類？</small></span><strong>＋</strong></button><div class="level">ZOOM IN · 具体へ</div><div class="start"><input id="input" placeholder="好きな言葉 例：窓、犬、未来、コーヒー"><button class="primary" id="start">この言葉で開始</button></div></section><div class="credit">ConceptNet 5 の IsA（上位・下位概念）を本線にし、抽象度スコアは補助判定にだけ使用。候補は正解ではなく、発想の足場です。</div></main><aside class="side"><section class="panel quest"><h2>🎯 5回ズーム</h2><p>上下を行き来して、最初と違う場所へ着地しよう。</p><div class="bar"><i id="bar"></i></div><p id="count">0 / 5</p></section><section class="panel"><h2>🪜 思考の足あと</h2><div class="history" id="history"></div></section><section class="panel"><h2>🧠 見方</h2><p><b>抽象化</b>＝意味を広げる。<br><b>具体化</b>＝意味を狭めて解像度を上げる。<br><br>まずは「AはBの一種」と言えるかを本線に判定するで。</p></section></aside></div></div><div class="modal" id="modal"><div class="dialog"><button class="close" id="close">×</button><h3 id="title"></h3><div class="help" id="help"></div><div class="choices" id="choices"></div><div class="manual"><input id="manual" placeholder="自分の答えも入れられる"><button class="primary" id="add">追加</button></div></div></div><script>
+
+.sourcechip{font-size:9px;border:1px solid #d9d5ca;border-radius:999px;padding:3px 6px;background:#fff;white-space:nowrap}.empty{border:1px dashed var(--line);background:#faf9f5;border-radius:14px;padding:15px;font-size:12px;line-height:1.7;color:var(--muted)}.empty b{color:var(--ink)}.loadingnote{font-size:10px;color:var(--muted);margin:5px 0 10px}.choice.core{border-color:#bfc5ff;background:#f5f5ff}.choice.remote{background:#fff}.hintbox{margin-top:8px;padding:10px 12px;border-radius:12px;background:#f2f0e9;font-size:10px;color:var(--muted);line-height:1.6}
+</style></head><body><div class="app"><header><div class="brand"><div class="logo">↕</div><div><h1>ことばズーム</h1><div class="sub">意味を保ったまま、抽象へ・具体へ。</div></div></div><button class="ghost" id="random">🎲 おまかせ</button></header><div class="layout"><main class="main"><section class="stage"><div class="level">ZOOM OUT · 抽象へ</div><button class="zoom up" id="up"><span><b>↑ 抽象化する</b><br><small>つまり何？ 何のため？</small></span><strong>−</strong></button><div class="line"></div><div class="card"><div class="eyebrow" id="eyebrow">START WORD</div><div class="word" id="word">カフェ</div><div class="reason" id="reason">内蔵階層＋Wikidata＋ConceptNetで、本当に上下する言葉だけを探すで。</div><div class="status" id="status">🌱 ↑か↓を押してみてな</div></div><div class="line"></div><button class="zoom down" id="down"><span><b>↓ 具体化する</b><br><small>どんな？ どこで？ 何の種類？</small></span><strong>＋</strong></button><div class="level">ZOOM IN · 具体へ</div><div class="start"><input id="input" placeholder="好きな言葉 例：窓、犬、未来、コーヒー"><button class="primary" id="start">この言葉で開始</button></div></section><div class="credit">分類の上下（AはBの一種）を本線に判定。通信できない時も主要語は内蔵階層で動きます。関連語を抽象語としては表示しません。</div></main><aside class="side"><section class="panel quest"><h2>🎯 5回ズーム</h2><p>上下を行き来して、最初と違う場所へ着地しよう。</p><div class="bar"><i id="bar"></i></div><p id="count">0 / 5</p></section><section class="panel"><h2>🪜 思考の足あと</h2><div class="history" id="history"></div></section><section class="panel"><h2>🧠 見方</h2><p><b>抽象化</b>＝意味を広げる。<br><b>具体化</b>＝意味を狭めて解像度を上げる。<br><br>まずは「AはBの一種」と言えるかで上下を判定。関連しているだけの語は候補から外します。</p></section></aside></div></div><div class="modal" id="modal"><div class="dialog"><button class="close" id="close">×</button><h3 id="title"></h3><div class="help" id="help"></div><div class="choices" id="choices"></div><div class="manual"><input id="manual" placeholder="自分の答えも入れられる"><button class="primary" id="add">追加</button></div></div></div><script>
 const $=s=>document.querySelector(s);
-const starters=['窓','犬','カフェ','未来','雨','光','仕事','記憶','椅子','海','学校','電車'];
+const starters=['窓','犬','カフェ','未来','雨','光','仕事','記憶','椅子','海','学校','電車','猫','コーヒー'];
 let current='カフェ',moves=0,last='up',seq=0,history=[{word:'カフェ',type:'start',note:'スタート'}];
-const fallback={
-  up:['意味','役割','関係','目的','経験','状態'],
-  down:['具体的な種類','ある日の場面','身近な例','場所を決めたそれ','誰かのそれ','一つの出来事']
+
+// 通信が死んでも、よく使う語は必ず上下できる小さな階層辞書。
+// 値は「1段上」の候補。下方向はこの表を自動反転して作る。
+const CORE_UP={
+  '柴犬':['犬'],'秋田犬':['犬'],'チワワ':['犬'],'プードル':['犬'],'ダックスフンド':['犬'],'ポメラニアン':['犬'],'ラブラドール・レトリバー':['犬'],
+  '犬':['哺乳類','動物'],'猫':['哺乳類','動物'],'ウサギ':['哺乳類','動物'],'馬':['哺乳類','動物'],'牛':['哺乳類','動物'],'人間':['哺乳類','動物'],
+  '哺乳類':['脊椎動物','動物'],'鳥':['脊椎動物','動物'],'魚':['脊椎動物','動物'],'爬虫類':['脊椎動物','動物'],'両生類':['脊椎動物','動物'],
+  '脊椎動物':['動物'],'昆虫':['動物'],'動物':['生物'],'植物':['生物'],'菌類':['生物'],'生物':['生命体'],'生き物':['生命体'],'生命体':['存在'],
+  '存在':['もの・こと'],
+  'コーヒー':['飲み物','飲料'],'紅茶':['飲み物','飲料'],'緑茶':['飲み物','飲料'],'水':['飲み物','物質'],'ジュース':['飲み物','飲料'],
+  '飲み物':['飲料'],'飲料':['食品'],'パン':['食品'],'米':['食品'],'おにぎり':['食品'],'カレー':['料理','食品'],'ラーメン':['料理','食品'],'料理':['食品'],
+  '食品':['物'],'物質':['物'],'物':['存在'],
+  'カフェ':['飲食店','店舗','施設'],'喫茶店':['飲食店','店舗'],'レストラン':['飲食店','店舗'],'居酒屋':['飲食店','店舗'],'飲食店':['店舗','施設'],
+  '本屋':['店舗'],'書店':['店舗'],'コンビニ':['店舗'],'スーパー':['店舗'],'店舗':['施設'],'美術館':['文化施設','施設'],'博物館':['文化施設','施設'],'映画館':['文化施設','施設'],'文化施設':['施設'],'施設':['場所'],
+  '学校':['教育機関','施設'],'大学':['教育機関','学校'],'高校':['学校'],'中学校':['学校'],'小学校':['学校'],'教育機関':['組織','施設'],'会社':['組織'],'企業':['組織'],'組織':['集団'],
+  '集団':['社会的存在'],'社会的存在':['存在'],
+  '電車':['鉄道車両','乗り物'],'新幹線':['鉄道車両','電車'],'地下鉄':['鉄道','交通手段'],'鉄道車両':['乗り物'],'自動車':['乗り物'],'車':['乗り物'],'自転車':['乗り物'],'飛行機':['乗り物'],'船':['乗り物'],
+  '乗り物':['移動手段'],'鉄道':['交通手段'],'バス':['交通手段','乗り物'],'交通手段':['移動手段'],'移動手段':['手段'],'手段':['方法'],'方法':['概念'],
+  '椅子':['家具'],'机':['家具'],'テーブル':['家具'],'ベッド':['家具'],'家具':['道具','物'],'道具':['物'],
+  '窓':['建具','建築要素'],'ドア':['建具','建築要素'],'扉':['建具','建築要素'],'建具':['建築要素'],'壁':['建築要素'],'屋根':['建築要素'],'建築要素':['構造物の一部'],'構造物の一部':['物'],
+  '家':['建物'],'ビル':['建物'],'マンション':['建物'],'建物':['構造物','場所'],'構造物':['物'],
+  '海':['水域','自然環境'],'川':['水域','自然環境'],'湖':['水域','自然環境'],'水域':['地理的対象'],'山':['地形','自然環境'],'島':['地形','地理的対象'],'地形':['地理的対象'],'地理的対象':['場所'],'自然環境':['環境'],'環境':['状態・条件'],
+  '雨':['降水','気象現象'],'雪':['降水','気象現象'],'降水':['気象現象'],'台風':['気象現象'],'風':['気象現象'],'気象現象':['自然現象'],'自然現象':['現象'],'現象':['出来事・状態'],
+  '光':['物理現象','現象'],'音':['物理現象','現象'],'熱':['物理現象','現象'],'物理現象':['自然現象'],
+  '仕事':['活動','労働'],'労働':['活動','行為'],'勉強':['学習','活動'],'学習':['活動','認知活動'],'散歩':['活動','行為'],'運動':['活動','行為'],'活動':['行為・出来事'],'行為':['出来事'],'認知活動':['心的過程'],
+  '記憶':['心的過程','認知機能'],'思考':['心的過程'],'感情':['心的状態'],'安心':['心的状態'],'不安':['心的状態'],'心的過程':['心理現象'],'心的状態':['心理現象'],'認知機能':['心理機能'],'心理機能':['心理現象'],'心理現象':['現象'],
+  '未来':['時間','時間概念'],'過去':['時間','時間概念'],'現在':['時間','時間概念'],'時間':['概念'],'時間概念':['概念'],'可能性':['概念'],'意味':['概念'],'目的':['概念'],'価値':['概念'],'関係':['概念'],'概念':['抽象的なもの'],'抽象的なもの':['存在'],
+  '場所':['空間的対象'],'空間':['概念'],'空間的対象':['存在'],
+  '色':['視覚属性','属性'],'赤':['色'],'青':['色'],'緑':['色'],'視覚属性':['属性'],'属性':['概念']
 };
-const LOCAL_SCORES={
-  '窓':1.55,'境界':3.62,'視点':3.72,'雨':1.46,'天気':2.25,'自然':3.12,'変化':3.94,
-  '犬':1.18,'動物':1.68,'生き物':2.08,'生命':3.58,'存在':4.62,'愛':4.42,'感情':4.18,'関係':4.01,
-  '仕事':2.74,'活動':3.20,'役割':3.76,'社会':3.70,'カフェ':1.42,'喫茶店':1.30,'休憩':2.78,'交流':3.56,
-  '居場所':3.10,'安心':4.16,'所属':4.08,'欲求':4.46,'未来':4.10,'時間':4.22,'可能性':4.64,'未知':4.52,
-  'イス':1.12,'椅子':1.12,'家具':1.62,'道具':2.10,'光':2.05,'現象':3.68,'エネルギー':3.28,'知覚':4.12,
-  '街':1.80,'場所':2.72,'記憶':4.30,'経験':3.92,'認識':4.48,'世界':4.08,'構造':4.02,'状態':3.90,
-  'コーヒー':1.18,'飲み物':1.45,'飲料':1.64,'人間':1.86,'人':1.55,'仲間':2.72,'サービス':3.06,
-  '空間':3.24,'環境':3.42,'接続':3.50,'区別':4.08,'解釈':4.52,'目的':4.44,'行動':3.22,'行為':3.50,
-  '海':1.35,'水':1.20,'自然環境':2.76,'学校':1.52,'教育':3.82,'学習':3.55,'電車':1.25,'交通':2.54,'移動':3.18
-};
-const REL_JA={IsA:'種類・上位概念',RelatedTo:'意味関連',UsedFor:'用途・目的',HasProperty:'性質',CapableOf:'できること',Causes:'結果',MotivatedByGoal:'目的',AtLocation:'場所',PartOf:'部分と全体',HasA:'持つもの',Synonym:'類義',SimilarTo:'類似',Antonym:'反対',CreatedBy:'作り手',ReceivesAction:'受ける作用',CausesDesire:'欲求を生む',Desires:'欲求',HasPrerequisite:'前提',HasSubevent:'過程'};
+const ALIASES={'いぬ':'犬','イヌ':'犬','わんこ':'犬','ワンコ':'犬','ねこ':'猫','ネコ':'猫','珈琲':'コーヒー','イス':'椅子','いす':'椅子','学校法人':'学校'};
+const REVERSE_CORE=(()=>{const r={};for(const [child,parents] of Object.entries(CORE_UP)){for(const p of parents)(r[p]??=[]).push(child)}return r})();
+
 function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
-function norm(s){return String(s??'').normalize('NFKC').trim().toLowerCase()}
-function conceptUri(word){return '/c/ja/'+encodeURIComponent(norm(word).replace(/\s+/g,'_'))}
-function idToLabel(id){if(!id||!id.startsWith('/c/ja/'))return'';const p=id.split('/')[3]||'';try{return decodeURIComponent(p).replaceAll('_',' ')}catch{return p.replaceAll('_',' ')}}
+function norm(s){return String(s??'').normalize('NFKC').trim()}
+function canonical(s){const n=norm(s);return ALIASES[n]||n}
 function render(){
   $('#word').textContent=current;
   $('#bar').style.width=Math.min(100,moves/5*100)+'%';
@@ -31,102 +49,104 @@ function render(){
   $('#history').innerHTML=history.map(x=>`<div class="h"><div class="dot ${x.type}">${x.type==='up'?'↑':x.type==='down'?'↓':'•'}</div><div class="hc"><b>${esc(x.word)}</b><span>${esc(x.note)}</span></div></div>`).join('')
 }
 function setStatus(t,k=''){const e=$('#status');e.textContent=t;e.className='status'+(k?' '+k:'')}
-function start(w){w=String(w||'').trim();if(!w)return;seq++;current=w;moves=0;history=[{word:w,type:'start',note:'スタート'}];$('#reason').textContent='ここから意味の階段を自動で探すで。';$('#eyebrow').textContent='START WORD';setStatus('🌱 ↑か↓を押してみてな');render()}
-function edgeOther(edge,currentNorm){
-  const a=edge.start,b=edge.end;
-  const al=norm(a?.label||idToLabel(a?.['@id'])),bl=norm(b?.label||idToLabel(b?.['@id']));
-  if(al===currentNorm)return{label:b?.label||idToLabel(b?.['@id']),side:'end'};
-  if(bl===currentNorm)return{label:a?.label||idToLabel(a?.['@id']),side:'start'};
-  return null
-}
-function scoreOk(dir,currentScore,candidateScore,tolerance=.10){
-  if(currentScore==null||candidateScore==null)return true;
-  const delta=candidateScore-currentScore;
-  return dir==='up'?delta>=-tolerance:delta<=tolerance
-}
-async function fetchJSON(url,ms=5500){
-  const c=new AbortController(),t=setTimeout(()=>c.abort(),ms);
-  try{const r=await fetch(url,{signal:c.signal});if(!r.ok)throw new Error('HTTP '+r.status);return await r.json()}finally{clearTimeout(t)}
-}
-async function directConceptNet(word,dir){
-  const uri=conceptUri(word),cn=norm(word),map=new Map(),cur=LOCAL_SCORES[cn]??null;
-  const [isa,all]=await Promise.all([
-    fetchJSON(`https://api.conceptnet.io/query?node=${uri}&rel=/r/IsA&other=/c/ja&limit=120`).catch(()=>null),
-    fetchJSON(`https://api.conceptnet.io/query?node=${uri}&other=/c/ja&limit=120`).catch(()=>null)
-  ]);
-  if(!isa&&!all)throw new Error('ConceptNet unavailable');
-  const add=x=>{const k=norm(x.word);if(!k||k===cn||k.length>30)return;const old=map.get(k);if(!old||x.relevance>old.relevance)map.set(k,x)};
-
-  // 本線：IsA の方向で、分類として本当に上下する候補だけを優先する。
-  for(const edge of isa?.edges||[]){
-    const other=edgeOther(edge,cn);if(!other)continue;
-    const correct=dir==='up'?other.side==='end':other.side==='start';
-    if(!correct)continue;
-    const label=String(other.label||'').trim();if(!label)continue;
-    const weight=Number(edge.weight)||0;if(weight<.65)continue;
-    const sc=LOCAL_SCORES[norm(label)]??null;
-    if(!scoreOk(dir,cur,sc,.18))continue;
-    add({word:label,score:sc,delta:sc!=null&&cur!=null?sc-cur:null,relationJa:dir==='up'?'分類の抽象化・上位概念':'分類の具体化・下位概念',source:'ConceptNet IsA',kind:'hierarchy',relevance:100+Math.min(weight,5)*4});
+function start(w){w=String(w||'').trim();if(!w)return;seq++;current=w;moves=0;history=[{word:w,type:'start',note:'スタート'}];$('#reason').textContent='ここから「一種 ↔ 上位概念」の階段を探すで。';$('#eyebrow').textContent='START WORD';setStatus('🌱 ↑か↓を押してみてな');render()}
+function fetchJSON(url,ms=5000){const c=new AbortController(),t=setTimeout(()=>c.abort(),ms);return fetch(url,{signal:c.signal,headers:{'Accept':'application/json'}}).then(r=>{if(!r.ok)throw new Error('HTTP '+r.status);return r.json()}).finally(()=>clearTimeout(t))}
+function coreCandidates(word,dir){
+  const w=canonical(word),arr=(dir==='up'?CORE_UP[w]:REVERSE_CORE[w])||[];
+  let out=arr.map((x,i)=>({word:x,relationJa:dir==='up'?'分類の上位概念':'分類の下位概念',source:'内蔵階層',kind:'hierarchy',rank:300-i}));
+  // 末尾からかなり安全に推定できるものだけ。
+  if(!out.length&&dir==='up'){
+    const rules=[['犬','犬'],['猫','猫'],['大学','大学'],['高校','高校'],['中学校','中学校'],['小学校','小学校'],['美術館','美術館'],['博物館','博物館'],['映画館','映画館'],['駅','鉄道駅']];
+    for(const [suffix,parent] of rules){if(w!==parent&&w.endsWith(suffix)){out.push({word:parent,relationJa:'語形から推定した上位概念',source:'内蔵推定',kind:'hierarchy',rank:260});break}}
   }
-
-  // 補助：目的・文脈。関連語は抽象度の方向が確認できるものだけ。
-  for(const edge of all?.edges||[]){
-    const other=edgeOther(edge,cn);if(!other)continue;
-    const label=String(other.label||'').trim();if(!label)continue;
-    const relName=edge.rel?.label||'',weight=Number(edge.weight)||0;if(weight<.7)continue;
-    const sc=LOCAL_SCORES[norm(label)]??null,delta=sc!=null&&cur!=null?sc-cur:null;
-    let ok=false,relationJa='',kind='',base=0;
-    if(dir==='up'){
-      if(relName==='PartOf'&&other.side==='end'){ok=scoreOk(dir,cur,sc,.10);relationJa='全体・文脈へ広げる';kind='context';base=66}
-      else if((relName==='UsedFor'||relName==='MotivatedByGoal')&&other.side==='end'){ok=scoreOk(dir,cur,sc,.05);relationJa='目的・機能へ抽象化';kind='purpose';base=62}
-      else if(relName==='RelatedTo'&&delta!=null&&delta>=.30){ok=true;relationJa='抽象度で上方向を確認';kind='score';base=48}
-    }else{
-      if(relName==='PartOf'&&other.side==='start'){ok=scoreOk(dir,cur,sc,.10);relationJa='部分へ具体化';kind='part';base=66}
-      else if(relName==='RelatedTo'&&delta!=null&&delta<=-.30){ok=true;relationJa='抽象度で下方向を確認';kind='score';base=48}
-    }
-    if(!ok)continue;
-    add({word:label,score:sc,delta,relationJa,source:'ConceptNet + direction check',kind,relevance:base+Math.min(weight,5)*2});
-  }
-  return {word,dir,currentScore:cur,candidates:[...map.values()].sort((a,b)=>b.relevance-a.relevance).slice(0,8),status:{conceptnet:true,awdjRemote:false,direct:true}};
+  return out
 }
-async function getCandidates(word,dir){
-  try{
-    const r=await fetch(`/api/candidates?word=${encodeURIComponent(word)}&dir=${dir}`,{cache:'no-store'});
-    if(r.ok){const d=await r.json();if((d.candidates||[]).length)return d}
-  }catch{}
-  return await directConceptNet(word,dir)
+function nodeLabel(n){return String(n?.label||'').trim()}
+function conceptUri(word){return '/c/ja/'+encodeURIComponent(canonical(word).replace(/\s+/g,'_').toLowerCase())}
+async function conceptNetIsA(word,dir){
+  const w=canonical(word),wn=w.toLowerCase(),uri=conceptUri(w),url=`https://api.conceptnet.io/query?node=${uri}&rel=/r/IsA&other=/c/ja&limit=100`;
+  const d=await fetchJSON(url,4500),out=[];
+  for(const e of d.edges||[]){
+    const a=nodeLabel(e.start),b=nodeLabel(e.end),an=canonical(a).toLowerCase(),bn=canonical(b).toLowerCase();
+    if(dir==='up'&&an===wn&&b)out.push({word:b,relationJa:'IsA 上位概念',source:'ConceptNet',kind:'hierarchy',rank:140+(Number(e.weight)||0)});
+    if(dir==='down'&&bn===wn&&a)out.push({word:a,relationJa:'IsA 下位概念',source:'ConceptNet',kind:'hierarchy',rank:140+(Number(e.weight)||0)});
+  }
+  return out
+}
+const WD='https://www.wikidata.org/w/api.php';
+async function wdSearch(word){
+  const q=new URLSearchParams({action:'wbsearchentities',search:canonical(word),language:'ja',uselang:'ja',type:'item',limit:'4',format:'json',origin:'*'});
+  const d=await fetchJSON(`${WD}?${q}`,4500);return d.search||[]
+}
+async function wdLabels(ids){
+  if(!ids.length)return{};
+  const q=new URLSearchParams({action:'wbgetentities',ids:[...new Set(ids)].slice(0,30).join('|'),props:'labels|descriptions',languages:'ja|en',languagefallback:'1',format:'json',origin:'*'});
+  const d=await fetchJSON(`${WD}?${q}`,4500),m={};
+  for(const [id,e] of Object.entries(d.entities||{})){const lab=e.labels?.ja?.value||e.labels?.en?.value||'';m[id]={label:lab,desc:e.descriptions?.ja?.value||e.descriptions?.en?.value||''}}
+  return m
+}
+function claimIds(claims,prop){return (claims?.[prop]||[]).map(c=>c?.mainsnak?.datavalue?.value?.id).filter(Boolean)}
+function badWdLabel(label,desc=''){
+  const t=(label+' '+desc).toLowerCase();
+  return !label||/wikimedia|曖昧さ回避|ウィキメディア|taxon|分類群|scientific article|記事/.test(t)
+}
+async function wikidataUp(word){
+  const results=await wdSearch(word);if(!results.length)return[];
+  const exact=results.filter(x=>canonical(x.label)===canonical(word));const chosen=(exact.length?exact:results).slice(0,2),out=[];
+  for(const r of chosen){
+    const q=new URLSearchParams({action:'wbgetentities',ids:r.id,props:'claims',format:'json',origin:'*'});
+    const d=await fetchJSON(`${WD}?${q}`,4500),claims=d.entities?.[r.id]?.claims||{};
+    const p279=claimIds(claims,'P279'),p31=claimIds(claims,'P31'),labels=await wdLabels([...p279,...p31]);
+    for(const id of p279){const x=labels[id];if(x&&!badWdLabel(x.label,x.desc))out.push({word:x.label,relationJa:'subclass of・上位概念',source:'Wikidata',kind:'hierarchy',rank:125})}
+    for(const id of p31){const x=labels[id];if(x&&!badWdLabel(x.label,x.desc))out.push({word:x.label,relationJa:'instance of・分類',source:'Wikidata',kind:'hierarchy',rank:115})}
+  }
+  return out
+}
+async function wikidataDown(word){
+  const results=await wdSearch(word);if(!results.length)return[];const qid=results.find(x=>canonical(x.label)===canonical(word))?.id||results[0].id;
+  const sparql=`SELECT ?item ?itemLabel WHERE { { ?item wdt:P279 wd:${qid}. } UNION { ?item wdt:P31 wd:${qid}. } SERVICE wikibase:label { bd:serviceParam wikibase:language "ja,en". } } LIMIT 14`;
+  const url='https://query.wikidata.org/sparql?format=json&origin=*&query='+encodeURIComponent(sparql),d=await fetchJSON(url,5000),out=[];
+  for(const row of d.results?.bindings||[]){const label=row.itemLabel?.value||'';if(label&&!/^Q\d+$/.test(label)&&!badWdLabel(label,''))out.push({word:label,relationJa:'下位分類・具体例',source:'Wikidata',kind:'hierarchy',rank:115})}
+  return out
+}
+function mergeCandidates(...lists){
+  const cur=canonical(current).toLowerCase(),m=new Map();
+  for(const list of lists)for(const x of list||[]){const w=norm(x.word);if(!w||canonical(w).toLowerCase()===cur||w.length>32)continue;const k=canonical(w).toLowerCase();const old=m.get(k);if(!old||(x.rank||0)>(old.rank||0))m.set(k,{...x,word:w})}
+  return [...m.values()].sort((a,b)=>(b.rank||0)-(a.rank||0)).slice(0,10)
+}
+async function remoteCandidates(word,dir){
+  const jobs=[conceptNetIsA(word,dir),dir==='up'?wikidataUp(word):wikidataDown(word)];
+  const r=await Promise.allSettled(jobs);return r.flatMap(x=>x.status==='fulfilled'?x.value:[])
 }
 async function open(dir){
-  last=dir;const my=++seq;
+  last=dir;const my=++seq,wordAtOpen=current;
   $('#title').textContent=dir==='up'?'↑ 抽象化候補':'↓ 具体化候補';
-  $('#help').textContent=`「${current}」と意味がつながり、${dir==='up'?'より抽象的':'より具体的'}な言葉を自動で探しています。`;
-  $('#choices').innerHTML='<div class="help">ConceptNetを検索中… 🧠🔎</div>';
-  $('#modal').classList.add('show');setStatus('🧠 自動検索中…');
+  $('#help').textContent=`「${current}」を、${dir==='up'?'「これは何の一種？」で上へ':'「この中には何がある？」で下へ'}たどります。`;
+  $('#modal').classList.add('show');
+  const local=coreCandidates(current,dir);
+  if(local.length){show(local,dir,true);setStatus('内蔵階層で候補あり · 外部辞書も検索中…','good')}
+  else{$('#choices').innerHTML='<div class="help">上位・下位概念を検索中… 🧠🔎</div>';setStatus('🧠 階層辞書を検索中…')}
   try{
-    const d=await getCandidates(current,dir);if(my!==seq)return;
-    let a=d.candidates||[];
-    if(!a.length)throw new Error('no candidates');
-    if(a.length<4)a=a.concat(fallback[dir].filter(w=>!a.some(x=>x.word===w)).slice(0,4-a.length).map(word=>({word,source:'fallback',relationJa:'発想ヒント'})));
-    show(a,dir);
-    const strict=Number.isFinite(d.currentScore);
-    if(strict)setStatus(`自動候補OK · 抽象度 ${d.currentScore.toFixed(2)} / 5`,'good');
-    else setStatus('自動候補OK · 上位/下位概念を優先','good');
-  }catch(e){
-    show(fallback[dir].map(word=>({word,source:'fallback',relationJa:'発想ヒント'})),dir);
-    setStatus('自動データに繋がらへんためヒント表示','warn')
-  }
+    const remote=await remoteCandidates(wordAtOpen,dir);if(my!==seq||current!==wordAtOpen)return;
+    const all=mergeCandidates(local,remote);
+    if(all.length){show(all,dir,false);setStatus(`本当の${dir==='up'?'上位':'下位'}概念 ${all.length}件`,'good')}
+    else{showEmpty(dir);setStatus('自動の上下関係が見つからへんかった','warn')}
+  }catch{if(my!==seq)return;if(local.length){show(local,dir,false);setStatus('内蔵階層の候補を表示','good')}else{showEmpty(dir);setStatus('自動辞書に繋がらへんかった','warn')}}
 }
-function show(a,dir){
-  $('#choices').innerHTML=a.map((x,i)=>`<button class="choice" data-i="${i}"><div class="top"><span class="cw">${esc(x.word)}</span>${Number.isFinite(x.score)?`<span class="score">抽象度 ${x.score.toFixed(2)}</span>`:''}</div><div class="meta">${esc(x.relationJa||'意味的に近い')} · ${x.kind==='hierarchy'?'本線':x.source==='fallback'?'ヒント':'補助候補'}</div></button>`).join('');
+function show(a,dir,loading=false){
+  $('#choices').innerHTML=(loading?'<div class="loadingnote">まず確実な候補を表示中。外部辞書も追加検索しています…</div>':'')+a.map((x,i)=>`<button class="choice ${x.source?.startsWith('内蔵')?'core':'remote'}" data-i="${i}"><div class="top"><span class="cw">${esc(x.word)}</span><span class="sourcechip">${esc(x.source||'階層辞書')}</span></div><div class="meta">${esc(x.relationJa||'上位・下位概念')} · 本線</div></button>`).join('');
   document.querySelectorAll('.choice').forEach(b=>b.onclick=()=>choose(a[+b.dataset.i],dir))
+}
+function showEmpty(dir){
+  const h=dir==='up'?'「これは何の一種？」→ 犬なら“動物”のように考える':'「この種類には何がある？」→ 動物なら“犬”のように考える';
+  $('#choices').innerHTML=`<div class="empty"><b>自動候補は見つからへんかった。</b><br>前みたいに「意味・役割・関係」を抽象化候補としては出しません。<div class="hintbox">💡 考えるヒント：${esc(h)}</div></div>`
 }
 function choose(x,dir){
   const prev=current;current=String(x.word||'').trim();if(!current)return;moves++;
-  const d=Number.isFinite(x.delta)?` · 差 ${Math.abs(x.delta).toFixed(2)}`:'';
-  history.push({word:current,type:dir,note:(x.relationJa||'自分の答え')+d});
+  history.push({word:current,type:dir,note:x.relationJa||'自分の答え'});
   $('#eyebrow').textContent=dir==='up'?'ZOOM OUT ↑':'ZOOM IN ↓';
-  $('#reason').textContent=`「${prev}」から${dir==='up'?'抽象':'具体'}側へ移動した。`;
-  $('#modal').classList.remove('show');setStatus('次も自動で探せるで 🌱');render()
+  $('#reason').textContent=`「${prev}」から${dir==='up'?'上位概念':'下位概念'}の「${current}」へ。`;
+  $('#modal').classList.remove('show');setStatus('次の階層も探せるで 🌱');render()
 }
 $('#up').onclick=()=>open('up');$('#down').onclick=()=>open('down');$('#start').onclick=()=>start($('#input').value);$('#input').onkeydown=e=>{if(e.key==='Enter')start(e.target.value)};$('#random').onclick=()=>start(starters[Math.floor(Math.random()*starters.length)]);$('#close').onclick=()=>{$('#modal').classList.remove('show');seq++};$('#modal').onclick=e=>{if(e.target.id==='modal'){$('#modal').classList.remove('show');seq++}};$('#add').onclick=()=>choose({word:$('#manual').value,relationJa:'自分の答え'},last);$('#manual').onkeydown=e=>{if(e.key==='Enter')$('#add').click()};render();
 </script></body></html>
