@@ -1,6 +1,6 @@
 <!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ことばズーム｜抽象化・具体化ゲーム</title><style>
 :root{--bg:#f7f5ef;--ink:#20211e;--muted:#706f68;--line:#d9d5ca;--up:#eef0ff;--down:#fff0ea}*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 15% 5%,#e9eaff 0,transparent 28%),radial-gradient(circle at 85% 95%,#ffe8df 0,transparent 30%),var(--bg);color:var(--ink);font-family:Inter,"Hiragino Sans","Yu Gothic",sans-serif}button,input{font:inherit}button{cursor:pointer}.app{max-width:980px;margin:auto;padding:20px 14px 44px}header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px}.brand{display:flex;gap:10px;align-items:center}.logo{width:42px;height:42px;border:2px solid;border-radius:14px;display:grid;place-items:center;background:#fff;font-weight:900}h1{font-size:20px;margin:0}.sub{font-size:11px;color:var(--muted);margin-top:2px}.ghost{border:1px solid var(--line);background:#fff9;border-radius:999px;padding:8px 10px}.layout{display:grid;grid-template-columns:minmax(0,1fr) 280px;gap:16px}.main,.panel{background:#fffdf8e8;border:1px solid var(--line);box-shadow:0 18px 50px #2221}.main{border-radius:28px;padding:18px}.stage{min-height:610px;display:flex;flex-direction:column;align-items:center;justify-content:center}.level{font-size:10px;font-weight:900;letter-spacing:.12em;color:var(--muted);margin:8px}.zoom{width:min(430px,96%);border:1px solid var(--line);border-radius:18px;padding:14px 16px;text-align:left;display:flex;justify-content:space-between;align-items:center}.zoom.up{background:var(--up)}.zoom.down{background:var(--down)}.zoom b{font-size:15px}.zoom small{color:var(--muted)}.line{height:28px;width:2px;background:var(--line)}.card{width:min(500px,98%);border:2px solid;border-radius:26px;background:#fff;box-shadow:0 13px 0 #e7e3d8;padding:24px 18px;text-align:center}.eyebrow{font-size:10px;color:var(--muted);font-weight:900;letter-spacing:.1em}.word{font-size:clamp(36px,8vw,58px);font-weight:900;margin:8px 0}.reason{font-size:12px;line-height:1.6;color:var(--muted)}.status{display:inline-block;margin-top:9px;border-radius:999px;padding:6px 9px;background:#f0eee8;font-size:10px;font-weight:800}.status.good{background:#eaf6ec;color:#315e3b}.status.warn{background:#fff0d6;color:#795821}.start{display:flex;gap:8px;width:min(540px,100%);margin-top:18px}.start input{flex:1;border:1px solid var(--line);border-radius:13px;padding:12px;background:#fff}.primary{border:0;border-radius:13px;padding:11px 14px;background:#20231f;color:#fff;font-weight:900}.side{display:flex;flex-direction:column;gap:12px}.panel{border-radius:20px;padding:15px}.panel h2{font-size:13px;margin:0 0 10px}.panel p{font-size:11px;line-height:1.6;color:var(--muted);margin:0}.quest{background:#202520;color:#fff}.quest p{color:#c9d0ca}.bar{height:7px;background:#404640;border-radius:999px;margin:10px 0;overflow:hidden}.bar i{display:block;height:100%;width:0;background:#fff}.history{display:flex;flex-direction:column;gap:7px;max-height:330px;overflow:auto}.h{display:grid;grid-template-columns:26px 1fr;gap:7px}.dot{width:26px;height:26px;border-radius:9px;display:grid;place-items:center;background:#eeeae0;font-size:11px;font-weight:900}.dot.up{background:#e8eaff}.dot.down{background:#ffe8e0}.hc{border-bottom:1px solid #ece8df;padding-bottom:7px}.hc b{font-size:12px}.hc span{display:block;font-size:10px;color:var(--muted);margin-top:2px}.modal{position:fixed;inset:0;background:#15151055;display:none;place-items:center;padding:18px;z-index:10}.modal.show{display:grid}.dialog{width:min(480px,100%);max-height:84vh;overflow:auto;background:#fff;border-radius:22px;padding:18px}.dialog h3{margin:0 0 5px}.help{font-size:11px;color:var(--muted);line-height:1.5}.choices{display:grid;gap:7px;margin:13px 0}.choice{border:1px solid var(--line);background:#faf9f5;border-radius:13px;padding:11px;text-align:left}.top{display:flex;justify-content:space-between;gap:8px}.cw{font-weight:900}.score{font-size:9px;background:#ece9e2;border-radius:999px;padding:4px 6px;white-space:nowrap}.meta{font-size:9px;color:var(--muted);margin-top:5px}.manual{display:flex;gap:7px}.manual input{flex:1;border:1px solid var(--line);border-radius:11px;padding:10px}.close{float:right;border:0;background:none;font-size:20px}.credit{text-align:center;font-size:9px;color:var(--muted);line-height:1.6;margin-top:12px}@media(max-width:760px){.layout{grid-template-columns:1fr}.stage{min-height:570px}.side{display:grid;grid-template-columns:1fr 1fr}.quest{grid-column:1/-1}}@media(max-width:520px){.app{padding:12px 10px 36px}.sub{display:none}.main{padding:12px;border-radius:21px}.side{grid-template-columns:1fr}.quest{grid-column:auto}.start{flex-direction:column}.primary{width:100%}}
-</style></head><body><div class="app"><header><div class="brand"><div class="logo">↕</div><div><h1>ことばズーム</h1><div class="sub">意味を保ったまま、抽象へ・具体へ。</div></div></div><button class="ghost" id="random">🎲 おまかせ</button></header><div class="layout"><main class="main"><section class="stage"><div class="level">ZOOM OUT · 抽象へ</div><button class="zoom up" id="up"><span><b>↑ 抽象化する</b><br><small>つまり何？ 何のため？</small></span><strong>−</strong></button><div class="line"></div><div class="card"><div class="eyebrow" id="eyebrow">START WORD</div><div class="word" id="word">カフェ</div><div class="reason" id="reason">ConceptNetとAWD-Jで、意味の階段を自動で探すで。</div><div class="status" id="status">🌱 ↑か↓を押してみてな</div></div><div class="line"></div><button class="zoom down" id="down"><span><b>↓ 具体化する</b><br><small>どんな？ どこで？ 何の種類？</small></span><strong>＋</strong></button><div class="level">ZOOM IN · 具体へ</div><div class="start"><input id="input" placeholder="好きな言葉 例：窓、犬、未来、コーヒー"><button class="primary" id="start">この言葉で開始</button></div></section><div class="credit">ConceptNet 5（意味ネットワーク）＋ AWD-J / NAIST（日本語抽象度）を利用。候補は正解ではなく、発想の足場として表示します。</div></main><aside class="side"><section class="panel quest"><h2>🎯 5回ズーム</h2><p>上下を行き来して、最初と違う場所へ着地しよう。</p><div class="bar"><i id="bar"></i></div><p id="count">0 / 5</p></section><section class="panel"><h2>🪜 思考の足あと</h2><div class="history" id="history"></div></section><section class="panel"><h2>🧠 見方</h2><p><b>抽象化</b>＝意味を広げる。<br><b>具体化</b>＝意味を狭めて解像度を上げる。<br><br>AWD-Jの数字は1→5ほど抽象的。</p></section></aside></div></div><div class="modal" id="modal"><div class="dialog"><button class="close" id="close">×</button><h3 id="title"></h3><div class="help" id="help"></div><div class="choices" id="choices"></div><div class="manual"><input id="manual" placeholder="自分の答えも入れられる"><button class="primary" id="add">追加</button></div></div></div><script>
+</style></head><body><div class="app"><header><div class="brand"><div class="logo">↕</div><div><h1>ことばズーム</h1><div class="sub">意味を保ったまま、抽象へ・具体へ。</div></div></div><button class="ghost" id="random">🎲 おまかせ</button></header><div class="layout"><main class="main"><section class="stage"><div class="level">ZOOM OUT · 抽象へ</div><button class="zoom up" id="up"><span><b>↑ 抽象化する</b><br><small>つまり何？ 何のため？</small></span><strong>−</strong></button><div class="line"></div><div class="card"><div class="eyebrow" id="eyebrow">START WORD</div><div class="word" id="word">カフェ</div><div class="reason" id="reason">ConceptNetの上位・下位概念を軸に、意味の階段を自動で探すで。</div><div class="status" id="status">🌱 ↑か↓を押してみてな</div></div><div class="line"></div><button class="zoom down" id="down"><span><b>↓ 具体化する</b><br><small>どんな？ どこで？ 何の種類？</small></span><strong>＋</strong></button><div class="level">ZOOM IN · 具体へ</div><div class="start"><input id="input" placeholder="好きな言葉 例：窓、犬、未来、コーヒー"><button class="primary" id="start">この言葉で開始</button></div></section><div class="credit">ConceptNet 5 の IsA（上位・下位概念）を本線にし、抽象度スコアは補助判定にだけ使用。候補は正解ではなく、発想の足場です。</div></main><aside class="side"><section class="panel quest"><h2>🎯 5回ズーム</h2><p>上下を行き来して、最初と違う場所へ着地しよう。</p><div class="bar"><i id="bar"></i></div><p id="count">0 / 5</p></section><section class="panel"><h2>🪜 思考の足あと</h2><div class="history" id="history"></div></section><section class="panel"><h2>🧠 見方</h2><p><b>抽象化</b>＝意味を広げる。<br><b>具体化</b>＝意味を狭めて解像度を上げる。<br><br>まずは「AはBの一種」と言えるかを本線に判定するで。</p></section></aside></div></div><div class="modal" id="modal"><div class="dialog"><button class="close" id="close">×</button><h3 id="title"></h3><div class="help" id="help"></div><div class="choices" id="choices"></div><div class="manual"><input id="manual" placeholder="自分の答えも入れられる"><button class="primary" id="add">追加</button></div></div></div><script>
 const $=s=>document.querySelector(s);
 const starters=['窓','犬','カフェ','未来','雨','光','仕事','記憶','椅子','海','学校','電車'];
 let current='カフェ',moves=0,last='up',seq=0,history=[{word:'カフェ',type:'start',note:'スタート'}];
@@ -39,43 +39,53 @@ function edgeOther(edge,currentNorm){
   if(bl===currentNorm)return{label:a?.label||idToLabel(a?.['@id']),side:'start'};
   return null
 }
-function directionGuess(rel,side,dir){
-  if(rel==='IsA'||rel==='PartOf') return dir==='up'?side==='end':side==='start';
-  const semanticUp=new Set(['UsedFor','MotivatedByGoal','HasProperty','Causes','CausesDesire','Desires','CapableOf','HasPrerequisite']);
-  const semanticDown=new Set(['AtLocation','HasA','CreatedBy','ReceivesAction','HasSubevent']);
-  if(dir==='up' && semanticUp.has(rel)) return true;
-  if(dir==='down' && semanticDown.has(rel)) return true;
-  return ['RelatedTo','Synonym','SimilarTo'].includes(rel);
+function scoreOk(dir,currentScore,candidateScore,tolerance=.10){
+  if(currentScore==null||candidateScore==null)return true;
+  const delta=candidateScore-currentScore;
+  return dir==='up'?delta>=-tolerance:delta<=tolerance
 }
-function relationBonus(rel){return({IsA:1.3,UsedFor:1.0,MotivatedByGoal:.95,HasProperty:.8,Causes:.75,PartOf:.7,AtLocation:.55,HasA:.5,RelatedTo:.25,Synonym:.2,SimilarTo:.2}[rel]||.1)}
 async function fetchJSON(url,ms=5500){
   const c=new AbortController(),t=setTimeout(()=>c.abort(),ms);
   try{const r=await fetch(url,{signal:c.signal});if(!r.ok)throw new Error('HTTP '+r.status);return await r.json()}finally{clearTimeout(t)}
 }
 async function directConceptNet(word,dir){
   const uri=conceptUri(word),cn=norm(word),map=new Map(),cur=LOCAL_SCORES[cn]??null;
-  const [q,rel]=await Promise.all([
-    fetchJSON(`https://api.conceptnet.io/query?node=${uri}&other=/c/ja&limit=100`).catch(()=>null),
-    fetchJSON(`https://api.conceptnet.io/related${uri}?filter=/c/ja&limit=60`).catch(()=>null)
+  const [isa,all]=await Promise.all([
+    fetchJSON(`https://api.conceptnet.io/query?node=${uri}&rel=/r/IsA&other=/c/ja&limit=120`).catch(()=>null),
+    fetchJSON(`https://api.conceptnet.io/query?node=${uri}&other=/c/ja&limit=120`).catch(()=>null)
   ]);
-  if(!q&&!rel)throw new Error('ConceptNet unavailable');
-  const add=(x)=>{const k=norm(x.word);if(!k||k===cn||k.length>28)return;const old=map.get(k);if(!old||x.relevance>old.relevance)map.set(k,x)};
-  for(const edge of q?.edges||[]){
+  if(!isa&&!all)throw new Error('ConceptNet unavailable');
+  const add=x=>{const k=norm(x.word);if(!k||k===cn||k.length>30)return;const old=map.get(k);if(!old||x.relevance>old.relevance)map.set(k,x)};
+
+  // 本線：IsA の方向で、分類として本当に上下する候補だけを優先する。
+  for(const edge of isa?.edges||[]){
+    const other=edgeOther(edge,cn);if(!other)continue;
+    const correct=dir==='up'?other.side==='end':other.side==='start';
+    if(!correct)continue;
+    const label=String(other.label||'').trim();if(!label)continue;
+    const weight=Number(edge.weight)||0;if(weight<.65)continue;
+    const sc=LOCAL_SCORES[norm(label)]??null;
+    if(!scoreOk(dir,cur,sc,.18))continue;
+    add({word:label,score:sc,delta:sc!=null&&cur!=null?sc-cur:null,relationJa:dir==='up'?'分類の抽象化・上位概念':'分類の具体化・下位概念',source:'ConceptNet IsA',kind:'hierarchy',relevance:100+Math.min(weight,5)*4});
+  }
+
+  // 補助：目的・文脈。関連語は抽象度の方向が確認できるものだけ。
+  for(const edge of all?.edges||[]){
     const other=edgeOther(edge,cn);if(!other)continue;
     const label=String(other.label||'').trim();if(!label)continue;
-    const relName=edge.rel?.label||'RelatedTo',sc=LOCAL_SCORES[norm(label)]??null;
-    const delta=sc!=null&&cur!=null?sc-cur:null;
-    let ok=delta!=null?(dir==='up'?delta>=.15:delta<=-.15):directionGuess(relName,other.side,dir);
-    if(!ok)continue;
-    add({word:label,score:sc,delta,relationJa:REL_JA[relName]||relName,source:'ConceptNet direct',relevance:(Number(edge.weight)||1)+relationBonus(relName)+(delta==null?0:Math.min(1.2,Math.abs(delta)*.35))});
-  }
-  if(map.size<5){
-    for(const item of rel?.related||[]){
-      const label=idToLabel(item['@id']);if(!label)continue;
-      const sc=LOCAL_SCORES[norm(label)]??null,delta=sc!=null&&cur!=null?sc-cur:null;
-      if(delta!=null && (dir==='up'?delta<.15:delta>-.15))continue;
-      add({word:label,score:sc,delta,relationJa:'意味関連・方向推定',source:'ConceptNet related',relevance:(Number(item.weight)||0)*2+.15});
+    const relName=edge.rel?.label||'',weight=Number(edge.weight)||0;if(weight<.7)continue;
+    const sc=LOCAL_SCORES[norm(label)]??null,delta=sc!=null&&cur!=null?sc-cur:null;
+    let ok=false,relationJa='',kind='',base=0;
+    if(dir==='up'){
+      if(relName==='PartOf'&&other.side==='end'){ok=scoreOk(dir,cur,sc,.10);relationJa='全体・文脈へ広げる';kind='context';base=66}
+      else if((relName==='UsedFor'||relName==='MotivatedByGoal')&&other.side==='end'){ok=scoreOk(dir,cur,sc,.05);relationJa='目的・機能へ抽象化';kind='purpose';base=62}
+      else if(relName==='RelatedTo'&&delta!=null&&delta>=.30){ok=true;relationJa='抽象度で上方向を確認';kind='score';base=48}
+    }else{
+      if(relName==='PartOf'&&other.side==='start'){ok=scoreOk(dir,cur,sc,.10);relationJa='部分へ具体化';kind='part';base=66}
+      else if(relName==='RelatedTo'&&delta!=null&&delta<=-.30){ok=true;relationJa='抽象度で下方向を確認';kind='score';base=48}
     }
+    if(!ok)continue;
+    add({word:label,score:sc,delta,relationJa,source:'ConceptNet + direction check',kind,relevance:base+Math.min(weight,5)*2});
   }
   return {word,dir,currentScore:cur,candidates:[...map.values()].sort((a,b)=>b.relevance-a.relevance).slice(0,8),status:{conceptnet:true,awdjRemote:false,direct:true}};
 }
@@ -100,14 +110,14 @@ async function open(dir){
     show(a,dir);
     const strict=Number.isFinite(d.currentScore);
     if(strict)setStatus(`自動候補OK · 抽象度 ${d.currentScore.toFixed(2)} / 5`,'good');
-    else setStatus('自動候補OK · 意味関係から方向推定','good');
+    else setStatus('自動候補OK · 上位/下位概念を優先','good');
   }catch(e){
     show(fallback[dir].map(word=>({word,source:'fallback',relationJa:'発想ヒント'})),dir);
     setStatus('自動データに繋がらへんためヒント表示','warn')
   }
 }
 function show(a,dir){
-  $('#choices').innerHTML=a.map((x,i)=>`<button class="choice" data-i="${i}"><div class="top"><span class="cw">${esc(x.word)}</span>${Number.isFinite(x.score)?`<span class="score">抽象度 ${x.score.toFixed(2)}</span>`:''}</div><div class="meta">${esc(x.relationJa||'意味的に近い')} · ${x.source==='fallback'?'ヒント':'自動候補'}</div></button>`).join('');
+  $('#choices').innerHTML=a.map((x,i)=>`<button class="choice" data-i="${i}"><div class="top"><span class="cw">${esc(x.word)}</span>${Number.isFinite(x.score)?`<span class="score">抽象度 ${x.score.toFixed(2)}</span>`:''}</div><div class="meta">${esc(x.relationJa||'意味的に近い')} · ${x.kind==='hierarchy'?'本線':x.source==='fallback'?'ヒント':'補助候補'}</div></button>`).join('');
   document.querySelectorAll('.choice').forEach(b=>b.onclick=()=>choose(a[+b.dataset.i],dir))
 }
 function choose(x,dir){
