@@ -1,0 +1,10 @@
+{
+  "functions": {
+    "api/candidates.js": { "maxDuration": 30 }
+  },
+  "headers": [
+    { "source": "/api/candidates", "headers": [
+      { "key": "Cache-Control", "value": "public, s-maxage=86400, stale-while-revalidate=604800" }
+    ] }
+  ]
+}
