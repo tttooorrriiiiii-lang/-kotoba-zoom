@@ -1,10 +1,11 @@
 {
-  "functions": {
-    "api/candidates.js": { "maxDuration": 30 }
-  },
-  "headers": [
-    { "source": "/api/candidates", "headers": [
-      { "key": "Cache-Control", "value": "public, s-maxage=86400, stale-while-revalidate=604800" }
-    ] }
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "builds": [
+    { "src": "index.html", "use": "@vercel/static" },
+    { "src": "candidates.js", "use": "@vercel/node" }
+  ],
+  "routes": [
+    { "src": "/api/candidates", "dest": "/candidates.js" },
+    { "src": "/(.*)", "dest": "/index.html" }
   ]
 }
