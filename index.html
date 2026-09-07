@@ -1,444 +1,72 @@
 <!doctype html>
 <html lang="ja">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>ことばズーム v7</title>
-  <style>
-    :root{
-      --bg:#f7f5ef;
-      --ink:#1d2440;
-      --muted:#68708d;
-      --line:rgba(135,145,198,.24);
-      --card:rgba(255,255,255,.78);
-      --card-strong:rgba(255,255,255,.92);
-      --up:#6f7ff7;
-      --up-soft:#eef1ff;
-      --down:#ea8f76;
-      --down-soft:#fff1ea;
-      --accent:#9e8fff;
-      --shadow:0 20px 50px rgba(89,96,148,.14);
-      --radius:28px;
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      color:var(--ink);
-      background:
-        radial-gradient(circle at 15% 10%, rgba(177,190,255,.55), transparent 26%),
-        radial-gradient(circle at 86% 14%, rgba(218,235,255,.6), transparent 24%),
-        radial-gradient(circle at 30% 84%, rgba(255,214,196,.55), transparent 22%),
-        linear-gradient(180deg, #eef3ff 0%, #f7f7fb 26%, #fdf7f0 61%, #f4ddc9 100%);
-      font-family: Inter, "Hiragino Sans", "Yu Gothic", system-ui, sans-serif;
-      overflow-x:hidden;
-    }
-    body::before, body::after{
-      content:"";
-      position:fixed; inset:auto;
-      pointer-events:none; z-index:0;
-      filter:blur(1px);
-    }
-    body::before{
-      top:72px; left:6%; width:230px; height:230px; border-radius:50%;
-      background:radial-gradient(circle, rgba(255,255,255,.75), rgba(255,255,255,0));
-    }
-    body::after{
-      right:10%; bottom:12%; width:300px; height:300px; border-radius:50%;
-      background:radial-gradient(circle, rgba(255,243,231,.8), rgba(255,243,231,0));
-    }
-
-    .stars, .stars::before, .stars::after{
-      content:""; position:fixed; inset:0; pointer-events:none; z-index:0;
-      background-image:
-        radial-gradient(circle at 10% 24%, rgba(255,255,255,.9) 0 2px, transparent 2.5px),
-        radial-gradient(circle at 31% 42%, rgba(255,255,255,.85) 0 1.6px, transparent 2px),
-        radial-gradient(circle at 53% 18%, rgba(255,255,255,.75) 0 2px, transparent 2.5px),
-        radial-gradient(circle at 72% 31%, rgba(255,255,255,.7) 0 1.8px, transparent 2.4px),
-        radial-gradient(circle at 82% 61%, rgba(255,255,255,.7) 0 1.6px, transparent 2px),
-        radial-gradient(circle at 22% 71%, rgba(255,255,255,.7) 0 1.4px, transparent 2px),
-        radial-gradient(circle at 64% 79%, rgba(255,255,255,.7) 0 2px, transparent 2.4px);
-      opacity:.55;
-    }
-    .stars::before{transform:scale(1.15); opacity:.35}
-    .stars::after{transform:scale(.9); opacity:.25}
-
-    .app{position:relative; z-index:1; max-width:1440px; margin:0 auto; padding:18px 18px 30px}
-    .topbar{
-      display:flex; align-items:center; gap:16px; justify-content:space-between;
-      padding:10px 12px; border-radius:26px; background:rgba(255,255,255,.45);
-      border:1px solid rgba(255,255,255,.45); backdrop-filter:blur(10px);
-      box-shadow:0 12px 32px rgba(70,74,126,.08);
-    }
-    .brand{display:flex; align-items:center; gap:12px; min-width:0}
-    .logo{
-      width:46px; height:46px; border-radius:16px; display:grid; place-items:center;
-      background:linear-gradient(145deg,#f7fbff,#ffffff); border:2px solid rgba(111,127,247,.28);
-      box-shadow: inset 0 2px 0 rgba(255,255,255,.7), 0 8px 22px rgba(129,140,235,.16);
-      font-size:28px; color:#6a79f8;
-    }
-    .brand h1{margin:0; font-size:18px; letter-spacing:.01em}
-    .brand p{margin:2px 0 0; font-size:11px; color:var(--muted)}
-    .nav{display:flex; gap:14px; flex-wrap:wrap; justify-content:center}
-    .nav a{color:#586295; text-decoration:none; font-size:13px; font-weight:700; opacity:.92}
-    .toolbar{display:flex; align-items:center; gap:10px}
-    .search{
-      display:flex; align-items:center; gap:8px; padding:0 14px; height:46px; width:min(360px,42vw);
-      background:rgba(255,255,255,.72); border:1px solid rgba(137,147,201,.22); border-radius:16px;
-      box-shadow:inset 0 1px 0 rgba(255,255,255,.7);
-    }
-    .search input{border:0; outline:0; background:transparent; width:100%; font:inherit; color:var(--ink)}
-    .pill-btn{
-      border:0; height:46px; padding:0 22px; border-radius:16px; color:#fff; font-weight:800; font-size:14px;
-      background:linear-gradient(135deg,#a899ff,#7a84ff); box-shadow:0 12px 24px rgba(121,131,255,.28);
-      cursor:pointer;
-    }
-
-    .layout{display:grid; grid-template-columns:250px minmax(0,1fr) 250px; gap:18px; margin-top:18px}
-    .panel{
-      background:rgba(255,255,255,.68); border:1px solid rgba(144,153,199,.2); border-radius:28px;
-      box-shadow:var(--shadow); backdrop-filter:blur(10px);
-    }
-    .panel.pad{padding:18px}
-    .title-row{display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:14px}
-    .panel h2{margin:0; font-size:16px; letter-spacing:.01em}
-    .panel small,.panel p{color:var(--muted)}
-    .panel p{font-size:13px; line-height:1.7; margin:0}
-
-    .steps-list{display:flex; flex-direction:column; gap:0; margin:10px 0 14px}
-    .step-row{display:grid; grid-template-columns:28px 1fr; align-items:center; gap:10px; padding:10px 10px; border-radius:14px}
-    .step-row.active{background:rgba(130,137,255,.12)}
-    .step-dot{width:18px; height:18px; border-radius:50%; border:2px solid #c3c8ef; display:grid; place-items:center; position:relative; margin-left:4px}
-    .step-dot::after{content:""; position:absolute; top:18px; left:50%; width:2px; height:22px; background:#d4d8ee; transform:translateX(-50%)}
-    .step-row:last-child .step-dot::after{display:none}
-    .step-row.active .step-dot{border-color:#877ef8; box-shadow:0 0 0 4px rgba(138,126,248,.15)}
-    .step-label{font-size:14px; font-weight:700}
-    .step-meta{font-size:12px; color:var(--muted)}
-
-    .quest-note{font-size:13px; line-height:1.8; color:#5d6487; margin-top:12px}
-    .history-list{display:flex; flex-direction:column; gap:10px}
-    .history-item{display:grid; grid-template-columns:16px 1fr 20px; gap:10px; align-items:start; padding:8px 0; border-bottom:1px solid rgba(191,196,226,.45)}
-    .history-item:last-child{border-bottom:0}
-    .history-mark{width:12px; height:12px; border-radius:50%; margin-top:4px}
-    .history-mark.up{background:#79a2ff}
-    .history-mark.down{background:#f3a37a}
-    .history-mark.start{background:#b89efb}
-    .history-item b{display:block; font-size:14px}
-    .history-item span{display:block; font-size:12px; color:var(--muted); margin-top:2px}
-    .mini-box{margin-top:14px; padding:14px; border-radius:18px; background:rgba(154,136,255,.1); color:#655eb0; font-size:12px; line-height:1.7}
-    .tabs{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:12px}
-    .tab{padding:8px 12px; border-radius:999px; font-size:12px; font-weight:700; border:1px solid rgba(155,162,214,.25); background:#fff}
-    .tab.active{background:linear-gradient(135deg,#c9c2ff,#eee8ff); color:#5749b8}
-    .mini-illust{height:88px; border-radius:18px; background:
-      radial-gradient(circle at 50% 20%, rgba(255,255,255,.75), rgba(255,255,255,0) 55%),
-      linear-gradient(180deg,#edf0ff 0%, #fcfcff 100%);
-      display:flex; align-items:center; justify-content:center; font-size:42px; margin-bottom:10px}
-
-    .hero{position:relative; min-height:1200px; overflow:hidden; padding:22px 28px 26px; border-radius:34px;
-      background:linear-gradient(180deg, rgba(241,246,255,.72) 0%, rgba(249,251,255,.46) 24%, rgba(254,248,241,.42) 57%, rgba(244,217,193,.58) 100%);
-      border:1px solid rgba(255,255,255,.48); box-shadow:var(--shadow); backdrop-filter:blur(10px);
-    }
-    .hero::before, .hero::after{
-      content:""; position:absolute; inset:auto; pointer-events:none;
-      background:radial-gradient(circle, rgba(255,255,255,.65), rgba(255,255,255,0) 70%);
-      filter:blur(2px);
-    }
-    .hero::before{top:80px; left:50%; width:420px; height:420px; transform:translateX(-50%)}
-    .hero::after{bottom:130px; left:50%; width:500px; height:500px; transform:translateX(-50%)}
-
-    .skyline, .village{position:absolute; left:0; right:0; pointer-events:none; opacity:.9}
-    .skyline{top:60px; height:320px}
-    .village{bottom:0; height:360px}
-    .floating-city, .island, .hut{
-      position:absolute; border-radius:28px; background:linear-gradient(180deg, rgba(255,255,255,.98), rgba(236,241,255,.85));
-      box-shadow:0 16px 40px rgba(120,130,194,.13);
-    }
-    .floating-city{left:8%; top:18px; width:130px; height:80px; border-radius:35px 35px 50px 50px; filter:blur(.15px)}
-    .floating-city::after{
-      content:""; position:absolute; left:17px; right:17px; bottom:-22px; height:28px; background:linear-gradient(180deg,#bcd0ee,#92a6c6);
-      clip-path:polygon(0 0,100% 0,79% 100%,21% 100%);
-    }
-    .floating-city::before{content:""; position:absolute; inset:16px 22px 18px; background:linear-gradient(180deg,#cdd7ec,#99a8c2); clip-path:polygon(0 100%,12% 28%,18% 70%,32% 12%,42% 100%,56% 0,66% 58%,78% 18%,100% 100%)}
-    .island{width:110px; height:66px; border-radius:34px}
-    .island::after{content:""; position:absolute; left:12px; right:12px; bottom:-18px; height:24px; background:linear-gradient(180deg,#b9cce9,#95aac6); clip-path:polygon(0 0,100% 0,80% 100%,20% 100%)}
-    .island::before{content:""; position:absolute; inset:10px 16px auto; height:16px; border-radius:999px; background:linear-gradient(180deg,#6ac487,#8bd39f); box-shadow:0 4px 0 rgba(255,255,255,.4)}
-    .is1{left:58%; top:72px; transform:scale(.86)}
-    .is2{right:7%; top:52px; transform:scale(.94)}
-    .is3{left:17%; top:138px; transform:scale(.65)}
-    .is4{left:63%; top:178px; transform:scale(.6)}
-    .is5{right:17%; top:220px; transform:scale(.74)}
-    .is6{left:8%; top:226px; transform:scale(.56)}
-
-    .hut{bottom:56px; width:70px; height:48px; border-radius:24px}
-    .hut::before{content:""; position:absolute; left:7px; right:7px; top:-16px; height:18px; background:#dd9a67; clip-path:polygon(50% 0,100% 100%,0 100%); border-radius:6px}
-    .hut::after{content:""; position:absolute; width:14px; height:20px; left:50%; bottom:0; transform:translateX(-50%); background:#c98d68; border-radius:6px 6px 0 0}
-    .h1{left:8%; bottom:88px}.h2{left:16%; bottom:24px; transform:scale(.88)}.h3{left:72%; bottom:32px}.h4{right:9%; bottom:86px}.h5{right:17%; bottom:30px; transform:scale(.78)}
-    .river{position:absolute; left:12%; bottom:28px; width:180px; height:72px; background:linear-gradient(180deg,#8bd1ff,#5aaee7); border-radius:46px; filter:blur(.2px); transform:rotate(-12deg)}
-    .river::after{content:""; position:absolute; right:-76px; top:16px; width:118px; height:42px; border-radius:40px; background:inherit; transform:rotate(18deg)}
-    .bakery-sign{position:absolute; right:5.5%; bottom:116px; font-weight:800; color:#d78f63; letter-spacing:.06em; opacity:.68}
-
-    .hero-copy{position:absolute; width:190px; color:#5b6d9f; font-size:15px; line-height:1.8; letter-spacing:.04em}
-    .copy-left-top{left:28px; top:150px}
-    .copy-right-top{right:28px; top:138px; text-align:right; color:#5770c5; font-size:18px}
-    .copy-left-mid{left:254px; top:540px; color:#7083ba; font-size:16px}
-    .copy-right-mid{right:214px; top:512px; color:#7083ba; font-size:16px}
-    .copy-left-bottom{left:28px; bottom:176px; color:#b67463; font-size:16px}
-    .copy-right-bottom{right:28px; bottom:96px; color:#ab715e; font-size:16px; text-align:right}
-
-    .axis{
-      position:absolute; top:92px; bottom:90px; left:50%; width:6px; transform:translateX(-50%);
-      background:linear-gradient(180deg, rgba(145,168,255,0), rgba(173,194,255,.85) 13%, rgba(255,255,255,1) 50%, rgba(255,203,173,.9) 85%, rgba(238,148,110,0));
-      border-radius:999px; box-shadow:0 0 22px rgba(255,255,255,.76);
-    }
-    .ring{position:absolute; left:50%; border:2px solid rgba(255,255,255,.5); border-radius:50%; transform:translateX(-50%); pointer-events:none}
-    .r1{top:248px; width:520px; height:230px; opacity:.6}
-    .r2{top:432px; width:670px; height:300px; opacity:.44}
-    .r3{top:734px; width:760px; height:340px; opacity:.28}
-
-    .hero-head{
-      position:relative; display:grid; grid-template-columns:1fr auto 1fr; align-items:start; gap:12px; z-index:2;
-      margin-bottom:12px;
-    }
-    .hero-head .top-left{justify-self:start; align-self:start; max-width:250px}
-    .hero-head .top-right{justify-self:end; text-align:right; align-self:start; max-width:230px}
-    .hero-head .center-title{justify-self:center; text-align:center}
-    .eyeline{font-size:34px; line-height:1; margin-bottom:8px}
-    .section-label{font-size:16px; color:#3e52c3; font-weight:900; letter-spacing:.05em}
-    .section-sub{font-size:12px; color:var(--muted); margin-top:4px}
-    .small-cap{font-size:15px; font-weight:800; color:#445897; line-height:1.7}
-
-    .abstract-stack, .concrete-zone{position:relative; z-index:2; display:flex; flex-direction:column; align-items:center}
-    .abstract-stack{margin-top:28px; gap:18px}
-    .abs-node{
-      min-width:146px; max-width:220px; padding:16px 20px 14px; border-radius:24px; text-align:center; background:var(--card-strong);
-      box-shadow:0 16px 36px rgba(121,130,189,.12); border:1px solid rgba(255,255,255,.58);
-    }
-    .abs-node.large{min-width:190px}
-    .abs-node b{font-size:18px}
-    .abs-node span{display:block; margin-top:6px; color:var(--muted); font-size:12px}
-    .abs-node.on-island{position:relative}
-    .abs-node.on-island::after{content:""; position:absolute; left:50%; transform:translateX(-50%); bottom:-20px; width:120px; height:18px; border-radius:50%; background:rgba(147,187,255,.16); filter:blur(10px)}
-
-    .cta{
-      margin-top:10px; border:0; color:#fff; font-weight:900; font-size:18px; letter-spacing:.03em; cursor:pointer;
-      padding:18px 34px; border-radius:999px; box-shadow:0 14px 28px rgba(124,134,255,.28);
-      background:linear-gradient(135deg,#8aa3ff,#6f7ff7);
-    }
-    .cta.down{background:linear-gradient(135deg,#efac98,#e38a72); box-shadow:0 14px 28px rgba(230,146,112,.28)}
-
-    .hero-card{
-      position:relative; z-index:2; margin:34px auto 0; width:min(520px,82%); min-height:200px;
-      background:var(--card-strong); border-radius:34px; box-shadow:0 28px 50px rgba(112,118,179,.18);
-      border:1px solid rgba(255,255,255,.58); padding:24px 26px 22px; text-align:center;
-    }
-    .hero-card::before{
-      content:""; position:absolute; left:50%; transform:translateX(-50%); bottom:-24px; width:72%; height:26px; border-radius:50%;
-      background:rgba(254,227,176,.35); filter:blur(16px)
-    }
-    .hero-island{position:absolute; left:50%; top:-22px; transform:translateX(-50%); width:460px; height:240px; pointer-events:none; z-index:1}
-    .hero-island .plate{position:absolute; inset:48px 20px auto; height:110px; border-radius:60px; background:linear-gradient(180deg, rgba(255,255,255,.65), rgba(255,255,255,0))}
-    .hero-island .base{position:absolute; left:50%; transform:translateX(-50%); bottom:18px; width:420px; height:126px; background:linear-gradient(180deg,#d3d0cb,#b3afa8); clip-path:polygon(6% 0,94% 0,82% 100%,18% 100%); border-radius:26px}
-    .hero-island .grass{position:absolute; left:50%; transform:translateX(-50%); top:44px; width:420px; height:86px; border-radius:70px; background:linear-gradient(180deg,#8bd392,#4cae72)}
-    .hero-island .puff{position:absolute; width:58px; height:26px; border-radius:20px; background:#7ec986}
-    .hero-island .p1{left:40px; top:36px}.hero-island .p2{left:106px; top:30px}.hero-island .p3{right:42px; top:38px}.hero-island .p4{right:112px; top:28px}
-    .hero-card .favorite{position:absolute; top:20px; right:22px; font-size:25px; color:#a3a7d8}
-    .emoji-art{font-size:94px; line-height:1; display:block; filter:drop-shadow(0 7px 10px rgba(240,178,128,.32)); margin-top:4px}
-    .word-main{font-size:52px; font-weight:900; letter-spacing:.01em; margin-top:8px}
-    .desc{margin-top:8px; font-size:16px; color:var(--muted); line-height:1.8}
-
-    .concrete-zone{margin-top:34px}
-    .concrete-grid{display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:18px; width:min(820px,100%); margin-top:26px}
-    .child-card{
-      background:var(--card-strong); border-radius:24px; padding:20px 18px 18px; text-align:center; box-shadow:0 18px 40px rgba(124,122,161,.12);
-      border:1px solid rgba(255,255,255,.58); cursor:pointer; transition:transform .18s ease, box-shadow .18s ease;
-    }
-    .child-card:hover{transform:translateY(-4px); box-shadow:0 22px 44px rgba(118,119,160,.18)}
-    .child-card .emoji{font-size:58px; line-height:1; display:block; margin-bottom:8px}
-    .child-card b{display:block; font-size:18px; margin-bottom:8px}
-    .child-card span{display:block; color:var(--muted); font-size:13px; line-height:1.6}
-    .faded-list{display:flex; flex-wrap:wrap; gap:14px; justify-content:center; margin-top:16px; width:min(880px,100%)}
-    .faded-item{
-      min-width:108px; padding:14px 12px; border-radius:16px; background:rgba(255,255,255,.45); border:1px solid rgba(255,255,255,.45);
-      text-align:center; color:#9e8f89; font-size:12px; line-height:1.5; backdrop-filter:blur(6px)
-    }
-    .bottom-label{margin-top:32px; text-align:center; color:#b55733}
-    .bottom-label .eyeline{font-size:30px; margin-bottom:8px}
-    .bottom-label .section-label{color:#bf5b36}
-
-    .choice-modal{position:fixed; inset:0; background:rgba(31,34,54,.18); display:none; place-items:center; padding:18px; z-index:20; backdrop-filter:blur(4px)}
-    .choice-modal.show{display:grid}
-    .modal-card{width:min(520px,100%); max-height:80vh; overflow:auto; background:rgba(255,255,255,.92); border-radius:30px; padding:20px; box-shadow:0 24px 70px rgba(80,87,148,.22)}
-    .modal-card h3{margin:0 0 6px; font-size:28px}
-    .modal-card p{margin:0; color:var(--muted); line-height:1.7}
-    .close-row{display:flex; justify-content:space-between; align-items:center; gap:10px; margin-bottom:10px}
-    .close-btn{border:0; background:transparent; font-size:32px; cursor:pointer; color:#5b74da}
-    .option-list{display:grid; gap:12px; margin-top:16px}
-    .option-btn{width:100%; text-align:left; border:1px solid rgba(146,152,205,.24); background:#fff; border-radius:18px; padding:16px; cursor:pointer}
-    .option-btn b{display:block; font-size:18px; margin-bottom:6px}
-    .option-btn span{display:block; font-size:13px; color:var(--muted)}
-
-    @media (max-width: 1180px){
-      .layout{grid-template-columns:1fr;}
-      .topbar{flex-wrap:wrap}
-      .nav{order:3; width:100%; justify-content:flex-start}
-      .search{width:min(100%,440px)}
-      .hero{min-height:1180px}
-      .hero-head{grid-template-columns:1fr;}
-      .hero-head .top-left,.hero-head .top-right,.hero-head .center-title{justify-self:center; text-align:center; max-width:unset}
-      .copy-left-top,.copy-right-top,.copy-left-mid,.copy-right-mid,.copy-left-bottom,.copy-right-bottom{display:none}
-      .panel-side-wrap{display:grid; grid-template-columns:1fr 1fr; gap:18px}
-      .panel-right-wrap{display:grid; grid-template-columns:1fr 1fr; gap:18px}
-    }
-    @media (max-width: 760px){
-      .app{padding:12px 10px 24px}
-      .toolbar{width:100%; justify-content:space-between}
-      .search{flex:1; width:auto}
-      .hero{padding:18px 14px 22px; min-height:1130px}
-      .abstract-stack{margin-top:20px}
-      .word-main{font-size:42px}
-      .desc{font-size:14px}
-      .hero-card{width:95%}
-      .hero-island{width:100%; max-width:460px}
-      .cta{font-size:17px; padding:16px 26px}
-      .concrete-grid{grid-template-columns:1fr; max-width:390px}
-      .axis{top:120px; bottom:90px}
-      .r1{width:360px; height:180px}.r2{width:460px; height:230px}.r3{width:520px; height:260px}
-      .panel-side-wrap,.panel-right-wrap{grid-template-columns:1fr}
-      .floating-city{transform:scale(.82); transform-origin:left top}
-      .bakery-sign{display:none}
-    }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ことばズーム v8</title>
+<style>
+:root{--bg:#f7f5ef;--ink:#20211e;--muted:#73736e;--line:#ddd9cf;--up:#edf0ff;--down:#fff0e9;--blue:#6f7df7;--coral:#ea8f75;--shadow:0 18px 50px rgba(40,42,65,.10)}
+*{box-sizing:border-box} html,body{margin:0;min-height:100%;font-family:Inter,"Hiragino Sans","Yu Gothic",system-ui,sans-serif;color:var(--ink)}
+body{background:radial-gradient(circle at 15% 5%,#e9eaff 0,transparent 28%),radial-gradient(circle at 88% 92%,#ffe7dd 0,transparent 30%),var(--bg)}
+button,input{font:inherit} button{cursor:pointer}
+.app{max-width:1040px;margin:0 auto;padding:18px 14px 40px}
+header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px}
+.brand{display:flex;align-items:center;gap:10px} .logo{width:44px;height:44px;border:2px solid #242520;border-radius:14px;display:grid;place-items:center;background:#fff;font-size:22px;box-shadow:0 8px 18px #2221}
+h1{font-size:21px;margin:0} .sub{font-size:11px;color:var(--muted);margin-top:2px}
+.ghost{border:1px solid var(--line);background:#fff9;border-radius:999px;padding:9px 13px;color:#4c5fc7;font-weight:800}
+.layout{display:grid;grid-template-columns:minmax(0,1fr) 270px;gap:16px}
+.main,.panel{background:rgba(255,253,248,.86);border:1px solid var(--line);box-shadow:var(--shadow);backdrop-filter:blur(8px)}
+.main{border-radius:28px;padding:18px;overflow:hidden;position:relative}
+.stage{min-height:680px;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative}
+.stage:before{content:"";position:absolute;top:104px;bottom:110px;left:50%;width:2px;background:linear-gradient(180deg,rgba(111,125,247,.08),rgba(111,125,247,.45) 30%,rgba(234,143,117,.45) 70%,rgba(234,143,117,.08));transform:translateX(-50%);z-index:0}
+.level{position:relative;z-index:2;font-size:11px;font-weight:900;letter-spacing:.13em;color:var(--muted);margin:7px}
+.zoom{position:relative;z-index:2;width:min(470px,96%);border:1px solid var(--line);border-radius:20px;padding:16px 18px;text-align:left;display:flex;justify-content:space-between;align-items:center;transition:.2s transform,.2s box-shadow}
+.zoom:hover{transform:translateY(-2px);box-shadow:0 12px 28px #2221} .zoom.up{background:linear-gradient(180deg,#f4f5ff,#ebeefe)} .zoom.down{background:linear-gradient(180deg,#fff6f1,#ffede5)}
+.zoom b{font-size:17px} .zoom small{color:var(--muted);font-size:12px} .zoom strong{font-size:26px}
+.connector{position:relative;z-index:1;height:30px;width:2px;background:var(--line)}
+.card{position:relative;z-index:2;width:min(540px,98%);border:2px solid #22231f;border-radius:28px;background:#fff;box-shadow:0 14px 0 #e8e3d8,0 22px 46px rgba(55,56,75,.08);padding:28px 20px 24px;text-align:center;animation:float 4s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+.eyebrow{font-size:10px;color:var(--muted);font-weight:900;letter-spacing:.12em} .word{font-size:clamp(38px,8vw,62px);font-weight:900;margin:10px 0 6px;letter-spacing:.01em} .desc{font-size:13px;line-height:1.75;color:var(--muted);max-width:420px;margin:0 auto} .emoji{font-size:48px;margin-bottom:4px;display:block}
+.status{display:inline-block;margin-top:12px;border-radius:999px;padding:7px 10px;background:#f0eee8;font-size:10px;font-weight:800;color:#6f6c64}
+.start{display:flex;gap:8px;width:min(560px,100%);margin-top:20px;position:relative;z-index:3} .start input{flex:1;border:1px solid var(--line);border-radius:14px;padding:12px 14px;background:#fff;outline:none} .start input:focus{border-color:#aaaee9;box-shadow:0 0 0 3px #e8e9ff}
+.primary{border:0;border-radius:14px;padding:11px 16px;background:#20231f;color:#fff;font-weight:900}
+.side{display:flex;flex-direction:column;gap:12px} .panel{border-radius:20px;padding:15px} .panel h2{font-size:13px;margin:0 0 10px} .panel p{font-size:11px;line-height:1.6;color:var(--muted);margin:0}
+.quest{background:#202520;color:#fff} .quest p{color:#cbd1cc} .bar{height:7px;background:#414641;border-radius:999px;margin:10px 0;overflow:hidden} .bar i{display:block;height:100%;width:0;background:#fff;transition:.25s width}
+.history{display:flex;flex-direction:column;gap:7px;max-height:340px;overflow:auto} .h{display:grid;grid-template-columns:28px 1fr;gap:8px} .dot{width:28px;height:28px;border-radius:9px;display:grid;place-items:center;background:#eeeae0;font-size:11px;font-weight:900} .dot.up{background:#e7eaff;color:#4f5fd3} .dot.down{background:#ffe7de;color:#c8684d} .hc{border-bottom:1px solid #ece8df;padding-bottom:8px} .hc b{font-size:12px} .hc span{display:block;font-size:10px;color:var(--muted);margin-top:2px}
+.tip{border-radius:14px;padding:12px;background:#f3f1ec;font-size:11px;line-height:1.7;color:#66655f}
+.modal{position:fixed;inset:0;background:#17171255;display:none;place-items:center;padding:18px;z-index:20;backdrop-filter:blur(4px)} .modal.show{display:grid}
+.dialog{width:min(510px,100%);max-height:84vh;overflow:auto;background:#fff;border-radius:24px;padding:18px;box-shadow:0 26px 70px #1113} .dialog h3{margin:0 0 5px;font-size:25px} .help{font-size:12px;color:var(--muted);line-height:1.6} .close{float:right;border:0;background:none;font-size:24px;color:#5d7bea}
+.choices{display:grid;gap:9px;margin:14px 0} .choice{border:1px solid var(--line);background:#fbfaf6;border-radius:16px;padding:13px;text-align:left;transition:.18s transform,.18s box-shadow} .choice:hover{transform:translateY(-2px);box-shadow:0 12px 26px #2221} .choice .top{display:flex;justify-content:space-between;align-items:center;gap:10px} .choice .cw{font-weight:900;font-size:18px} .badge{font-size:9px;border-radius:999px;padding:4px 7px;background:#eceffd;color:#5564ca;white-space:nowrap} .choice.down .badge{background:#fff0e9;color:#c56a50} .meta{font-size:10px;color:var(--muted);margin-top:6px}
+.preview{margin-top:8px;padding:9px 10px;border-radius:12px;background:#f1f0eb;font-size:10px;color:#66655f;line-height:1.6}
+@media(max-width:760px){.layout{grid-template-columns:1fr}.side{display:grid;grid-template-columns:1fr 1fr}.quest{grid-column:1/-1}.stage{min-height:620px}}
+@media(max-width:520px){.app{padding:12px 10px 34px}.sub{display:none}.main{padding:12px;border-radius:21px}.side{grid-template-columns:1fr}.quest{grid-column:auto}.start{flex-direction:column}.primary{width:100%}.card{padding:24px 16px 22px}.word{font-size:42px}}
+</style>
 </head>
 <body>
-  <div class="stars"></div>
-  <div class="app">
-    <header class="topbar">
-      <div class="brand">
-        <div class="logo">🪐</div>
-        <div>
-          <h1>ことばズーム <span style="font-size:12px;color:#7a85bf;font-weight:700">v7</span></h1>
-          <p>ことばから、世界をひろげる</p>
-        </div>
-      </div>
-      <nav class="nav">
-        <a href="#">みつける</a>
-        <a href="#">たどる</a>
-        <a href="#">あそぶ</a>
-        <a href="#">について</a>
-      </nav>
-      <div class="toolbar">
-        <label class="search">
-          <span>🔎</span>
-          <input id="searchInput" type="text" placeholder="ことばを入力してみよう…" />
-        </label>
-        <button class="pill-btn" id="randomBtn">✨ おまかせ</button>
-      </div>
-    </header>
-
-    <div class="layout">
-      <div class="panel-side-wrap">
-        <aside class="panel pad">
-          <div class="title-row"><h2>🧩 5回ズーム</h2></div>
-          <div class="steps-list" id="questList"></div>
-          <div class="quest-note">上下にズームして、ことばの階層をたどってみよう。</div>
-        </aside>
-      </div>
-
-      <main class="hero">
-        <div class="skyline">
-          <div class="floating-city"></div>
-          <div class="island is1"></div><div class="island is2"></div><div class="island is3"></div>
-          <div class="island is4"></div><div class="island is5"></div><div class="island is6"></div>
-        </div>
-        <div class="village">
-          <div class="river"></div>
-          <div class="hut h1"></div><div class="hut h2"></div><div class="hut h3"></div><div class="hut h4"></div><div class="hut h5"></div>
-          <div class="bakery-sign">BAKERY</div>
-        </div>
-
-        <div class="hero-copy copy-left-top">ひとつのことばから<br>上にも、下にも、<br>まだ見ぬ世界がひろがっていく。</div>
-        <div class="hero-copy copy-right-top">ことばで、<br>もう少し遠くまで<br>行ってみよう。</div>
-        <div class="hero-copy copy-left-mid">このことばから<br>どんな世界が<br>ひろがるだろう？</div>
-        <div class="hero-copy copy-right-mid">もっとくわしく<br>見てみると…</div>
-        <div class="hero-copy copy-left-bottom">もっとくわしく見ると<br>こんなことばたちが<br>見えてくる。</div>
-        <div class="hero-copy copy-right-bottom">身近なところに<br>たくさんの世界がある。</div>
-
-        <div class="axis"></div>
-        <div class="ring r1"></div><div class="ring r2"></div><div class="ring r3"></div>
-
-        <div class="hero-head">
-          <div class="top-left"></div>
-          <div class="center-title">
-            <div class="eyeline">↑</div>
-            <div class="section-label">ZOOM OUT・抽象へ</div>
-            <div class="section-sub">より大きな概念・広い視点へ</div>
-          </div>
-          <div class="top-right">
-            <div class="small-cap">言葉のズームで<br>見える世界が、きっとある。</div>
-          </div>
-        </div>
-
-        <section class="abstract-stack" id="abstractStack"></section>
-
-        <div style="display:flex; justify-content:center; position:relative; z-index:2; margin-top:10px;">
-          <button class="cta" id="zoomOutBtn">↑ 抽象化する</button>
-        </div>
-
-        <div class="hero-card" id="heroCard">
-          <div class="hero-island" aria-hidden="true">
-            <div class="grass"></div>
-            <div class="puff p1"></div><div class="puff p2"></div><div class="puff p3"></div><div class="puff p4"></div>
-            <div class="base"></div>
-          </div>
-          <div class="favorite">♡</div>
-          <span class="emoji-art" id="heroEmoji">🥐</span>
-          <div class="word-main" id="heroWord">クロワッサン</div>
-          <div class="desc" id="heroDesc">バターの香りが広がる、フランス生まれのパン</div>
-        </div>
-
-        <div class="concrete-zone">
-          <button class="cta down" id="zoomInBtn">↓ 具体化する</button>
-          <div class="concrete-grid" id="concreteGrid"></div>
-          <div class="faded-list" id="fadedList"></div>
-          <div class="bottom-label">
-            <div class="eyeline">↓</div>
-            <div class="section-label">ZOOM IN・具体へ</div>
-            <div class="section-sub">よりくわしい概念・身近なものへ</div>
-          </div>
-        </div>
-      </main>
-
-      <div class="panel-right-wrap">
-        <aside class="panel pad">
-          <div class="title-row"><h2>👣 思考の足あと</h2><small id="historyMeta">すべてクリア</small></div>
-          <div class="history-list" id="historyList"></div>
-          <div class="mini-box">たどったことばがここに残ります。あとから見返して、考えをふりかえってみましょう。</div>
-        </aside>
-
-        <aside class="panel pad">
-          <div class="title-row"><h2>👁️ 見方</h2></div>
-          <div class="tabs"><span class="tab active">ことばの階層</span><span class="tab">関連することば</span></div>
-          <div class="mini-illust">🏝️</div>
-          <p>上に行くほど、より抽象的で広い概念に。下に行くほど、より具体的で身近なことばにつながります。</p>
-        </aside>
-      </div>
-    </div>
-  </div>
-
-  <div class="choice-modal" id="choiceModal">
-    <div class="modal-card">
-      <div class="close-row">
-        <div>
-          <h3 id="modalTitle">候補</h3>
-          <p id="modalHelp">ここから次の階層を選べます。</p>
-        </div>
-        <button class="close-btn" id="closeModal">×</button>
-      </div>
-      <div class="option-list" id="optionList"></div>
-    </div>
-  </div>
-
-  <script>
+<div class="app">
+<header><div class="brand"><div class="logo">↕</div><div><h1>ことばズーム <span style="font-size:11px;color:#7e86a8">v8</span></h1><div class="sub">上へ抽象、下へ具体。ことばをズームする。</div></div></div><button class="ghost" id="random">🎲 おまかせ</button></header>
+<div class="layout">
+<main class="main">
+<section class="stage">
+<div class="level">ZOOM OUT · 抽象へ</div>
+<button class="zoom up" id="up"><span><b>↑ 抽象化する</b><br><small>これは何の一種？ もっと広く言うと？</small></span><strong>−</strong></button>
+<div class="connector"></div>
+<div class="card" id="card"><div class="eyebrow">NOW · 今いる階層</div><span class="emoji" id="emoji">🥐</span><div class="word" id="word">クロワッサン</div><div class="desc" id="desc"></div><div class="status" id="status">🌱 上か下を押してみてな</div></div>
+<div class="connector"></div>
+<button class="zoom down" id="down"><span><b>↓ 具体化する</b><br><small>どんな種類？ もっと細かく言うと？</small></span><strong>＋</strong></button>
+<div class="level">ZOOM IN · 具体へ</div>
+<div class="start"><input id="input" placeholder="好きな言葉 例：クロワッサン、犬、カフェ、未来"><button class="primary" id="start">この言葉で開始</button></div>
+</section>
+</main>
+<aside class="side">
+<section class="panel quest"><h2>🎯 5回ズーム</h2><p>上下を行き来して、ことばの見え方を変えてみよう。</p><div class="bar"><i id="bar"></i></div><p id="count">0 / 5</p></section>
+<section class="panel"><h2>🪜 思考の足あと</h2><div class="history" id="history"></div></section>
+<section class="panel"><h2>🧠 見方</h2><div class="tip"><b>↑ 抽象化</b><br>意味を広げて、上の階層へ。<br><br><b>↓ 具体化</b><br>意味を狭めて、下の階層へ。</div></section>
+</aside>
+</div>
+</div>
+<div class="modal" id="modal"><div class="dialog"><button class="close" id="close">×</button><h3 id="title"></h3><div class="help" id="help"></div><div class="choices" id="choices"></div></div></div>
+<script>
     const DATA = {
       'クロワッサン': {
         desc: 'バターの香りが広がる、フランス生まれのパン', emoji:'🥐',
@@ -559,202 +187,69 @@
     };
 
     const STARTERS = ['クロワッサン','犬','カフェ','コーヒー','窓','未来','海','椅子'];
+
     let currentWord = 'クロワッサン';
-    let history = [{word:'クロワッサン', type:'start', note:'スタート'}];
-    let moveCount = 0;
-    let currentOptions = [];
+    let history = [{word:'クロワッサン',type:'start',note:'スタート'}];
+    let moves = 0;
     let currentDir = 'up';
+    const $ = s => document.querySelector(s);
 
-    const $ = (s) => document.querySelector(s);
-    const questList = $('#questList');
-    const abstractStack = $('#abstractStack');
-    const concreteGrid = $('#concreteGrid');
-    const fadedList = $('#fadedList');
-    const historyList = $('#historyList');
-    const searchInput = $('#searchInput');
+    function canonical(word){ const w=String(word||'').trim(); return ALIASES[w]||w; }
+    function entry(word){ return DATA[canonical(word)]||null; }
+    function parents(word){ return (entry(word)?.parents||[]).filter(Boolean); }
+    function children(word){ return (entry(word)?.children||[]).filter(Boolean); }
+    function esc(s){ return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 
-    function canonical(word){
-      const w = String(word || '').trim();
-      return ALIASES[w] || w;
+    function render(){
+      const info=entry(currentWord)||{desc:'まだ説明がありません',emoji:'💭'};
+      $('#word').textContent=currentWord;
+      $('#desc').textContent=info.desc||'';
+      $('#emoji').textContent=info.emoji||'💭';
+      $('#bar').style.width=Math.min(100,moves/5*100)+'%';
+      $('#count').textContent=moves>=5?'達成！ 🎉':moves+' / 5';
+      $('#history').innerHTML=history.slice().reverse().map(x=>`<div class="h"><div class="dot ${x.type}">${x.type==='up'?'↑':x.type==='down'?'↓':'•'}</div><div class="hc"><b>${esc(x.word)}</b><span>${esc(x.note)}</span></div></div>`).join('');
     }
 
-    function entry(word){
-      return DATA[canonical(word)] || null;
-    }
-
-    function ensureWord(word){
-      const e = entry(word);
-      if (e) return canonical(word);
-      return null;
-    }
-
-    function getParents(word){
-      return (entry(word)?.parents || []).filter(Boolean);
-    }
-
-    function getChildren(word){
-      return (entry(word)?.children || []).filter(Boolean);
-    }
-
-    function getAncestors(word, limit = 4){
-      const out = [];
-      let cursor = canonical(word);
-      let safe = 0;
-      while (safe < limit){
-        safe += 1;
-        const parents = getParents(cursor);
-        if (!parents.length) break;
-        cursor = parents[0];
-        out.push(cursor);
-      }
-      return out.reverse();
-    }
-
-    function buildQuestPath(word){
-      const ancestors = getAncestors(word, 4);
-      return [...ancestors, canonical(word)].slice(-6);
-    }
-
-    function renderQuest(){
-      const path = buildQuestPath(currentWord);
-      const slots = [...path];
-      while (slots.length < 6) slots.push('？');
-      questList.innerHTML = slots.map(label => {
-        const active = label === canonical(currentWord);
-        const meta = label === '？' ? '' : (label === slots[0] ? '上の階層' : '');
-        return `
-          <div class="step-row ${active ? 'active':''}">
-            <div class="step-dot"></div>
-            <div>
-              <div class="step-label">${label}</div>
-              <div class="step-meta">${meta}</div>
-            </div>
-          </div>`;
-      }).join('');
-    }
-
-    function renderHistory(){
-      $('#historyMeta').textContent = moveCount >= 5 ? '5回達成！' : 'たどり中';
-      historyList.innerHTML = history.slice().reverse().slice(0,6).map((item, idx)=>{
-        const label = idx === 0 ? 'たった今' : `${idx}手前`;
-        return `
-          <div class="history-item">
-            <div class="history-mark ${item.type}"></div>
-            <div>
-              <b>${item.word}</b>
-              <span>${label} · ${item.note}</span>
-            </div>
-            <div style="color:#9aa1c9">⋮</div>
-          </div>`;
-      }).join('');
-    }
-
-    function renderAbstract(){
-      const ancestors = getAncestors(currentWord, 3);
-      if (!ancestors.length){
-        abstractStack.innerHTML = '<div class="abs-node large"><b>これ以上うえはないかも</b><span>いちばん広い概念に近いよ</span></div>';
-        return;
-      }
-      abstractStack.innerHTML = ancestors.map((w, i)=>{
-        const info = entry(w) || {desc:''};
-        return `<div class="abs-node ${i === ancestors.length-1 ? 'large on-island' : ''}"><b>${w}</b><span>${info.desc || ''}</span></div>`;
-      }).join('');
-    }
-
-    function renderHero(){
-      const info = entry(currentWord) || {desc:'まだ説明がありません', emoji:'💭'};
-      $('#heroWord').textContent = currentWord;
-      $('#heroDesc').textContent = info.desc || 'まだ説明がありません';
-      $('#heroEmoji').textContent = info.emoji || '💭';
-      renderAbstract();
-    }
-
-    function renderConcrete(){
-      const kids = getChildren(currentWord);
-      const visible = kids.slice(0, 3);
-      const faded = kids.slice(3);
-      if (!visible.length){
-        concreteGrid.innerHTML = `<div class="child-card" style="grid-column:1/-1; cursor:default"><span class="emoji">🌱</span><b>これ以上細かくはないかも</b><span>この言葉の下の階層は、まだ登録してへんよ。</span></div>`;
-      } else {
-        concreteGrid.innerHTML = visible.map(w=>{
-          const info = entry(w) || {desc:'', emoji:'🌱'};
-          return `<button class="child-card" data-word="${w}"><span class="emoji">${info.emoji || '🌱'}</span><b>${w}</b><span>${info.desc || ''}</span></button>`;
-        }).join('');
-        concreteGrid.querySelectorAll('[data-word]').forEach(btn=> btn.addEventListener('click', ()=>goTo(btn.dataset.word,'down','下位概念')));
-      }
-      fadedList.innerHTML = faded.map(w=>`<div class="faded-item">${w}</div>`).join('');
-    }
-
-    function renderAll(){
-      renderQuest();
-      renderHistory();
-      renderHero();
-      renderConcrete();
-    }
-
-    function goTo(word, type, note){
-      const next = ensureWord(word);
-      if (!next) return;
-      currentWord = next;
-      if (type !== 'start') moveCount += 1;
-      history.push({word:currentWord, type, note});
-      renderAll();
-      animateHero();
-    }
-
-    function animateHero(){
-      const card = $('#heroCard');
-      card.animate([
-        {transform:'translateY(18px) scale(.98)', opacity:.72},
-        {transform:'translateY(0) scale(1)', opacity:1}
-      ], {duration:360, easing:'cubic-bezier(.2,.8,.2,1)'});
-    }
-
-    function openChoice(dir){
-      currentDir = dir;
-      const list = dir === 'up' ? getParents(currentWord) : getChildren(currentWord);
-      currentOptions = list;
-      $('#modalTitle').textContent = dir === 'up' ? '↑ 抽象化候補' : '↓ 具体化候補';
-      $('#modalHelp').textContent = dir === 'up'
-        ? `「${currentWord}」を、より広い概念へズームします。`
-        : `「${currentWord}」を、よりくわしい具体へズームします。`;
-      const optionList = $('#optionList');
-      if (!list.length){
-        optionList.innerHTML = `<div class="option-btn" style="cursor:default"><b>${dir === 'up' ? 'これ以上うえはないよ' : 'まだ下の階層がないよ'}</b><span>${dir === 'up' ? 'いちばん広い概念に近いかも。' : 'また別のことばでも遊んでみてな。'}</span></div>`;
-      } else {
-        optionList.innerHTML = list.map(w=>{
-          const info = entry(w) || {desc:''};
-          return `<button class="option-btn" data-word="${w}"><b>${w}</b><span>${info.desc || ''}</span></button>`;
-        }).join('');
-        optionList.querySelectorAll('[data-word]').forEach(btn=>btn.addEventListener('click', ()=>{
-          $('#choiceModal').classList.remove('show');
-          goTo(btn.dataset.word, dir, dir === 'up' ? '上位概念へ' : '下位概念へ');
-        }));
-      }
-      $('#choiceModal').classList.add('show');
-    }
+    function setStatus(text){ $('#status').textContent=text; }
 
     function startWord(word){
-      const next = ensureWord(word);
-      if (!next){
-        alert('その言葉は、まだ小さな辞書に入ってへんみたいやわ🥲\nいまは 例: クロワッサン / 犬 / カフェ / コーヒー / 窓 / 未来 などで試してみてな。');
-        return;
-      }
-      currentWord = next;
-      history = [{word:next, type:'start', note:'スタート'}];
-      moveCount = 0;
-      renderAll();
+      const w=canonical(word);
+      if(!DATA[w]){ alert('その言葉は、まだこの版の辞書に入ってへんみたいやわ🥲\n例：クロワッサン / 犬 / カフェ / コーヒー / 窓 / 未来'); return; }
+      currentWord=w; history=[{word:w,type:'start',note:'スタート'}]; moves=0; setStatus('🌱 上か下を押してみてな'); render();
     }
 
-    $('#zoomOutBtn').addEventListener('click', ()=>openChoice('up'));
-    $('#zoomInBtn').addEventListener('click', ()=>openChoice('down'));
-    $('#closeModal').addEventListener('click', ()=>$('#choiceModal').classList.remove('show'));
-    $('#choiceModal').addEventListener('click', (e)=>{ if (e.target.id === 'choiceModal') $('#choiceModal').classList.remove('show'); });
-    $('#randomBtn').addEventListener('click', ()=>startWord(STARTERS[Math.floor(Math.random()*STARTERS.length)]));
-    searchInput.addEventListener('keydown', (e)=>{ if (e.key === 'Enter') startWord(searchInput.value); });
-    searchInput.addEventListener('change', ()=> startWord(searchInput.value));
+    function openChoices(dir){
+      currentDir=dir;
+      const list=dir==='up'?parents(currentWord):children(currentWord);
+      $('#title').textContent=dir==='up'?'↑ 抽象化候補':'↓ 具体化候補';
+      $('#help').textContent=dir==='up'?`「${currentWord}」より上の階層へ。`: `「${currentWord}」より下の階層へ。`;
+      if(!list.length){
+        $('#choices').innerHTML=`<div class="preview"><b>${dir==='up'?'これ以上うえはないかも':'これ以上細かくはないかも'}</b><br>${dir==='up'?'かなり広い概念まで来たで。':'この言葉の下の階層はまだ登録してへんよ。'}</div>`;
+      } else {
+        $('#choices').innerHTML=list.map(w=>{const i=entry(w)||{desc:''}; return `<button class="choice ${dir==='down'?'down':''}" data-word="${esc(w)}"><div class="top"><span class="cw">${esc(w)}</span><span class="badge">${dir==='up'?'1段上':'1段下'}</span></div><div class="meta">${esc(i.desc||'')}</div><div class="preview">${dir==='up'?`「${currentWord}」は「${w}」の一種`:`「${w}」は「${currentWord}」の一種`}</div></button>`}).join('');
+        document.querySelectorAll('.choice').forEach(btn=>btn.onclick=()=>choose(btn.dataset.word,dir));
+      }
+      $('#modal').classList.add('show');
+    }
 
-    renderAll();
-  </script>
+    function choose(word,dir){
+      const prev=currentWord; currentWord=canonical(word); moves++;
+      history.push({word:currentWord,type:dir,note:dir==='up'?'上の階層へ':'下の階層へ'});
+      $('#modal').classList.remove('show');
+      setStatus(dir==='up'?`↑ 「${prev}」から1段上へ`:`↓ 「${prev}」から1段下へ`);
+      const card=$('#card');
+      card.animate(dir==='up'?[{transform:'translateY(16px)',opacity:.45},{transform:'translateY(0)',opacity:1}]:[{transform:'translateY(-16px)',opacity:.45},{transform:'translateY(0)',opacity:1}],{duration:320,easing:'cubic-bezier(.2,.8,.2,1)'});
+      render();
+    }
+
+    $('#up').onclick=()=>openChoices('up');
+    $('#down').onclick=()=>openChoices('down');
+    $('#start').onclick=()=>startWord($('#input').value);
+    $('#input').onkeydown=e=>{if(e.key==='Enter')startWord(e.target.value)};
+    $('#random').onclick=()=>startWord(STARTERS[Math.floor(Math.random()*STARTERS.length)]);
+    $('#close').onclick=()=>$('#modal').classList.remove('show');
+    $('#modal').onclick=e=>{if(e.target.id==='modal')$('#modal').classList.remove('show')};
+    render();
+</script>
 </body>
 </html>
