@@ -83,14 +83,27 @@ async function buildWordNet() {
 
   const upSynsets = new Map();
   const downSynsets = new Map();
-  console.log('[wordnet] reading hypernym links...');
+  const attrSynsets = new Map();
+  const simSynsets = new Map();
+  console.log('[wordnet] reading semantic links (hypernym / attribute / similar)...');
   {
-    const stmt = db.prepare(`SELECT synset1, synset2 FROM synlink WHERE link='hype'`);
+    const stmt = db.prepare(`SELECT synset1, synset2, link FROM synlink WHERE link IN ('hype','attr','sim')`);
     while (stmt.step()) {
-      const { synset1, synset2 } = stmt.getAsObject();
+      const { synset1, synset2, link } = stmt.getAsObject();
       if (!synset1 || !synset2) continue;
-      addToSetMap(upSynsets, synset1, synset2);
-      addToSetMap(downSynsets, synset2, synset1);
+      if (link === 'hype') {
+        addToSetMap(upSynsets, synset1, synset2);
+        addToSetMap(downSynsets, synset2, synset1);
+      } else if (link === 'attr') {
+        // Attribute is useful as an abstraction bridge for adjectives:
+        // e.g. an adjective synset can point to the noun concept/attribute it expresses.
+        // Keep it both ways so the browser can safely inspect either endpoint.
+        addToSetMap(attrSynsets, synset1, synset2);
+        addToSetMap(attrSynsets, synset2, synset1);
+      } else if (link === 'sim') {
+        addToSetMap(simSynsets, synset1, synset2);
+        addToSetMap(simSynsets, synset2, synset1);
+      }
     }
     stmt.free();
   }
@@ -99,7 +112,7 @@ async function buildWordNet() {
   let sensesWritten = 0;
   let wordsWritten = 0;
 
-  console.log('[wordnet] creating compact hypernym/hyponym shards...');
+  console.log('[wordnet] creating compact hierarchy + adjective-bridge shards...');
   for (const [lemma, synsetsSet] of lemmaSenses) {
     const senses = [];
     for (const synset of synsetsSet) {
@@ -108,6 +121,11 @@ async function buildWordNet() {
       // instead of re-opening every sense of the next Japanese label.
       const up = [];
       const down = [];
+      const attr = [];
+      const similar = [];
+      const synonyms = [...(synsetToWords.get(synset) || [])]
+        .filter(w => w && w !== lemma)
+        .slice(0, 10);
       for (const parentSyn of upSynsets.get(synset) || []) {
         const words = [...(synsetToWords.get(parentSyn) || [])]
           .filter(w => w && w !== lemma)
@@ -120,13 +138,30 @@ async function buildWordNet() {
           .slice(0, 8);
         if (words.length) down.push({ synset: childSyn, words });
       }
-      if (!up.length && !down.length) continue;
+      for (const targetSyn of attrSynsets.get(synset) || []) {
+        const words = [...(synsetToWords.get(targetSyn) || [])]
+          .filter(w => w && w !== lemma)
+          .slice(0, 8);
+        if (words.length) attr.push({ synset: targetSyn, words });
+      }
+      for (const targetSyn of simSynsets.get(synset) || []) {
+        const words = [...(synsetToWords.get(targetSyn) || [])]
+          .filter(w => w && w !== lemma)
+          .slice(0, 8);
+        if (words.length) similar.push({ synset: targetSyn, words });
+      }
+      // v10.3: do not throw away adjective senses just because WordNet has no
+      // hypernym/hyponym edge. Adjectives commonly use Attr / Sim instead.
+      if (!up.length && !down.length && !attr.length && !similar.length && !synonyms.length) continue;
       senses.push({
         id: synset,
         pos: sensePos.get(`${lemma}\u0000${synset}`) || '',
         gloss: gloss.get(synset) || '',
         up,
-        down
+        down,
+        attr,
+        similar,
+        synonyms
       });
       sensesWritten++;
     }
@@ -140,7 +175,7 @@ async function buildWordNet() {
   }
   await fs.writeFile(path.join(WN_DIR, 'meta.json'), JSON.stringify({
     available: true,
-    version: 'Japanese WordNet 1.1 / sense-lock v10.2',
+    version: 'Japanese WordNet 1.1 / adjective-bridge v10.3',
     buckets: BUCKETS,
     words: wordsWritten,
     senses: sensesWritten,

@@ -20,7 +20,7 @@ header{display:flex;align-items:center;justify-content:space-between;gap:12px;ma
 </head>
 <body>
 <div class="app">
-<header><div class="brand"><div class="logo">↕</div><div><h1>ことばズーム <span style="font-size:11px;color:#7e86a8">v10.2</span></h1><div class="sub">WordNetで上下、ConceptNetで補助。文章でも自由に続けられる。</div></div></div><button class="ghost" id="random">🎲 おまかせ</button></header>
+<header><div class="brand"><div class="logo">↕</div><div><h1>ことばズーム <span style="font-size:11px;color:#7e86a8">v10.3</span></h1><div class="sub">WordNetで上下。形容詞は「属性→概念」に橋渡し。文章でも自由に続けられる。</div></div></div><button class="ghost" id="random">🎲 おまかせ</button></header>
 <div class="layout">
 <main class="main"><section class="stage">
 <div class="level">ZOOM OUT · 抽象へ</div>
@@ -35,7 +35,7 @@ header{display:flex;align-items:center;justify-content:space-between;gap:12px;ma
 <aside class="side">
 <section class="panel quest"><h2>🎯 5回ズーム</h2><p>辞書の答えを選んでも、自分の言葉を書いてもOK。</p><div class="bar"><i id="bar"></i></div><p id="count">0 / 5</p></section>
 <section class="panel"><h2>🪜 思考の足あと</h2><div class="history" id="history"></div></section>
-<section class="panel"><h2>🧠 3つの助け</h2><div class="tip"><b>WordNet</b>＝上下の階層<br><b>ConceptNet</b>＝WordNetにない時の補助<br><b>自由入力</b>＝文章・状況・自分の抽象化</div><div class="source-row"><span class="source-pill" id="wnState">WordNet 確認中</span><span class="source-pill on">ConceptNet 補助ON</span><span class="source-pill on">自由入力 ON</span></div></section>
+<section class="panel"><h2>🧠 3つの助け</h2><div class="tip"><b>WordNet</b>＝上下の階層＋形容詞の属性<br><b>ConceptNet</b>＝WordNetにない時の補助<br><b>自由入力</b>＝文章・状況・自分の抽象化</div><div class="source-row"><span class="source-pill" id="wnState">WordNet 確認中</span><span class="source-pill on">ConceptNet 補助ON</span><span class="source-pill on">自由入力 ON</span></div></section>
 </aside>
 </div></div>
 <div class="modal" id="modal"><div class="dialog"><button class="close" id="close">×</button><h3 id="title"></h3><div class="help" id="help"></div><div class="choices" id="choices"></div><div class="hint-zone" id="hintZone"></div><div class="manual-zone"><div class="manual-label">✍️ 自分の言葉で続ける</div><div class="manual-row"><input id="manualInput" placeholder="自分の答えを入力"><button class="primary" id="manualAdd">この言葉へ</button></div><div class="manual-help" id="manualHelp">辞書にない答えでも、そのまま次のズームへ進めるで。</div></div></div></div>
@@ -56,8 +56,8 @@ const CORE={
   '未来':{desc:'これから先の時間',emoji:'🔮',up:['時間'],down:['近い未来','遠い未来']},
   '海':{desc:'広く大きな水域',emoji:'🌊',up:['水域','自然環境'],down:['内海','外洋']}
 };
-const ALIASES={'いぬ':'犬','イヌ':'犬','わんこ':'犬','ねこ':'猫','ネコ':'猫','珈琲':'コーヒー','くろわっさん':'クロワッサン'};
-const STARTERS=['クロワッサン','犬','猫','カフェ','コーヒー','窓','未来','海','椅子','雨','記憶'];
+const ALIASES={'いぬ':'犬','イヌ':'犬','わんこ':'犬','ねこ':'猫','ネコ':'猫','珈琲':'コーヒー','くろわっさん':'クロワッサン','哀しい':'悲しい'};
+const STARTERS=['クロワッサン','犬','猫','カフェ','コーヒー','窓','未来','海','椅子','雨','記憶','嬉しい','悲しい'];
 const BUCKETS=128, bucketCache=new Map();
 let current='クロワッサン',currentSense=null,moves=0,lastDir='up',history=[{word:'クロワッサン',type:'start',note:'スタート',sense:null}], requestSeq=0;
 const visitedSenses=new Set();
@@ -92,9 +92,17 @@ async function wordNetCandidates(word,dir){
   const senses=currentSense ? allSenses.filter(s=>s.id===currentSense) : allSenses;
   if(currentSense && !senses.length)return [];
   for(const s of senses){
-    const arr=dir==='up'?s.up:s.down;
-    for(const rel of arr||[]){
-      // v10.2 data: {synset, words:[...]}. Backward-compatible with v10 strings.
+    const isAdj=(s.pos==='a')||String(s.id||'').endsWith('-a');
+    const normal=dir==='up'?(s.up||[]):(s.down||[]);
+    const relations=[];
+    for(const rel of normal)relations.push({rel,badge:dir==='up'?'hypernym':'hyponym',rank:currentSense?340:300,bridge:false});
+    // WordNet adjectives usually don't have a noun-like hypernym tree.
+    // For abstraction only, bridge an adjective to the noun attribute/concept it expresses.
+    if(dir==='up'&&isAdj){
+      for(const rel of s.attr||[])relations.push({rel,badge:'属性→概念',rank:currentSense?335:315,bridge:true});
+    }
+    for(const row of relations){
+      const rel=row.rel;
       const targetSense=typeof rel==='object' ? (rel.synset||'') : '';
       const words=typeof rel==='object' ? (rel.words||[]) : [rel];
       const w=pickDisplayWord(words);
@@ -102,9 +110,10 @@ async function wordNetCandidates(word,dir){
       if(targetSense && visitedSenses.has(targetSense))continue;
       const alts=words.map(norm).filter(x=>x&&x!==w).slice(0,4);
       out.push({
-        word:w,source:'WordNet',badge:dir==='up'?'hypernym':'hyponym',
-        rank:currentSense?340:300,gloss:s.gloss||'',sense:s.id||'',targetSense,
-        aliases:alts
+        word:w,source:'WordNet',badge:row.badge,
+        rank:row.rank,gloss:s.gloss||'',sense:s.id||'',targetSense,
+        aliases:alts,bridge:row.bridge,
+        synonyms:(s.synonyms||[]).slice(0,5)
       });
     }
   }
@@ -117,13 +126,13 @@ const HINTS={up:[['種類','これは何の一種？'],['役割','何のため�
 function showHints(dir){const hs=HINTS[dir];$('#hintZone').innerHTML=`<b>🧠 答えが出ない時の思考ヒント</b><div class="hint-chips">${hs.map((h,i)=>`<button class="hint-chip" data-hi="${i}">${h[0]}</button>`).join('')}</div><div class="hint-text" id="hintText">辞書に正解がなくてもOK。視点を1つ選んで、自分の言葉で書いてみよう。</div>`;document.querySelectorAll('.hint-chip').forEach(b=>b.onclick=()=>{$('#hintText').textContent='💡 '+hs[+b.dataset.hi][1];$('#manualInput').focus()})}
 function showChoices(items,dir){
   if(!items.length){$('#choices').innerHTML='<div class="preview"><b>自動の上下候補は見つからへんかった。</b><br>文章や場面は辞書に載らないことが多いから、下の思考ヒント＋自由入力で続けてな。</div>';return}
-  $('#choices').innerHTML=items.map((x,i)=>`<button class="choice" data-i="${i}"><div class="top"><span class="cw">${esc(x.word)}</span><span class="badge ${x.source==='ConceptNet'?'cn':x.source==='内蔵'?'core':''}">${esc(x.source)} · ${esc(x.badge)}</span></div>${x.gloss?`<div class="meta">この意味：${esc(x.gloss)}</div>`:''}${x.aliases?.length?`<div class="sense">同じ概念の言い方：${esc(x.aliases.join(' / '))}</div>`:''}${x.source==='WordNet'&&x.targetSense?`<div class="sense">🔒 この意味を固定して次へ進む</div>`:''}<div class="preview">${dir==='up'?`「${esc(current)}」→ より広い「${esc(x.word)}」`:`「${esc(current)}」→ より細かい「${esc(x.word)}」`}</div></button>`).join('');
+  $('#choices').innerHTML=items.map((x,i)=>`<button class="choice" data-i="${i}"><div class="top"><span class="cw">${esc(x.word)}</span><span class="badge ${x.source==='ConceptNet'?'cn':x.source==='内蔵'?'core':''}">${esc(x.source)} · ${esc(x.badge)}</span></div>${x.gloss?`<div class="meta">この意味：${esc(x.gloss)}</div>`:''}${x.bridge?`<div class="sense">🌉 形容詞なので「何の属性・心の状態を表す？」へ橋渡し</div>`:''}${x.synonyms?.length?`<div class="sense">近い言い方：${esc(x.synonyms.join(' / '))}</div>`:''}${x.aliases?.length?`<div class="sense">同じ概念の言い方：${esc(x.aliases.join(' / '))}</div>`:''}${x.source==='WordNet'&&x.targetSense?`<div class="sense">🔒 この意味を固定して次へ進む</div>`:''}<div class="preview">${dir==='up'?`「${esc(current)}」→ より広い「${esc(x.word)}」`:`「${esc(current)}」→ より細かい「${esc(x.word)}」`}</div></button>`).join('');
   document.querySelectorAll('.choice[data-i]').forEach(b=>b.onclick=()=>chooseItem(items[+b.dataset.i],dir))
 }
 function chooseItem(item,dir){
   choose(item.word,dir,item.source,item.targetSense||null)
 }
-async function openChoices(dir){lastDir=dir;const seq=++requestSeq,wordAtOpen=current;$('#title').textContent=dir==='up'?'↑ 抽象化候補':'↓ 具体化候補';$('#help').textContent=dir==='up'?`「${current}」の上位概念（hypernym）を探します。`:`「${current}」の下位概念（hyponym）を探します。`;$('#manualInput').value='';$('#manualInput').placeholder=dir==='up'?'自分なら、もっと広く何と言う？':'自分なら、もっと細かく何と言う？';showHints(dir);$('#modal').classList.add('show');const local=coreCandidates(current,dir);if(local.length){showChoices(local,dir);setStatus('内蔵候補を表示 · WordNet検索中…','good')}else{$('#choices').innerHTML='<div class="loading">日本語WordNetを検索中… 🧠🔎</div>';setStatus('WordNet検索中…')}
+async function openChoices(dir){lastDir=dir;const seq=++requestSeq,wordAtOpen=current;$('#title').textContent=dir==='up'?'↑ 抽象化候補':'↓ 具体化候補';$('#help').textContent=dir==='up'?`「${current}」をより広く。名詞はhypernym、形容詞はWordNetの属性（Attr）から概念へ橋渡しします。`:`「${current}」の下位概念（hyponym）を探します。`;$('#manualInput').value='';$('#manualInput').placeholder=dir==='up'?'自分なら、もっと広く何と言う？':'自分なら、もっと細かく何と言う？';showHints(dir);$('#modal').classList.add('show');const local=coreCandidates(current,dir);if(local.length){showChoices(local,dir);setStatus('内蔵候補を表示 · WordNet検索中…','good')}else{$('#choices').innerHTML='<div class="loading">日本語WordNetを検索中… 🧠🔎</div>';setStatus('WordNet検索中…')}
 let wn=[];try{wn=await wordNetCandidates(wordAtOpen,dir)}catch{}if(seq!==requestSeq||current!==wordAtOpen)return;let all=merge([...local,...wn]);if(all.length){showChoices(all,dir);setStatus(`WordNet系の候補 ${all.length}件`,'good');return}
 let cn=[];try{cn=await conceptNetCandidates(wordAtOpen,dir)}catch{}if(seq!==requestSeq||current!==wordAtOpen)return;all=merge([...local,...wn,...cn]);showChoices(all,dir);setStatus(all.length?'ConceptNetの補助候補を表示':'自動候補なし · 自分の言葉で続けられる',all.length?'warn':'warn')}
 function choose(word,dir,source='自分',targetSense=null){const prev=current;current=canonical(word);if(source==='WordNet'&&targetSense){currentSense=targetSense;visitedSenses.add(targetSense)}else{currentSense=null}moves++;history.push({word:current,type:dir,note:`${source} · ${dir==='up'?'上へ':'下へ'}${currentSense?' · 意味固定':''}`,sense:currentSense});$('#modal').classList.remove('show');setStatus(currentSense?'🔒 同じ意味の枝をたどってるで':'次の階層も探せるで 🌱',currentSense?'good':'');render();const card=$('#card');card.animate([{transform:dir==='up'?'translateY(18px)':'translateY(-18px)',opacity:.75},{transform:'translateY(0)',opacity:1}],{duration:320,easing:'ease-out'})}
