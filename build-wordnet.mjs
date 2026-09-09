@@ -103,23 +103,30 @@ async function buildWordNet() {
   for (const [lemma, synsetsSet] of lemmaSenses) {
     const senses = [];
     for (const synset of synsetsSet) {
+      // Keep the target synset ID with every relation. This lets the browser
+      // stay on the same meaning after the user chooses a hypernym/hyponym,
+      // instead of re-opening every sense of the next Japanese label.
       const up = [];
       const down = [];
       for (const parentSyn of upSynsets.get(synset) || []) {
-        for (const w of synsetToWords.get(parentSyn) || []) if (w !== lemma) up.push(w);
+        const words = [...(synsetToWords.get(parentSyn) || [])]
+          .filter(w => w && w !== lemma)
+          .slice(0, 8);
+        if (words.length) up.push({ synset: parentSyn, words });
       }
       for (const childSyn of downSynsets.get(synset) || []) {
-        for (const w of synsetToWords.get(childSyn) || []) if (w !== lemma) down.push(w);
+        const words = [...(synsetToWords.get(childSyn) || [])]
+          .filter(w => w && w !== lemma)
+          .slice(0, 8);
+        if (words.length) down.push({ synset: childSyn, words });
       }
-      const uniqUp = [...new Set(up)].slice(0, 16);
-      const uniqDown = [...new Set(down)].slice(0, 28);
-      if (!uniqUp.length && !uniqDown.length) continue;
+      if (!up.length && !down.length) continue;
       senses.push({
         id: synset,
         pos: sensePos.get(`${lemma}\u0000${synset}`) || '',
         gloss: gloss.get(synset) || '',
-        up: uniqUp,
-        down: uniqDown
+        up,
+        down
       });
       sensesWritten++;
     }
@@ -133,7 +140,7 @@ async function buildWordNet() {
   }
   await fs.writeFile(path.join(WN_DIR, 'meta.json'), JSON.stringify({
     available: true,
-    version: 'Japanese WordNet 1.1',
+    version: 'Japanese WordNet 1.1 / sense-lock v10.2',
     buckets: BUCKETS,
     words: wordsWritten,
     senses: sensesWritten,
