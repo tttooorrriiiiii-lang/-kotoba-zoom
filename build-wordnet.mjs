@@ -31,7 +31,7 @@ async function copyBase() {
 
 async function buildWordNet() {
   console.log('[wordnet] downloading Japanese WordNet v1.1...');
-  const res = await fetch(DB_URL, { headers: { 'user-agent': 'kotoba-zoom-build/10.6' } });
+  const res = await fetch(DB_URL, { headers: { 'user-agent': 'kotoba-zoom-build/10.7' } });
   if (!res.ok) throw new Error(`download failed: HTTP ${res.status}`);
   const gz = Buffer.from(await res.arrayBuffer());
   console.log(`[wordnet] downloaded ${(gz.length/1024/1024).toFixed(1)} MB; decompressing...`);
