@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>ことばズーム v10.2</title>
+<title>ことばズーム v10.5</title>
 <style>
 :root{--bg:#f7f5ef;--ink:#20211e;--muted:#73736e;--line:#ddd9cf;--up:#edf0ff;--down:#fff0e9;--blue:#6f7df7;--coral:#ea8f75;--shadow:0 18px 50px rgba(40,42,65,.10)}
 *{box-sizing:border-box} html,body{margin:0;min-height:100%;font-family:Inter,"Hiragino Sans","Yu Gothic",system-ui,sans-serif;color:var(--ink)}
@@ -13,29 +13,29 @@ a{color:#5967d2}.app{max-width:1040px;margin:0 auto;padding:18px 14px 40px}
 header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px}.brand{display:flex;align-items:center;gap:10px}.logo{width:44px;height:44px;border:2px solid #242520;border-radius:14px;display:grid;place-items:center;background:#fff;font-size:22px;box-shadow:0 8px 18px #2221}h1{font-size:21px;margin:0}.sub{font-size:11px;color:var(--muted);margin-top:2px}.ghost{border:1px solid var(--line);background:#fff9;border-radius:999px;padding:9px 13px;color:#4c5fc7;font-weight:800}
 .layout{display:grid;grid-template-columns:minmax(0,1fr) 270px;gap:16px}.main,.panel{background:rgba(255,253,248,.86);border:1px solid var(--line);box-shadow:var(--shadow);backdrop-filter:blur(8px)}.main{border-radius:28px;padding:18px;overflow:hidden;position:relative}.stage{min-height:680px;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative}.stage:before{content:"";position:absolute;top:104px;bottom:110px;left:50%;width:2px;background:linear-gradient(180deg,rgba(111,125,247,.08),rgba(111,125,247,.45) 30%,rgba(234,143,117,.45) 70%,rgba(234,143,117,.08));transform:translateX(-50%);z-index:0}.level{position:relative;z-index:2;font-size:11px;font-weight:900;letter-spacing:.13em;color:var(--muted);margin:7px}.zoom{position:relative;z-index:2;width:min(470px,96%);border:1px solid var(--line);border-radius:20px;padding:16px 18px;text-align:left;display:flex;justify-content:space-between;align-items:center;transition:.2s transform,.2s box-shadow}.zoom:hover{transform:translateY(-2px);box-shadow:0 12px 28px #2221}.zoom.up{background:linear-gradient(180deg,#f4f5ff,#ebeefe)}.zoom.down{background:linear-gradient(180deg,#fff6f1,#ffede5)}.zoom b{font-size:17px}.zoom small{color:var(--muted);font-size:12px}.zoom strong{font-size:26px}.connector{position:relative;z-index:1;height:30px;width:2px;background:var(--line)}
 .card{position:relative;z-index:2;width:min(540px,98%);border:2px solid #22231f;border-radius:28px;background:#fff;box-shadow:0 14px 0 #e8e3d8,0 22px 46px rgba(55,56,75,.08);padding:28px 20px 24px;text-align:center;animation:float 4s ease-in-out infinite}@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}.eyebrow{font-size:10px;color:var(--muted);font-weight:900;letter-spacing:.12em}.word{font-size:clamp(38px,8vw,62px);font-weight:900;margin:10px 0 6px;letter-spacing:.01em}.desc{font-size:13px;line-height:1.75;color:var(--muted);max-width:420px;margin:0 auto}.emoji{font-size:48px;margin-bottom:4px;display:block}.status{display:inline-flex;align-items:center;gap:6px;margin-top:12px;border-radius:999px;padding:7px 10px;background:#f0eee8;font-size:10px;font-weight:800;color:#6f6c64}.status.good{background:#e9f6ec;color:#32623b}.status.warn{background:#fff1d8;color:#7d5c1c}.start{display:flex;gap:8px;width:min(560px,100%);margin-top:20px;position:relative;z-index:3}.start input{flex:1;border:1px solid var(--line);border-radius:14px;padding:12px 14px;background:#fff;outline:none}.start input:focus{border-color:#aaaee9;box-shadow:0 0 0 3px #e8e9ff}.primary{border:0;border-radius:14px;padding:11px 16px;background:#20231f;color:#fff;font-weight:900}
-.side{display:flex;flex-direction:column;gap:12px}.panel{border-radius:20px;padding:15px}.panel h2{font-size:13px;margin:0 0 10px}.panel p{font-size:11px;line-height:1.65;color:var(--muted);margin:0}.quest{background:#202520;color:#fff}.quest p{color:#cbd1cc}.bar{height:7px;background:#414641;border-radius:999px;margin:10px 0;overflow:hidden}.bar i{display:block;height:100%;width:0;background:#fff;transition:.25s width}.history{display:flex;flex-direction:column;gap:7px;max-height:340px;overflow:auto}.h{display:grid;grid-template-columns:28px 1fr;gap:8px}.dot{width:28px;height:28px;border-radius:9px;display:grid;place-items:center;background:#eeeae0;font-size:11px;font-weight:900}.dot.up{background:#e7eaff;color:#4f5fd3}.dot.down{background:#ffe7de;color:#c8684d}.hc{border-bottom:1px solid #ece8df;padding-bottom:8px}.hc b{font-size:12px}.hc span{display:block;font-size:10px;color:var(--muted);margin-top:2px}.tip{border-radius:14px;padding:12px;background:#f3f1ec;font-size:11px;line-height:1.7;color:#66655f}.source-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}.source-pill{font-size:9px;padding:5px 7px;border-radius:999px;border:1px solid var(--line);background:#fff}.source-pill.on{background:#eaf6ec;color:#35613e;border-color:#cce8d2}.source-pill.off{background:#fff1dc;color:#805f24;border-color:#ecd6a8}
+.side{display:flex;flex-direction:column;gap:12px}.panel{border-radius:20px;padding:15px}.panel h2{font-size:13px;margin:0 0 10px}.panel p{font-size:11px;line-height:1.65;color:var(--muted);margin:0}.quest{background:#202520;color:#fff}.quest p{color:#cbd1cc}.bar{height:7px;background:#414641;border-radius:999px;margin:10px 0;overflow:hidden}.bar i{display:block;height:100%;width:0;background:#fff;transition:.25s width}.history{display:flex;flex-direction:column;gap:7px;max-height:340px;overflow:auto}.h{display:grid;grid-template-columns:28px 1fr;gap:8px}.dot{width:28px;height:28px;border-radius:9px;display:grid;place-items:center;background:#eeeae0;font-size:11px;font-weight:900}.dot.up{background:#e7eaff;color:#4f5fd3}.dot.down{background:#ffe7de;color:#c8684d}.hc{border-bottom:1px solid #ece8df;padding-bottom:8px}.hc b{font-size:12px}.hc span{display:block;font-size:10px;color:var(--muted);margin-top:2px}.tip{border-radius:14px;padding:12px;background:#f3f1ec;font-size:11px;line-height:1.7;color:#66655f}.source-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}.source-pill{font-size:9px;padding:5px 7px;border-radius:999px;border:1px solid var(--line);background:#fff}.source-pill.on{background:#eaf6ec;color:#35613e;border-color:#cce8d2}.source-pill.off{background:#fff1dc;color:#805f24;border-color:#ecd6a8}.hbtn{border:0;background:transparent;width:100%;padding:0;text-align:left;color:inherit}.hbtn:hover .hc b{text-decoration:underline}.hbtn.now .hc{background:#f5f3ec;border-radius:10px;padding:6px 8px}.group-title{font-size:10px;font-weight:900;letter-spacing:.08em;color:#77766f;margin:14px 2px 6px;text-transform:uppercase}.group-title:first-child{margin-top:2px}.badge.route{background:#e9f6ec;color:#35613e}.badge.view{background:#f7eafa;color:#7a4e86}.badge.think{background:#e7f3ff;color:#35658a}.choice.back{border-style:dashed;background:#f3fbf4}.choice.viewpoint{background:#fcf7fd}.choice.thinking{background:#f6fbff}
 .modal{position:fixed;inset:0;background:#17171255;display:none;place-items:center;padding:18px;z-index:20;backdrop-filter:blur(4px)}.modal.show{display:grid}.dialog{width:min(560px,100%);max-height:86vh;overflow:auto;background:#fff;border-radius:24px;padding:18px;box-shadow:0 26px 70px #1113}.dialog h3{margin:0 0 5px;font-size:25px}.help{font-size:12px;color:var(--muted);line-height:1.6}.close{float:right;border:0;background:none;font-size:24px;color:#5d7bea}.choices{display:grid;gap:9px;margin:14px 0}.choice{border:1px solid var(--line);background:#fbfaf6;border-radius:16px;padding:13px;text-align:left;transition:.18s transform,.18s box-shadow}.choice:hover{transform:translateY(-2px);box-shadow:0 12px 26px #2221}.choice .top{display:flex;justify-content:space-between;align-items:center;gap:10px}.choice .cw{font-weight:900;font-size:18px}.badge{font-size:9px;border-radius:999px;padding:4px 7px;background:#eceffd;color:#5564ca;white-space:nowrap}.badge.cn{background:#fff1dc;color:#7b5d25}.badge.core{background:#e9f6ec;color:#35613e}.meta{font-size:10px;color:var(--muted);margin-top:6px;line-height:1.55}.preview{margin-top:8px;padding:9px 10px;border-radius:12px;background:#f1f0eb;font-size:10px;color:#66655f;line-height:1.6}.sense{margin-top:7px;font-size:10px;line-height:1.55;color:#72716b;border-left:3px solid #dfe2ff;padding-left:8px}.loading{padding:16px;border:1px dashed var(--line);border-radius:14px;color:var(--muted);font-size:12px}.hint-zone{margin:12px 0;padding:13px;border-radius:16px;background:linear-gradient(180deg,#f7f7ff,#faf9f5);border:1px solid #e4e2f2}.hint-zone b{font-size:12px}.hint-chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:9px}.hint-chip{border:1px solid #d9d9ea;background:#fff;border-radius:999px;padding:7px 9px;font-size:10px;color:#5f6080}.hint-text{font-size:11px;line-height:1.65;color:#686879;margin-top:8px}.manual-zone{margin-top:14px;padding-top:14px;border-top:1px solid var(--line)}.manual-label{font-size:11px;font-weight:900;color:#64645f;margin-bottom:7px}.manual-row{display:flex;gap:8px}.manual-row input{flex:1;min-width:0;border:1px solid var(--line);border-radius:13px;padding:11px 12px;background:#fff;outline:none}.manual-row input:focus{border-color:#aaaee9;box-shadow:0 0 0 3px #e8e9ff}.manual-help{font-size:10px;line-height:1.6;color:var(--muted);margin-top:7px}.foot{max-width:1040px;margin:12px auto 0;padding:0 14px 24px;font-size:9px;color:#85847d;line-height:1.6;text-align:center}
 @media(max-width:760px){.layout{grid-template-columns:1fr}.side{display:grid;grid-template-columns:1fr 1fr}.quest{grid-column:1/-1}.stage{min-height:620px}}@media(max-width:520px){.app{padding:12px 10px 34px}.sub{display:none}.main{padding:12px;border-radius:21px}.side{grid-template-columns:1fr}.quest{grid-column:auto}.start{flex-direction:column}.primary{width:100%}.card{padding:24px 16px 22px}.word{font-size:42px}.manual-row{flex-direction:column}}
 </style>
 </head>
 <body>
 <div class="app">
-<header><div class="brand"><div class="logo">↕</div><div><h1>ことばズーム <span style="font-size:11px;color:#7e86a8">v10.4</span></h1><div class="sub">WordNetで意味を固定して上下。名詞・動詞・形容詞に対応。文章は自由入力で続けられる。</div></div></div><button class="ghost" id="random">🎲 おまかせ</button></header>
+<header><div class="brand"><div class="logo">↕</div><div><h1>ことばズーム <span style="font-size:11px;color:#7e86a8">v10.5</span></h1><div class="sub">意味を固定して上下＋観点で分岐。来た道にも戻れる、思考トレーニング版。</div></div></div><button class="ghost" id="random">🎲 おまかせ</button></header>
 <div class="layout">
 <main class="main"><section class="stage">
 <div class="level">ZOOM OUT · 抽象へ</div>
-<button class="zoom up" id="up"><span><b>↑ 抽象化する</b><br><small>上位概念（hypernym）へ</small></span><strong>−</strong></button>
+<button class="zoom up" id="up"><span><b>↑ 抽象化する</b><br><small>上位概念＋観点を変えて広げる</small></span><strong>−</strong></button>
 <div class="connector"></div>
 <div class="card" id="card"><div class="eyebrow">NOW · 今いる階層</div><span class="emoji" id="emoji">🥐</span><div class="word" id="word">クロワッサン</div><div class="desc" id="desc"></div><div class="status" id="status">🌱 上か下を押してみてな</div></div>
 <div class="connector"></div>
-<button class="zoom down" id="down"><span><b>↓ 具体化する</b><br><small>下位概念（hyponym）へ</small></span><strong>＋</strong></button>
+<button class="zoom down" id="down"><span><b>↓ 具体化する</b><br><small>下位概念＋来た道へ戻る</small></span><strong>＋</strong></button>
 <div class="level">ZOOM IN · 具体へ</div>
 <div class="start"><input id="input" placeholder="何でも入力 例：犬、窓、飲みかけの私のコーヒーカップ"><button class="primary" id="start">この言葉で開始</button></div>
 </section></main>
 <aside class="side">
 <section class="panel quest"><h2>🎯 5回ズーム</h2><p>辞書の答えを選んでも、自分の言葉を書いてもOK。</p><div class="bar"><i id="bar"></i></div><p id="count">0 / 5</p></section>
-<section class="panel"><h2>🪜 思考の足あと</h2><div class="history" id="history"></div></section>
-<section class="panel"><h2>🧠 3つの助け</h2><div class="tip"><b>WordNet</b>＝名詞の階層・動詞の動作階層・形容詞の属性<br><b>ConceptNet</b>＝WordNetにない時の補助<br><b>自由入力</b>＝文章・状況・自分の抽象化</div><div class="source-row"><span class="source-pill" id="wnState">WordNet 確認中</span><span class="source-pill on">ConceptNet 補助ON</span><span class="source-pill on">自由入力 ON</span></div></section>
+<section class="panel"><h2>🪜 思考の足あと</h2><p style="margin-bottom:9px">ことばを押すと、その時の意味へ戻れるで。</p><div class="history" id="history"></div></section>
+<section class="panel"><h2>🧠 4つの助け</h2><div class="tip"><b>WordNet</b>＝意味IDを固定した辞書の骨組み<br><b>思考ルート</b>＝自然な現代語・動詞の橋渡し<br><b>観点分岐</b>＝感情 / 性質 / 用途など別の上がり方<br><b>自由入力</b>＝文章・状況・自分の抽象化</div><div class="source-row"><span class="source-pill" id="wnState">WordNet 確認中</span><span class="source-pill on">思考ルート ON</span><span class="source-pill on">観点分岐 ON</span><span class="source-pill on">ConceptNet 補助ON</span><span class="source-pill on">自由入力 ON</span></div></section>
 </aside>
 </div></div>
 <div class="modal" id="modal"><div class="dialog"><button class="close" id="close">×</button><h3 id="title"></h3><div class="help" id="help"></div><div class="choices" id="choices"></div><div class="hint-zone" id="hintZone"></div><div class="manual-zone"><div class="manual-label">✍️ 自分の言葉で続ける</div><div class="manual-row"><input id="manualInput" placeholder="自分の答えを入力"><button class="primary" id="manualAdd">この言葉へ</button></div><div class="manual-help" id="manualHelp">辞書にない答えでも、そのまま次のズームへ進めるで。</div></div></div></div>
@@ -44,7 +44,10 @@ header{display:flex;align-items:center;justify-content:space-between;gap:12px;ma
 const CORE={
   'クロワッサン':{desc:'バターを折り込んだ層のあるパン',emoji:'🥐',up:['パン'],down:['チョコクロワッサン','ミニクロワッサン']},
   'パン':{desc:'小麦などを焼いて作る食品',emoji:'🍞',up:['食品'],down:['クロワッサン','食パン','フランスパン']},
-  '食品':{desc:'食べたり飲んだりするもの',emoji:'🍽️',up:[],down:['パン','飲料','料理']},
+  'ジュース':{desc:'果汁などを使った飲みもの',emoji:'🧃',up:['飲料'],down:['オレンジジュース','りんごジュース']},
+  '飲料':{desc:'飲むための食品',emoji:'🥤',up:['食品'],down:['ジュース','コーヒー','お茶']},
+  '食品':{desc:'食べたり飲んだりするもの',emoji:'🍽️',up:['物'],down:['パン','飲料','料理']},
+  '物':{desc:'具体的なものを大きくまとめた言い方',emoji:'📦',up:[],down:['食品','人工物']},
   '犬':{desc:'人と暮らすことも多い動物',emoji:'🐶',up:['哺乳類','動物'],down:['柴犬','秋田犬','チワワ']},
   '猫':{desc:'しなやかで身近な動物',emoji:'🐱',up:['哺乳類','動物'],down:['三毛猫','黒猫']},
   '動物':{desc:'生きものの大きなグループ',emoji:'🐾',up:['生物'],down:['哺乳類','鳥','魚']},
@@ -54,23 +57,88 @@ const CORE={
   '窓':{desc:'光や視線を通す建物の一部',emoji:'🪟',up:['建具','建築要素'],down:['出窓','丸窓']},
   '椅子':{desc:'座るための家具',emoji:'🪑',up:['家具'],down:['ダイニングチェア','折り畳み椅子']},
   '未来':{desc:'これから先の時間',emoji:'🔮',up:['時間'],down:['近い未来','遠い未来']},
-  '海':{desc:'広く大きな水域',emoji:'🌊',up:['水域','自然環境'],down:['内海','外洋']}
+  '海':{desc:'広く大きな水域',emoji:'🌊',up:['水域','自然環境'],down:['内海','外洋']},
+  '家':{desc:'人が暮らすための場所・建物',emoji:'🏠',up:['住居','建物'],down:['一戸建て','集合住宅']},
+  '住居':{desc:'人が生活するための場所',emoji:'🏠',up:['建物'],down:['家','集合住宅']},
+  '建物':{desc:'人が建てた構造物',emoji:'🏢',up:['人工物'],down:['家','学校','店舗']},
+  '人工物':{desc:'人が作ったもの',emoji:'🧱',up:['物'],down:['建物','道具','機械']},
+  '指':{desc:'手や足の先にある身体の一部',emoji:'☝️',up:['身体の一部'],down:['親指','人差し指']},
+  '身体の一部':{desc:'身体を構成する部分',emoji:'🫀',up:['身体'],down:['指','腕','脚']},
+  '身体':{desc:'生物のからだ全体',emoji:'🧍',up:['生物の構造'],down:['身体の一部']},
+  '生物の構造':{desc:'生物を形づくる構造',emoji:'🧬',up:[],down:['身体']},
+  '興味':{desc:'もっと知りたい・気になる心の動き',emoji:'✨',up:['感情'],down:['好奇心']},
+  '喜び':{desc:'うれしいと感じる気持ち',emoji:'😊',up:['感情'],down:['嬉しさ']},
+  '悲しみ':{desc:'悲しいと感じる気持ち',emoji:'😢',up:['感情'],down:['寂しさ']},
+  '恐怖':{desc:'怖いと感じる気持ち',emoji:'😨',up:['感情'],down:['不安']},
+  '感情':{desc:'心に起こる感じや気持ち',emoji:'❤️',up:['心の状態'],down:['喜び','悲しみ','恐怖','興味']},
+  '心の状態':{desc:'その時の心のあり方',emoji:'🫧',up:[],down:['感情']},
+  '魅力':{desc:'人を引きつける性質',emoji:'💫',up:['性質'],down:['面白さ']},
+  '性質':{desc:'ものごとが持つ特徴',emoji:'🔹',up:[],down:['魅力']},
+  '評価':{desc:'良い・悪いなどを判断した結果',emoji:'🧠',up:['判断'],down:['好評価','低評価']},
+  '判断':{desc:'情報をもとに決める心の働き',emoji:'🧠',up:['心の働き'],down:['評価']},
+  '心の働き':{desc:'考える・感じるなど心の活動',emoji:'🧠',up:[],down:['判断','知覚','思考']},
+  '行為':{desc:'人や生物がすること',emoji:'🏃',up:[],down:['行動する','摂取する','制作する']}
 };
 const ALIASES={'いぬ':'犬','イヌ':'犬','わんこ':'犬','ねこ':'猫','ネコ':'猫','珈琲':'コーヒー','くろわっさん':'クロワッサン','哀しい':'悲しい'};
-const STARTERS=['クロワッサン','犬','猫','カフェ','コーヒー','窓','未来','海','椅子','嬉しい','悲しい','面白い','走る','歩く','食べる','考える'];
+const STARTERS=['クロワッサン','犬','猫','家','ジュース','指','カフェ','コーヒー','窓','未来','海','椅子','嬉しい','悲しい','面白い','怖い','走る','歩く','食べる','考える'];
 const BUCKETS=128, lemmaCache=new Map(), senseCache=new Map();
 let wordNetAvailable=false;
-let current='クロワッサン',currentSense=null,currentPos='',moves=0,lastDir='up',history=[{word:'クロワッサン',type:'start',note:'スタート',sense:null}], requestSeq=0;
-const visitedSenses=new Set(), visitedWords=new Set(['クロワッサン']);
+let current='クロワッサン',currentSense=null,currentPos='',moves=0,lastDir='up',requestSeq=0,cursor=0;
+let trail=[{word:'クロワッサン',type:'start',note:'スタート',sense:null,pos:'',source:'スタート'}];
+const visitedSenses=new Set(),visitedWords=new Set(['クロワッサン']);
 const $=s=>document.querySelector(s);
 
 const FRIENDLY={
   '付属肢':'身体の一部','一指':'指','興味を起こさせる力':'興味を引く性質',
-  '工合':'状態','感':'感じ・状態','滋養分':'栄養分','滋養':'栄養',
-  '身体部分':'身体の一部','身体部位':'身体の一部','肉体部分':'身体の一部'
+  '工合':'状態','感':'感じ・状態','滋養分':'栄養分','滋養':'栄養','質':'性質',
+  '身体部分':'身体の一部','身体部位':'身体の一部','肉体部分':'身体の一部',
+  '営造':'建物','住居施設':'住居','アーチファクト':'人工物'
 };
-const HIDE_ROOT=new Set(['実体','抽象的実体','物理的実体','存在物','属性']);
-const STOP_UP=new Set(['物','物質','性質','状態','感情','行為','活動','出来事','現象','概念','生物','生命体']);
+const HIDE_ROOT=new Set(['実体','抽象的実体','物理的実体','存在物','属性','一統']);
+const STOP_UP=new Set(['物','物質','性質','状態','感情','心の状態','心の働き','行為','活動','出来事','現象','概念','生物','生命体','生物の構造']);
+
+// WordNetだけでは浅い・古い言い方になる場所を、人間向けの思考ルートで橋渡し。
+const GUIDED_UP={
+  'ジュース':['飲料'],'飲料':['食品'],'食品':['物'],
+  '家':['住居','建物'],'住居':['建物'],'建物':['人工物'],'人工物':['物'],
+  '指':['身体の一部'],'身体の一部':['身体'],'身体':['生物の構造'],
+  '興味を引く性質':['魅力','性質'],'魅力':['性質'],'興味':['感情'],'喜び':['感情'],'悲しみ':['感情'],'恐怖':['感情'],'感情':['心の状態'],
+  '評価':['判断'],'判断':['心の働き'],
+  '走る':['移動する'],'歩く':['移動する'],'行く':['移動する'],'泳ぐ':['移動する'],'飛ぶ':['移動する'],
+  '移動する':['動く'],'動く':['行動する'],'行動する':['行為'],
+  '食べる':['摂取する'],'飲む':['摂取する'],'摂取する':['行為'],
+  '考える':['思考する'],'思考する':['心の働き'],
+  '見る':['知覚する'],'聞く':['知覚する'],'知覚する':['心の働き'],
+  '話す':['伝える'],'伝える':['コミュニケーション'],'コミュニケーション':['行為'],
+  '作る':['制作する'],'描く':['制作する'],'制作する':['行為']
+};
+const GUIDED_DOWN={};
+for(const [child,parents] of Object.entries(GUIDED_UP))for(const parent of parents)(GUIDED_DOWN[parent]??=[]).push(child);
+
+const VIEWPOINTS={
+  '面白い':[
+    {label:'❤️ 感情として',word:'興味',desc:'「自分が面白いと感じる」側から上がる。'},
+    {label:'🎨 対象の性質として',word:'魅力',desc:'「それが人を引きつける」側から上がる。'},
+    {label:'🧠 評価として',word:'評価',desc:'「面白いと判断した」側から上がる。'}
+  ],
+  '嬉しい':[
+    {label:'❤️ 感情として',word:'喜び',desc:'自分の内側に起きた気持ちとして見る。'},
+    {label:'🫧 状態として',word:'心の状態',desc:'その時の心全体の状態として見る。'}
+  ],
+  '悲しい':[
+    {label:'❤️ 感情として',word:'悲しみ',desc:'自分の内側に起きた気持ちとして見る。'},
+    {label:'🫧 状態として',word:'心の状態',desc:'その時の心全体の状態として見る。'}
+  ],
+  '怖い':[
+    {label:'❤️ 感情として',word:'恐怖',desc:'怖いと感じる自分の側から見る。'},
+    {label:'⚠️ 対象の性質として',word:'危険性',desc:'怖さを生む対象側の性質として見る。'}
+  ],
+  '家':[
+    {label:'🧱 構造として',word:'建物',desc:'何であるか・形として上がる。'},
+    {label:'🏠 用途として',word:'住居',desc:'何のための場所かで上がる。'},
+    {label:'❤️ 人との関係として',word:'居場所',desc:'人にとってどんな意味を持つかで上がる。'}
+  ]
+};
 
 function norm(s){return String(s??'').normalize('NFKC').trim()}
 function canonical(s){const n=norm(s);return ALIASES[n]||n}
@@ -81,10 +149,20 @@ function coreInfo(w){return CORE[canonical(w)]||null}
 function emojiFor(w){return coreInfo(w)?.emoji||(/[ぁ-んァ-ン一-龠]/.test(w)?'💭':'✍️')}
 function posOfSense(s){return s?.pos||String(s?.id||'').slice(-1)}
 function posJa(pos){return ({n:'名詞',v:'動詞',a:'形容詞',r:'副詞'})[pos]||''}
-function render(){const info=coreInfo(current);$('#word').textContent=current;$('#desc').textContent=info?.desc||(current.length>12?'自由入力した言葉・場面。辞書にない時は自分の抽象化で進めるで。':currentPos?`${posJa(currentPos)}の意味を固定して階層をたどっているで。`:'辞書と知識グラフから上下の候補を探せるで。');$('#emoji').textContent=emojiFor(current);$('#bar').style.width=Math.min(100,moves/5*100)+'%';$('#count').textContent=moves>=5?'達成！ 🎉':moves+' / 5';$('#history').innerHTML=history.slice().reverse().map(x=>`<div class="h"><div class="dot ${x.type}">${x.type==='up'?'↑':x.type==='down'?'↓':'•'}</div><div class="hc"><b>${esc(x.word)}</b><span>${esc(x.note)}</span></div></div>`).join('')}
+function currentNode(){return trail[cursor]||trail[trail.length-1]}
+function rebuildVisited(){visitedSenses.clear();visitedWords.clear();for(let i=0;i<=cursor;i++){const n=trail[i];if(!n)continue;visitedWords.add(canonical(n.word));if(n.sense)visitedSenses.add(n.sense)}}
+function syncNode(n){current=n.word;currentSense=n.sense||null;currentPos=n.pos||'';rebuildVisited()}
+function render(){
+  const info=coreInfo(current);$('#word').textContent=current;
+  $('#desc').textContent=info?.desc||(current.length>12?'自由入力した言葉・場面。辞書にない時は自分の抽象化で進めるで。':currentPos?`${posJa(currentPos)}の意味を固定して階層をたどっているで。`:'辞書・思考ルート・観点から上下を探せるで。');
+  $('#emoji').textContent=emojiFor(current);$('#bar').style.width=Math.min(100,moves/5*100)+'%';$('#count').textContent=moves>=5?'達成！ 🎉':moves+' / 5';
+  const rows=trail.map((x,i)=>`<button class="h hbtn ${i===cursor?'now':''}" data-history="${i}" title="この言葉へ戻る"><div class="dot ${x.type}">${x.type==='up'?'↑':x.type==='down'?'↓':'•'}</div><div class="hc"><b>${esc(x.word)}</b><span>${esc(x.note)}${i===cursor?' · 今ここ':''}</span></div></button>`).reverse().join('');
+  $('#history').innerHTML=rows;document.querySelectorAll('[data-history]').forEach(b=>b.onclick=()=>jumpTo(+b.dataset.history));
+}
 function setStatus(t,k=''){const e=$('#status');e.textContent=t;e.className='status'+(k?' '+k:'')}
-function resetSense(){currentSense=null;currentPos='';visitedSenses.clear()}
-function startWord(w){w=canonical(w);if(!w)return;requestSeq++;current=w;resetSense();visitedWords.clear();visitedWords.add(current);moves=0;history=[{word:w,type:'start',note:'自由入力でスタート',sense:null}];setStatus('🌱 上か下を押してみてな');render()}
+function resetSense(){currentSense=null;currentPos=''}
+function startWord(w){w=canonical(w);if(!w)return;requestSeq++;current=w;resetSense();moves=0;trail=[{word:w,type:'start',note:'自由入力でスタート',sense:null,pos:'',source:'自由入力'}];cursor=0;rebuildVisited();setStatus('🌱 上か下を押してみてな');render()}
+function jumpTo(i){if(i<0||i>=trail.length)return;requestSeq++;cursor=i;syncNode(trail[cursor]);$('#modal').classList.remove('show');setStatus(`↩ 「${current}」の時点へ戻ったで`,'good');render()}
 
 async function checkWordNet(){try{const r=await fetch('/wn/meta.json',{cache:'no-store'});const m=await r.json();const e=$('#wnState');if(m.available){wordNetAvailable=true;e.textContent=`WordNet ON · ${m.words?.toLocaleString?.()||''}語`;e.className='source-pill on'}else{wordNetAvailable=false;e.textContent='WordNet ビルド失敗';e.className='source-pill off'}}catch{wordNetAvailable=false;const e=$('#wnState');e.textContent='WordNet 未接続';e.className='source-pill off'}}
 async function loadLemmaShard(b){if(!lemmaCache.has(b)){const r=await fetch(`/wn/l-${b}.json`);if(!r.ok)throw new Error('WordNet lemma shard unavailable');lemmaCache.set(b,await r.json())}return lemmaCache.get(b)}
@@ -92,99 +170,84 @@ async function loadSenseShard(b){if(!senseCache.has(b)){const r=await fetch(`/wn
 async function wnSense(id){if(!id)return null;const shard=await loadSenseShard(hashText(id));return shard[id]||null}
 async function wnLookup(word){const w=canonical(word),shard=await loadLemmaShard(hashText(w));const ids=shard[w]||shard[norm(word)]||[];return (await Promise.all(ids.slice(0,20).map(wnSense))).filter(Boolean)}
 
-function coreCandidates(word,dir){const info=coreInfo(word);const arr=dir==='up'?info?.up:info?.down;return (arr||[]).map((w,i)=>({word:w,source:'内蔵',badge:'確認済み',rank:180-i,gloss:coreInfo(w)?.desc||'',targetSense:null,targetPos:''}))}
+function coreCandidates(word,dir){const info=coreInfo(word),arr=dir==='up'?info?.up:info?.down;return (arr||[]).map((w,i)=>({word:w,source:'内蔵',badge:'確認済み',group:'core',rank:260-i,gloss:coreInfo(w)?.desc||'',targetSense:null,targetPos:''}))}
+function guidedCandidates(word,dir){if(dir==='up'&&shouldStopAbove(word))return[];const arr=(dir==='up'?GUIDED_UP:GUIDED_DOWN)[canonical(word)]||[];return arr.map((w,i)=>({word:w,source:'思考ルート',badge:dir==='up'?'自然な抽象化':'自然な具体化',group:'thinking',rank:520-i,gloss:coreInfo(w)?.desc||'WordNetの辞書階層を、人が使いやすい現代語で補うルート。'}))}
+function viewpointCandidates(word,dir){if(dir!=='up')return[];return (VIEWPOINTS[canonical(word)]||[]).map((x,i)=>({word:x.word,source:'観点',badge:x.label,group:'viewpoint',rank:650-i,gloss:x.desc,viewpoint:true}))}
+function routeBackCandidates(dir){
+  const out=[];
+  if(cursor>0){const cur=trail[cursor],prev=trail[cursor-1];if((cur.type==='up'&&dir==='down')||(cur.type==='down'&&dir==='up'))out.push({word:prev.word,source:'足あと',badge:'1段戻る',group:'back',rank:1000,gloss:'さっき通った意味IDごと正確に戻る。',returnIndex:cursor-1,targetSense:prev.sense,targetPos:prev.pos})}
+  if(cursor<trail.length-1){const next=trail[cursor+1];if((next.type==='up'&&dir==='up')||(next.type==='down'&&dir==='down'))out.push({word:next.word,source:'足あと',badge:'来た道を進む',group:'back',rank:990,gloss:'前に選んだ同じ道をもう一度たどる。',returnIndex:cursor+1,targetSense:next.sense,targetPos:next.pos})}
+  return out
+}
 function pickDisplayWord(words=[]){
-  const clean=[...new Set((words||[]).map(norm).filter(Boolean))];
-  if(!clean.length)return '';
+  const clean=[...new Set((words||[]).map(norm).filter(Boolean))];if(!clean.length)return '';
   const core=clean.find(w=>CORE[canonical(w)]);if(core)return friendly(core);
-  return friendly(clean.slice().sort((a,b)=>{
-    const ap=/[・（）()]/.test(a)?2:0,bp=/[・（）()]/.test(b)?2:0;
-    return ap-bp||a.length-b.length||a.localeCompare(b,'ja');
-  })[0]);
+  return friendly(clean.slice().sort((a,b)=>{const ah=HIDE_ROOT.has(a)?10:0,bh=HIDE_ROOT.has(b)?10:0,ap=/[・（）()]/.test(a)?2:0,bp=/[・（）()]/.test(b)?2:0;return ah-bh||ap-bp||a.length-b.length||a.localeCompare(b,'ja')})[0]);
 }
 function stripped(s){return friendly(s).replace(/[\s・、。,.()（）「」『』]/g,'').replace(/^(一|一つの|ある|その)/,'')}
 function isNearDuplicate(a,b){const x=stripped(a),y=stripped(b);if(!x||!y)return false;if(x===y)return true;if(Math.abs(x.length-y.length)<=1&&(x.endsWith(y)||y.endsWith(x)))return true;return false}
-function isHiddenLabel(w){return HIDE_ROOT.has(friendly(w))}
+function isHiddenLabel(w){return HIDE_ROOT.has(canonical(w))||HIDE_ROOT.has(friendly(w))}
 function shouldStopAbove(w){return STOP_UP.has(friendly(w))}
 function relationBadge(pos,dir,bridge=false){if(bridge)return '属性→概念';if(pos==='v')return dir==='up'?'より広い動作':'より具体的な動作';return dir==='up'?'上位概念':'下位概念'}
 
 async function expandTarget(rel,dir,sourceSense,bridge=false,depth=0){
-  const targetId=rel?.synset||''; if(!targetId||visitedSenses.has(targetId))return [];
-  const target=await wnSense(targetId); if(!target)return [];
-  let word=pickDisplayWord(target.words||rel.words||[]); if(!word)return [];
-  const pos=posOfSense(target);
-  if(isHiddenLabel(word))return [];
+  const targetId=rel?.synset||'';if(!targetId||visitedSenses.has(targetId))return[];const target=await wnSense(targetId);if(!target)return[];
+  let raw=pickDisplayWord(target.words||rel.words||[]);if(!raw)return[];let word=friendly(raw);const pos=posOfSense(target);
+  if(isHiddenLabel(raw)||isHiddenLabel(word)){
+    if(depth>=3)return[];const next=dir==='up'?(target.up||[]):(target.down||[]),nested=[];for(const n of next.slice(0,8))nested.push(...await expandTarget(n,dir,target,false,depth+1));return nested;
+  }
   if(isNearDuplicate(current,word)||visitedWords.has(canonical(word))){
-    if(depth>=2)return [];
-    const next=dir==='up'?(target.up||[]):(target.down||[]);
-    const nested=[];for(const n of next.slice(0,8))nested.push(...await expandTarget(n,dir,target,false,depth+1));return nested;
+    if(depth>=3)return[];const next=dir==='up'?(target.up||[]):(target.down||[]),nested=[];for(const n of next.slice(0,8))nested.push(...await expandTarget(n,dir,target,false,depth+1));return nested;
   }
-  const aliases=[...new Set((target.words||[]).map(friendly).filter(x=>x&&x!==word&&!isNearDuplicate(x,word)))].slice(0,4);
-  return [{
-    word,source:'WordNet',badge:relationBadge(posOfSense(sourceSense),dir,bridge),rank:bridge?330:340,
-    gloss:target.gloss||'',targetSense:target.id,targetPos:pos,aliases,bridge,
-    terminal:dir==='up'&&shouldStopAbove(word)
-  }];
+  const aliases=[...new Set((target.words||[]).map(friendly).filter(x=>x&&x!==word&&!isNearDuplicate(x,word)&&!isHiddenLabel(x)))].slice(0,4);
+  return [{word,source:'WordNet',badge:relationBadge(posOfSense(sourceSense),dir,bridge),group:'wordnet',rank:bridge?330:340,gloss:target.gloss||'',targetSense:target.id,targetPos:pos,aliases,bridge,terminal:dir==='up'&&shouldStopAbove(word)}];
 }
-
 async function wordNetCandidates(word,dir){
-  if(dir==='up'&&shouldStopAbove(current))return [];
-  const senses=currentSense?[await wnSense(currentSense)].filter(Boolean):await wnLookup(word);
-  const out=[];
-  for(const s of senses){
-    const pos=posOfSense(s);
-    let rels=[]; let bridge=false;
-    if(pos==='a'){
-      if(dir==='up'){rels=s.attr||[];bridge=true}
-      else continue;
-    }else if(pos==='n'||pos==='v'){
-      rels=dir==='up'?(s.up||[]):(s.down||[]);
-    }else continue;
-    for(const rel of rels.slice(0,14)) out.push(...await expandTarget(rel,dir,s,bridge,0));
-  }
+  if(dir==='up'&&shouldStopAbove(current))return[];const senses=currentSense?[await wnSense(currentSense)].filter(Boolean):await wnLookup(word),out=[];
+  for(const s of senses){const pos=posOfSense(s);let rels=[],bridge=false;if(pos==='a'){if(dir==='up'){rels=s.attr||[];bridge=true}else continue}else if(pos==='n'||pos==='v'){rels=dir==='up'?(s.up||[]):(s.down||[])}else continue;for(const rel of rels.slice(0,14))out.push(...await expandTarget(rel,dir,s,bridge,0))}
   return out
 }
-
 async function relationHints(word){
-  const senses=currentSense?[await wnSense(currentSense)].filter(Boolean):await wnLookup(word);
-  const similar=[], entail=[], cause=[];
-  for(const s of senses.slice(0,5)){
-    for(const r of (s.similar||[]).slice(0,4)){const t=await wnSense(r.synset);const w=pickDisplayWord(t?.words||r.words||[]);if(w&&!isNearDuplicate(w,current))similar.push(w)}
-    if(posOfSense(s)==='v'){
-      for(const r of (s.entail||[]).slice(0,3)){const t=await wnSense(r.synset);const w=pickDisplayWord(t?.words||r.words||[]);if(w)entail.push(w)}
-      for(const r of (s.cause||[]).slice(0,3)){const t=await wnSense(r.synset);const w=pickDisplayWord(t?.words||r.words||[]);if(w)cause.push(w)}
-    }
-  }
+  const senses=currentSense?[await wnSense(currentSense)].filter(Boolean):await wnLookup(word),similar=[],entail=[],cause=[];
+  for(const s of senses.slice(0,5)){for(const r of (s.similar||[]).slice(0,4)){const t=await wnSense(r.synset),w=pickDisplayWord(t?.words||r.words||[]);if(w&&!isNearDuplicate(w,current)&&!isHiddenLabel(w))similar.push(w)}if(posOfSense(s)==='v'){for(const r of (s.entail||[]).slice(0,3)){const t=await wnSense(r.synset),w=pickDisplayWord(t?.words||r.words||[]);if(w)entail.push(w)}for(const r of (s.cause||[]).slice(0,3)){const t=await wnSense(r.synset),w=pickDisplayWord(t?.words||r.words||[]);if(w)cause.push(w)}}}
   return {similar:[...new Set(similar)].slice(0,5),entail:[...new Set(entail)].slice(0,4),cause:[...new Set(cause)].slice(0,4)}
 }
-
 function conceptUri(word){return '/c/ja/'+encodeURIComponent(canonical(word).replace(/\s+/g,'_').toLowerCase())}
-async function conceptNetCandidates(word,dir){const w=canonical(word),wn=w.toLowerCase(),url=`https://api.conceptnet.io/query?node=${conceptUri(w)}&rel=/r/IsA&other=/c/ja&limit=80`;const c=new AbortController(),t=setTimeout(()=>c.abort(),4200);try{const r=await fetch(url,{signal:c.signal,headers:{Accept:'application/json'}});if(!r.ok)throw new Error('ConceptNet '+r.status);const d=await r.json(),out=[];for(const e of d.edges||[]){const weight=Number(e.weight)||0;if(weight<1.2)continue;const a=norm(e.start?.label),b=norm(e.end?.label);if(dir==='up'&&canonical(a).toLowerCase()===wn&&b)out.push({word:friendly(b),source:'ConceptNet',badge:'補助',rank:100+weight,gloss:'ConceptNetのIsA関係。WordNetに候補がない時だけ表示。'});if(dir==='down'&&canonical(b).toLowerCase()===wn&&a)out.push({word:friendly(a),source:'ConceptNet',badge:'補助',rank:100+weight,gloss:'ConceptNetのIsA関係。WordNetに候補がない時だけ表示。'})}return out}finally{clearTimeout(t)}}
-function merge(list){const m=new Map(),cur=canonical(current).toLowerCase();for(const x of list){const w=norm(x.word);if(!w||canonical(w).toLowerCase()===cur||w.length>40||isHiddenLabel(w)||isNearDuplicate(current,w))continue;const k=canonical(w).toLowerCase(),old=m.get(k);if(!old||x.rank>(old.rank||0))m.set(k,{...x,word:w})}return [...m.values()].sort((a,b)=>(b.rank||0)-(a.rank||0)).slice(0,12)}
+async function conceptNetCandidates(word,dir){const w=canonical(word),wn=w.toLowerCase(),url=`https://api.conceptnet.io/query?node=${conceptUri(w)}&rel=/r/IsA&other=/c/ja&limit=80`,c=new AbortController(),t=setTimeout(()=>c.abort(),4200);try{const r=await fetch(url,{signal:c.signal,headers:{Accept:'application/json'}});if(!r.ok)throw new Error('ConceptNet '+r.status);const d=await r.json(),out=[];for(const e of d.edges||[]){const weight=Number(e.weight)||0;if(weight<1.2)continue;const a=norm(e.start?.label),b=norm(e.end?.label);if(dir==='up'&&canonical(a).toLowerCase()===wn&&b)out.push({word:friendly(b),source:'ConceptNet',badge:'補助',group:'conceptnet',rank:100+weight,gloss:'ConceptNetのIsA関係。ほかに自然な候補がない時の補助。'});if(dir==='down'&&canonical(b).toLowerCase()===wn&&a)out.push({word:friendly(a),source:'ConceptNet',badge:'補助',group:'conceptnet',rank:100+weight,gloss:'ConceptNetのIsA関係。ほかに自然な候補がない時の補助。'})}return out}finally{clearTimeout(t)}}
+function merge(list){const m=new Map(),cur=canonical(current).toLowerCase();for(const x of list){const w=norm(x.word);if(!w||canonical(w).toLowerCase()===cur||w.length>40||isHiddenLabel(w)||isNearDuplicate(current,w))continue;const k=canonical(w).toLowerCase(),old=m.get(k);if(!old||x.rank>(old.rank||0))m.set(k,{...x,word:w})}return [...m.values()].sort((a,b)=>(b.rank||0)-(a.rank||0)).slice(0,16)}
 
-const HINTS={up:[['種類','これは何の一種？'],['役割','何のためにあるもの？'],['行動','ここで人は何をしていた？'],['痕跡','この場面に何が残っている？'],['状態','何が起きている途中？'],['意味','この場面全体を一言で言うと？']],down:[['種類','この仲間には何がある？'],['場所','どこで見つかる？'],['人物','誰が使う・する？'],['時間','いつ起こる？'],['形','どんな見た目や状態？'],['例','具体例を1つだけ挙げると？']]};
-function showHints(dir,extra={}){const hs=HINTS[dir];let extraHtml='';if(extra.similar?.length)extraHtml+=`<div class="hint-text">↔ 近い表現：${esc(extra.similar.join(' / '))}</div>`;if(extra.entail?.length)extraHtml+=`<div class="hint-text">→ この動作に伴いやすい：${esc(extra.entail.join(' / '))}</div>`;if(extra.cause?.length)extraHtml+=`<div class="hint-text">⚡ この動作が引き起こす：${esc(extra.cause.join(' / '))}</div>`;$('#hintZone').innerHTML=`<b>🧠 答えが出ない時の思考ヒント</b><div class="hint-chips">${hs.map((h,i)=>`<button class="hint-chip" data-hi="${i}">${h[0]}</button>`).join('')}</div><div class="hint-text" id="hintText">辞書に正解がなくてもOK。視点を1つ選んで、自分の言葉で書いてみよう。</div>${extraHtml}`;document.querySelectorAll('.hint-chip').forEach(b=>b.onclick=()=>{$('#hintText').textContent='💡 '+hs[+b.dataset.hi][1];$('#manualInput').focus()})}
+const HINTS={up:[['種類','これは何の一種？'],['役割','何のためにあるもの？'],['感情','それを人の心の側から言うと？'],['痕跡','この場面に何が残っている？'],['状態','何が起きている途中？'],['意味','この場面全体を一言で言うと？']],down:[['種類','この仲間には何がある？'],['来た道','さっきの具体語へ戻るのも正解。'],['場所','どこで見つかる？'],['人物','誰が使う・する？'],['形','どんな見た目や状態？'],['例','具体例を1つだけ挙げると？']]};
+function showHints(dir,extra={}){const hs=HINTS[dir];let extraHtml='';if(extra.similar?.length)extraHtml+=`<div class="hint-text">↔ 近い表現：${esc(extra.similar.join(' / '))}</div>`;if(extra.entail?.length)extraHtml+=`<div class="hint-text">→ この動作に伴いやすい：${esc(extra.entail.join(' / '))}</div>`;if(extra.cause?.length)extraHtml+=`<div class="hint-text">⚡ この動作が引き起こす：${esc(extra.cause.join(' / '))}</div>`;$('#hintZone').innerHTML=`<b>🧠 答えが出ない時の思考ヒント</b><div class="hint-chips">${hs.map((h,i)=>`<button class="hint-chip" data-hi="${i}">${h[0]}</button>`).join('')}</div><div class="hint-text" id="hintText">正解は1本じゃないで。観点を変えると別の抽象化ルートも作れる。</div>${extraHtml}`;document.querySelectorAll('.hint-chip').forEach(b=>b.onclick=()=>{$('#hintText').textContent='💡 '+hs[+b.dataset.hi][1];$('#manualInput').focus()})}
+function groupName(g){return ({back:'↩ 来た道',viewpoint:'🌿 観点を選ぶ',thinking:'🧠 自然な思考ルート',wordnet:'📚 WordNetの辞書階層',core:'✅ 内蔵の確認済みルート',conceptnet:'🕸 ConceptNet補助'})[g]||'候補'}
+function badgeClass(x){return x.group==='back'?'route':x.group==='viewpoint'?'view':x.group==='thinking'?'think':x.source==='ConceptNet'?'cn':x.source==='内蔵'?'core':''}
+function choiceClass(x){return x.group==='back'?'back':x.group==='viewpoint'?'viewpoint':x.group==='thinking'?'thinking':''}
 function showChoices(items,dir){
-  if(!items.length){$('#choices').innerHTML='<div class="preview"><b>この方向の自然な候補はここまで。</b><br>辞書の最上層まで無理に登らず、必要なら下の自由入力で続けてな。</div>';return}
-  $('#choices').innerHTML=items.map((x,i)=>`<button class="choice" data-i="${i}"><div class="top"><span class="cw">${esc(x.word)}</span><span class="badge ${x.source==='ConceptNet'?'cn':x.source==='内蔵'?'core':''}">${esc(x.source)} · ${esc(x.badge)}</span></div>${x.gloss?`<div class="meta">この意味：${esc(x.gloss)}</div>`:''}${x.bridge?`<div class="sense">🌉 形容詞なので「どんな性質・状態か」の概念へ橋渡し</div>`:''}${x.aliases?.length?`<div class="sense">同じ概念の言い方：${esc(x.aliases.join(' / '))}</div>`:''}${x.source==='WordNet'&&x.targetSense?`<div class="sense">🔒 この意味を固定して次へ進む${x.terminal?' · ここで止めるのがおすすめ':''}</div>`:''}<div class="preview">${dir==='up'?`「${esc(current)}」→ より広い「${esc(x.word)}」`:`「${esc(current)}」→ より細かい「${esc(x.word)}」`}</div></button>`).join('');
+  if(!items.length){$('#choices').innerHTML='<div class="preview"><b>この方向の自然な候補はここまで。</b><br>辞書の根っこへ無理に進まず、自由入力や別の観点に切り替えてな。</div>';return}
+  const groups=[];for(const x of items){let g=groups.find(z=>z.key===x.group);if(!g){g={key:x.group||'wordnet',items:[]};groups.push(g)}g.items.push(x)}
+  $('#choices').innerHTML=groups.map(g=>`<div class="group-title">${groupName(g.key)}</div>${g.items.map((x)=>{const i=items.indexOf(x);return `<button class="choice ${choiceClass(x)}" data-i="${i}"><div class="top"><span class="cw">${esc(x.word)}</span><span class="badge ${badgeClass(x)}">${esc(x.source)} · ${esc(x.badge)}</span></div>${x.gloss?`<div class="meta">${esc(x.gloss)}</div>`:''}${x.bridge?`<div class="sense">🌉 形容詞の属性を、名詞の概念へ橋渡し</div>`:''}${x.viewpoint?`<div class="sense">🌿 これは唯一の正解ではなく「この観点なら」のルート</div>`:''}${x.aliases?.length?`<div class="sense">同じ概念の言い方：${esc(x.aliases.join(' / '))}</div>`:''}${x.source==='WordNet'&&x.targetSense?`<div class="sense">🔒 この意味IDを固定して次へ進む${x.terminal?' · ここで止めるのがおすすめ':''}</div>`:''}${x.group==='back'?`<div class="sense">↩ 前に選んだ意味IDごと戻るので、別の意味に化けない</div>`:''}<div class="preview">${x.group==='back'?`「${esc(current)}」→ 足あと「${esc(x.word)}」へ`:(dir==='up'?`「${esc(current)}」→ より広い「${esc(x.word)}」`:`「${esc(current)}」→ より細かい「${esc(x.word)}」`)}</div></button>`}).join('')}`).join('');
   document.querySelectorAll('.choice[data-i]').forEach(b=>b.onclick=()=>chooseItem(items[+b.dataset.i],dir))
 }
-function chooseItem(item,dir){choose(item.word,dir,item.source,item.targetSense||null,item.targetPos||'',item.badge||'')}
+function chooseItem(item,dir){if(Number.isInteger(item.returnIndex)){jumpTo(item.returnIndex);return}choose(item.word,dir,item.source,item.targetSense||null,item.targetPos||'',item.badge||'')}
 async function openChoices(dir){
   lastDir=dir;const seq=++requestSeq,wordAtOpen=current;$('#title').textContent=dir==='up'?'↑ 抽象化候補':'↓ 具体化候補';
-  const mode=currentPos==='v'?'動詞は「より広い動作 ↔ より具体的な動作」でたどります。':currentPos==='a'?'形容詞は属性・状態の概念へ橋渡しします。':'名詞は上位概念 / 下位概念をたどります。';
-  $('#help').textContent=`「${current}」を${dir==='up'?'より広く':'より細かく'}。${mode}`;
-  $('#manualInput').value='';$('#manualInput').placeholder=dir==='up'?'自分なら、もっと広く何と言う？':'自分なら、もっと細かく何と言う？';showHints(dir);$('#modal').classList.add('show');$('#choices').innerHTML='<div class="loading">日本語WordNetを検索中… 🧠🔎</div>';setStatus('WordNet検索中…');
+  const mode=currentPos==='v'?'動詞はWordNet＋自然な動作ルートで、浅い所で終わらないよう補います。':currentPos==='a'?'形容詞は「感情 / 性質 / 評価」など観点を分けられます。':'同じ言葉でも「種類 / 用途 / 人との関係」など観点を変えられます。';
+  $('#help').textContent=`「${current}」を${dir==='up'?'より広く':'より細かく'}。${mode}`;$('#manualInput').value='';$('#manualInput').placeholder=dir==='up'?'自分なら、別の観点でどう広げる？':'自分なら、どんな具体例にする？';showHints(dir);$('#modal').classList.add('show');$('#choices').innerHTML='<div class="loading">候補を整理中… 🧠🔎</div>';setStatus('候補を整理中…');
+  const fixed=[...routeBackCandidates(dir),...viewpointCandidates(wordAtOpen,dir),...guidedCandidates(wordAtOpen,dir),...coreCandidates(wordAtOpen,dir)];
   let wn=[];try{wn=await wordNetCandidates(wordAtOpen,dir)}catch{}if(seq!==requestSeq||current!==wordAtOpen)return;
   let extra={};try{extra=await relationHints(wordAtOpen)}catch{}if(seq!==requestSeq||current!==wordAtOpen)return;showHints(dir,extra);
-  let all=merge(wn);if(all.length){showChoices(all,dir);setStatus(`WordNetの候補 ${all.length}件 · 意味を固定して進む`,'good');return}
-  if(currentSense){showChoices([],dir);setStatus('この意味の枝はここまで · 自由入力なら続けられる','good');return}
-  const local=merge(coreCandidates(current,dir));if(local.length){showChoices(local,dir);setStatus('WordNet候補なし · 内蔵候補を表示','warn');return}
-  let cn=[];try{cn=await conceptNetCandidates(wordAtOpen,dir)}catch{}if(seq!==requestSeq||current!==wordAtOpen)return;all=merge(cn);showChoices(all,dir);setStatus(all.length?'ConceptNetの補助候補を表示':'自動候補なし · 自分の言葉で続けられる','warn')
+  let all=merge([...fixed,...wn]);
+  if(!all.length){let cn=[];try{cn=await conceptNetCandidates(wordAtOpen,dir)}catch{}if(seq!==requestSeq||current!==wordAtOpen)return;all=merge([...fixed,...cn])}
+  showChoices(all,dir);
+  const hasBack=all.some(x=>x.group==='back'),hasView=all.some(x=>x.group==='viewpoint'),hasThink=all.some(x=>x.group==='thinking');
+  setStatus(all.length?`${hasBack?'来た道＋':''}${hasView?'観点分岐＋':''}${hasThink?'思考ルート＋':''}辞書候補を表示`:'自動候補なし · 自分の言葉で続けられる',all.length?'good':'warn')
 }
 function choose(word,dir,source='自分',targetSense=null,targetPos='',badge=''){
-  current=canonical(word);if(source==='WordNet'&&targetSense){currentSense=targetSense;currentPos=targetPos||String(targetSense).slice(-1);visitedSenses.add(targetSense)}else{resetSense()}
-  visitedWords.add(current);moves++;history.push({word:current,type:dir,note:`${source}${badge?' · '+badge:''} · ${dir==='up'?'上へ':'下へ'}${currentSense?' · 意味固定':''}`,sense:currentSense});$('#modal').classList.remove('show');setStatus(currentSense?(shouldStopAbove(current)?'🔒 このあたりで止めると自然やで':'🔒 同じ意味の枝をたどってるで'):'次の階層も探せるで 🌱',currentSense?'good':'');render();const card=$('#card');card.animate([{transform:dir==='up'?'translateY(18px)':'translateY(-18px)',opacity:.75},{transform:'translateY(0)',opacity:1}],{duration:320,easing:'ease-out'})
+  if(cursor<trail.length-1)trail=trail.slice(0,cursor+1);current=canonical(word);
+  const sense=(source==='WordNet'&&targetSense)?targetSense:null,pos=(source==='WordNet'&&targetSense)?(targetPos||String(targetSense).slice(-1)):'';
+  currentSense=sense;currentPos=pos;moves++;const note=`${source}${badge?' · '+badge:''} · ${dir==='up'?'上へ':'下へ'}${sense?' · 意味固定':''}`;
+  trail.push({word:current,type:dir,note,sense,pos,source});cursor=trail.length-1;rebuildVisited();$('#modal').classList.remove('show');
+  setStatus(sense?(shouldStopAbove(current)?'🔒 このあたりで止めると自然やで':'🔒 同じ意味の枝をたどってるで'):(source==='観点'?'🌿 観点を切り替えたで':source==='思考ルート'?'🧠 自然な思考ルートへ進んだで':'次の階層も探せるで 🌱'),sense?'good':'');render();
+  const card=$('#card');card.animate([{transform:dir==='up'?'translateY(18px)':'translateY(-18px)',opacity:.75},{transform:'translateY(0)',opacity:1}],{duration:320,easing:'ease-out'})
 }
 $('#up').onclick=()=>openChoices('up');$('#down').onclick=()=>openChoices('down');$('#start').onclick=()=>startWord($('#input').value);$('#input').onkeydown=e=>{if(e.key==='Enter')startWord(e.target.value)};$('#random').onclick=()=>startWord(STARTERS[Math.floor(Math.random()*STARTERS.length)]);$('#close').onclick=()=>{$('#modal').classList.remove('show');requestSeq++};$('#modal').onclick=e=>{if(e.target.id==='modal'){$('#modal').classList.remove('show');requestSeq++}};$('#manualAdd').onclick=()=>{const w=$('#manualInput').value.trim();if(w)choose(w,lastDir,'自由入力')};$('#manualInput').onkeydown=e=>{if(e.key==='Enter')$('#manualAdd').click()};render();checkWordNet();
 </script>
