@@ -4,7 +4,7 @@ import zlib from 'node:zlib';
 import { fileURLToPath } from 'node:url';
 import initSqlJs from 'sql.js';
 
-const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)));
 const DIST = path.join(ROOT, 'dist');
 const WN_DIR = path.join(DIST, 'wn');
 const DB_URL = 'https://github.com/bond-lab/wnja/releases/download/v1.1/wnjpn.db.gz';

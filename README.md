@@ -29,3 +29,7 @@ https://bond-lab.github.io/wnja/index.ja.html
 
 ConceptNet 5
 https://conceptnet.io/
+
+
+## v10.1
+GitHub手動アップロード向けに、scriptsフォルダを廃止しました。すべてのファイルをリポジトリ直下へアップロードしてください。
