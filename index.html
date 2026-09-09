@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>ことばズーム v10.10</title>
+<title>ことばズーム v10.11</title>
 <style>
 :root{--bg:#f7f5ef;--ink:#20211e;--muted:#73736e;--line:#ddd9cf;--up:#edf0ff;--down:#fff0e9;--blue:#6f7df7;--coral:#ea8f75;--shadow:0 18px 50px rgba(40,42,65,.10)}
 *{box-sizing:border-box} html,body{margin:0;min-height:100%;font-family:Inter,"Hiragino Sans","Yu Gothic",system-ui,sans-serif;color:var(--ink)}
@@ -21,7 +21,7 @@ header{display:flex;align-items:center;justify-content:space-between;gap:12px;ma
 </head>
 <body>
 <div class="app">
-<header><div class="brand"><div class="logo">↕</div><div><h1>ことばズーム <span style="font-size:11px;color:#7e86a8">v10.10</span></h1><div class="sub">意味飛び防止＋固有名詞の正体固定。候補1位だけを自動でたどるTEST LABつき。</div></div></div><div class="header-actions"><button class="ghost" id="testLab">🧪 TEST LAB</button><button class="ghost" id="random">🎲 おまかせ</button></div></header>
+<header><div class="brand"><div class="logo">↕</div><div><h1>ことばズーム <span style="font-size:11px;color:#7e86a8">v10.11</span></h1><div class="sub">多義語は観点を選んでから意味固定。知識の先も分岐し、名前判定は必要な時だけ。</div></div></div><div class="header-actions"><button class="ghost" id="testLab">🧪 TEST LAB</button><button class="ghost" id="random">🎲 おまかせ</button></div></header>
 <div class="layout">
 <main class="main"><section class="stage">
 <div class="level">ZOOM OUT · 抽象へ</div>
@@ -96,8 +96,28 @@ const CORE={
   '生命':{desc:'生きていること・命そのものを表す概念',emoji:'🌱',up:['生きること'],down:['生物']},
   '生きること':{desc:'生命が続き、活動していること',emoji:'🌿',up:['存在'],down:['生命']},
   '存在':{desc:'何かが「ある・いる」という最も広い見方',emoji:'◯',up:[],down:['生きること','物']},
-  '概念':{desc:'ものごとを頭の中でまとめて捉えた意味のまとまり',emoji:'💭',up:['知識'],down:[]},
+  '概念':{desc:'ものごとを頭の中でまとめて捉えた意味のまとまり',emoji:'💭',up:[],down:[]},
   '知識':{desc:'理解・経験・情報として蓄えられたもの',emoji:'🧠',up:[],down:['概念']},
+  '認知':{desc:'ものごとを知り、捉え、理解する心の働き',emoji:'🧠',up:['心の働き'],down:['知識']},
+  '情報':{desc:'伝えたり受け取ったりできる内容',emoji:'📚',up:['内容'],down:['知識']},
+  '内容':{desc:'情報や表現の中に含まれる意味や中身',emoji:'📄',up:['意味'],down:['情報']},
+  '意味':{desc:'言葉や出来事が表している内容・意義',emoji:'💭',up:['概念'],down:['内容']},
+  '共有知':{desc:'人々のあいだで共有されている知識',emoji:'👥',up:['文化'],down:['知識']},
+  '知識体系':{desc:'知識を関連づけて組み立てたまとまり',emoji:'🗂️',up:['世界の捉え方'],down:['知識']},
+  '世界の捉え方':{desc:'世界をどう理解し整理するかという見方',emoji:'🌍',up:[],down:['知識体系']},
+  '言葉':{desc:'意味や考えを表し伝えるための表現',emoji:'💬',up:['表現'],down:['概念']},
+  '制約の少ない状態':{desc:'強い制限や束縛を受けにくい状態',emoji:'🕊️',up:['状態'],down:['自由']},
+  '選択できること':{desc:'複数の可能性から自分で選べること',emoji:'🚪',up:['可能性'],down:['自由']},
+  '可能性':{desc:'そうなる・そうできる余地があること',emoji:'🌱',up:[],down:['選択できること']},
+  '権利':{desc:'社会の中で認められる自由や資格',emoji:'⚖️',up:['社会的な価値'],down:['自由']},
+  '社会的な価値':{desc:'社会の中で大切だと認められる価値',emoji:'⚖️',up:['価値'],down:['権利']},
+  '解放感':{desc:'束縛から離れたときに感じる軽さや自由さ',emoji:'🪽',up:['感情'],down:['自由']},
+  '心が動く':{desc:'感情や注意が強く揺さぶられること',emoji:'💓',up:['心の経験'],down:['エモい']},
+  '印象':{desc:'ものごとに触れたとき心に残る感じ',emoji:'🌫️',up:['心の経験'],down:['エモい']},
+  '懐かしさ':{desc:'過去を思い出して感じる感情',emoji:'🕰️',up:['感情'],down:['エモい']},
+  '疲労感':{desc:'疲れて重く感じる心身の感覚',emoji:'😮‍💨',up:['心の状態'],down:['だるい']},
+  '驚き':{desc:'予想外のことに心が大きく動く感情',emoji:'😳',up:['感情'],down:['すごい','やばい']},
+  '危険性':{desc:'害や問題が起こる可能性',emoji:'⚠️',up:['可能性'],down:['怖い','やばい']},
   '心の経験':{desc:'感じる・考えるなど、心の中で起こる経験',emoji:'🫧',up:['経験'],down:['感情','心の状態']},
   '経験':{desc:'実際に感じたり行ったりして得ること',emoji:'🌊',up:[],down:['心の経験']},
   '作品':{desc:'人が作り、表現として残したもの',emoji:'🎨',up:['表現'],down:['映画','小説','楽曲']},
@@ -134,7 +154,7 @@ const FRIENDLY={
 };
 const HIDE_ROOT=new Set(['実体','抽象的実体','物理的実体','存在物','属性','一統']);
 const INTERNAL_LABEL_RE=/(Wikidata|ウィキデータ|ウィキベース|可変次数|データモデル|基礎エンティティ|エンティティ|分類体系|文法範疇|品詞|抽象名詞|一統|営造|アーチファクト|付属肢|抽象的実体|物理的実体)/i;
-const STOP_UP=new Set(['物','物質','性質','状態','感情','心の状態','心の働き','行為','活動','出来事','現象','概念','知識','生物','生命体','生物の構造','存在','経験','文化','集団','空間','役職']);
+const STOP_UP=new Set(['物','物質','性質','状態','感情','心の状態','心の働き','行為','活動','出来事','現象','概念','知識','生物','生命体','生物の構造','存在','経験','文化','集団','空間','役職','可能性','世界の捉え方']);
 
 // WordNetだけでは浅い・古い言い方になる場所を、人間向けの思考ルートで橋渡し。
 const GUIDED_UP={
@@ -154,7 +174,10 @@ const GUIDED_UP={
   '作る':['制作する'],'描く':['制作する'],'制作する':['行為'],
   '総理大臣':['政府の長'],'政府の長':['政治上の役職'],'政治上の役職':['公職'],'公職':['役職'],
   '作品':['表現'],'表現':['文化'],'キャラクター':['架空の存在'],'架空の存在':['概念'],'企業':['組織'],'組織':['集団'],'場所':['空間'],
-  '生命':['生きること'],'生きること':['存在'],'心の経験':['経験'],'概念':['知識']
+  '生命':['生きること'],'生きること':['存在'],'心の経験':['経験'],
+  '認知':['心の働き'],'情報':['内容'],'内容':['意味'],'意味':['概念'],'共有知':['文化'],'知識体系':['世界の捉え方'],'言葉':['表現'],
+  '制約の少ない状態':['状態'],'選択できること':['可能性'],'権利':['社会的な価値'],'社会的な価値':['価値'],'解放感':['感情'],
+  '心が動く':['心の経験'],'印象':['心の経験'],'懐かしさ':['感情'],'疲労感':['心の状態'],'驚き':['感情'],'危険性':['可能性']
 };
 const GUIDED_DOWN={};
 for(const [child,parents] of Object.entries(GUIDED_UP))for(const parent of parents)(GUIDED_DOWN[parent]??=[]).push(child);
@@ -185,7 +208,15 @@ const SUMMIT_VIEWPOINTS={
     {label:'💭 メタ化する',word:'性質という概念',desc:'性質の種類ではなく「性質という考え」を対象にする。'}
   ],
   '概念':[
-    {label:'🧠 知識として',word:'知識',desc:'個々の概念を、理解・知識のまとまりとして見る。'}
+    {label:'🧠 知識として',word:'知識',desc:'概念を、理解・学習の中にある知識として見る。'},
+    {label:'💬 言葉として',word:'言葉',desc:'概念を、言葉で名づけられ伝えられるものとして見る。'},
+    {label:'🌏 文化として',word:'文化',desc:'概念を、人々が共有してきた文化的な枠組みとして見る。'}
+  ],
+  '知識':[
+    {label:'🧠 認知として',word:'認知',desc:'知識を「人が知り、理解する心の働き」として見る。'},
+    {label:'📚 情報として',word:'情報',desc:'知識を「伝達・記録できる内容」として見る。'},
+    {label:'👥 社会として',word:'共有知',desc:'知識を「人々のあいだで共有されるもの」として見る。'},
+    {label:'🗂️ メタとして',word:'知識体系',desc:'個々の知識ではなく、知識同士を組み立てた体系として見る。'}
   ]
 };
 const CONCRETE_MODES=[
@@ -211,7 +242,7 @@ const TEST_WORDS=[
   '物','代表','力','橋','あめ','はし','かみ','星','光','窓','森',
   '嬉しい','悲しい','怖い','楽しい','面白い','美しい','尊い','かわいい','寂しい','不思議',
   '走る','歩く','行く','食べる','見る','考える','作る','待つ','描く',
-  '自由','存在','生命','総理大臣','大谷翔平','ハチ公','東京タワー','任天堂','となりのトトロ'
+  '自由','存在','生命','知識','概念','エモい','やばい','だるい','すごい','総理大臣','大谷翔平','ハチ公','東京タワー','任天堂','となりのトトロ'
 ];
 const TEST_INTERNAL_RE=/(Wikidata|ウィキデータ|ウィキベース|可変次数|データモデル|基礎エンティティ|エンティティ|分類体系|文法範疇|品詞|抽象名詞|一統|営造|アーチファクト|付属肢|抽象的実体|物理的実体|工合|滋養分)/i;
 const TEST_EXPECT={
@@ -222,7 +253,14 @@ const TEST_EXPECT={
   '嬉しい':{first:['喜び','心の状態'],any:['喜び','心の状態','感情']},'悲しい':{first:['悲しみ','心の状態'],any:['悲しみ','心の状態','感情']},
   '総理大臣':{first:['政府の長'],any:['政府の長','政治上の役職','公職','役職'],forbid:['抽象名詞','名詞','品詞','文法範疇']},
   '大谷翔平':{first:['人間'],any:['人間','動物','生物']},'ハチ公':{first:['犬'],any:['犬','哺乳類','動物','生物']},
-  '東京タワー':{first:['場所','建物','人工物'],any:['場所','人工物','建物']},'任天堂':{first:['組織'],any:['組織','集団']},'となりのトトロ':{first:['作品'],any:['作品','表現','文化']}
+  '東京タワー':{first:['場所','建物','人工物'],any:['場所','人工物','建物']},'任天堂':{first:['組織'],any:['組織','集団']},'となりのトトロ':{first:['作品'],any:['作品','表現','文化']},
+  '自由':{first:['制約の少ない状態','選択できること','権利','解放感'],any:['状態','可能性','権利','感情'],forbid:['罪','悪行','活動']},
+  'エモい':{first:['心が動く','印象','懐かしさ','評価'],any:['心が動く','心の経験','印象','感情','評価'],forbid:['人間','犬','猫']},
+  '知識':{first:['認知','情報','共有知','知識体系'],any:['認知','情報','共有知','知識体系'],forbid:['ウィキデータのエンティティ']},
+  '概念':{first:['知識','言葉','文化'],any:['知識','言葉','文化']},
+  'やばい':{first:['危険性','驚き','評価'],any:['危険性','驚き','評価'],forbid:['人間']},
+  'だるい':{first:['疲労感','心の状態'],any:['疲労感','心の状態'],forbid:['人間']},
+  'すごい':{first:['驚き','評価'],any:['驚き','評価'],forbid:['人間']}
 };
 let testCancelRequested=false,lastTestResults=[];
 
@@ -249,6 +287,31 @@ const VIEWPOINTS={
     {label:'👑 品格として',word:'気品',desc:'「気高い・高貴だ」という側から上がる。'},
     {label:'✨ 神聖さとして',word:'神聖',desc:'「神聖で特別だ」という側から上がる。'},
     {label:'🫶 感情として',word:'大切に感じる',desc:'「自分がかけがえなく感じる」という心の側から上がる。'}
+  ],
+  '自由':[
+    {label:'🕊️ 状態として',word:'制約の少ない状態',desc:'「束縛や制限が少ない状態」という側から上がる。'},
+    {label:'🚪 可能性として',word:'選択できること',desc:'「自分で選べる・別の道を取れる」という側から上がる。'},
+    {label:'⚖️ 権利として',word:'権利',desc:'社会の中で認められる自由・権利として見る。'},
+    {label:'🪽 感覚として',word:'解放感',desc:'自由を感じたときの心の感覚として見る。'}
+  ],
+  'エモい':[
+    {label:'❤️ 感情として',word:'心が動く',desc:'心が強く揺さぶられる経験として見る。'},
+    {label:'🌫️ 雰囲気として',word:'印象',desc:'雰囲気やイメージが心に残る側から見る。'},
+    {label:'🕰️ 記憶として',word:'懐かしさ',desc:'過去や記憶を呼び起こす感じとして見る。'},
+    {label:'⭐ 評価として',word:'評価',desc:'「心に残る・良い」と判断する評価として見る。'}
+  ],
+  'やばい':[
+    {label:'⚠️ 危険として',word:'危険性',desc:'悪い意味の「やばい」を、危険や問題の可能性として見る。'},
+    {label:'😳 驚きとして',word:'驚き',desc:'良くも悪くも予想を超えて驚く感情として見る。'},
+    {label:'⭐ 評価として',word:'評価',desc:'「すごい・強烈だ」という評価として見る。'}
+  ],
+  'だるい':[
+    {label:'😮‍💨 疲れとして',word:'疲労感',desc:'身体や心が重く疲れている感覚として見る。'},
+    {label:'🫧 状態として',word:'心の状態',desc:'そのときの気分・心理状態として見る。'}
+  ],
+  'すごい':[
+    {label:'😳 驚きとして',word:'驚き',desc:'予想を超えて心が動く感情として見る。'},
+    {label:'⭐ 評価として',word:'評価',desc:'能力・規模・出来を高く評価する側から見る。'}
   ],
   '家':[
     {label:'🧱 構造として',word:'建物',desc:'何であるか・形として上がる。'},
@@ -298,7 +361,8 @@ function summitCandidates(word,force=false){
 }
 function concreteModeCandidates(dir){if(dir!=='down')return[];return CONCRETE_MODES.map((x,i)=>({word:x.label,source:'具体化モード',badge:'方向を選ぶ',group:'mode',rank:900-i,gloss:x.desc,promptOnly:true,prompt:x.prompt.replace('{word}',current),modeId:x.id,key:`mode:${x.id}`}))}
 function looksNameish(word){const w=norm(word);if(!w||w.length>20||/[\s、。！？!?]/.test(w))return false;if(/(の|が|を|に|へ|で|と|から|まで|より|して|した|いる|ある)/.test(w)&&w.length>7)return false;return /^[ぁ-んァ-ヶ一-龠々ーA-Za-z0-9・]+$/.test(w)}
-function identityFallbackCandidates(word){if(!looksNameish(word))return[];return IDENTITY_FALLBACK.map((x,i)=>({word:x.word,source:'正体を選ぶ',badge:x.label,group:'identity',rank:780-i,gloss:x.desc,identity:true})).concat([{word:'ほかの正体を自分で入力',source:'正体を選ぶ',badge:'✍️ その他',group:'identity',rank:720,gloss:'人・犬・場所などに当てはまらない時は、何者なのかを自分の言葉で入力。',promptOnly:true,prompt:`「${word}」は何の個体・名前？ 例：馬、店、学校、ゲーム作品`,key:'identity:other'}])}
+function identityGatewayCandidates(word){if(!looksNameish(word))return[];return [{word:'名前・固有名詞として見る',source:'正体判定',badge:'🏷 名前ならここ',group:'identityGate',rank:690,gloss:'普通の言葉として候補が出ない時だけ使う入口。人名・ペット名・作品名などなら押して正体を選ぶ。',promptOnly:true,revealIdentity:true,key:'identity:gate'}]}
+function identityFallbackCandidates(word){return IDENTITY_FALLBACK.map((x,i)=>({word:x.word,source:'正体を選ぶ',badge:x.label,group:'identity',rank:780-i,gloss:x.desc,identity:true})).concat([{word:'ほかの正体を自分で入力',source:'正体を選ぶ',badge:'✍️ その他',group:'identity',rank:720,gloss:'人・犬・場所などに当てはまらない時は、何者なのかを自分の言葉で入力。',promptOnly:true,prompt:`「${word}」は何の個体・名前？ 例：馬、店、学校、ゲーム作品`,key:'identity:other'}])}
 function routeBackCandidates(dir){
   const out=[];
   // 具体化では、抽象化で実際に通った言葉を必ず先頭にする。
@@ -386,20 +450,20 @@ async function wikidataCandidates(word,dir){
   if(out.some(x=>x.word==='人間'))for(const id of occupations.slice(0,3)){const x=labels[id];if(x&&x.label&&x.label.length<16&&!/(Wikidata|ウィキ|class|entity|カテゴリ|分類体系)/i.test(x.label))out.push({word:friendly(x.label),source:'正体判定',badge:'💼 職業として',group:'entity',rank:900,gloss:base+' 人物の職業という別の観点。次からは辞書側へ戻る。',entityId:hit.id,identity:true})}
   return out;
 }
-function merge(list){const m=new Map(),cur=canonical(current).toLowerCase();for(const x of list){const w=norm(x.word);if(!w||w.length>60)continue;if(!x.promptOnly&&(canonical(w).toLowerCase()===cur||isHiddenLabel(w)||isNearDuplicate(current,w)))continue;const k=x.key||((x.promptOnly?'action:':'word:')+canonical(w).toLowerCase()),old=m.get(k);if(!old||x.rank>(old.rank||0))m.set(k,{...x,word:w})}return [...m.values()].sort((a,b)=>(b.rank||0)-(a.rank||0)).slice(0,22)}
+function merge(list){const m=new Map(),cur=canonical(current).toLowerCase();for(const x of list){const w=norm(x.word);if(!w||w.length>60)continue;const cw=canonical(w);if(!x.promptOnly&&(cw.toLowerCase()===cur||isHiddenLabel(w)||isNearDuplicate(current,w)||(x.group!=='back'&&visitedWords.has(cw))))continue;const k=x.key||((x.promptOnly?'action:':'word:')+cw.toLowerCase()),old=m.get(k);if(!old||x.rank>(old.rank||0))m.set(k,{...x,word:w})}return [...m.values()].sort((a,b)=>(b.rank||0)-(a.rank||0)).slice(0,22)}
 
 const HINTS={up:[['種類','これは何の一種？'],['役割','何のためにあるもの？'],['感情','それを人の心の側から言うと？'],['痕跡','この場面に何が残っている？'],['状態','何が起きている途中？'],['意味','この場面全体を一言で言うと？']],down:[['種類','この仲間には何がある？'],['個体','実在する「この一つ」にすると？'],['場面','どこで・誰が・何をしている？'],['五感','色・音・温度・手触りまで言うと？'],['瞬間','いつの、どの一瞬？'],['来た道','さっきの具体語へ戻るのも正解。']]};
 function showHints(dir,extra={}){const hs=HINTS[dir];let extraHtml='';if(extra.similar?.length)extraHtml+=`<div class="hint-text">↔ 近い表現：${esc(extra.similar.join(' / '))}</div>`;if(extra.entail?.length)extraHtml+=`<div class="hint-text">→ この動作に伴いやすい：${esc(extra.entail.join(' / '))}</div>`;if(extra.cause?.length)extraHtml+=`<div class="hint-text">⚡ この動作が引き起こす：${esc(extra.cause.join(' / '))}</div>`;$('#hintZone').innerHTML=`<b>🧠 答えが出ない時の思考ヒント</b><div class="hint-chips">${hs.map((h,i)=>`<button class="hint-chip" data-hi="${i}">${h[0]}</button>`).join('')}</div><div class="hint-text" id="hintText">正解は1本じゃないで。観点を変えると別の抽象化ルートも作れる。</div>${extraHtml}`;document.querySelectorAll('.hint-chip').forEach(b=>b.onclick=()=>{$('#hintText').textContent='💡 '+hs[+b.dataset.hi][1];$('#manualInput').focus()})}
-function groupName(g){return ({back:'↩ 来た道をそのまま戻る',mode:'🔎 どんな方向に具体化する？',summit:'🚪 分類の頂上から視点を変える',viewpoint:'🌿 観点を選ぶ',entity:'🏷 固有名詞の正体',identity:'🏷 もしかして固有名詞？ 正体を選ぶ',thinking:'🧠 自然な思考ルート',wordnet:'📚 WordNetの辞書階層',core:'✅ 内蔵の確認済みルート',conceptnet:'🕸 ConceptNet補助'})[g]||'候補'}
-function badgeClass(x){return x.group==='back'?'route':x.group==='viewpoint'?'view':x.group==='entity'?'entity':x.group==='summit'?'summit':x.group==='mode'?'mode':x.group==='identity'?'identity':x.group==='thinking'?'think':x.source==='ConceptNet'?'cn':x.source==='内蔵'?'core':''}
-function choiceClass(x){return x.group==='back'?'back':x.group==='viewpoint'?'viewpoint':x.group==='entity'?'entity':x.group==='summit'?'summit':x.group==='mode'?'mode':x.group==='identity'?'identity':x.group==='thinking'?'thinking':''}
+function groupName(g){return ({back:'↩ 来た道をそのまま戻る',mode:'🔎 どんな方向に具体化する？',summit:'🚪 分類の頂上から視点を変える',viewpoint:'🌿 観点を選ぶ',entity:'🏷 固有名詞の正体',identity:'🏷 固有名詞の正体を選ぶ',identityGate:'🏷 名前として見る？',thinking:'🧠 自然な思考ルート',wordnet:'📚 WordNetの辞書階層',core:'✅ 内蔵の確認済みルート',conceptnet:'🕸 ConceptNet補助'})[g]||'候補'}
+function badgeClass(x){return x.group==='back'?'route':x.group==='viewpoint'?'view':x.group==='entity'?'entity':x.group==='summit'?'summit':x.group==='mode'?'mode':x.group==='identity'?'identity':x.group==='identityGate'?'identity':x.group==='thinking'?'think':x.source==='ConceptNet'?'cn':x.source==='内蔵'?'core':''}
+function choiceClass(x){return x.group==='back'?'back':x.group==='viewpoint'?'viewpoint':x.group==='entity'?'entity':x.group==='summit'?'summit':x.group==='mode'?'mode':x.group==='identity'?'identity':x.group==='identityGate'?'identity':x.group==='thinking'?'thinking':''}
 function showChoices(items,dir){
   if(!items.length){$('#choices').innerHTML='<div class="preview"><b>この方向の自然な候補はここまで。</b><br>辞書の根っこへ無理に進まず、自由入力や別の観点に切り替えてな。</div>';return}
   const groups=[];for(const x of items){let g=groups.find(z=>z.key===x.group);if(!g){g={key:x.group||'wordnet',items:[]};groups.push(g)}g.items.push(x)}
-  $('#choices').innerHTML=groups.map(g=>`<div class="group-title">${groupName(g.key)}</div>${g.items.map((x)=>{const i=items.indexOf(x);return `<button class="choice ${choiceClass(x)}" data-i="${i}"><div class="top"><span class="cw">${esc(x.word)}</span><span class="badge ${badgeClass(x)}">${esc(x.source)} · ${esc(x.badge)}</span></div>${x.gloss?`<div class="meta">${esc(x.gloss)}</div>`:''}${x.bridge?`<div class="sense">🌉 形容詞の属性を、名詞の概念へ橋渡し</div>`:''}${x.viewpoint?`<div class="sense">🌿 これは唯一の正解ではなく「この観点なら」のルート</div>`:''}${x.aliases?.length?`<div class="sense">同じ概念の言い方：${esc(x.aliases.join(' / '))}</div>`:''}${x.source==='WordNet'&&x.targetSense?`<div class="sense">🔒 この意味IDを固定して次へ進む${x.terminal?' · ここで止めるのがおすすめ':''}</div>`:''}${x.group==='back'?`<div class="sense">↩ 前に選んだ言葉を最優先。意味IDごと戻るので別の意味に化けない</div>`:''}${x.group==='entity'?`<div class="sense">🏷 Wikidataは固有名詞の「正体」だけ判定。ここから先はWordNet・思考ルートへ合流する</div>`:''}${x.group==='identity'?`<div class="sense">🏷 Wikidataにない知り合い・ペット名でも、自分で正体を選べる</div>`:''}${x.group==='summit'?`<div class="sense">🚪 ここから先は分類の上下ではなく、意味・メタなど別の抽象化軸へ切り替える</div>`:''}${x.group==='mode'?`<div class="sense">🔎 これは移動せず、具体化の考え方と入力欄を切り替えるボタン</div>`:''}<div class="preview">${x.promptOnly?`「${esc(current)}」をこの方向で具体化する`:(x.group==='back'?`「${esc(current)}」→ 足あと「${esc(x.word)}」へ`:(dir==='up'?`「${esc(current)}」→ より広い「${esc(x.word)}」`:`「${esc(current)}」→ より細かい「${esc(x.word)}」`))}</div></button>`}).join('')}`).join('');
+  $('#choices').innerHTML=groups.map(g=>`<div class="group-title">${groupName(g.key)}</div>${g.items.map((x)=>{const i=items.indexOf(x);return `<button class="choice ${choiceClass(x)}" data-i="${i}"><div class="top"><span class="cw">${esc(x.word)}</span><span class="badge ${badgeClass(x)}">${esc(x.source)} · ${esc(x.badge)}</span></div>${x.gloss?`<div class="meta">${esc(x.gloss)}</div>`:''}${x.bridge?`<div class="sense">🌉 形容詞の属性を、名詞の概念へ橋渡し</div>`:''}${x.viewpoint?`<div class="sense">🌿 これは唯一の正解ではなく「この観点なら」のルート</div>`:''}${x.aliases?.length?`<div class="sense">同じ概念の言い方：${esc(x.aliases.join(' / '))}</div>`:''}${x.source==='WordNet'&&x.targetSense?`<div class="sense">🔒 この意味IDを固定して次へ進む${x.terminal?' · ここで止めるのがおすすめ':''}</div>`:''}${x.group==='back'?`<div class="sense">↩ 前に選んだ言葉を最優先。意味IDごと戻るので別の意味に化けない</div>`:''}${x.group==='entity'?`<div class="sense">🏷 Wikidataは固有名詞の「正体」だけ判定。ここから先はWordNet・思考ルートへ合流する</div>`:''}${x.group==='identity'?`<div class="sense">🏷 Wikidataにない知り合い・ペット名でも、自分で正体を選べる</div>`:''}${x.group==='identityGate'?`<div class="sense">🏷 これは自動で「人」と決めないための入口。名前の時だけ押してな</div>`:''}${x.group==='summit'?`<div class="sense">🚪 ここから先は分類の上下ではなく、意味・メタなど別の抽象化軸へ切り替える</div>`:''}${x.group==='mode'?`<div class="sense">🔎 これは移動せず、具体化の考え方と入力欄を切り替えるボタン</div>`:''}<div class="preview">${x.promptOnly?`「${esc(current)}」をこの方向で具体化する`:(x.group==='back'?`「${esc(current)}」→ 足あと「${esc(x.word)}」へ`:(dir==='up'?`「${esc(current)}」→ より広い「${esc(x.word)}」`:`「${esc(current)}」→ より細かい「${esc(x.word)}」`))}</div></button>`}).join('')}`).join('');
   document.querySelectorAll('.choice[data-i]').forEach(b=>b.onclick=()=>chooseItem(items[+b.dataset.i],dir))
 }
-function chooseItem(item,dir){if(Number.isInteger(item.returnIndex)){jumpTo(item.returnIndex);return}if(item.promptOnly){$('#manualInput').placeholder=item.prompt||'自分の言葉で具体化してみる';$('#manualInput').value='';$('#manualHelp').textContent=item.gloss||'この観点で、自分の言葉を1つ書いて進めるで。';$('#manualInput').focus();setStatus('🔎 具体化の方向を選んだで。自分の言葉を書いてみよ','good');return}choose(item.word,dir,item.source,item.targetSense||null,item.targetPos||'',item.badge||'')}
+function chooseItem(item,dir){if(Number.isInteger(item.returnIndex)){jumpTo(item.returnIndex);return}if(item.revealIdentity){$('#help').textContent=`「${current}」は何の名前？ 正体を1つ選ぶと、そこから普通の概念階層へ合流するで。`;showChoices(identityFallbackCandidates(current),'up');setStatus('🏷 名前としての正体を選んでな','good');return}if(item.promptOnly){$('#manualInput').placeholder=item.prompt||'自分の言葉で具体化してみる';$('#manualInput').value='';$('#manualHelp').textContent=item.gloss||'この観点で、自分の言葉を1つ書いて進めるで。';$('#manualInput').focus();setStatus('🔎 具体化の方向を選んだで。自分の言葉を書いてみよ','good');return}choose(item.word,dir,item.source,item.targetSense||null,item.targetPos||'',item.badge||'')}
 function canResolveIdentityNow(){
   // Wikidata / 正体判定は「最初に入力した語」にだけ使う。途中の一般語では絶対に再判定しない。
   return cursor===0 && trail.length===1 && trail[0]?.type==='start';
@@ -408,11 +472,12 @@ async function collectCandidates(dir){
   const wordAtOpen=current;
   let fixed=[...routeBackCandidates(dir),...concreteModeCandidates(dir),...viewpointCandidates(wordAtOpen,dir),...guidedCandidates(wordAtOpen,dir),...coreCandidates(wordAtOpen,dir)];
   let wn=[];try{wn=await wordNetCandidates(wordAtOpen,dir)}catch{}
-  if(dir==='up'&&shouldStopAbove(wordAtOpen))fixed=[...routeBackCandidates(dir),...summitCandidates(wordAtOpen,true),...viewpointCandidates(wordAtOpen,dir)];
+  if(dir==='up'&&!currentSense&&VIEWPOINTS[canonical(wordAtOpen)]?.length)wn=[]; // 多義語は観点を選んでから意味を固定する
+  if(dir==='up'&&shouldStopAbove(wordAtOpen)){fixed=[...routeBackCandidates(dir),...summitCandidates(wordAtOpen,true),...viewpointCandidates(wordAtOpen,dir)];wn=[];}
   let wd=[];if(dir==='up'&&canResolveIdentityNow()&&!currentSense&&fixed.filter(x=>x.group!=='back').length===0&&wn.length===0){try{wd=await wikidataCandidates(wordAtOpen,dir)}catch{}}
   let all=merge([...fixed,...wd,...wn]);
   if(!all.some(x=>!x.promptOnly&&x.group!=='back'&&x.group!=='mode')){let cn=[];try{cn=await conceptNetCandidates(wordAtOpen,dir)}catch{}all=merge([...fixed,...wd,...wn,...cn])}
-  if(dir==='up'&&canResolveIdentityNow()&&!all.some(x=>!x.promptOnly&&x.group!=='back'&&x.group!=='mode')&&looksNameish(wordAtOpen))all=merge([...all,...identityFallbackCandidates(wordAtOpen)]);
+  if(dir==='up'&&canResolveIdentityNow()&&!all.some(x=>!x.promptOnly&&x.group!=='back'&&x.group!=='mode')&&looksNameish(wordAtOpen))all=merge([...all,...identityGatewayCandidates(wordAtOpen)]);
   else if(dir==='up'&&!all.some(x=>!x.promptOnly&&x.group!=='back'&&x.group!=='mode'))all=merge([...all,...summitCandidates(wordAtOpen,true)]);
   return all;
 }
@@ -451,7 +516,7 @@ function analyzeTestRun(start,steps,roundtrip,stoppedReason){
   const seen=new Set();for(const w of canon){if(seen.has(w)){add('FAIL',`同じ語「${w}」を再訪してループ`);break}seen.add(w)}
   for(let i=1;i<words.length;i++)if(isNearDuplicate(words[i-1],words[i])){add('FAIL',`ほぼ同義の「${words[i-1]} → ${words[i]}」を1段として消費`);break}
   for(const w of words)if(TEST_INTERNAL_RE.test(w)){add('FAIL',`内部語・難解語「${w}」を表示`);break}
-  const lateIdentity=steps.find((x,i)=>i>1&&(x.group==='entity'||x.group==='identity'));if(lateIdentity)add('FAIL',`途中の「${lateIdentity.word}」で固有名詞の正体判定に戻った`);
+  const lateIdentity=steps.find((x,i)=>i>1&&(x.group==='entity'||x.group==='identity'||x.group==='identityGate'));if(lateIdentity)add('FAIL',`途中の「${lateIdentity.word}」で固有名詞の正体判定に戻った`);
   const badSenseWords=['密偵','代行','一統','工合','感','可変次数クラス','ウィキデータのエンティティ'];const badSense=badSenseWords.find(w=>canon.includes(canonical(w)));if(badSense)add('FAIL',`既知の意味飛び・内部語「${badSense}」を通過`);
   const expect=TEST_EXPECT[canonical(start)];if(expect){const firstHop=steps[1]?.word||'';if(expect.first&&!expect.first.some(w=>canonical(w)===canonical(firstHop)))add('FAIL',`最初の候補が「${firstHop||'停止'}」。期待：${expect.first.join(' / ')}`);if(expect.any&&!expect.any.some(w=>canon.includes(canonical(w))))add('WARN',`期待する方向（${expect.any.join(' / ')}）に一度も入らない`);if(expect.forbid){const bad=expect.forbid.find(w=>canon.includes(canonical(w)));if(bad)add('FAIL',`既知の別義・事故語「${bad}」へ飛んだ`)}}
   if(words.length<=2&&stoppedReason==='end')add('WARN','1段だけで候補が尽きた');
@@ -487,7 +552,7 @@ function renderTestResults(results,running=false){
   $('#testResults').innerHTML=bad.length?bad.map(row).join(''):(running?'<div class="test-empty">いまのところ怪しい経路なし。続けてテスト中…</div>':'<div class="test-empty">🎉 怪しい経路は検出されへんかった！</div>');
   $('#testPassResults').innerHTML=results.filter(r=>r.severity==='PASS').map(row).join('')||'<div class="test-empty">PASSはまだないで。</div>';
 }
-function testReportText(results){const bad=results.filter(r=>r.severity!=='PASS');const c={FAIL:results.filter(r=>r.severity==='FAIL').length,WARN:results.filter(r=>r.severity==='WARN').length,PASS:results.filter(r=>r.severity==='PASS').length};return [`ことばズーム v10.10 TEST LAB`,`候補一覧の一番上だけを自動選択`,`FAIL ${c.FAIL} / WARN ${c.WARN} / PASS ${c.PASS}`,'',...bad.map(r=>`${r.severity} ${r.start}\n↑ ${r.steps.map(x=>x.word).join(' → ')}${r.roundtrip?.length?'\n↓ '+r.roundtrip.map(x=>`${x.expected}:${x.ok?'OK':'NG'}`).join(' / '):''}\n${r.issues.join(' / ')}`)].join('\n')}
+function testReportText(results){const bad=results.filter(r=>r.severity!=='PASS');const c={FAIL:results.filter(r=>r.severity==='FAIL').length,WARN:results.filter(r=>r.severity==='WARN').length,PASS:results.filter(r=>r.severity==='PASS').length};return [`ことばズーム v10.11 TEST LAB`,`候補一覧の一番上だけを自動選択`,`FAIL ${c.FAIL} / WARN ${c.WARN} / PASS ${c.PASS}`,'',...bad.map(r=>`${r.severity} ${r.start}\n↑ ${r.steps.map(x=>x.word).join(' → ')}${r.roundtrip?.length?'\n↓ '+r.roundtrip.map(x=>`${x.expected}:${x.ok?'OK':'NG'}`).join(' / '):''}\n${r.issues.join(' / ')}`)].join('\n')}
 async function runTestLab(){
   if(!wordNetAvailable){$('#testStatus').textContent='WordNet確認待ち…';await checkWordNet()}
   if(!wordNetAvailable){$('#testStatus').textContent='中止 · WordNet未接続';$('#testSummary').innerHTML='<span class="test-stat fail">⛔ テスト無効</span><span class="test-stat">WordNet OFF</span>';$('#testResults').innerHTML='<div class="test-empty">WordNetがOFFのまま走ると、普通の単語まで固有名詞フォールバックへ流れて誤判定するため、自動テストを中止したで。公開環境でWordNet ONを確認してから実行してな。</div>';return}
