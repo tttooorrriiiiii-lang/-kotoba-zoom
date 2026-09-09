@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>ことばズーム v10.9</title>
+<title>ことばズーム v10.10</title>
 <style>
 :root{--bg:#f7f5ef;--ink:#20211e;--muted:#73736e;--line:#ddd9cf;--up:#edf0ff;--down:#fff0e9;--blue:#6f7df7;--coral:#ea8f75;--shadow:0 18px 50px rgba(40,42,65,.10)}
 *{box-sizing:border-box} html,body{margin:0;min-height:100%;font-family:Inter,"Hiragino Sans","Yu Gothic",system-ui,sans-serif;color:var(--ink)}
@@ -21,7 +21,7 @@ header{display:flex;align-items:center;justify-content:space-between;gap:12px;ma
 </head>
 <body>
 <div class="app">
-<header><div class="brand"><div class="logo">↕</div><div><h1>ことばズーム <span style="font-size:11px;color:#7e86a8">v10.9</span></h1><div class="sub">意味飛び防止＋固有名詞の正体固定。候補1位だけを自動でたどるTEST LABつき。</div></div></div><div class="header-actions"><button class="ghost" id="testLab">🧪 TEST LAB</button><button class="ghost" id="random">🎲 おまかせ</button></div></header>
+<header><div class="brand"><div class="logo">↕</div><div><h1>ことばズーム <span style="font-size:11px;color:#7e86a8">v10.10</span></h1><div class="sub">意味飛び防止＋固有名詞の正体固定。候補1位だけを自動でたどるTEST LABつき。</div></div></div><div class="header-actions"><button class="ghost" id="testLab">🧪 TEST LAB</button><button class="ghost" id="random">🎲 おまかせ</button></div></header>
 <div class="layout">
 <main class="main"><section class="stage">
 <div class="level">ZOOM OUT · 抽象へ</div>
@@ -215,14 +215,14 @@ const TEST_WORDS=[
 ];
 const TEST_INTERNAL_RE=/(Wikidata|ウィキデータ|ウィキベース|可変次数|データモデル|基礎エンティティ|エンティティ|分類体系|文法範疇|品詞|抽象名詞|一統|営造|アーチファクト|付属肢|抽象的実体|物理的実体|工合|滋養分)/i;
 const TEST_EXPECT={
-  '犬':{any:['哺乳類','動物','生物'],forbid:['密偵','代行','代表']},'猫':{any:['哺乳類','動物','生物']},
-  'ジュース':{any:['飲料','食品'],forbid:['感','工合','属性']},'家':{any:['住居','建物','人工物']},'指':{any:['身体の一部','身体']},
-  '走る':{any:['移動する','動く','行動する','行為']},'歩く':{any:['移動する','動く','行動する','行為']},
-  '面白い':{any:['興味','魅力','評価']},'尊い':{any:['価値が高い','気品','神聖','大切に感じる']},
-  '嬉しい':{any:['喜び','心の状態','感情']},'悲しい':{any:['悲しみ','心の状態','感情']},
-  '総理大臣':{any:['政府の長','政治上の役職','公職','役職'],forbid:['抽象名詞','名詞','品詞','文法範疇']},
-  '大谷翔平':{any:['人間','動物','生物']},'ハチ公':{any:['犬','哺乳類','動物','生物']},
-  '東京タワー':{any:['場所','人工物','建物']},'任天堂':{any:['組織','集団']},'となりのトトロ':{any:['作品','表現','文化']}
+  '犬':{first:['哺乳類'],any:['哺乳類','動物','生物'],forbid:['密偵','代行','代表']},'猫':{first:['哺乳類'],any:['哺乳類','動物','生物']},
+  'ジュース':{first:['飲料','食品'],any:['飲料','食品'],forbid:['感','工合','属性']},'家':{first:['建物','住居'],any:['住居','建物','人工物']},'指':{first:['身体の一部'],any:['身体の一部','身体']},
+  '走る':{first:['移動する'],any:['移動する','動く','行動する','行為']},'歩く':{first:['移動する'],any:['移動する','動く','行動する','行為']},
+  '面白い':{first:['興味','魅力','評価'],any:['興味','魅力','評価']},'尊い':{first:['価値が高い','気品','神聖','大切に感じる'],any:['価値が高い','気品','神聖','大切に感じる']},
+  '嬉しい':{first:['喜び','心の状態'],any:['喜び','心の状態','感情']},'悲しい':{first:['悲しみ','心の状態'],any:['悲しみ','心の状態','感情']},
+  '総理大臣':{first:['政府の長'],any:['政府の長','政治上の役職','公職','役職'],forbid:['抽象名詞','名詞','品詞','文法範疇']},
+  '大谷翔平':{first:['人間'],any:['人間','動物','生物']},'ハチ公':{first:['犬'],any:['犬','哺乳類','動物','生物']},
+  '東京タワー':{first:['場所','建物','人工物'],any:['場所','人工物','建物']},'任天堂':{first:['組織'],any:['組織','集団']},'となりのトトロ':{first:['作品'],any:['作品','表現','文化']}
 };
 let testCancelRequested=false,lastTestResults=[];
 
@@ -453,7 +453,7 @@ function analyzeTestRun(start,steps,roundtrip,stoppedReason){
   for(const w of words)if(TEST_INTERNAL_RE.test(w)){add('FAIL',`内部語・難解語「${w}」を表示`);break}
   const lateIdentity=steps.find((x,i)=>i>1&&(x.group==='entity'||x.group==='identity'));if(lateIdentity)add('FAIL',`途中の「${lateIdentity.word}」で固有名詞の正体判定に戻った`);
   const badSenseWords=['密偵','代行','一統','工合','感','可変次数クラス','ウィキデータのエンティティ'];const badSense=badSenseWords.find(w=>canon.includes(canonical(w)));if(badSense)add('FAIL',`既知の意味飛び・内部語「${badSense}」を通過`);
-  const expect=TEST_EXPECT[canonical(start)];if(expect){if(expect.any&&!expect.any.some(w=>canon.includes(canonical(w))))add('WARN',`期待する方向（${expect.any.join(' / ')}）に一度も入らない`);if(expect.forbid){const bad=expect.forbid.find(w=>canon.includes(canonical(w)));if(bad)add('FAIL',`既知の別義・事故語「${bad}」へ飛んだ`)}}
+  const expect=TEST_EXPECT[canonical(start)];if(expect){const firstHop=steps[1]?.word||'';if(expect.first&&!expect.first.some(w=>canonical(w)===canonical(firstHop)))add('FAIL',`最初の候補が「${firstHop||'停止'}」。期待：${expect.first.join(' / ')}`);if(expect.any&&!expect.any.some(w=>canon.includes(canonical(w))))add('WARN',`期待する方向（${expect.any.join(' / ')}）に一度も入らない`);if(expect.forbid){const bad=expect.forbid.find(w=>canon.includes(canonical(w)));if(bad)add('FAIL',`既知の別義・事故語「${bad}」へ飛んだ`)}}
   if(words.length<=2&&stoppedReason==='end')add('WARN','1段だけで候補が尽きた');
   if(stoppedReason==='action')add('WARN','候補1位が入力式アクションで、自動追跡できなかった');
   if(stoppedReason==='error')add('WARN','候補取得中にエラー');
@@ -487,9 +487,10 @@ function renderTestResults(results,running=false){
   $('#testResults').innerHTML=bad.length?bad.map(row).join(''):(running?'<div class="test-empty">いまのところ怪しい経路なし。続けてテスト中…</div>':'<div class="test-empty">🎉 怪しい経路は検出されへんかった！</div>');
   $('#testPassResults').innerHTML=results.filter(r=>r.severity==='PASS').map(row).join('')||'<div class="test-empty">PASSはまだないで。</div>';
 }
-function testReportText(results){const bad=results.filter(r=>r.severity!=='PASS');const c={FAIL:results.filter(r=>r.severity==='FAIL').length,WARN:results.filter(r=>r.severity==='WARN').length,PASS:results.filter(r=>r.severity==='PASS').length};return [`ことばズーム v10.9 TEST LAB`,`候補一覧の一番上だけを自動選択`,`FAIL ${c.FAIL} / WARN ${c.WARN} / PASS ${c.PASS}`,'',...bad.map(r=>`${r.severity} ${r.start}\n↑ ${r.steps.map(x=>x.word).join(' → ')}${r.roundtrip?.length?'\n↓ '+r.roundtrip.map(x=>`${x.expected}:${x.ok?'OK':'NG'}`).join(' / '):''}\n${r.issues.join(' / ')}`)].join('\n')}
+function testReportText(results){const bad=results.filter(r=>r.severity!=='PASS');const c={FAIL:results.filter(r=>r.severity==='FAIL').length,WARN:results.filter(r=>r.severity==='WARN').length,PASS:results.filter(r=>r.severity==='PASS').length};return [`ことばズーム v10.10 TEST LAB`,`候補一覧の一番上だけを自動選択`,`FAIL ${c.FAIL} / WARN ${c.WARN} / PASS ${c.PASS}`,'',...bad.map(r=>`${r.severity} ${r.start}\n↑ ${r.steps.map(x=>x.word).join(' → ')}${r.roundtrip?.length?'\n↓ '+r.roundtrip.map(x=>`${x.expected}:${x.ok?'OK':'NG'}`).join(' / '):''}\n${r.issues.join(' / ')}`)].join('\n')}
 async function runTestLab(){
   if(!wordNetAvailable){$('#testStatus').textContent='WordNet確認待ち…';await checkWordNet()}
+  if(!wordNetAvailable){$('#testStatus').textContent='中止 · WordNet未接続';$('#testSummary').innerHTML='<span class="test-stat fail">⛔ テスト無効</span><span class="test-stat">WordNet OFF</span>';$('#testResults').innerHTML='<div class="test-empty">WordNetがOFFのまま走ると、普通の単語まで固有名詞フォールバックへ流れて誤判定するため、自動テストを中止したで。公開環境でWordNet ONを確認してから実行してな。</div>';return}
   const snap=snapshotAppState();testCancelRequested=false;lastTestResults=[];$('#testRun').disabled=true;$('#testCancel').disabled=false;$('#testCopy').disabled=true;$('#testBar').style.width='0%';$('#testStatus').textContent='開始中…';renderTestResults([],true);
   try{for(let i=0;i<TEST_WORDS.length;i++){if(testCancelRequested)break;$('#testStatus').textContent=`${i+1} / ${TEST_WORDS.length} · ${TEST_WORDS[i]}`;const r=await runOneTest(TEST_WORDS[i]);lastTestResults.push(r);$('#testBar').style.width=((i+1)/TEST_WORDS.length*100)+'%';renderTestResults(lastTestResults,true);await new Promise(res=>setTimeout(res,0))}}
   finally{restoreAppState(snap);$('#testRun').disabled=false;$('#testCancel').disabled=true;$('#testCopy').disabled=!lastTestResults.some(r=>r.severity!=='PASS');$('#testStatus').textContent=testCancelRequested?`停止 · ${lastTestResults.length}語まで`:`完了 · ${lastTestResults.length}語`;renderTestResults(lastTestResults,false)}
