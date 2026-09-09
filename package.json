@@ -1,0 +1,12 @@
+{
+  "name": "kotoba-zoom-v10",
+  "private": true,
+  "version": "10.0.0",
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build-wordnet.mjs"
+  },
+  "dependencies": {
+    "sql.js": "1.13.0"
+  }
+}

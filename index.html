@@ -3,253 +3,87 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>ことばズーム v8</title>
+<title>ことばズーム v10</title>
 <style>
 :root{--bg:#f7f5ef;--ink:#20211e;--muted:#73736e;--line:#ddd9cf;--up:#edf0ff;--down:#fff0e9;--blue:#6f7df7;--coral:#ea8f75;--shadow:0 18px 50px rgba(40,42,65,.10)}
 *{box-sizing:border-box} html,body{margin:0;min-height:100%;font-family:Inter,"Hiragino Sans","Yu Gothic",system-ui,sans-serif;color:var(--ink)}
 body{background:radial-gradient(circle at 15% 5%,#e9eaff 0,transparent 28%),radial-gradient(circle at 88% 92%,#ffe7dd 0,transparent 30%),var(--bg)}
 button,input{font:inherit} button{cursor:pointer}
-.app{max-width:1040px;margin:0 auto;padding:18px 14px 40px}
-header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px}
-.brand{display:flex;align-items:center;gap:10px} .logo{width:44px;height:44px;border:2px solid #242520;border-radius:14px;display:grid;place-items:center;background:#fff;font-size:22px;box-shadow:0 8px 18px #2221}
-h1{font-size:21px;margin:0} .sub{font-size:11px;color:var(--muted);margin-top:2px}
-.ghost{border:1px solid var(--line);background:#fff9;border-radius:999px;padding:9px 13px;color:#4c5fc7;font-weight:800}
-.layout{display:grid;grid-template-columns:minmax(0,1fr) 270px;gap:16px}
-.main,.panel{background:rgba(255,253,248,.86);border:1px solid var(--line);box-shadow:var(--shadow);backdrop-filter:blur(8px)}
-.main{border-radius:28px;padding:18px;overflow:hidden;position:relative}
-.stage{min-height:680px;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative}
-.stage:before{content:"";position:absolute;top:104px;bottom:110px;left:50%;width:2px;background:linear-gradient(180deg,rgba(111,125,247,.08),rgba(111,125,247,.45) 30%,rgba(234,143,117,.45) 70%,rgba(234,143,117,.08));transform:translateX(-50%);z-index:0}
-.level{position:relative;z-index:2;font-size:11px;font-weight:900;letter-spacing:.13em;color:var(--muted);margin:7px}
-.zoom{position:relative;z-index:2;width:min(470px,96%);border:1px solid var(--line);border-radius:20px;padding:16px 18px;text-align:left;display:flex;justify-content:space-between;align-items:center;transition:.2s transform,.2s box-shadow}
-.zoom:hover{transform:translateY(-2px);box-shadow:0 12px 28px #2221} .zoom.up{background:linear-gradient(180deg,#f4f5ff,#ebeefe)} .zoom.down{background:linear-gradient(180deg,#fff6f1,#ffede5)}
-.zoom b{font-size:17px} .zoom small{color:var(--muted);font-size:12px} .zoom strong{font-size:26px}
-.connector{position:relative;z-index:1;height:30px;width:2px;background:var(--line)}
-.card{position:relative;z-index:2;width:min(540px,98%);border:2px solid #22231f;border-radius:28px;background:#fff;box-shadow:0 14px 0 #e8e3d8,0 22px 46px rgba(55,56,75,.08);padding:28px 20px 24px;text-align:center;animation:float 4s ease-in-out infinite}
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
-.eyebrow{font-size:10px;color:var(--muted);font-weight:900;letter-spacing:.12em} .word{font-size:clamp(38px,8vw,62px);font-weight:900;margin:10px 0 6px;letter-spacing:.01em} .desc{font-size:13px;line-height:1.75;color:var(--muted);max-width:420px;margin:0 auto} .emoji{font-size:48px;margin-bottom:4px;display:block}
-.status{display:inline-block;margin-top:12px;border-radius:999px;padding:7px 10px;background:#f0eee8;font-size:10px;font-weight:800;color:#6f6c64}
-.start{display:flex;gap:8px;width:min(560px,100%);margin-top:20px;position:relative;z-index:3} .start input{flex:1;border:1px solid var(--line);border-radius:14px;padding:12px 14px;background:#fff;outline:none} .start input:focus{border-color:#aaaee9;box-shadow:0 0 0 3px #e8e9ff}
-.primary{border:0;border-radius:14px;padding:11px 16px;background:#20231f;color:#fff;font-weight:900}
-.side{display:flex;flex-direction:column;gap:12px} .panel{border-radius:20px;padding:15px} .panel h2{font-size:13px;margin:0 0 10px} .panel p{font-size:11px;line-height:1.6;color:var(--muted);margin:0}
-.quest{background:#202520;color:#fff} .quest p{color:#cbd1cc} .bar{height:7px;background:#414641;border-radius:999px;margin:10px 0;overflow:hidden} .bar i{display:block;height:100%;width:0;background:#fff;transition:.25s width}
-.history{display:flex;flex-direction:column;gap:7px;max-height:340px;overflow:auto} .h{display:grid;grid-template-columns:28px 1fr;gap:8px} .dot{width:28px;height:28px;border-radius:9px;display:grid;place-items:center;background:#eeeae0;font-size:11px;font-weight:900} .dot.up{background:#e7eaff;color:#4f5fd3} .dot.down{background:#ffe7de;color:#c8684d} .hc{border-bottom:1px solid #ece8df;padding-bottom:8px} .hc b{font-size:12px} .hc span{display:block;font-size:10px;color:var(--muted);margin-top:2px}
-.tip{border-radius:14px;padding:12px;background:#f3f1ec;font-size:11px;line-height:1.7;color:#66655f}
-.modal{position:fixed;inset:0;background:#17171255;display:none;place-items:center;padding:18px;z-index:20;backdrop-filter:blur(4px)} .modal.show{display:grid}
-.dialog{width:min(510px,100%);max-height:84vh;overflow:auto;background:#fff;border-radius:24px;padding:18px;box-shadow:0 26px 70px #1113} .dialog h3{margin:0 0 5px;font-size:25px} .help{font-size:12px;color:var(--muted);line-height:1.6} .close{float:right;border:0;background:none;font-size:24px;color:#5d7bea}
-.choices{display:grid;gap:9px;margin:14px 0} .choice{border:1px solid var(--line);background:#fbfaf6;border-radius:16px;padding:13px;text-align:left;transition:.18s transform,.18s box-shadow} .choice:hover{transform:translateY(-2px);box-shadow:0 12px 26px #2221} .choice .top{display:flex;justify-content:space-between;align-items:center;gap:10px} .choice .cw{font-weight:900;font-size:18px} .badge{font-size:9px;border-radius:999px;padding:4px 7px;background:#eceffd;color:#5564ca;white-space:nowrap} .choice.down .badge{background:#fff0e9;color:#c56a50} .meta{font-size:10px;color:var(--muted);margin-top:6px}
-.preview{margin-top:8px;padding:9px 10px;border-radius:12px;background:#f1f0eb;font-size:10px;color:#66655f;line-height:1.6}
-@media(max-width:760px){.layout{grid-template-columns:1fr}.side{display:grid;grid-template-columns:1fr 1fr}.quest{grid-column:1/-1}.stage{min-height:620px}}
-@media(max-width:520px){.app{padding:12px 10px 34px}.sub{display:none}.main{padding:12px;border-radius:21px}.side{grid-template-columns:1fr}.quest{grid-column:auto}.start{flex-direction:column}.primary{width:100%}.card{padding:24px 16px 22px}.word{font-size:42px}}
+a{color:#5967d2}.app{max-width:1040px;margin:0 auto;padding:18px 14px 40px}
+header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px}.brand{display:flex;align-items:center;gap:10px}.logo{width:44px;height:44px;border:2px solid #242520;border-radius:14px;display:grid;place-items:center;background:#fff;font-size:22px;box-shadow:0 8px 18px #2221}h1{font-size:21px;margin:0}.sub{font-size:11px;color:var(--muted);margin-top:2px}.ghost{border:1px solid var(--line);background:#fff9;border-radius:999px;padding:9px 13px;color:#4c5fc7;font-weight:800}
+.layout{display:grid;grid-template-columns:minmax(0,1fr) 270px;gap:16px}.main,.panel{background:rgba(255,253,248,.86);border:1px solid var(--line);box-shadow:var(--shadow);backdrop-filter:blur(8px)}.main{border-radius:28px;padding:18px;overflow:hidden;position:relative}.stage{min-height:680px;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative}.stage:before{content:"";position:absolute;top:104px;bottom:110px;left:50%;width:2px;background:linear-gradient(180deg,rgba(111,125,247,.08),rgba(111,125,247,.45) 30%,rgba(234,143,117,.45) 70%,rgba(234,143,117,.08));transform:translateX(-50%);z-index:0}.level{position:relative;z-index:2;font-size:11px;font-weight:900;letter-spacing:.13em;color:var(--muted);margin:7px}.zoom{position:relative;z-index:2;width:min(470px,96%);border:1px solid var(--line);border-radius:20px;padding:16px 18px;text-align:left;display:flex;justify-content:space-between;align-items:center;transition:.2s transform,.2s box-shadow}.zoom:hover{transform:translateY(-2px);box-shadow:0 12px 28px #2221}.zoom.up{background:linear-gradient(180deg,#f4f5ff,#ebeefe)}.zoom.down{background:linear-gradient(180deg,#fff6f1,#ffede5)}.zoom b{font-size:17px}.zoom small{color:var(--muted);font-size:12px}.zoom strong{font-size:26px}.connector{position:relative;z-index:1;height:30px;width:2px;background:var(--line)}
+.card{position:relative;z-index:2;width:min(540px,98%);border:2px solid #22231f;border-radius:28px;background:#fff;box-shadow:0 14px 0 #e8e3d8,0 22px 46px rgba(55,56,75,.08);padding:28px 20px 24px;text-align:center;animation:float 4s ease-in-out infinite}@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}.eyebrow{font-size:10px;color:var(--muted);font-weight:900;letter-spacing:.12em}.word{font-size:clamp(38px,8vw,62px);font-weight:900;margin:10px 0 6px;letter-spacing:.01em}.desc{font-size:13px;line-height:1.75;color:var(--muted);max-width:420px;margin:0 auto}.emoji{font-size:48px;margin-bottom:4px;display:block}.status{display:inline-flex;align-items:center;gap:6px;margin-top:12px;border-radius:999px;padding:7px 10px;background:#f0eee8;font-size:10px;font-weight:800;color:#6f6c64}.status.good{background:#e9f6ec;color:#32623b}.status.warn{background:#fff1d8;color:#7d5c1c}.start{display:flex;gap:8px;width:min(560px,100%);margin-top:20px;position:relative;z-index:3}.start input{flex:1;border:1px solid var(--line);border-radius:14px;padding:12px 14px;background:#fff;outline:none}.start input:focus{border-color:#aaaee9;box-shadow:0 0 0 3px #e8e9ff}.primary{border:0;border-radius:14px;padding:11px 16px;background:#20231f;color:#fff;font-weight:900}
+.side{display:flex;flex-direction:column;gap:12px}.panel{border-radius:20px;padding:15px}.panel h2{font-size:13px;margin:0 0 10px}.panel p{font-size:11px;line-height:1.65;color:var(--muted);margin:0}.quest{background:#202520;color:#fff}.quest p{color:#cbd1cc}.bar{height:7px;background:#414641;border-radius:999px;margin:10px 0;overflow:hidden}.bar i{display:block;height:100%;width:0;background:#fff;transition:.25s width}.history{display:flex;flex-direction:column;gap:7px;max-height:340px;overflow:auto}.h{display:grid;grid-template-columns:28px 1fr;gap:8px}.dot{width:28px;height:28px;border-radius:9px;display:grid;place-items:center;background:#eeeae0;font-size:11px;font-weight:900}.dot.up{background:#e7eaff;color:#4f5fd3}.dot.down{background:#ffe7de;color:#c8684d}.hc{border-bottom:1px solid #ece8df;padding-bottom:8px}.hc b{font-size:12px}.hc span{display:block;font-size:10px;color:var(--muted);margin-top:2px}.tip{border-radius:14px;padding:12px;background:#f3f1ec;font-size:11px;line-height:1.7;color:#66655f}.source-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}.source-pill{font-size:9px;padding:5px 7px;border-radius:999px;border:1px solid var(--line);background:#fff}.source-pill.on{background:#eaf6ec;color:#35613e;border-color:#cce8d2}.source-pill.off{background:#fff1dc;color:#805f24;border-color:#ecd6a8}
+.modal{position:fixed;inset:0;background:#17171255;display:none;place-items:center;padding:18px;z-index:20;backdrop-filter:blur(4px)}.modal.show{display:grid}.dialog{width:min(560px,100%);max-height:86vh;overflow:auto;background:#fff;border-radius:24px;padding:18px;box-shadow:0 26px 70px #1113}.dialog h3{margin:0 0 5px;font-size:25px}.help{font-size:12px;color:var(--muted);line-height:1.6}.close{float:right;border:0;background:none;font-size:24px;color:#5d7bea}.choices{display:grid;gap:9px;margin:14px 0}.choice{border:1px solid var(--line);background:#fbfaf6;border-radius:16px;padding:13px;text-align:left;transition:.18s transform,.18s box-shadow}.choice:hover{transform:translateY(-2px);box-shadow:0 12px 26px #2221}.choice .top{display:flex;justify-content:space-between;align-items:center;gap:10px}.choice .cw{font-weight:900;font-size:18px}.badge{font-size:9px;border-radius:999px;padding:4px 7px;background:#eceffd;color:#5564ca;white-space:nowrap}.badge.cn{background:#fff1dc;color:#7b5d25}.badge.core{background:#e9f6ec;color:#35613e}.meta{font-size:10px;color:var(--muted);margin-top:6px;line-height:1.55}.preview{margin-top:8px;padding:9px 10px;border-radius:12px;background:#f1f0eb;font-size:10px;color:#66655f;line-height:1.6}.sense{margin-top:7px;font-size:10px;line-height:1.55;color:#72716b;border-left:3px solid #dfe2ff;padding-left:8px}.loading{padding:16px;border:1px dashed var(--line);border-radius:14px;color:var(--muted);font-size:12px}.hint-zone{margin:12px 0;padding:13px;border-radius:16px;background:linear-gradient(180deg,#f7f7ff,#faf9f5);border:1px solid #e4e2f2}.hint-zone b{font-size:12px}.hint-chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:9px}.hint-chip{border:1px solid #d9d9ea;background:#fff;border-radius:999px;padding:7px 9px;font-size:10px;color:#5f6080}.hint-text{font-size:11px;line-height:1.65;color:#686879;margin-top:8px}.manual-zone{margin-top:14px;padding-top:14px;border-top:1px solid var(--line)}.manual-label{font-size:11px;font-weight:900;color:#64645f;margin-bottom:7px}.manual-row{display:flex;gap:8px}.manual-row input{flex:1;min-width:0;border:1px solid var(--line);border-radius:13px;padding:11px 12px;background:#fff;outline:none}.manual-row input:focus{border-color:#aaaee9;box-shadow:0 0 0 3px #e8e9ff}.manual-help{font-size:10px;line-height:1.6;color:var(--muted);margin-top:7px}.foot{max-width:1040px;margin:12px auto 0;padding:0 14px 24px;font-size:9px;color:#85847d;line-height:1.6;text-align:center}
+@media(max-width:760px){.layout{grid-template-columns:1fr}.side{display:grid;grid-template-columns:1fr 1fr}.quest{grid-column:1/-1}.stage{min-height:620px}}@media(max-width:520px){.app{padding:12px 10px 34px}.sub{display:none}.main{padding:12px;border-radius:21px}.side{grid-template-columns:1fr}.quest{grid-column:auto}.start{flex-direction:column}.primary{width:100%}.card{padding:24px 16px 22px}.word{font-size:42px}.manual-row{flex-direction:column}}
 </style>
 </head>
 <body>
 <div class="app">
-<header><div class="brand"><div class="logo">↕</div><div><h1>ことばズーム <span style="font-size:11px;color:#7e86a8">v8</span></h1><div class="sub">上へ抽象、下へ具体。ことばをズームする。</div></div></div><button class="ghost" id="random">🎲 おまかせ</button></header>
+<header><div class="brand"><div class="logo">↕</div><div><h1>ことばズーム <span style="font-size:11px;color:#7e86a8">v10</span></h1><div class="sub">WordNetで上下、ConceptNetで補助。文章でも自由に続けられる。</div></div></div><button class="ghost" id="random">🎲 おまかせ</button></header>
 <div class="layout">
-<main class="main">
-<section class="stage">
+<main class="main"><section class="stage">
 <div class="level">ZOOM OUT · 抽象へ</div>
-<button class="zoom up" id="up"><span><b>↑ 抽象化する</b><br><small>これは何の一種？ もっと広く言うと？</small></span><strong>−</strong></button>
+<button class="zoom up" id="up"><span><b>↑ 抽象化する</b><br><small>上位概念（hypernym）へ</small></span><strong>−</strong></button>
 <div class="connector"></div>
 <div class="card" id="card"><div class="eyebrow">NOW · 今いる階層</div><span class="emoji" id="emoji">🥐</span><div class="word" id="word">クロワッサン</div><div class="desc" id="desc"></div><div class="status" id="status">🌱 上か下を押してみてな</div></div>
 <div class="connector"></div>
-<button class="zoom down" id="down"><span><b>↓ 具体化する</b><br><small>どんな種類？ もっと細かく言うと？</small></span><strong>＋</strong></button>
+<button class="zoom down" id="down"><span><b>↓ 具体化する</b><br><small>下位概念（hyponym）へ</small></span><strong>＋</strong></button>
 <div class="level">ZOOM IN · 具体へ</div>
-<div class="start"><input id="input" placeholder="好きな言葉 例：クロワッサン、犬、カフェ、未来"><button class="primary" id="start">この言葉で開始</button></div>
-</section>
-</main>
+<div class="start"><input id="input" placeholder="何でも入力 例：犬、窓、飲みかけの私のコーヒーカップ"><button class="primary" id="start">この言葉で開始</button></div>
+</section></main>
 <aside class="side">
-<section class="panel quest"><h2>🎯 5回ズーム</h2><p>上下を行き来して、ことばの見え方を変えてみよう。</p><div class="bar"><i id="bar"></i></div><p id="count">0 / 5</p></section>
+<section class="panel quest"><h2>🎯 5回ズーム</h2><p>辞書の答えを選んでも、自分の言葉を書いてもOK。</p><div class="bar"><i id="bar"></i></div><p id="count">0 / 5</p></section>
 <section class="panel"><h2>🪜 思考の足あと</h2><div class="history" id="history"></div></section>
-<section class="panel"><h2>🧠 見方</h2><div class="tip"><b>↑ 抽象化</b><br>意味を広げて、上の階層へ。<br><br><b>↓ 具体化</b><br>意味を狭めて、下の階層へ。</div></section>
+<section class="panel"><h2>🧠 3つの助け</h2><div class="tip"><b>WordNet</b>＝上下の階層<br><b>ConceptNet</b>＝WordNetにない時の補助<br><b>自由入力</b>＝文章・状況・自分の抽象化</div><div class="source-row"><span class="source-pill" id="wnState">WordNet 確認中</span><span class="source-pill on">ConceptNet 補助ON</span><span class="source-pill on">自由入力 ON</span></div></section>
 </aside>
-</div>
-</div>
-<div class="modal" id="modal"><div class="dialog"><button class="close" id="close">×</button><h3 id="title"></h3><div class="help" id="help"></div><div class="choices" id="choices"></div></div></div>
+</div></div>
+<div class="modal" id="modal"><div class="dialog"><button class="close" id="close">×</button><h3 id="title"></h3><div class="help" id="help"></div><div class="choices" id="choices"></div><div class="hint-zone" id="hintZone"></div><div class="manual-zone"><div class="manual-label">✍️ 自分の言葉で続ける</div><div class="manual-row"><input id="manualInput" placeholder="自分の答えを入力"><button class="primary" id="manualAdd">この言葉へ</button></div><div class="manual-help" id="manualHelp">辞書にない答えでも、そのまま次のズームへ進めるで。</div></div></div></div>
+<div class="foot">日本語ワードネット（1.1版）© 2009-2011 NICT, 2012-2015 Francis Bond, 2016-2024 Francis Bond, Takayuki Kuribayashi · ConceptNet 5 / CC BY-SA 4.0</div>
 <script>
-    const DATA = {
-      'クロワッサン': {
-        desc: 'バターの香りが広がる、フランス生まれのパン', emoji:'🥐',
-        parents:['パン'],
-        children:['バタークロワッサン','チョコクロワッサン','ミニクロワッサン','発酵バタークロワッサン','アーモンドクロワッサン','抹茶クロワッサン','チーズクロワッサン']
-      },
-      'バタークロワッサン': {desc:'シンプルで定番の味', emoji:'🥐', parents:['クロワッサン'], children:[]},
-      'チョコクロワッサン': {desc:'チョコレート入りの甘い味', emoji:'🥐🍫', parents:['クロワッサン'], children:[]},
-      'ミニクロワッサン': {desc:'ひとくちサイズの小さなクロワッサン', emoji:'🥐', parents:['クロワッサン'], children:[]},
-      '発酵バタークロワッサン': {desc:'香り豊かな発酵バターを使ったクロワッサン', emoji:'🥐', parents:['クロワッサン'], children:[]},
-      'アーモンドクロワッサン': {desc:'アーモンドクリームを詰めた香ばしいクロワッサン', emoji:'🥐🌰', parents:['クロワッサン'], children:[]},
-      '抹茶クロワッサン': {desc:'抹茶の香りをたのしめる和風クロワッサン', emoji:'🥐🍵', parents:['クロワッサン'], children:[]},
-      'チーズクロワッサン': {desc:'チーズの塩気がおいしいクロワッサン', emoji:'🥐🧀', parents:['クロワッサン'], children:[]},
-      'パン': {desc:'小麦からつくられる食べもの', emoji:'🍞', parents:['食品'], children:['クロワッサン','食パン','フランスパン','ベーグル','メロンパン']},
-      '食パン': {desc:'四角い形が定番のパン', emoji:'🍞', parents:['パン'], children:[]},
-      'フランスパン': {desc:'ハード系の細長いパン', emoji:'🥖', parents:['パン'], children:['バゲット']},
-      'バゲット': {desc:'細長いフランスパン', emoji:'🥖', parents:['フランスパン'], children:[]},
-      'ベーグル': {desc:'もちっとした輪っかのパン', emoji:'🥯', parents:['パン'], children:[]},
-      'メロンパン': {desc:'表面が甘いクッキー生地のパン', emoji:'🍈🍞', parents:['パン'], children:[]},
-      '食品': {desc:'食べられるもの', emoji:'🍽️', parents:['物'], children:['パン','飲料','果物','野菜','料理']},
-      '飲料': {desc:'飲んでたのしむ食品', emoji:'🥤', parents:['食品'], children:['コーヒー','紅茶','ジュース']},
-      'コーヒー': {desc:'香り高い苦みをたのしむ飲みもの', emoji:'☕', parents:['飲料'], children:['カフェラテ','アイスコーヒー','エスプレッソ']},
-      'カフェラテ': {desc:'ミルクが入ったまろやかなコーヒー', emoji:'☕🥛', parents:['コーヒー'], children:[]},
-      'アイスコーヒー': {desc:'冷たくして飲むコーヒー', emoji:'🧊☕', parents:['コーヒー'], children:[]},
-      'エスプレッソ': {desc:'濃く抽出した小さなコーヒー', emoji:'☕', parents:['コーヒー'], children:[]},
-      '紅茶': {desc:'茶葉から入れる香りのよい飲みもの', emoji:'🫖', parents:['飲料'], children:['ミルクティー','レモンティー']},
-      'ミルクティー': {desc:'ミルク入りの紅茶', emoji:'🫖🥛', parents:['紅茶'], children:[]},
-      'レモンティー': {desc:'レモンの香りを足した紅茶', emoji:'🍋🫖', parents:['紅茶'], children:[]},
-      'ジュース': {desc:'果汁や甘みのある飲みもの', emoji:'🧃', parents:['飲料'], children:['オレンジジュース']},
-      'オレンジジュース': {desc:'オレンジの果汁を絞ったジュース', emoji:'🍊', parents:['ジュース'], children:[]},
-      '果物': {desc:'甘みのある植物の実', emoji:'🍎', parents:['食品'], children:['りんご','バナナ']},
-      'りんご': {desc:'赤くて丸い果物', emoji:'🍎', parents:['果物'], children:['青森のりんご']},
-      '青森のりんご': {desc:'青森で育てられた有名なりんご', emoji:'🍎', parents:['りんご'], children:[]},
-      'バナナ': {desc:'黄色くて細長い果物', emoji:'🍌', parents:['果物'], children:[]},
-      '野菜': {desc:'料理によく使う植物の部分', emoji:'🥬', parents:['食品'], children:['トマト','きゅうり']},
-      'トマト': {desc:'赤くてみずみずしい野菜', emoji:'🍅', parents:['野菜'], children:[]},
-      'きゅうり': {desc:'細長くてしゃきっとした野菜', emoji:'🥒', parents:['野菜'], children:[]},
-      '料理': {desc:'調理して食べるもの', emoji:'🍳', parents:['食品'], children:['カレー','ラーメン']},
-      'カレー': {desc:'スパイスの香りをたのしむ料理', emoji:'🍛', parents:['料理'], children:['チキンカレー']},
-      'チキンカレー': {desc:'鶏肉入りのカレー', emoji:'🍛🐔', parents:['カレー'], children:[]},
-      'ラーメン': {desc:'麺をスープで食べる料理', emoji:'🍜', parents:['料理'], children:['醤油ラーメン']},
-      '醤油ラーメン': {desc:'しょうゆ味のラーメン', emoji:'🍜', parents:['ラーメン'], children:[]},
-      '物': {desc:'すべてのもの', emoji:'✨', parents:['存在'], children:['食品','家具','場所','道具','乗り物']},
-      '存在': {desc:'そこにあるもの・こと', emoji:'🌌', parents:['概念'], children:['物','生命体','空間的対象']},
-      '生命体': {desc:'いのちを持つもの', emoji:'🌱', parents:['存在'], children:['生物']},
-      '生物': {desc:'いきているもの', emoji:'🧬', parents:['生命体'], children:['動物','植物']},
-      '動物': {desc:'動いてくらす生きもの', emoji:'🐾', parents:['生物'], children:['哺乳類','鳥']},
-      '哺乳類': {desc:'母乳で子を育てる動物', emoji:'🍼', parents:['動物'], children:['犬','猫','人間']},
-      '鳥': {desc:'羽とくちばしを持つ動物', emoji:'🐦', parents:['動物'], children:['スズメ']},
-      'スズメ': {desc:'小さくて身近な鳥', emoji:'🐦', parents:['鳥'], children:[]},
-      '犬': {desc:'人とくらすことも多い動物', emoji:'🐶', parents:['哺乳類'], children:['柴犬','秋田犬','チワワ']},
-      '柴犬': {desc:'日本で親しまれる小型の犬', emoji:'🐕', parents:['犬'], children:[]},
-      '秋田犬': {desc:'がっしりした日本犬', emoji:'🐕', parents:['犬'], children:[]},
-      'チワワ': {desc:'とても小さな犬', emoji:'🐕', parents:['犬'], children:[]},
-      '猫': {desc:'しなやかで気まぐれな動物', emoji:'🐱', parents:['哺乳類'], children:['三毛猫','黒猫']},
-      '三毛猫': {desc:'三色の毛がある猫', emoji:'🐈', parents:['猫'], children:[]},
-      '黒猫': {desc:'黒い毛並みの猫', emoji:'🐈⬛', parents:['猫'], children:[]},
-      '人間': {desc:'考え、ことばを使う生きもの', emoji:'🧍', parents:['哺乳類'], children:['子ども','大人']},
-      '子ども': {desc:'まだ成長の途中にある人間', emoji:'🧒', parents:['人間'], children:[]},
-      '大人': {desc:'成長した人間', emoji:'🧑', parents:['人間'], children:[]},
-      '植物': {desc:'根を張って育つ生きもの', emoji:'🌿', parents:['生物'], children:['花']},
-      '花': {desc:'植物の色鮮やかな部分', emoji:'🌸', parents:['植物'], children:['バラ']},
-      'バラ': {desc:'香りのよい花', emoji:'🌹', parents:['花'], children:[]},
-      '家具': {desc:'暮らしの中で使う大きめの道具', emoji:'🪑', parents:['物'], children:['椅子','机']},
-      '椅子': {desc:'座るための家具', emoji:'🪑', parents:['家具'], children:['ダイニングチェア']},
-      'ダイニングチェア': {desc:'食卓で使う椅子', emoji:'🪑', parents:['椅子'], children:[]},
-      '机': {desc:'作業するときに使う家具', emoji:'🪵', parents:['家具'], children:['学習机']},
-      '学習机': {desc:'勉強用の机', emoji:'🪵', parents:['机'], children:[]},
-      '場所': {desc:'なにかがある空間', emoji:'📍', parents:['物'], children:['施設','自然環境']},
-      '施設': {desc:'目的を持って使われる場所', emoji:'🏛️', parents:['場所'], children:['カフェ','美術館','学校']},
-      'カフェ': {desc:'飲みものや時間を味わう場所', emoji:'☕🏠', parents:['施設'], children:['喫茶店','ブックカフェ','古民家カフェ']},
-      '喫茶店': {desc:'落ち着いて飲みものを楽しむ店', emoji:'☕', parents:['カフェ'], children:[]},
-      'ブックカフェ': {desc:'本を読みながらくつろぐカフェ', emoji:'📚☕', parents:['カフェ'], children:[]},
-      '古民家カフェ': {desc:'古い家屋を活かしたカフェ', emoji:'🏡☕', parents:['カフェ'], children:[]},
-      '美術館': {desc:'作品を見たり学んだりする施設', emoji:'🖼️', parents:['施設'], children:['現代美術館']},
-      '現代美術館': {desc:'現代の美術作品を集めた美術館', emoji:'🖼️', parents:['美術館'], children:[]},
-      '学校': {desc:'学ぶための施設', emoji:'🏫', parents:['施設'], children:['高校','大学']},
-      '高校': {desc:'中学の次に通う学校', emoji:'🏫', parents:['学校'], children:[]},
-      '大学': {desc:'専門的に学ぶ学校', emoji:'🎓', parents:['学校'], children:[]},
-      '自然環境': {desc:'自然に形づくられた場所や状態', emoji:'🏞️', parents:['場所'], children:['海','山']},
-      '海': {desc:'広く大きな水の世界', emoji:'🌊', parents:['自然環境'], children:['砂浜']},
-      '砂浜': {desc:'砂が広がる海辺', emoji:'🏖️', parents:['海'], children:[]},
-      '山': {desc:'高く盛り上がった地形', emoji:'⛰️', parents:['自然環境'], children:['富士山']},
-      '富士山': {desc:'日本を代表する山', emoji:'🗻', parents:['山'], children:[]},
-      '道具': {desc:'何かをするために使う物', emoji:'🛠️', parents:['物'], children:['文房具']},
-      '文房具': {desc:'書いたり整えたりする道具', emoji:'✏️', parents:['道具'], children:['鉛筆']},
-      '鉛筆': {desc:'書くための文房具', emoji:'✏️', parents:['文房具'], children:[]},
-      '乗り物': {desc:'移動するためのもの', emoji:'🚗', parents:['物'], children:['電車','自転車']},
-      '電車': {desc:'線路の上を走る乗り物', emoji:'🚃', parents:['乗り物'], children:['新幹線']},
-      '新幹線': {desc:'速く走る特別な電車', emoji:'🚅', parents:['電車'], children:[]},
-      '自転車': {desc:'ペダルをこいで進む乗り物', emoji:'🚲', parents:['乗り物'], children:['マウンテンバイク']},
-      'マウンテンバイク': {desc:'でこぼこ道にも強い自転車', emoji:'🚲', parents:['自転車'], children:[]},
-      '概念': {desc:'考え方やとらえ方のまとまり', emoji:'💭', parents:[], children:['存在','時間','意味']},
-      '時間': {desc:'過去・現在・未来の流れ', emoji:'⏳', parents:['概念'], children:['未来','過去','現在']},
-      '未来': {desc:'これから先の時間', emoji:'🔮', parents:['時間'], children:['近い未来','遠い未来']},
-      '近い未来': {desc:'すぐ先の未来', emoji:'✨', parents:['未来'], children:[]},
-      '遠い未来': {desc:'ずっと先の未来', emoji:'🌠', parents:['未来'], children:[]},
-      '過去': {desc:'すでに過ぎた時間', emoji:'🕰️', parents:['時間'], children:[]},
-      '現在': {desc:'いまこの瞬間の時間', emoji:'⌛', parents:['時間'], children:[]},
-      '意味': {desc:'ことばやものごとが持つ内容', emoji:'🌀', parents:['概念'], children:['記憶','関係']},
-      '記憶': {desc:'覚えている内容や経験', emoji:'🧠', parents:['意味'], children:['思い出']},
-      '思い出': {desc:'心に残っている記憶', emoji:'💫', parents:['記憶'], children:[]},
-      '関係': {desc:'ものごと同士のつながり', emoji:'🔗', parents:['意味'], children:['人間関係']},
-      '人間関係': {desc:'人と人とのつながり', emoji:'🤝', parents:['関係'], children:[]},
-      '窓': {desc:'光や視線を通す建物の一部', emoji:'🪟', parents:['建具'], children:['出窓','丸窓']},
-      '出窓': {desc:'外へ少し張り出した窓', emoji:'🪟', parents:['窓'], children:[]},
-      '丸窓': {desc:'丸い形をした窓', emoji:'🪟', parents:['窓'], children:[]},
-      '建具': {desc:'建物に取りつける部分', emoji:'🚪', parents:['建築要素'], children:['窓','ドア']},
-      'ドア': {desc:'出入りするための建具', emoji:'🚪', parents:['建具'], children:['玄関ドア']},
-      '玄関ドア': {desc:'家の入口にあるドア', emoji:'🚪', parents:['ドア'], children:[]},
-      '建築要素': {desc:'建物を構成する要素', emoji:'🏗️', parents:['物'], children:['建具']}
-    };
-
-    const ALIASES = {
-      'いぬ':'犬','イヌ':'犬','わんこ':'犬','ワンコ':'犬','ねこ':'猫','ネコ':'猫',
-      'こーひー':'コーヒー','珈琲':'コーヒー','くろわっさん':'クロワッサン','めろんぱん':'メロンパン',
-      'みらい':'未来','かふぇ':'カフェ','まど':'窓'
-    };
-
-    const STARTERS = ['クロワッサン','犬','カフェ','コーヒー','窓','未来','海','椅子'];
-
-    let currentWord = 'クロワッサン';
-    let history = [{word:'クロワッサン',type:'start',note:'スタート'}];
-    let moves = 0;
-    let currentDir = 'up';
-    const $ = s => document.querySelector(s);
-
-    function canonical(word){ const w=String(word||'').trim(); return ALIASES[w]||w; }
-    function entry(word){ return DATA[canonical(word)]||null; }
-    function parents(word){ return (entry(word)?.parents||[]).filter(Boolean); }
-    function children(word){ return (entry(word)?.children||[]).filter(Boolean); }
-    function esc(s){ return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
-
-    function render(){
-      const info=entry(currentWord)||{desc:'まだ説明がありません',emoji:'💭'};
-      $('#word').textContent=currentWord;
-      $('#desc').textContent=info.desc||'';
-      $('#emoji').textContent=info.emoji||'💭';
-      $('#bar').style.width=Math.min(100,moves/5*100)+'%';
-      $('#count').textContent=moves>=5?'達成！ 🎉':moves+' / 5';
-      $('#history').innerHTML=history.slice().reverse().map(x=>`<div class="h"><div class="dot ${x.type}">${x.type==='up'?'↑':x.type==='down'?'↓':'•'}</div><div class="hc"><b>${esc(x.word)}</b><span>${esc(x.note)}</span></div></div>`).join('');
-    }
-
-    function setStatus(text){ $('#status').textContent=text; }
-
-    function startWord(word){
-      const w=canonical(word);
-      if(!DATA[w]){ alert('その言葉は、まだこの版の辞書に入ってへんみたいやわ🥲\n例：クロワッサン / 犬 / カフェ / コーヒー / 窓 / 未来'); return; }
-      currentWord=w; history=[{word:w,type:'start',note:'スタート'}]; moves=0; setStatus('🌱 上か下を押してみてな'); render();
-    }
-
-    function openChoices(dir){
-      currentDir=dir;
-      const list=dir==='up'?parents(currentWord):children(currentWord);
-      $('#title').textContent=dir==='up'?'↑ 抽象化候補':'↓ 具体化候補';
-      $('#help').textContent=dir==='up'?`「${currentWord}」より上の階層へ。`: `「${currentWord}」より下の階層へ。`;
-      if(!list.length){
-        $('#choices').innerHTML=`<div class="preview"><b>${dir==='up'?'これ以上うえはないかも':'これ以上細かくはないかも'}</b><br>${dir==='up'?'かなり広い概念まで来たで。':'この言葉の下の階層はまだ登録してへんよ。'}</div>`;
-      } else {
-        $('#choices').innerHTML=list.map(w=>{const i=entry(w)||{desc:''}; return `<button class="choice ${dir==='down'?'down':''}" data-word="${esc(w)}"><div class="top"><span class="cw">${esc(w)}</span><span class="badge">${dir==='up'?'1段上':'1段下'}</span></div><div class="meta">${esc(i.desc||'')}</div><div class="preview">${dir==='up'?`「${currentWord}」は「${w}」の一種`:`「${w}」は「${currentWord}」の一種`}</div></button>`}).join('');
-        document.querySelectorAll('.choice').forEach(btn=>btn.onclick=()=>choose(btn.dataset.word,dir));
-      }
-      $('#modal').classList.add('show');
-    }
-
-    function choose(word,dir){
-      const prev=currentWord; currentWord=canonical(word); moves++;
-      history.push({word:currentWord,type:dir,note:dir==='up'?'上の階層へ':'下の階層へ'});
-      $('#modal').classList.remove('show');
-      setStatus(dir==='up'?`↑ 「${prev}」から1段上へ`:`↓ 「${prev}」から1段下へ`);
-      const card=$('#card');
-      card.animate(dir==='up'?[{transform:'translateY(16px)',opacity:.45},{transform:'translateY(0)',opacity:1}]:[{transform:'translateY(-16px)',opacity:.45},{transform:'translateY(0)',opacity:1}],{duration:320,easing:'cubic-bezier(.2,.8,.2,1)'});
-      render();
-    }
-
-    $('#up').onclick=()=>openChoices('up');
-    $('#down').onclick=()=>openChoices('down');
-    $('#start').onclick=()=>startWord($('#input').value);
-    $('#input').onkeydown=e=>{if(e.key==='Enter')startWord(e.target.value)};
-    $('#random').onclick=()=>startWord(STARTERS[Math.floor(Math.random()*STARTERS.length)]);
-    $('#close').onclick=()=>$('#modal').classList.remove('show');
-    $('#modal').onclick=e=>{if(e.target.id==='modal')$('#modal').classList.remove('show')};
-    render();
+const CORE={
+  'クロワッサン':{desc:'バターを折り込んだ層のあるパン',emoji:'🥐',up:['パン'],down:['チョコクロワッサン','ミニクロワッサン']},
+  'パン':{desc:'小麦などを焼いて作る食品',emoji:'🍞',up:['食品'],down:['クロワッサン','食パン','フランスパン']},
+  '食品':{desc:'食べたり飲んだりするもの',emoji:'🍽️',up:['物'],down:['パン','飲料','料理']},
+  '犬':{desc:'人と暮らすことも多い動物',emoji:'🐶',up:['哺乳類','動物'],down:['柴犬','秋田犬','チワワ']},
+  '猫':{desc:'しなやかで身近な動物',emoji:'🐱',up:['哺乳類','動物'],down:['三毛猫','黒猫']},
+  '動物':{desc:'生きものの大きなグループ',emoji:'🐾',up:['生物'],down:['哺乳類','鳥','魚']},
+  '生物':{desc:'いきているもの',emoji:'🧬',up:['生命体'],down:['動物','植物']},
+  'コーヒー':{desc:'焙煎した豆から作る飲みもの',emoji:'☕',up:['飲料'],down:['エスプレッソ','カフェラテ','アイスコーヒー']},
+  'カフェ':{desc:'飲食や休憩をする店・場所',emoji:'☕',up:['飲食店','施設'],down:['ブックカフェ','古民家カフェ']},
+  '窓':{desc:'光や視線を通す建物の一部',emoji:'🪟',up:['建具','建築要素'],down:['出窓','丸窓']},
+  '椅子':{desc:'座るための家具',emoji:'🪑',up:['家具'],down:['ダイニングチェア','折り畳み椅子']},
+  '未来':{desc:'これから先の時間',emoji:'🔮',up:['時間'],down:['近い未来','遠い未来']},
+  '海':{desc:'広く大きな水域',emoji:'🌊',up:['水域','自然環境'],down:['内海','外洋']}
+};
+const ALIASES={'いぬ':'犬','イヌ':'犬','わんこ':'犬','ねこ':'猫','ネコ':'猫','珈琲':'コーヒー','くろわっさん':'クロワッサン'};
+const STARTERS=['クロワッサン','犬','猫','カフェ','コーヒー','窓','未来','海','椅子','雨','記憶'];
+const BUCKETS=128, bucketCache=new Map();
+let current='クロワッサン',moves=0,lastDir='up',history=[{word:'クロワッサン',type:'start',note:'スタート'}], requestSeq=0;
+const $=s=>document.querySelector(s);
+function norm(s){return String(s??'').normalize('NFKC').trim()}
+function canonical(s){const n=norm(s);return ALIASES[n]||n}
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function hashWord(text){let h=0x811c9dc5;for(const ch of norm(text)){h^=ch.codePointAt(0);h=Math.imul(h,0x01000193)>>>0}return h%BUCKETS}
+function coreInfo(w){return CORE[canonical(w)]||null}
+function emojiFor(w){return coreInfo(w)?.emoji||(/[ぁ-んァ-ン一-龠]/.test(w)?'💭':'✍️')}
+function render(){const info=coreInfo(current);$('#word').textContent=current;$('#desc').textContent=info?.desc||(current.length>12?'自由入力した言葉・場面。辞書にない時は自分の抽象化で進めるで。':'辞書と知識グラフから上下の候補を探せるで。');$('#emoji').textContent=emojiFor(current);$('#bar').style.width=Math.min(100,moves/5*100)+'%';$('#count').textContent=moves>=5?'達成！ 🎉':moves+' / 5';$('#history').innerHTML=history.slice().reverse().map(x=>`<div class="h"><div class="dot ${x.type}">${x.type==='up'?'↑':x.type==='down'?'↓':'•'}</div><div class="hc"><b>${esc(x.word)}</b><span>${esc(x.note)}</span></div></div>`).join('')}
+function setStatus(t,k=''){const e=$('#status');e.textContent=t;e.className='status'+(k?' '+k:'')}
+function startWord(w){w=canonical(w);if(!w)return;requestSeq++;current=w;moves=0;history=[{word:w,type:'start',note:'自由入力でスタート'}];setStatus('🌱 上か下を押してみてな');render()}
+async function checkWordNet(){try{const r=await fetch('/wn/meta.json',{cache:'no-store'});const m=await r.json();const e=$('#wnState');if(m.available){e.textContent=`WordNet ON · ${m.words?.toLocaleString?.()||''}語`;e.className='source-pill on'}else{e.textContent='WordNet ビルド失敗';e.className='source-pill off'}}catch{const e=$('#wnState');e.textContent='WordNet 未接続';e.className='source-pill off'}}
+async function wnLookup(word){const w=canonical(word),b=hashWord(w);if(!bucketCache.has(b)){const r=await fetch(`/wn/${b}.json`);if(!r.ok)throw new Error('WordNet shard unavailable');bucketCache.set(b,await r.json())}const shard=bucketCache.get(b);return shard[w]||shard[norm(word)]||[]}
+function coreCandidates(word,dir){const info=coreInfo(word);const arr=dir==='up'?info?.up:info?.down;return (arr||[]).map((w,i)=>({word:w,source:'内蔵',badge:'確認済み',rank:400-i,gloss:coreInfo(w)?.desc||'',sense:''}))}
+async function wordNetCandidates(word,dir){const senses=await wnLookup(word),out=[];for(const s of senses){const arr=dir==='up'?s.up:s.down;for(const w of arr||[])out.push({word:w,source:'WordNet',badge:dir==='up'?'hypernym':'hyponym',rank:300,gloss:s.gloss||'',sense:s.id||''})}return out}
+function conceptUri(word){return '/c/ja/'+encodeURIComponent(canonical(word).replace(/\s+/g,'_').toLowerCase())}
+async function conceptNetCandidates(word,dir){const w=canonical(word),wn=w.toLowerCase(),url=`https://api.conceptnet.io/query?node=${conceptUri(w)}&rel=/r/IsA&other=/c/ja&limit=80`;const c=new AbortController(),t=setTimeout(()=>c.abort(),4200);try{const r=await fetch(url,{signal:c.signal,headers:{Accept:'application/json'}});if(!r.ok)throw new Error('ConceptNet '+r.status);const d=await r.json(),out=[];for(const e of d.edges||[]){const weight=Number(e.weight)||0;if(weight<1.2)continue;const a=norm(e.start?.label),b=norm(e.end?.label);if(dir==='up'&&canonical(a).toLowerCase()===wn&&b)out.push({word:b,source:'ConceptNet',badge:'補助',rank:100+weight,gloss:'ConceptNetのIsA関係。WordNetに候補がない時だけ表示。',sense:''});if(dir==='down'&&canonical(b).toLowerCase()===wn&&a)out.push({word:a,source:'ConceptNet',badge:'補助',rank:100+weight,gloss:'ConceptNetのIsA関係。WordNetに候補がない時だけ表示。',sense:''})}return out}finally{clearTimeout(t)}}
+function merge(list){const m=new Map(),cur=canonical(current).toLowerCase();for(const x of list){const w=norm(x.word);if(!w||canonical(w).toLowerCase()===cur||w.length>40)continue;const k=canonical(w).toLowerCase(),old=m.get(k);if(!old||x.rank>old.rank)m.set(k,{...x,word:w})}return [...m.values()].sort((a,b)=>b.rank-a.rank).slice(0,12)}
+const HINTS={up:[['種類','これは何の一種？'],['役割','何のためにあるもの？'],['行動','ここで人は何をしていた？'],['痕跡','この場面に何が残っている？'],['状態','何が起きている途中？'],['意味','この場面全体を一言で言うと？']],down:[['種類','この仲間には何がある？'],['場所','どこで見つかる？'],['人物','誰が使う・する？'],['時間','いつ起こる？'],['形','どんな見た目や状態？'],['例','具体例を1つだけ挙げると？']]};
+function showHints(dir){const hs=HINTS[dir];$('#hintZone').innerHTML=`<b>🧠 答えが出ない時の思考ヒント</b><div class="hint-chips">${hs.map((h,i)=>`<button class="hint-chip" data-hi="${i}">${h[0]}</button>`).join('')}</div><div class="hint-text" id="hintText">辞書に正解がなくてもOK。視点を1つ選んで、自分の言葉で書いてみよう。</div>`;document.querySelectorAll('.hint-chip').forEach(b=>b.onclick=()=>{$('#hintText').textContent='💡 '+hs[+b.dataset.hi][1];$('#manualInput').focus()})}
+function showChoices(items,dir){if(!items.length){$('#choices').innerHTML='<div class="preview"><b>自動の上下候補は見つからへんかった。</b><br>文章や場面は辞書に載らないことが多いから、下の思考ヒント＋自由入力で続けてな。</div>';return}$('#choices').innerHTML=items.map((x,i)=>`<button class="choice" data-i="${i}"><div class="top"><span class="cw">${esc(x.word)}</span><span class="badge ${x.source==='ConceptNet'?'cn':x.source==='内蔵'?'core':''}">${esc(x.source)} · ${esc(x.badge)}</span></div>${x.gloss?`<div class="meta">${esc(x.gloss)}</div>`:''}${x.sense?`<div class="sense">sense: ${esc(x.sense)}</div>`:''}<div class="preview">${dir==='up'?`「${esc(current)}」→ より広い「${esc(x.word)}」`:`「${esc(current)}」→ より細かい「${esc(x.word)}」`}</div></button>`).join('');document.querySelectorAll('.choice[data-i]').forEach(b=>b.onclick=()=>choose(items[+b.dataset.i].word,dir,items[+b.dataset.i].source))}
+async function openChoices(dir){lastDir=dir;const seq=++requestSeq,wordAtOpen=current;$('#title').textContent=dir==='up'?'↑ 抽象化候補':'↓ 具体化候補';$('#help').textContent=dir==='up'?`「${current}」の上位概念（hypernym）を探します。`:`「${current}」の下位概念（hyponym）を探します。`;$('#manualInput').value='';$('#manualInput').placeholder=dir==='up'?'自分なら、もっと広く何と言う？':'自分なら、もっと細かく何と言う？';showHints(dir);$('#modal').classList.add('show');const local=coreCandidates(current,dir);if(local.length){showChoices(local,dir);setStatus('内蔵候補を表示 · WordNet検索中…','good')}else{$('#choices').innerHTML='<div class="loading">日本語WordNetを検索中… 🧠🔎</div>';setStatus('WordNet検索中…')}
+let wn=[];try{wn=await wordNetCandidates(wordAtOpen,dir)}catch{}if(seq!==requestSeq||current!==wordAtOpen)return;let all=merge([...local,...wn]);if(all.length){showChoices(all,dir);setStatus(`WordNet系の候補 ${all.length}件`,'good');return}
+let cn=[];try{cn=await conceptNetCandidates(wordAtOpen,dir)}catch{}if(seq!==requestSeq||current!==wordAtOpen)return;all=merge([...local,...wn,...cn]);showChoices(all,dir);setStatus(all.length?'ConceptNetの補助候補を表示':'自動候補なし · 自分の言葉で続けられる',all.length?'warn':'warn')}
+function choose(word,dir,source='自分'){const prev=current;current=canonical(word);moves++;history.push({word:current,type:dir,note:`${source} · ${dir==='up'?'上へ':'下へ'}`});$('#modal').classList.remove('show');setStatus('次の階層も探せるで 🌱');render();const card=$('#card');card.animate([{transform:dir==='up'?'translateY(18px)':'translateY(-18px)',opacity:.75},{transform:'translateY(0)',opacity:1}],{duration:320,easing:'ease-out'})}
+$('#up').onclick=()=>openChoices('up');$('#down').onclick=()=>openChoices('down');$('#start').onclick=()=>startWord($('#input').value);$('#input').onkeydown=e=>{if(e.key==='Enter')startWord(e.target.value)};$('#random').onclick=()=>startWord(STARTERS[Math.floor(Math.random()*STARTERS.length)]);$('#close').onclick=()=>{$('#modal').classList.remove('show');requestSeq++};$('#modal').onclick=e=>{if(e.target.id==='modal'){$('#modal').classList.remove('show');requestSeq++}};$('#manualAdd').onclick=()=>{const w=$('#manualInput').value.trim();if(w)choose(w,lastDir,'自由入力')};$('#manualInput').onkeydown=e=>{if(e.key==='Enter')$('#manualAdd').click()};render();checkWordNet();
 </script>
-</body>
-</html>
+</body></html>
