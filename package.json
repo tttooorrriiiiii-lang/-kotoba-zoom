@@ -1,7 +1,7 @@
 {
-  "name": "kotoba-zoom-v10-11",
+  "name": "kotoba-zoom-v10-12",
   "private": true,
-  "version": "10.11.0",
+  "version": "10.12.0",
   "type": "module",
   "scripts": {
     "build": "node build-wordnet.mjs"
