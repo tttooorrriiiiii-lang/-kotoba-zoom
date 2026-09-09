@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>ことばズーム v10.5</title>
+<title>ことばズーム v10.6</title>
 <style>
 :root{--bg:#f7f5ef;--ink:#20211e;--muted:#73736e;--line:#ddd9cf;--up:#edf0ff;--down:#fff0e9;--blue:#6f7df7;--coral:#ea8f75;--shadow:0 18px 50px rgba(40,42,65,.10)}
 *{box-sizing:border-box} html,body{margin:0;min-height:100%;font-family:Inter,"Hiragino Sans","Yu Gothic",system-ui,sans-serif;color:var(--ink)}
@@ -13,14 +13,14 @@ a{color:#5967d2}.app{max-width:1040px;margin:0 auto;padding:18px 14px 40px}
 header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px}.brand{display:flex;align-items:center;gap:10px}.logo{width:44px;height:44px;border:2px solid #242520;border-radius:14px;display:grid;place-items:center;background:#fff;font-size:22px;box-shadow:0 8px 18px #2221}h1{font-size:21px;margin:0}.sub{font-size:11px;color:var(--muted);margin-top:2px}.ghost{border:1px solid var(--line);background:#fff9;border-radius:999px;padding:9px 13px;color:#4c5fc7;font-weight:800}
 .layout{display:grid;grid-template-columns:minmax(0,1fr) 270px;gap:16px}.main,.panel{background:rgba(255,253,248,.86);border:1px solid var(--line);box-shadow:var(--shadow);backdrop-filter:blur(8px)}.main{border-radius:28px;padding:18px;overflow:hidden;position:relative}.stage{min-height:680px;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative}.stage:before{content:"";position:absolute;top:104px;bottom:110px;left:50%;width:2px;background:linear-gradient(180deg,rgba(111,125,247,.08),rgba(111,125,247,.45) 30%,rgba(234,143,117,.45) 70%,rgba(234,143,117,.08));transform:translateX(-50%);z-index:0}.level{position:relative;z-index:2;font-size:11px;font-weight:900;letter-spacing:.13em;color:var(--muted);margin:7px}.zoom{position:relative;z-index:2;width:min(470px,96%);border:1px solid var(--line);border-radius:20px;padding:16px 18px;text-align:left;display:flex;justify-content:space-between;align-items:center;transition:.2s transform,.2s box-shadow}.zoom:hover{transform:translateY(-2px);box-shadow:0 12px 28px #2221}.zoom.up{background:linear-gradient(180deg,#f4f5ff,#ebeefe)}.zoom.down{background:linear-gradient(180deg,#fff6f1,#ffede5)}.zoom b{font-size:17px}.zoom small{color:var(--muted);font-size:12px}.zoom strong{font-size:26px}.connector{position:relative;z-index:1;height:30px;width:2px;background:var(--line)}
 .card{position:relative;z-index:2;width:min(540px,98%);border:2px solid #22231f;border-radius:28px;background:#fff;box-shadow:0 14px 0 #e8e3d8,0 22px 46px rgba(55,56,75,.08);padding:28px 20px 24px;text-align:center;animation:float 4s ease-in-out infinite}@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}.eyebrow{font-size:10px;color:var(--muted);font-weight:900;letter-spacing:.12em}.word{font-size:clamp(38px,8vw,62px);font-weight:900;margin:10px 0 6px;letter-spacing:.01em}.desc{font-size:13px;line-height:1.75;color:var(--muted);max-width:420px;margin:0 auto}.emoji{font-size:48px;margin-bottom:4px;display:block}.status{display:inline-flex;align-items:center;gap:6px;margin-top:12px;border-radius:999px;padding:7px 10px;background:#f0eee8;font-size:10px;font-weight:800;color:#6f6c64}.status.good{background:#e9f6ec;color:#32623b}.status.warn{background:#fff1d8;color:#7d5c1c}.start{display:flex;gap:8px;width:min(560px,100%);margin-top:20px;position:relative;z-index:3}.start input{flex:1;border:1px solid var(--line);border-radius:14px;padding:12px 14px;background:#fff;outline:none}.start input:focus{border-color:#aaaee9;box-shadow:0 0 0 3px #e8e9ff}.primary{border:0;border-radius:14px;padding:11px 16px;background:#20231f;color:#fff;font-weight:900}
-.side{display:flex;flex-direction:column;gap:12px}.panel{border-radius:20px;padding:15px}.panel h2{font-size:13px;margin:0 0 10px}.panel p{font-size:11px;line-height:1.65;color:var(--muted);margin:0}.quest{background:#202520;color:#fff}.quest p{color:#cbd1cc}.bar{height:7px;background:#414641;border-radius:999px;margin:10px 0;overflow:hidden}.bar i{display:block;height:100%;width:0;background:#fff;transition:.25s width}.history{display:flex;flex-direction:column;gap:7px;max-height:340px;overflow:auto}.h{display:grid;grid-template-columns:28px 1fr;gap:8px}.dot{width:28px;height:28px;border-radius:9px;display:grid;place-items:center;background:#eeeae0;font-size:11px;font-weight:900}.dot.up{background:#e7eaff;color:#4f5fd3}.dot.down{background:#ffe7de;color:#c8684d}.hc{border-bottom:1px solid #ece8df;padding-bottom:8px}.hc b{font-size:12px}.hc span{display:block;font-size:10px;color:var(--muted);margin-top:2px}.tip{border-radius:14px;padding:12px;background:#f3f1ec;font-size:11px;line-height:1.7;color:#66655f}.source-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}.source-pill{font-size:9px;padding:5px 7px;border-radius:999px;border:1px solid var(--line);background:#fff}.source-pill.on{background:#eaf6ec;color:#35613e;border-color:#cce8d2}.source-pill.off{background:#fff1dc;color:#805f24;border-color:#ecd6a8}.hbtn{border:0;background:transparent;width:100%;padding:0;text-align:left;color:inherit}.hbtn:hover .hc b{text-decoration:underline}.hbtn.now .hc{background:#f5f3ec;border-radius:10px;padding:6px 8px}.group-title{font-size:10px;font-weight:900;letter-spacing:.08em;color:#77766f;margin:14px 2px 6px;text-transform:uppercase}.group-title:first-child{margin-top:2px}.badge.route{background:#e9f6ec;color:#35613e}.badge.view{background:#f7eafa;color:#7a4e86}.badge.think{background:#e7f3ff;color:#35658a}.choice.back{border-style:dashed;background:#f3fbf4}.choice.viewpoint{background:#fcf7fd}.choice.thinking{background:#f6fbff}
+.side{display:flex;flex-direction:column;gap:12px}.panel{border-radius:20px;padding:15px}.panel h2{font-size:13px;margin:0 0 10px}.panel p{font-size:11px;line-height:1.65;color:var(--muted);margin:0}.quest{background:#202520;color:#fff}.quest p{color:#cbd1cc}.bar{height:7px;background:#414641;border-radius:999px;margin:10px 0;overflow:hidden}.bar i{display:block;height:100%;width:0;background:#fff;transition:.25s width}.history{display:flex;flex-direction:column;gap:7px;max-height:340px;overflow:auto}.h{display:grid;grid-template-columns:28px 1fr;gap:8px}.dot{width:28px;height:28px;border-radius:9px;display:grid;place-items:center;background:#eeeae0;font-size:11px;font-weight:900}.dot.up{background:#e7eaff;color:#4f5fd3}.dot.down{background:#ffe7de;color:#c8684d}.hc{border-bottom:1px solid #ece8df;padding-bottom:8px}.hc b{font-size:12px}.hc span{display:block;font-size:10px;color:var(--muted);margin-top:2px}.tip{border-radius:14px;padding:12px;background:#f3f1ec;font-size:11px;line-height:1.7;color:#66655f}.source-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}.source-pill{font-size:9px;padding:5px 7px;border-radius:999px;border:1px solid var(--line);background:#fff}.source-pill.on{background:#eaf6ec;color:#35613e;border-color:#cce8d2}.source-pill.off{background:#fff1dc;color:#805f24;border-color:#ecd6a8}.hbtn{border:0;background:transparent;width:100%;padding:0;text-align:left;color:inherit}.hbtn:hover .hc b{text-decoration:underline}.hbtn.now .hc{background:#f5f3ec;border-radius:10px;padding:6px 8px}.group-title{font-size:10px;font-weight:900;letter-spacing:.08em;color:#77766f;margin:14px 2px 6px;text-transform:uppercase}.group-title:first-child{margin-top:2px}.badge.route{background:#e9f6ec;color:#35613e}.badge.view{background:#f7eafa;color:#7a4e86}.badge.think{background:#e7f3ff;color:#35658a}.badge.entity{background:#fff3cf;color:#76590b}.choice.entity{background:#fffaf0}.choice.back{border-style:dashed;background:#f3fbf4}.choice.viewpoint{background:#fcf7fd}.choice.thinking{background:#f6fbff}
 .modal{position:fixed;inset:0;background:#17171255;display:none;place-items:center;padding:18px;z-index:20;backdrop-filter:blur(4px)}.modal.show{display:grid}.dialog{width:min(560px,100%);max-height:86vh;overflow:auto;background:#fff;border-radius:24px;padding:18px;box-shadow:0 26px 70px #1113}.dialog h3{margin:0 0 5px;font-size:25px}.help{font-size:12px;color:var(--muted);line-height:1.6}.close{float:right;border:0;background:none;font-size:24px;color:#5d7bea}.choices{display:grid;gap:9px;margin:14px 0}.choice{border:1px solid var(--line);background:#fbfaf6;border-radius:16px;padding:13px;text-align:left;transition:.18s transform,.18s box-shadow}.choice:hover{transform:translateY(-2px);box-shadow:0 12px 26px #2221}.choice .top{display:flex;justify-content:space-between;align-items:center;gap:10px}.choice .cw{font-weight:900;font-size:18px}.badge{font-size:9px;border-radius:999px;padding:4px 7px;background:#eceffd;color:#5564ca;white-space:nowrap}.badge.cn{background:#fff1dc;color:#7b5d25}.badge.core{background:#e9f6ec;color:#35613e}.meta{font-size:10px;color:var(--muted);margin-top:6px;line-height:1.55}.preview{margin-top:8px;padding:9px 10px;border-radius:12px;background:#f1f0eb;font-size:10px;color:#66655f;line-height:1.6}.sense{margin-top:7px;font-size:10px;line-height:1.55;color:#72716b;border-left:3px solid #dfe2ff;padding-left:8px}.loading{padding:16px;border:1px dashed var(--line);border-radius:14px;color:var(--muted);font-size:12px}.hint-zone{margin:12px 0;padding:13px;border-radius:16px;background:linear-gradient(180deg,#f7f7ff,#faf9f5);border:1px solid #e4e2f2}.hint-zone b{font-size:12px}.hint-chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:9px}.hint-chip{border:1px solid #d9d9ea;background:#fff;border-radius:999px;padding:7px 9px;font-size:10px;color:#5f6080}.hint-text{font-size:11px;line-height:1.65;color:#686879;margin-top:8px}.manual-zone{margin-top:14px;padding-top:14px;border-top:1px solid var(--line)}.manual-label{font-size:11px;font-weight:900;color:#64645f;margin-bottom:7px}.manual-row{display:flex;gap:8px}.manual-row input{flex:1;min-width:0;border:1px solid var(--line);border-radius:13px;padding:11px 12px;background:#fff;outline:none}.manual-row input:focus{border-color:#aaaee9;box-shadow:0 0 0 3px #e8e9ff}.manual-help{font-size:10px;line-height:1.6;color:var(--muted);margin-top:7px}.foot{max-width:1040px;margin:12px auto 0;padding:0 14px 24px;font-size:9px;color:#85847d;line-height:1.6;text-align:center}
 @media(max-width:760px){.layout{grid-template-columns:1fr}.side{display:grid;grid-template-columns:1fr 1fr}.quest{grid-column:1/-1}.stage{min-height:620px}}@media(max-width:520px){.app{padding:12px 10px 34px}.sub{display:none}.main{padding:12px;border-radius:21px}.side{grid-template-columns:1fr}.quest{grid-column:auto}.start{flex-direction:column}.primary{width:100%}.card{padding:24px 16px 22px}.word{font-size:42px}.manual-row{flex-direction:column}}
 </style>
 </head>
 <body>
 <div class="app">
-<header><div class="brand"><div class="logo">↕</div><div><h1>ことばズーム <span style="font-size:11px;color:#7e86a8">v10.5</span></h1><div class="sub">意味を固定して上下＋観点で分岐。来た道にも戻れる、思考トレーニング版。</div></div></div><button class="ghost" id="random">🎲 おまかせ</button></header>
+<header><div class="brand"><div class="logo">↕</div><div><h1>ことばズーム <span style="font-size:11px;color:#7e86a8">v10.6</span></h1><div class="sub">意味を固定して上下＋観点で分岐。来た道にも戻れる、思考トレーニング版。</div></div></div><button class="ghost" id="random">🎲 おまかせ</button></header>
 <div class="layout">
 <main class="main"><section class="stage">
 <div class="level">ZOOM OUT · 抽象へ</div>
@@ -35,11 +35,11 @@ header{display:flex;align-items:center;justify-content:space-between;gap:12px;ma
 <aside class="side">
 <section class="panel quest"><h2>🎯 5回ズーム</h2><p>辞書の答えを選んでも、自分の言葉を書いてもOK。</p><div class="bar"><i id="bar"></i></div><p id="count">0 / 5</p></section>
 <section class="panel"><h2>🪜 思考の足あと</h2><p style="margin-bottom:9px">ことばを押すと、その時の意味へ戻れるで。</p><div class="history" id="history"></div></section>
-<section class="panel"><h2>🧠 4つの助け</h2><div class="tip"><b>WordNet</b>＝意味IDを固定した辞書の骨組み<br><b>思考ルート</b>＝自然な現代語・動詞の橋渡し<br><b>観点分岐</b>＝感情 / 性質 / 用途など別の上がり方<br><b>自由入力</b>＝文章・状況・自分の抽象化</div><div class="source-row"><span class="source-pill" id="wnState">WordNet 確認中</span><span class="source-pill on">思考ルート ON</span><span class="source-pill on">観点分岐 ON</span><span class="source-pill on">ConceptNet 補助ON</span><span class="source-pill on">自由入力 ON</span></div></section>
+<section class="panel"><h2>🧠 5つの助け</h2><div class="tip"><b>WordNet</b>＝意味IDを固定した辞書の骨組み<br><b>思考ルート</b>＝自然な現代語・動詞の橋渡し<br><b>観点分岐</b>＝感情 / 性質 / 用途など別の上がり方<br><b>Wikidata</b>＝人名・作品名・地名・会社名の種類や職業<br><b>自由入力</b>＝文章・状況・自分の抽象化</div><div class="source-row"><span class="source-pill" id="wnState">WordNet 確認中</span><span class="source-pill on">思考ルート ON</span><span class="source-pill on">観点分岐 ON</span><span class="source-pill on" id="wdState">Wikidata 固有名詞 ON</span><span class="source-pill on">ConceptNet 補助ON</span><span class="source-pill on">自由入力 ON</span></div></section>
 </aside>
 </div></div>
 <div class="modal" id="modal"><div class="dialog"><button class="close" id="close">×</button><h3 id="title"></h3><div class="help" id="help"></div><div class="choices" id="choices"></div><div class="hint-zone" id="hintZone"></div><div class="manual-zone"><div class="manual-label">✍️ 自分の言葉で続ける</div><div class="manual-row"><input id="manualInput" placeholder="自分の答えを入力"><button class="primary" id="manualAdd">この言葉へ</button></div><div class="manual-help" id="manualHelp">辞書にない答えでも、そのまま次のズームへ進めるで。</div></div></div></div>
-<div class="foot">日本語ワードネット（1.1版）© 2009-2011 NICT, 2012-2015 Francis Bond, 2016-2024 Francis Bond, Takayuki Kuribayashi · ConceptNet 5 / CC BY-SA 4.0</div>
+<div class="foot">日本語ワードネット（1.1版）© 2009-2011 NICT, 2012-2015 Francis Bond, 2016-2024 Francis Bond, Takayuki Kuribayashi · Wikidata / CC0 · ConceptNet 5 / CC BY-SA 4.0</div>
 <script>
 const CORE={
   'クロワッサン':{desc:'バターを折り込んだ層のあるパン',emoji:'🥐',up:['パン'],down:['チョコクロワッサン','ミニクロワッサン']},
@@ -77,11 +77,20 @@ const CORE={
   '評価':{desc:'良い・悪いなどを判断した結果',emoji:'🧠',up:['判断'],down:['好評価','低評価']},
   '判断':{desc:'情報をもとに決める心の働き',emoji:'🧠',up:['心の働き'],down:['評価']},
   '心の働き':{desc:'考える・感じるなど心の活動',emoji:'🧠',up:[],down:['判断','知覚','思考']},
-  '行為':{desc:'人や生物がすること',emoji:'🏃',up:[],down:['行動する','摂取する','制作する']}
+  '行為':{desc:'人や生物がすること',emoji:'🏃',up:[],down:['行動する','摂取する','制作する']},
+  '人間':{desc:'人という生物・存在',emoji:'🧑',up:['動物','生物'],down:['大人','子ども']},
+  '価値':{desc:'どれほど大切・有用・望ましいかという尺度',emoji:'💎',up:['評価'],down:['重要性','有用性']},
+  '気品':{desc:'上品さや気高さとして感じられる性質',emoji:'👑',up:['性質'],down:['上品さ','気高さ']},
+  '神聖さ':{desc:'神聖・特別で侵しがたいと感じられる性質',emoji:'✨',up:['特別性','性質'],down:['神聖']},
+  '特別性':{desc:'ほかと異なる特別な性質',emoji:'✨',up:['性質'],down:['神聖さ']},
+  '愛着':{desc:'大切に感じ、心が引かれる気持ち',emoji:'🫶',up:['感情'],down:['親しみ']},
+  '居場所':{desc:'自分が安心していられる場所や関係',emoji:'🏠',up:['生活空間','安心'],down:['家']},
+  '生活空間':{desc:'人が暮らしを営む場所',emoji:'🏠',up:['生活'],down:['居場所','住居']},
+  '生活':{desc:'日々の暮らしや営み',emoji:'🌱',up:[],down:['生活空間']}
 };
-const ALIASES={'いぬ':'犬','イヌ':'犬','わんこ':'犬','ねこ':'猫','ネコ':'猫','珈琲':'コーヒー','くろわっさん':'クロワッサン','哀しい':'悲しい'};
+const ALIASES={'いぬ':'犬','イヌ':'犬','わんこ':'犬','ねこ':'猫','ネコ':'猫','珈琲':'コーヒー','くろわっさん':'クロワッサン','哀しい':'悲しい','ヒト':'人間','人':'人間'};
 const STARTERS=['クロワッサン','犬','猫','家','ジュース','指','カフェ','コーヒー','窓','未来','海','椅子','嬉しい','悲しい','面白い','怖い','走る','歩く','食べる','考える'];
-const BUCKETS=128, lemmaCache=new Map(), senseCache=new Map();
+const BUCKETS=128, lemmaCache=new Map(), senseCache=new Map(), wikidataCache=new Map(), wikidataLabelCache=new Map();
 let wordNetAvailable=false;
 let current='クロワッサン',currentSense=null,currentPos='',moves=0,lastDir='up',requestSeq=0,cursor=0;
 let trail=[{word:'クロワッサン',type:'start',note:'スタート',sense:null,pos:'',source:'スタート'}];
@@ -92,7 +101,8 @@ const FRIENDLY={
   '付属肢':'身体の一部','一指':'指','興味を起こさせる力':'興味を引く性質',
   '工合':'状態','感':'感じ・状態','滋養分':'栄養分','滋養':'栄養','質':'性質',
   '身体部分':'身体の一部','身体部位':'身体の一部','肉体部分':'身体の一部',
-  '営造':'建物','住居施設':'住居','アーチファクト':'人工物'
+  '営造':'建物','住居施設':'住居','アーチファクト':'人工物','ヒト':'人間','人':'人間',
+  '人類':'人間','都市自治体':'都市','会社':'企業','法人':'組織','映画作品':'映画'
 };
 const HIDE_ROOT=new Set(['実体','抽象的実体','物理的実体','存在物','属性','一統']);
 const STOP_UP=new Set(['物','物質','性質','状態','感情','心の状態','心の働き','行為','活動','出来事','現象','概念','生物','生命体','生物の構造']);
@@ -104,6 +114,8 @@ const GUIDED_UP={
   '指':['身体の一部'],'身体の一部':['身体'],'身体':['生物の構造'],
   '興味を引く性質':['魅力','性質'],'魅力':['性質'],'興味':['感情'],'喜び':['感情'],'悲しみ':['感情'],'恐怖':['感情'],'感情':['心の状態'],
   '評価':['判断'],'判断':['心の働き'],
+  '気品':['性質'],'価値が高い':['価値'],'価値':['評価'],'神聖':['神聖さ'],'神聖さ':['特別性'],'特別性':['性質'],'大切に感じる':['愛着'],'愛着':['感情'],
+  '居場所':['生活空間','安心'],'生活空間':['生活'],'人間':['動物','生物'],
   '走る':['移動する'],'歩く':['移動する'],'行く':['移動する'],'泳ぐ':['移動する'],'飛ぶ':['移動する'],
   '移動する':['動く'],'動く':['行動する'],'行動する':['行為'],
   '食べる':['摂取する'],'飲む':['摂取する'],'摂取する':['行為'],
@@ -132,6 +144,12 @@ const VIEWPOINTS={
   '怖い':[
     {label:'❤️ 感情として',word:'恐怖',desc:'怖いと感じる自分の側から見る。'},
     {label:'⚠️ 対象の性質として',word:'危険性',desc:'怖さを生む対象側の性質として見る。'}
+  ],
+  '尊い':[
+    {label:'💎 価値として',word:'価値が高い',desc:'「大切・価値がある」という側から上がる。'},
+    {label:'👑 品格として',word:'気品',desc:'「気高い・高貴だ」という側から上がる。'},
+    {label:'✨ 神聖さとして',word:'神聖',desc:'「神聖で特別だ」という側から上がる。'},
+    {label:'🫶 感情として',word:'大切に感じる',desc:'「自分がかけがえなく感じる」という心の側から上がる。'}
   ],
   '家':[
     {label:'🧱 構造として',word:'建物',desc:'何であるか・形として上がる。'},
@@ -175,8 +193,30 @@ function guidedCandidates(word,dir){if(dir==='up'&&shouldStopAbove(word))return[
 function viewpointCandidates(word,dir){if(dir!=='up')return[];return (VIEWPOINTS[canonical(word)]||[]).map((x,i)=>({word:x.word,source:'観点',badge:x.label,group:'viewpoint',rank:650-i,gloss:x.desc,viewpoint:true}))}
 function routeBackCandidates(dir){
   const out=[];
-  if(cursor>0){const cur=trail[cursor],prev=trail[cursor-1];if((cur.type==='up'&&dir==='down')||(cur.type==='down'&&dir==='up'))out.push({word:prev.word,source:'足あと',badge:'1段戻る',group:'back',rank:1000,gloss:'さっき通った意味IDごと正確に戻る。',returnIndex:cursor-1,targetSense:prev.sense,targetPos:prev.pos})}
-  if(cursor<trail.length-1){const next=trail[cursor+1];if((next.type==='up'&&dir==='up')||(next.type==='down'&&dir==='down'))out.push({word:next.word,source:'足あと',badge:'来た道を進む',group:'back',rank:990,gloss:'前に選んだ同じ道をもう一度たどる。',returnIndex:cursor+1,targetSense:next.sense,targetPos:next.pos})}
+  // 具体化では、抽象化で実際に通った言葉を必ず先頭にする。
+  if(dir==='down'){
+    let distance=0;
+    for(let i=cursor-1;i>=0;i--){
+      const step=trail[i+1];
+      if(!step||step.type!=='up')break;
+      distance++;
+      const prev=trail[i];
+      out.push({word:prev.word,source:'足あと',badge:distance===1?'さっき選んだ言葉へ戻る':`${distance}段戻る`,group:'back',rank:2000-distance,gloss:distance===1?'この一覧の一番上は、さっき実際に選んだ言葉。意味IDごと正確に戻る。':'前に通った具体語まで、その時の意味IDごと戻れる。',returnIndex:i,targetSense:prev.sense,targetPos:prev.pos});
+    }
+  }
+  // 具体化から逆に抽象へ戻る時も、来た道を優先。
+  if(dir==='up'){
+    let distance=0;
+    for(let i=cursor-1;i>=0;i--){
+      const step=trail[i+1];
+      if(!step||step.type!=='down')break;
+      distance++;
+      const prev=trail[i];
+      out.push({word:prev.word,source:'足あと',badge:distance===1?'さっきの抽象語へ戻る':`${distance}段戻る`,group:'back',rank:2000-distance,gloss:'前に通った抽象語へ、その時の意味IDごと戻る。',returnIndex:i,targetSense:prev.sense,targetPos:prev.pos});
+    }
+    // 足あとで過去地点へジャンプした場合は、以前の先の道も復元できる。
+    if(cursor<trail.length-1){const next=trail[cursor+1];if(next?.type==='up')out.push({word:next.word,source:'足あと',badge:'前に選んだ道を進む',group:'back',rank:1950,gloss:'この地点から前に選んだ抽象化ルートをもう一度たどる。',returnIndex:cursor+1,targetSense:next.sense,targetPos:next.pos})}
+  }
   return out
 }
 function pickDisplayWord(words=[]){
@@ -214,32 +254,51 @@ async function relationHints(word){
 }
 function conceptUri(word){return '/c/ja/'+encodeURIComponent(canonical(word).replace(/\s+/g,'_').toLowerCase())}
 async function conceptNetCandidates(word,dir){const w=canonical(word),wn=w.toLowerCase(),url=`https://api.conceptnet.io/query?node=${conceptUri(w)}&rel=/r/IsA&other=/c/ja&limit=80`,c=new AbortController(),t=setTimeout(()=>c.abort(),4200);try{const r=await fetch(url,{signal:c.signal,headers:{Accept:'application/json'}});if(!r.ok)throw new Error('ConceptNet '+r.status);const d=await r.json(),out=[];for(const e of d.edges||[]){const weight=Number(e.weight)||0;if(weight<1.2)continue;const a=norm(e.start?.label),b=norm(e.end?.label);if(dir==='up'&&canonical(a).toLowerCase()===wn&&b)out.push({word:friendly(b),source:'ConceptNet',badge:'補助',group:'conceptnet',rank:100+weight,gloss:'ConceptNetのIsA関係。ほかに自然な候補がない時の補助。'});if(dir==='down'&&canonical(b).toLowerCase()===wn&&a)out.push({word:friendly(a),source:'ConceptNet',badge:'補助',group:'conceptnet',rank:100+weight,gloss:'ConceptNetのIsA関係。ほかに自然な候補がない時の補助。'})}return out}finally{clearTimeout(t)}}
+
+function wdClaimIds(entity,prop){return (entity?.claims?.[prop]||[]).map(c=>c?.mainsnak?.datavalue?.value?.id).filter(Boolean)}
+async function wdFetchJson(url,timeout=5000){const c=new AbortController(),t=setTimeout(()=>c.abort(),timeout);try{const r=await fetch(url,{signal:c.signal,headers:{Accept:'application/json'}});if(!r.ok)throw new Error('Wikidata '+r.status);return await r.json()}finally{clearTimeout(t)}}
+async function wdLabels(ids){const need=[...new Set(ids)].filter(Boolean),missing=need.filter(id=>!wikidataLabelCache.has(id));if(missing.length){const url='https://www.wikidata.org/w/api.php?action=wbgetentities&format=json&origin=*&props=labels%7Cdescriptions&languages=ja%7Cen&ids='+encodeURIComponent(missing.slice(0,50).join('|'));const d=await wdFetchJson(url);for(const id of missing){const e=d.entities?.[id],label=e?.labels?.ja?.value||e?.labels?.en?.value||id,desc=e?.descriptions?.ja?.value||e?.descriptions?.en?.value||'';wikidataLabelCache.set(id,{label:friendly(label),desc})}}return Object.fromEntries(need.map(id=>[id,wikidataLabelCache.get(id)||{label:id,desc:''}]))}
+async function wdEntityForWord(word){const q=canonical(word),key=q.toLowerCase();if(wikidataCache.has(key))return wikidataCache.get(key);const searchUrl='https://www.wikidata.org/w/api.php?action=wbsearchentities&format=json&origin=*&language=ja&uselang=ja&type=item&limit=7&search='+encodeURIComponent(q);const d=await wdFetchJson(searchUrl);const nq=norm(q).toLowerCase();const hit=(d.search||[]).find(x=>norm(x.label).toLowerCase()===nq||norm(x.match?.text).toLowerCase()===nq);if(!hit){wikidataCache.set(key,null);return null}const getUrl='https://www.wikidata.org/w/api.php?action=wbgetentities&format=json&origin=*&props=claims%7Clabels%7Cdescriptions&languages=ja%7Cen&ids='+encodeURIComponent(hit.id);const e=(await wdFetchJson(getUrl)).entities?.[hit.id];if(!e){wikidataCache.set(key,null);return null}const result={id:hit.id,label:e.labels?.ja?.value||e.labels?.en?.value||hit.label||q,desc:e.descriptions?.ja?.value||e.descriptions?.en?.value||hit.description||'',entity:e};wikidataCache.set(key,result);return result}
+async function wikidataCandidates(word,dir){
+  if(dir!=='up'||currentSense)return[];
+  const hit=await wdEntityForWord(word);if(!hit)return[];
+  const e=hit.entity,instances=wdClaimIds(e,'P31'),subclasses=wdClaimIds(e,'P279'),occupations=wdClaimIds(e,'P106'),genres=wdClaimIds(e,'P136'),industries=wdClaimIds(e,'P452');
+  const allIds=[...instances,...subclasses,...occupations,...genres,...industries],labels=await wdLabels(allIds),isHuman=instances.includes('Q5'),out=[],base=`Wikidataで「${hit.label}」${hit.desc?'（'+hit.desc+'）':''}として見つかった。`;
+  const push=(word,badge,rank,extra='')=>{word=friendly(word);if(!word||isHiddenLabel(word)||isNearDuplicate(word,current))return;out.push({word,source:'Wikidata',badge,group:'entity',rank,gloss:base+(extra?' '+extra:''),entityId:hit.id})};
+  if(isHuman)push('人間','👤 人物として',880,'固有名詞を「人物」という種類から抽象化。');
+  for(const id of occupations.slice(0,4)){const x=labels[id];if(x)push(x.label,'💼 職業として',860,'その人物の職業・役割という観点。')}
+  if(!isHuman){for(const id of [...instances,...subclasses].slice(0,5)){const x=labels[id];if(x)push(x.label,'📦 種類として',850,'固有名詞を「何の一種か」で抽象化。')}}
+  for(const id of genres.slice(0,3)){const x=labels[id];if(x)push(x.label,'🎨 ジャンルとして',830,'作品・表現のジャンルという観点。')}
+  for(const id of industries.slice(0,3)){const x=labels[id];if(x)push(x.label,'🏢 分野として',820,'企業・組織が属する分野という観点。')}
+  return out
+}
 function merge(list){const m=new Map(),cur=canonical(current).toLowerCase();for(const x of list){const w=norm(x.word);if(!w||canonical(w).toLowerCase()===cur||w.length>40||isHiddenLabel(w)||isNearDuplicate(current,w))continue;const k=canonical(w).toLowerCase(),old=m.get(k);if(!old||x.rank>(old.rank||0))m.set(k,{...x,word:w})}return [...m.values()].sort((a,b)=>(b.rank||0)-(a.rank||0)).slice(0,16)}
 
 const HINTS={up:[['種類','これは何の一種？'],['役割','何のためにあるもの？'],['感情','それを人の心の側から言うと？'],['痕跡','この場面に何が残っている？'],['状態','何が起きている途中？'],['意味','この場面全体を一言で言うと？']],down:[['種類','この仲間には何がある？'],['来た道','さっきの具体語へ戻るのも正解。'],['場所','どこで見つかる？'],['人物','誰が使う・する？'],['形','どんな見た目や状態？'],['例','具体例を1つだけ挙げると？']]};
 function showHints(dir,extra={}){const hs=HINTS[dir];let extraHtml='';if(extra.similar?.length)extraHtml+=`<div class="hint-text">↔ 近い表現：${esc(extra.similar.join(' / '))}</div>`;if(extra.entail?.length)extraHtml+=`<div class="hint-text">→ この動作に伴いやすい：${esc(extra.entail.join(' / '))}</div>`;if(extra.cause?.length)extraHtml+=`<div class="hint-text">⚡ この動作が引き起こす：${esc(extra.cause.join(' / '))}</div>`;$('#hintZone').innerHTML=`<b>🧠 答えが出ない時の思考ヒント</b><div class="hint-chips">${hs.map((h,i)=>`<button class="hint-chip" data-hi="${i}">${h[0]}</button>`).join('')}</div><div class="hint-text" id="hintText">正解は1本じゃないで。観点を変えると別の抽象化ルートも作れる。</div>${extraHtml}`;document.querySelectorAll('.hint-chip').forEach(b=>b.onclick=()=>{$('#hintText').textContent='💡 '+hs[+b.dataset.hi][1];$('#manualInput').focus()})}
-function groupName(g){return ({back:'↩ 来た道',viewpoint:'🌿 観点を選ぶ',thinking:'🧠 自然な思考ルート',wordnet:'📚 WordNetの辞書階層',core:'✅ 内蔵の確認済みルート',conceptnet:'🕸 ConceptNet補助'})[g]||'候補'}
-function badgeClass(x){return x.group==='back'?'route':x.group==='viewpoint'?'view':x.group==='thinking'?'think':x.source==='ConceptNet'?'cn':x.source==='内蔵'?'core':''}
-function choiceClass(x){return x.group==='back'?'back':x.group==='viewpoint'?'viewpoint':x.group==='thinking'?'thinking':''}
+function groupName(g){return ({back:'↩ さっき選んだ言葉へ戻る',viewpoint:'🌿 観点を選ぶ',entity:'🏷 固有名詞の観点（Wikidata）',thinking:'🧠 自然な思考ルート',wordnet:'📚 WordNetの辞書階層',core:'✅ 内蔵の確認済みルート',conceptnet:'🕸 ConceptNet補助'})[g]||'候補'}
+function badgeClass(x){return x.group==='back'?'route':x.group==='viewpoint'?'view':x.group==='entity'?'entity':x.group==='thinking'?'think':x.source==='ConceptNet'?'cn':x.source==='内蔵'?'core':''}
+function choiceClass(x){return x.group==='back'?'back':x.group==='viewpoint'?'viewpoint':x.group==='entity'?'entity':x.group==='thinking'?'thinking':''}
 function showChoices(items,dir){
   if(!items.length){$('#choices').innerHTML='<div class="preview"><b>この方向の自然な候補はここまで。</b><br>辞書の根っこへ無理に進まず、自由入力や別の観点に切り替えてな。</div>';return}
   const groups=[];for(const x of items){let g=groups.find(z=>z.key===x.group);if(!g){g={key:x.group||'wordnet',items:[]};groups.push(g)}g.items.push(x)}
-  $('#choices').innerHTML=groups.map(g=>`<div class="group-title">${groupName(g.key)}</div>${g.items.map((x)=>{const i=items.indexOf(x);return `<button class="choice ${choiceClass(x)}" data-i="${i}"><div class="top"><span class="cw">${esc(x.word)}</span><span class="badge ${badgeClass(x)}">${esc(x.source)} · ${esc(x.badge)}</span></div>${x.gloss?`<div class="meta">${esc(x.gloss)}</div>`:''}${x.bridge?`<div class="sense">🌉 形容詞の属性を、名詞の概念へ橋渡し</div>`:''}${x.viewpoint?`<div class="sense">🌿 これは唯一の正解ではなく「この観点なら」のルート</div>`:''}${x.aliases?.length?`<div class="sense">同じ概念の言い方：${esc(x.aliases.join(' / '))}</div>`:''}${x.source==='WordNet'&&x.targetSense?`<div class="sense">🔒 この意味IDを固定して次へ進む${x.terminal?' · ここで止めるのがおすすめ':''}</div>`:''}${x.group==='back'?`<div class="sense">↩ 前に選んだ意味IDごと戻るので、別の意味に化けない</div>`:''}<div class="preview">${x.group==='back'?`「${esc(current)}」→ 足あと「${esc(x.word)}」へ`:(dir==='up'?`「${esc(current)}」→ より広い「${esc(x.word)}」`:`「${esc(current)}」→ より細かい「${esc(x.word)}」`)}</div></button>`}).join('')}`).join('');
+  $('#choices').innerHTML=groups.map(g=>`<div class="group-title">${groupName(g.key)}</div>${g.items.map((x)=>{const i=items.indexOf(x);return `<button class="choice ${choiceClass(x)}" data-i="${i}"><div class="top"><span class="cw">${esc(x.word)}</span><span class="badge ${badgeClass(x)}">${esc(x.source)} · ${esc(x.badge)}</span></div>${x.gloss?`<div class="meta">${esc(x.gloss)}</div>`:''}${x.bridge?`<div class="sense">🌉 形容詞の属性を、名詞の概念へ橋渡し</div>`:''}${x.viewpoint?`<div class="sense">🌿 これは唯一の正解ではなく「この観点なら」のルート</div>`:''}${x.aliases?.length?`<div class="sense">同じ概念の言い方：${esc(x.aliases.join(' / '))}</div>`:''}${x.source==='WordNet'&&x.targetSense?`<div class="sense">🔒 この意味IDを固定して次へ進む${x.terminal?' · ここで止めるのがおすすめ':''}</div>`:''}${x.group==='back'?`<div class="sense">↩ 前に選んだ言葉を最優先。意味IDごと戻るので別の意味に化けない</div>`:''}${x.group==='entity'?`<div class="sense">🏷 人名・作品名・地名・会社名などはWikidataから「人物 / 職業 / 種類 / ジャンル / 分野」の枝を作る</div>`:''}<div class="preview">${x.group==='back'?`「${esc(current)}」→ 足あと「${esc(x.word)}」へ`:(dir==='up'?`「${esc(current)}」→ より広い「${esc(x.word)}」`:`「${esc(current)}」→ より細かい「${esc(x.word)}」`)}</div></button>`}).join('')}`).join('');
   document.querySelectorAll('.choice[data-i]').forEach(b=>b.onclick=()=>chooseItem(items[+b.dataset.i],dir))
 }
 function chooseItem(item,dir){if(Number.isInteger(item.returnIndex)){jumpTo(item.returnIndex);return}choose(item.word,dir,item.source,item.targetSense||null,item.targetPos||'',item.badge||'')}
 async function openChoices(dir){
   lastDir=dir;const seq=++requestSeq,wordAtOpen=current;$('#title').textContent=dir==='up'?'↑ 抽象化候補':'↓ 具体化候補';
-  const mode=currentPos==='v'?'動詞はWordNet＋自然な動作ルートで、浅い所で終わらないよう補います。':currentPos==='a'?'形容詞は「感情 / 性質 / 評価」など観点を分けられます。':'同じ言葉でも「種類 / 用途 / 人との関係」など観点を変えられます。';
+  const mode=currentPos==='v'?'動詞はWordNet＋自然な動作ルートで、浅い所で終わらないよう補います。':currentPos==='a'?'形容詞は「感情 / 性質 / 評価 / 価値」など観点を分けられます。':'同じ言葉でも観点を変えられます。人名・作品名・地名・会社名はWikidataでも探します。';
   $('#help').textContent=`「${current}」を${dir==='up'?'より広く':'より細かく'}。${mode}`;$('#manualInput').value='';$('#manualInput').placeholder=dir==='up'?'自分なら、別の観点でどう広げる？':'自分なら、どんな具体例にする？';showHints(dir);$('#modal').classList.add('show');$('#choices').innerHTML='<div class="loading">候補を整理中… 🧠🔎</div>';setStatus('候補を整理中…');
   const fixed=[...routeBackCandidates(dir),...viewpointCandidates(wordAtOpen,dir),...guidedCandidates(wordAtOpen,dir),...coreCandidates(wordAtOpen,dir)];
   let wn=[];try{wn=await wordNetCandidates(wordAtOpen,dir)}catch{}if(seq!==requestSeq||current!==wordAtOpen)return;
+  let wd=[];if(dir==='up'&&!currentSense&&fixed.length===0){try{wd=await wikidataCandidates(wordAtOpen,dir)}catch{}}if(seq!==requestSeq||current!==wordAtOpen)return;
   let extra={};try{extra=await relationHints(wordAtOpen)}catch{}if(seq!==requestSeq||current!==wordAtOpen)return;showHints(dir,extra);
-  let all=merge([...fixed,...wn]);
-  if(!all.length){let cn=[];try{cn=await conceptNetCandidates(wordAtOpen,dir)}catch{}if(seq!==requestSeq||current!==wordAtOpen)return;all=merge([...fixed,...cn])}
+  let all=merge([...fixed,...wd,...wn]);
+  if(!all.length){let cn=[];try{cn=await conceptNetCandidates(wordAtOpen,dir)}catch{}if(seq!==requestSeq||current!==wordAtOpen)return;all=merge([...fixed,...wd,...cn])}
   showChoices(all,dir);
-  const hasBack=all.some(x=>x.group==='back'),hasView=all.some(x=>x.group==='viewpoint'),hasThink=all.some(x=>x.group==='thinking');
-  setStatus(all.length?`${hasBack?'来た道＋':''}${hasView?'観点分岐＋':''}${hasThink?'思考ルート＋':''}辞書候補を表示`:'自動候補なし · 自分の言葉で続けられる',all.length?'good':'warn')
+  const hasBack=all.some(x=>x.group==='back'),hasView=all.some(x=>x.group==='viewpoint'),hasEntity=all.some(x=>x.group==='entity'),hasThink=all.some(x=>x.group==='thinking');
+  setStatus(all.length?`${hasBack?'来た道＋':''}${hasView?'観点分岐＋':''}${hasEntity?'固有名詞＋':''}${hasThink?'思考ルート＋':''}辞書候補を表示`:'自動候補なし · 自分の言葉で続けられる',all.length?'good':'warn')
 }
 function choose(word,dir,source='自分',targetSense=null,targetPos='',badge=''){
   if(cursor<trail.length-1)trail=trail.slice(0,cursor+1);current=canonical(word);

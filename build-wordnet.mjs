@@ -31,7 +31,7 @@ async function copyBase() {
 
 async function buildWordNet() {
   console.log('[wordnet] downloading Japanese WordNet v1.1...');
-  const res = await fetch(DB_URL, { headers: { 'user-agent': 'kotoba-zoom-build/10.5' } });
+  const res = await fetch(DB_URL, { headers: { 'user-agent': 'kotoba-zoom-build/10.6' } });
   if (!res.ok) throw new Error(`download failed: HTTP ${res.status}`);
   const gz = Buffer.from(await res.arrayBuffer());
   console.log(`[wordnet] downloaded ${(gz.length/1024/1024).toFixed(1)} MB; decompressing...`);
@@ -143,7 +143,7 @@ async function buildWordNet() {
   }
   await fs.writeFile(path.join(WN_DIR, 'meta.json'), JSON.stringify({
     available: true,
-    version: 'Japanese WordNet 1.1 / meaning-safe v10.5',
+    version: 'Japanese WordNet 1.1 / meaning-safe v10.6',
     buckets: BUCKETS,
     words: lemmaToSynsets.size,
     senses: sensesWritten,
