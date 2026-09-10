@@ -1,9 +1,9 @@
-# ことばズーム v10.16
+# ことばズーム v10.17
 
 抽象化・具体化を「辞書の一本道」ではなく、観点を選びながら練習する思考トレーニング版。
 
 
-## v10.16 の主な変更
+## v10.17 の主な変更
 
 - 「修飾語＋中心名詞」を先にほどくルールを追加。`冷めたコーヒー → コーヒー`、`赤い靴 → 靴`、`古い家 → 家` などを候補1位に。
 - 作品タイトルを自由フレーズより先に判定。既知タイトルは即 `作品` へ、`○○の○○` 型はWikidataの作品判定も先に確認。
@@ -59,3 +59,10 @@
 - 確定時のみ履歴と意味IDをリセット。↑↓で階層移動した時は中央入力欄も現在語へ自動同期。
 - Escapeで編集を取り消して現在語へ戻せる。
 - 画面下の重複していた開始入力欄は削除。
+
+
+## v10.17 semantic router
+- Added a semantic router before person-name fallback. It combines word-form signals, compound-head rules, and Japanese WordNet sense/hypernym evidence.
+- High-confidence common-word routes suppress raw WordNet at the first hop; ambiguous words no longer auto-jump to `人間`.
+- Wikidata person results now require stronger confidence; ambiguous short/common-looking terms ask for confirmation instead.
+- Added regression coverage for 炭酸水 / ミルクティー / かわいい / 印象派 / 杠 / 憂い / 昇華.
