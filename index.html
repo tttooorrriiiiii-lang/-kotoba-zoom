@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>ことばズーム v10.17</title>
+<title>ことばズーム v10.19</title>
 <style>
 :root{--bg:#f7f5ef;--ink:#20211e;--muted:#73736e;--line:#ddd9cf;--up:#edf0ff;--down:#fff0e9;--blue:#6f7df7;--coral:#ea8f75;--shadow:0 18px 50px rgba(40,42,65,.10)}
 *{box-sizing:border-box} html,body{margin:0;min-height:100%;font-family:Inter,"Hiragino Sans","Yu Gothic",system-ui,sans-serif;color:var(--ink)}
@@ -13,7 +13,7 @@ a{color:#5967d2}.app{max-width:1040px;margin:0 auto;padding:18px 14px 40px}
 header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px}.brand{display:flex;align-items:center;gap:10px}.logo{width:44px;height:44px;border:2px solid #242520;border-radius:14px;display:grid;place-items:center;background:#fff;font-size:22px;box-shadow:0 8px 18px #2221}h1{font-size:21px;margin:0}.sub{font-size:11px;color:var(--muted);margin-top:2px}.ghost{border:1px solid var(--line);background:#fff9;border-radius:999px;padding:9px 13px;color:#4c5fc7;font-weight:800}
 .layout{display:grid;grid-template-columns:minmax(0,1fr) 270px;gap:16px}.main,.panel{background:rgba(255,253,248,.86);border:1px solid var(--line);box-shadow:var(--shadow);backdrop-filter:blur(8px)}.main{border-radius:28px;padding:18px;overflow:hidden;position:relative}.stage{min-height:680px;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative}.stage:before{content:"";position:absolute;top:104px;bottom:110px;left:50%;width:2px;background:linear-gradient(180deg,rgba(111,125,247,.08),rgba(111,125,247,.45) 30%,rgba(234,143,117,.45) 70%,rgba(234,143,117,.08));transform:translateX(-50%);z-index:0}.level{position:relative;z-index:2;font-size:11px;font-weight:900;letter-spacing:.13em;color:var(--muted);margin:7px}.zoom{position:relative;z-index:2;width:min(470px,96%);border:1px solid var(--line);border-radius:20px;padding:16px 18px;text-align:left;display:flex;justify-content:space-between;align-items:center;transition:.2s transform,.2s box-shadow}.zoom:hover{transform:translateY(-2px);box-shadow:0 12px 28px #2221}.zoom.up{background:linear-gradient(180deg,#f4f5ff,#ebeefe)}.zoom.down{background:linear-gradient(180deg,#fff6f1,#ffede5)}.zoom b{font-size:17px}.zoom small{color:var(--muted);font-size:12px}.zoom strong{font-size:26px}.connector{position:relative;z-index:1;height:30px;width:2px;background:var(--line)}
 .card{position:relative;z-index:2;width:min(540px,98%);border:2px solid #22231f;border-radius:28px;background:#fff;box-shadow:0 14px 0 #e8e3d8,0 22px 46px rgba(55,56,75,.08);padding:28px 20px 24px;text-align:center;animation:float 4s ease-in-out infinite}.center-edit{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center;width:min(430px,100%);margin:10px auto 7px}.center-edit input{min-width:0;width:100%;border:0;border-bottom:2px solid #d8d5ca;background:transparent;padding:7px 4px 8px;text-align:center;font-size:clamp(34px,7vw,58px);font-weight:900;letter-spacing:.01em;color:var(--ink);outline:none}.center-edit input:focus{border-bottom-color:#6f7df7}.center-start{border:1px solid var(--line);background:#f7f5ef;border-radius:999px;padding:9px 12px;font-size:10px;font-weight:900;white-space:nowrap}.center-edit-note{font-size:10px;color:var(--muted);margin:0 auto 8px;line-height:1.5}.center-edit input.dirty{border-bottom-color:#ea8f75}.center-start.ready{background:#20231f;color:#fff;border-color:#20231f}@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}.eyebrow{font-size:10px;color:var(--muted);font-weight:900;letter-spacing:.12em}.word{font-size:clamp(38px,8vw,62px);font-weight:900;margin:10px 0 6px;letter-spacing:.01em}.desc{font-size:13px;line-height:1.75;color:var(--muted);max-width:420px;margin:0 auto}.emoji{font-size:48px;margin-bottom:4px;display:block}.status{display:inline-flex;align-items:center;gap:6px;margin-top:12px;border-radius:999px;padding:7px 10px;background:#f0eee8;font-size:10px;font-weight:800;color:#6f6c64}.status.good{background:#e9f6ec;color:#32623b}.status.warn{background:#fff1d8;color:#7d5c1c}.start{display:flex;gap:8px;width:min(560px,100%);margin-top:20px;position:relative;z-index:3}.start input{flex:1;border:1px solid var(--line);border-radius:14px;padding:12px 14px;background:#fff;outline:none}.start input:focus{border-color:#aaaee9;box-shadow:0 0 0 3px #e8e9ff}.primary{border:0;border-radius:14px;padding:11px 16px;background:#20231f;color:#fff;font-weight:900}
-.side{display:flex;flex-direction:column;gap:12px}.panel{border-radius:20px;padding:15px}.panel h2{font-size:13px;margin:0 0 10px}.panel p{font-size:11px;line-height:1.65;color:var(--muted);margin:0}.quest{background:#202520;color:#fff}.quest p{color:#cbd1cc}.bar{height:7px;background:#414641;border-radius:999px;margin:10px 0;overflow:hidden}.bar i{display:block;height:100%;width:0;background:#fff;transition:.25s width}.history{display:flex;flex-direction:column;gap:7px;max-height:340px;overflow:auto}.h{display:grid;grid-template-columns:28px 1fr;gap:8px}.dot{width:28px;height:28px;border-radius:9px;display:grid;place-items:center;background:#eeeae0;font-size:11px;font-weight:900}.dot.up{background:#e7eaff;color:#4f5fd3}.dot.down{background:#ffe7de;color:#c8684d}.hc{border-bottom:1px solid #ece8df;padding-bottom:8px}.hc b{font-size:12px}.hc span{display:block;font-size:10px;color:var(--muted);margin-top:2px}.tip{border-radius:14px;padding:12px;background:#f3f1ec;font-size:11px;line-height:1.7;color:#66655f}.source-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}.source-pill{font-size:9px;padding:5px 7px;border-radius:999px;border:1px solid var(--line);background:#fff}.source-pill.on{background:#eaf6ec;color:#35613e;border-color:#cce8d2}.source-pill.off{background:#fff1dc;color:#805f24;border-color:#ecd6a8}.hbtn{border:0;background:transparent;width:100%;padding:0;text-align:left;color:inherit}.hbtn:hover .hc b{text-decoration:underline}.hbtn.now .hc{background:#f5f3ec;border-radius:10px;padding:6px 8px}.group-title{font-size:10px;font-weight:900;letter-spacing:.08em;color:#77766f;margin:14px 2px 6px;text-transform:uppercase}.group-title:first-child{margin-top:2px}.badge.route{background:#e9f6ec;color:#35613e}.badge.view{background:#f7eafa;color:#7a4e86}.badge.think{background:#e7f3ff;color:#35658a}.badge.entity{background:#fff3cf;color:#76590b}.badge.summit{background:#eee9ff;color:#6555a0}.badge.mode{background:#e8f5f1;color:#356d61}.badge.identity{background:#fff0df;color:#895a26}.choice.entity{background:#fffaf0}.choice.back{border-style:dashed;background:#f3fbf4}.choice.viewpoint{background:#fcf7fd}.choice.thinking{background:#f6fbff}.choice.summit{background:#f8f6ff}.choice.mode{background:#f3fbf8}.choice.identity{background:#fffaf3}
+.side{display:flex;flex-direction:column;gap:12px}.panel{border-radius:20px;padding:15px}.panel h2{font-size:13px;margin:0 0 10px}.panel p{font-size:11px;line-height:1.65;color:var(--muted);margin:0}.quest{background:#202520;color:#fff}.quest p{color:#cbd1cc}.bar{height:7px;background:#414641;border-radius:999px;margin:10px 0;overflow:hidden}.bar i{display:block;height:100%;width:0;background:#fff;transition:.25s width}.history{display:flex;flex-direction:column;gap:7px;max-height:340px;overflow:auto}.h{display:grid;grid-template-columns:28px 1fr;gap:8px}.dot{width:28px;height:28px;border-radius:9px;display:grid;place-items:center;background:#eeeae0;font-size:11px;font-weight:900}.dot.up{background:#e7eaff;color:#4f5fd3}.dot.down{background:#ffe7de;color:#c8684d}.hc{border-bottom:1px solid #ece8df;padding-bottom:8px}.hc b{font-size:12px}.hc span{display:block;font-size:10px;color:var(--muted);margin-top:2px}.tip{border-radius:14px;padding:12px;background:#f3f1ec;font-size:11px;line-height:1.7;color:#66655f}.source-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}.source-pill{font-size:9px;padding:5px 7px;border-radius:999px;border:1px solid var(--line);background:#fff}.source-pill.on{background:#eaf6ec;color:#35613e;border-color:#cce8d2}.source-pill.off{background:#fff1dc;color:#805f24;border-color:#ecd6a8}.hbtn{border:0;background:transparent;width:100%;padding:0;text-align:left;color:inherit}.hbtn:hover .hc b{text-decoration:underline}.hbtn.now .hc{background:#f5f3ec;border-radius:10px;padding:6px 8px}.group-title{font-size:10px;font-weight:900;letter-spacing:.08em;color:#77766f;margin:14px 2px 6px;text-transform:uppercase}.group-title:first-child{margin-top:2px}.badge.route{background:#e9f6ec;color:#35613e}.badge.view{background:#f7eafa;color:#7a4e86}.badge.think{background:#e7f3ff;color:#35658a}.badge.entity{background:#fff3cf;color:#76590b}.badge.summit{background:#eee9ff;color:#6555a0}.badge.mode{background:#e8f5f1;color:#356d61}.badge.identity{background:#fff0df;color:#895a26}.badge.example{background:#e9f7f2;color:#2f6e5d}.choice.entity{background:#fffaf0}.choice.back{border-style:dashed;background:#f3fbf4}.choice.viewpoint{background:#fcf7fd}.choice.thinking{background:#f6fbff}.choice.summit{background:#f8f6ff}.choice.mode{background:#f3fbf8}.choice.identity{background:#fffaf3}.choice.example{background:#f4fbf8}
 .modal{position:fixed;inset:0;background:#17171255;display:none;place-items:center;padding:18px;z-index:20;backdrop-filter:blur(4px)}.modal.show{display:grid}.dialog{width:min(560px,100%);max-height:86vh;overflow:auto;background:#fff;border-radius:24px;padding:18px;box-shadow:0 26px 70px #1113}.dialog h3{margin:0 0 5px;font-size:25px}.help{font-size:12px;color:var(--muted);line-height:1.6}.close{float:right;border:0;background:none;font-size:24px;color:#5d7bea}.choices{display:grid;gap:9px;margin:14px 0}.choice{border:1px solid var(--line);background:#fbfaf6;border-radius:16px;padding:13px;text-align:left;transition:.18s transform,.18s box-shadow}.choice:hover{transform:translateY(-2px);box-shadow:0 12px 26px #2221}.choice .top{display:flex;justify-content:space-between;align-items:center;gap:10px}.choice .cw{font-weight:900;font-size:18px}.badge{font-size:9px;border-radius:999px;padding:4px 7px;background:#eceffd;color:#5564ca;white-space:nowrap}.badge.cn{background:#fff1dc;color:#7b5d25}.badge.core{background:#e9f6ec;color:#35613e}.meta{font-size:10px;color:var(--muted);margin-top:6px;line-height:1.55}.preview{margin-top:8px;padding:9px 10px;border-radius:12px;background:#f1f0eb;font-size:10px;color:#66655f;line-height:1.6}.sense{margin-top:7px;font-size:10px;line-height:1.55;color:#72716b;border-left:3px solid #dfe2ff;padding-left:8px}.loading{padding:16px;border:1px dashed var(--line);border-radius:14px;color:var(--muted);font-size:12px}.hint-zone{margin:12px 0;padding:13px;border-radius:16px;background:linear-gradient(180deg,#f7f7ff,#faf9f5);border:1px solid #e4e2f2}.hint-zone b{font-size:12px}.hint-chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:9px}.hint-chip{border:1px solid #d9d9ea;background:#fff;border-radius:999px;padding:7px 9px;font-size:10px;color:#5f6080}.hint-text{font-size:11px;line-height:1.65;color:#686879;margin-top:8px}.manual-zone{margin-top:14px;padding-top:14px;border-top:1px solid var(--line)}.manual-label{font-size:11px;font-weight:900;color:#64645f;margin-bottom:7px}.manual-row{display:flex;gap:8px}.manual-row input{flex:1;min-width:0;border:1px solid var(--line);border-radius:13px;padding:11px 12px;background:#fff;outline:none}.manual-row input:focus{border-color:#aaaee9;box-shadow:0 0 0 3px #e8e9ff}.manual-help{font-size:10px;line-height:1.6;color:var(--muted);margin-top:7px}.foot{max-width:1040px;margin:12px auto 0;padding:0 14px 24px;font-size:9px;color:#85847d;line-height:1.6;text-align:center}
 .header-actions{display:flex;gap:7px;flex-wrap:wrap;justify-content:flex-end}.test-dialog{width:min(780px,100%)}.test-head{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin:12px 0}.test-actions{display:flex;gap:7px;flex-wrap:wrap}.test-progress{height:9px;background:#ece9e0;border-radius:999px;overflow:hidden;flex:1;min-width:160px}.test-progress i{display:block;height:100%;width:0;background:#222820;transition:.2s width}.test-summary{display:flex;gap:7px;flex-wrap:wrap;margin:10px 0}.test-stat{border:1px solid var(--line);border-radius:999px;padding:6px 9px;font-size:10px;font-weight:900;background:#fff}.test-stat.fail{background:#ffe8e4;color:#9a3e32}.test-stat.warn{background:#fff3d9;color:#7e5d1c}.test-stat.pass{background:#e9f6ec;color:#32623b}.test-results{display:grid;gap:9px;margin-top:10px}.test-row{border:1px solid var(--line);border-radius:16px;padding:12px;background:#fbfaf6}.test-row.fail{border-color:#edb9b0;background:#fff8f6}.test-row.warn{border-color:#ead29d;background:#fffaf0}.test-row.pass{border-color:#cde4d2;background:#f7fcf8}.test-row-top{display:flex;gap:8px;justify-content:space-between;align-items:flex-start}.test-word{font-weight:900;font-size:15px}.test-sev{font-size:9px;font-weight:900;border-radius:999px;padding:4px 7px}.test-row.fail .test-sev{background:#fbdad5;color:#92392f}.test-row.warn .test-sev{background:#ffedc2;color:#795718}.test-row.pass .test-sev{background:#dcf1e1;color:#2e673a}.test-path{font-size:11px;line-height:1.7;margin-top:7px;word-break:break-word}.test-issue{font-size:10px;line-height:1.6;color:#6f6d66;margin-top:5px}.test-note{font-size:10px;line-height:1.6;color:#77746c}.test-empty{padding:18px;border:1px dashed var(--line);border-radius:14px;text-align:center;font-size:11px;color:var(--muted)}.smallbtn{border:1px solid var(--line);background:#fff;border-radius:11px;padding:8px 10px;font-size:10px;font-weight:900}.smallbtn:disabled,.primary:disabled{opacity:.5;cursor:wait}.test-pass-details{margin-top:12px}.test-pass-details summary{cursor:pointer;font-size:11px;font-weight:900;color:#4d6653}.test-statusline{font-size:10px;color:var(--muted);min-width:150px;text-align:right}
 @media(max-width:760px){.layout{grid-template-columns:1fr}.side{display:grid;grid-template-columns:1fr 1fr}.quest{grid-column:1/-1}.stage{min-height:620px}}@media(max-width:520px){.header-actions{gap:4px}.header-actions .ghost{padding:8px 9px;font-size:10px}.app{padding:12px 10px 34px}.sub{display:none}.main{padding:12px;border-radius:21px}.side{grid-template-columns:1fr}.quest{grid-column:auto}.start{flex-direction:column}.primary{width:100%}.card{padding:24px 16px 22px}.word{font-size:42px}.manual-row{flex-direction:column}.center-edit{grid-template-columns:1fr}.center-start{width:100%}}
@@ -21,7 +21,7 @@ header{display:flex;align-items:center;justify-content:space-between;gap:12px;ma
 </head>
 <body>
 <div class="app">
-<header><div class="brand"><div class="logo">↕</div><div><h1>ことばズーム <span style="font-size:11px;color:#7e86a8">v10.17</span></h1><div class="sub">意味ルーター追加。語形＋複合語＋WordNet意味階層を合わせ、曖昧なら人名に決め打ちしない。</div></div></div><div class="header-actions"><button class="ghost" id="testLab">🧪 TEST LAB</button><button class="ghost" id="random">🎲 おまかせ</button></div></header>
+<header><div class="brand"><div class="logo">↕</div><div><h1>ことばズーム <span style="font-size:11px;color:#7e86a8">v10.19</span></h1><div class="sub">具体化に「実在する例」を追加。種類だけでなく、商品名・作品名・個体名まで自動候補に出す。</div></div></div><div class="header-actions"><button class="ghost" id="testLab">🧪 TEST LAB</button><button class="ghost" id="random">🎲 おまかせ</button></div></header>
 <div class="layout">
 <main class="main"><section class="stage">
 <div class="level">ZOOM OUT · 抽象へ</div>
@@ -36,7 +36,7 @@ header{display:flex;align-items:center;justify-content:space-between;gap:12px;ma
 <aside class="side">
 <section class="panel quest"><h2>🎯 5回ズーム</h2><p>辞書の答えを選んでも、自分の言葉を書いてもOK。</p><div class="bar"><i id="bar"></i></div><p id="count">0 / 5</p></section>
 <section class="panel"><h2>🪜 思考の足あと</h2><p style="margin-bottom:9px">ことばを押すと、その時の意味へ戻れるで。</p><div class="history" id="history"></div></section>
-<section class="panel"><h2>🧠 6つの助け</h2><div class="tip"><b>WordNet</b>＝意味IDを固定した辞書の骨組み<br><b>思考ルート</b>＝自然な現代語・動詞の橋渡し<br><b>観点分岐</b>＝感情 / 性質 / 用途など別の上がり方<br><b>頂上のその先</b>＝分類から「意味 / メタ」へ視点を切り替える<br><b>Wikidata</b>＝固有名詞の「正体」だけ判定して辞書へ合流<br><b>自由入力</b>＝場面・五感・瞬間まで自分の言葉でズーム</div><div class="source-row"><span class="source-pill" id="wnState">WordNet 確認中</span><span class="source-pill on">思考ルート ON</span><span class="source-pill on">観点分岐 ON</span><span class="source-pill on" id="wdState">Wikidata 正体判定 ON</span><span class="source-pill on">ConceptNet 補助ON</span><span class="source-pill on">自由入力 ON</span></div></section>
+<section class="panel"><h2>🧠 6つの助け</h2><div class="tip"><b>WordNet</b>＝意味IDを固定した辞書の骨組み<br><b>思考ルート</b>＝自然な現代語・動詞の橋渡し<br><b>観点分岐</b>＝感情 / 性質 / 用途など別の上がり方<br><b>頂上のその先</b>＝分類から「意味 / メタ」へ視点を切り替える<br><b>Wikidata</b>＝固有名詞の正体判定＋具体化時の実在例<br><b>自由入力</b>＝場面・五感・瞬間まで自分の言葉でズーム</div><div class="source-row"><span class="source-pill" id="wnState">WordNet 確認中</span><span class="source-pill on">思考ルート ON</span><span class="source-pill on">観点分岐 ON</span><span class="source-pill on" id="wdState">Wikidata 正体＋実例 ON</span><span class="source-pill on">ConceptNet 補助ON</span><span class="source-pill on">自由入力 ON</span></div></section>
 </aside>
 </div></div>
 <div class="modal" id="modal"><div class="dialog"><button class="close" id="close">×</button><h3 id="title"></h3><div class="help" id="help"></div><div class="choices" id="choices"></div><div class="hint-zone" id="hintZone"></div><div class="manual-zone"><div class="manual-label">✍️ 自分の言葉で続ける</div><div class="manual-row"><input id="manualInput" placeholder="自分の答えを入力"><button class="primary" id="manualAdd">この言葉へ</button></div><div class="manual-help" id="manualHelp">辞書にない答えでも、そのまま次のズームへ進めるで。</div></div></div></div>
@@ -212,8 +212,8 @@ const ALIASES={'いぬ':'犬','イヌ':'犬','わんこ':'犬','ねこ':'猫','�
 const STARTERS=['クロワッサン','犬','猫','家','ジュース','指','カフェ','コーヒー','窓','未来','海','椅子','嬉しい','悲しい','面白い','怖い','走る','歩く','食べる','考える'];
 const BUCKETS=128, lemmaCache=new Map(), senseCache=new Map(), wikidataCache=new Map(), wikidataLabelCache=new Map();
 let wordNetAvailable=false;
-let current='クロワッサン',currentSense=null,currentPos='',moves=0,lastDir='up',requestSeq=0,cursor=0;
-let trail=[{word:'クロワッサン',type:'start',note:'スタート',sense:null,pos:'',source:'スタート'}];
+let current='クロワッサン',currentSense=null,currentPos='',currentSemanticType='',moves=0,lastDir='up',requestSeq=0,cursor=0;
+let trail=[{word:'クロワッサン',type:'start',note:'スタート',sense:null,pos:'',semanticType:'',source:'スタート'}];
 const visitedSenses=new Set(),visitedWords=new Set(['クロワッサン']);
 const $=s=>document.querySelector(s);
 
@@ -227,7 +227,7 @@ const FRIENDLY={
   '倖':'喜び','莫大小':'編み物製品','下足':'履物','衣':'衣類','アトリビュート':'性質','移い':'変化'
 };
 const HIDE_ROOT=new Set(['実体','抽象的実体','物理的実体','存在物','属性','一統','工率','倖','莫大小','下足','期','患','事','感','質','移い']);
-const INTERNAL_LABEL_RE=/(Wikidata|ウィキデータ|ウィキベース|可変次数|データモデル|基礎エンティティ|エンティティ|分類体系|文法範疇|品詞|抽象名詞|一統|営造|アーチファクト|付属肢|抽象的実体|物理的実体|栲|工率|倖|莫大小|下足|期|患|事|感|質|移い)/i;
+const INTERNAL_LABEL_RE=/(Wikidata|ウィキデータ|ウィキベース|可変次数|データモデル|基礎エンティティ|エンティティ|分類体系|文法範疇|品詞|抽象名詞|一統|営造|アーチファクト|付属肢|抽象的実体|物理的実体|栲|工率|倖|莫大小|下足|移い)/i;
 const STOP_UP=new Set(['物','物質','性質','状態','感情','心の状態','心の働き','行為','活動','出来事','現象','概念','知識','生物','生命体','生物の構造','存在','経験','文化','集団','空間','役職','可能性','世界の捉え方','人の営み']);
 const STOP_FIRST=new Set(['概念','知識','存在','心の働き','可能性','状態','文化','経験','空間','集団','役職','世界の捉え方','人の営み']);
 
@@ -281,6 +281,14 @@ const GUIDED_UP={
 // v10.17: 意味ルーターから入った後も、現代語のまま自然に上へ続ける橋。
 Object.assign(GUIDED_UP,{
   '紅茶飲料':['飲み物'],'流派':['集団'],'美術運動':['芸術運動'],'芸術運動':['文化活動'],
+  '電話':['通信機器'],'通信機器':['機器'],'機器':['人工物'],'電子機器':['機器'],'撮影機器':['機器'],
+  'カメラ':['撮影機器'],'スマートフォン':['通信機器'],'携帯電話':['電話'],'固定電話':['電話'],'黒電話':['電話'],
+  '家電製品':['機器'],'洗濯機':['家電製品'],'炊飯器':['家電製品'],'発電機':['装置'],
+  '医療施設':['施設'],'教育施設':['施設'],'文化施設':['施設'],'施設':['場所'],
+  '病院':['医療施設'],'学校':['教育施設'],'大学':['教育施設'],'美術館':['文化施設'],'博物館':['文化施設'],
+  '自転車':['乗り物'],'電車':['乗り物'],'タクシー':['乗り物'],'飛行機':['乗り物'],'船':['乗り物'],'新幹線':['乗り物'],
+  'シャツ':['衣類'],'服':['衣類'],'靴':['身につけるもの'],'帽子':['衣類'],'手袋':['衣類'],'バッグ':['服飾品'],
+  '紅茶':['飲み物'],'お茶':['飲み物'],'コーヒー':['飲み物'],'スープ':['食べ物'],'食べ物':['食品'],
   '絵画様式':['芸術様式'],'芸術様式':['表現'],'画家の一派':['芸術家集団'],'芸術家集団':['集団'],
   '心配':['感情'],'不安':['感情'],'もの悲しさ':['感情'],
   '状態変化':['変化'],'物理変化':['変化'],'変換':['変化'],'心理的な変化':['変化'],'変化':['出来事'],
@@ -328,11 +336,31 @@ const SUMMIT_VIEWPOINTS={
 };
 const CONCRETE_MODES=[
   {id:'kind',label:'🌿 種類を細かく',prompt:'「{word}」の種類・仲間を1つ挙げるなら？',desc:'分類の枝を下へ。WordNetや内蔵候補はこの下にそのまま表示する。'},
-  {id:'instance',label:'👤 実例・個体へ',prompt:'「{word}」に当てはまる実在の1つ・固有名を入力してみる',desc:'一般名詞から「この一つ」へ。犬→ハチ公、画家→特定の画家、のように降りる。'},
+  {id:'instance',label:'🏷 実在する名前へ',prompt:'「{word}」に当てはまる実在の商品名・作品名・個体名を1つ挙げるなら？',desc:'一般名詞から固有名へ。ハンバーガー→ビッグマック、カフェラテ→スターバックス ラテ、犬→ハチ公のように降りる。'},
   {id:'scene',label:'🎬 場面にする',prompt:'「{word}」が実際に起きている場面を一文で書くなら？',desc:'概念を、場所・人物・行動がある具体的な場面へ置く。'},
   {id:'sense',label:'👁 五感で描く',prompt:'「{word}」を見た・聞いた・触れた時に分かる具体的なものは？',desc:'色・音・形・温度・手触りなど、見える情報まで降りる。'},
   {id:'moment',label:'⏰ ある瞬間にする',prompt:'「{word}」を「いつ・どこで・誰が・何をしている」にすると？',desc:'抽象語を、ある一瞬の出来事までズームインする。'}
 ];
+const REAL_EXAMPLE_SEEDS={
+  'ハンバーガー':[
+    {word:'ビッグマック',badge:'🍔 商品例',desc:'マクドナルドのハンバーガー商品。',type:'food'},
+    {word:'ワッパー',badge:'🍔 商品例',desc:'バーガーキングのハンバーガー商品。',type:'food'}
+  ],
+  'カフェラテ':[
+    {word:'スターバックス ラテ',badge:'☕ 商品例',desc:'スターバックスのラテ商品。',type:'beverage'}
+  ],
+  'ラテ':[
+    {word:'スターバックス ラテ',badge:'☕ 商品例',desc:'スターバックスのラテ商品。',type:'beverage'}
+  ],
+  '犬':[
+    {word:'ハチ公',badge:'🐕 実在個体',desc:'犬という一般概念から、実在した個体名へ具体化。',type:'animal'}
+  ],
+  '塔':[
+    {word:'東京タワー',badge:'🗼 実在例',desc:'塔という一般概念から、実在する建造物名へ具体化。',type:'artifact'}
+  ]
+};
+const wikidataExampleCache=new Map();
+let autoTestRunning=false;
 const IDENTITY_FALLBACK=[
   {word:'人間',label:'👤 人の名前として',desc:'知り合いなどWikidataに載っていない個人名でもここから「人間」へ合流できる。'},
   {word:'犬',label:'🐕 犬の名前として',desc:'ペットなど犬の個体名なら「犬」へ合流する。'},
@@ -352,9 +380,16 @@ const TEST_WORDS=[
   '自由','存在','生命','知識','概念','エモい','やばい','だるい','すごい','疲れた','レース','はし','あめ','かみ','総理大臣','大谷翔平','ハチ公','東京タワー','任天堂','となりのトトロ','幻','電源','飲みかけのコーヒー','飲みかけの私のコーヒーカップ','ポスター','アート','高速バス','非常階段','ミラクル','趣味','靴下',
   '入院','癌','花柄','積木','積み木','瞬間','冷めたコーヒー','赤い靴','古い家','雨に濡れた傘','止まった時計','机に置かれた本','散らかった部屋','濡れたアスファルト','開けっぱなしの窓','夜のコンビニ','公園のベンチ','雨上がりの道路',
   'キャンバス','オムニバス','エアバス','わからない','知らない','行かない','泣いている','笑ってる','食べたい','帰りたい',
-  '千と千尋の神隠し','風の谷のナウシカ','魔女の宅急便','ハウルの動く城','銀河鉄道の夜','ノルウェイの森','星の王子さま','君の名は','天気の子','もののけ姫','火垂るの墓','崖の上のポニョ','炭酸水','ミルクティー','印象派','杠','憂い','昇華'
+  '千と千尋の神隠し','風の谷のナウシカ','魔女の宅急便','ハウルの動く城','銀河鉄道の夜','ノルウェイの森','星の王子さま','君の名は','天気の子','もののけ姫','火垂るの墓','崖の上のポニョ','炭酸水','ミルクティー','印象派','杠','憂い','昇華',
+  '公衆電話','固定電話','携帯電話','黒電話','非常電話','内線電話','外線電話','コードレス電話','衛星電話','IP電話','テレビ電話',
+  'デジタルカメラ','防犯カメラ','監視カメラ','フィルムカメラ','中古スマートフォン','防水スマートフォン','電動自転車','折りたたみ自転車','通学用自転車',
+  '大学病院','総合病院','救急病院','動物病院','小学校','中学校','国立美術館','科学博物館',
+  '赤いシャツ','黒い服','革靴','雨靴','トートバッグ','ショルダーバッグ','冷めたスープ','壊れた電話','濡れた服','開いたドア','閉じた箱','落ちたスマートフォン',
+  '退院','通院','就職','退職','結婚','移動','予約','購入','研究','分析','設計','実装','判断','分類','キュビスム','シュルレアリスム','バウハウス','ポップアート','浮世絵'
 ];
-const TEST_INTERNAL_RE=/(Wikidata|ウィキデータ|ウィキベース|可変次数|データモデル|基礎エンティティ|エンティティ|分類体系|文法範疇|品詞|抽象名詞|一統|営造|アーチファクト|付属肢|抽象的実体|物理的実体|工合|滋養分|栲|工率|倖|莫大小|下足|期|患|事|感|質|移い)/i;
+const TEST_INTERNAL_RE=/(Wikidata|ウィキデータ|ウィキベース|可変次数|データモデル|基礎エンティティ|エンティティ|分類体系|文法範疇|品詞|抽象名詞|一統|営造|アーチファクト|付属肢|抽象的実体|物理的実体|工合|滋養分|栲|工率|倖|莫大小|下足|移い)/i;
+const TEST_INTERNAL_EXACT=new Set(['期','患','事','感','質']);
+function isTestInternalLabel(w){const c=canonical(w);return TEST_INTERNAL_EXACT.has(c)||TEST_INTERNAL_RE.test(c)}
 const TEST_EXPECT={
   '犬':{first:['哺乳類'],any:['哺乳類','動物','生物'],forbid:['密偵','代行','代表']},'猫':{first:['哺乳類'],any:['哺乳類','動物','生物']},
   'ジュース':{first:['飲料','食品'],any:['飲料','食品'],forbid:['感','工合','属性']},'家':{first:['建物','住居'],any:['住居','建物','人工物']},'指':{first:['身体の一部'],any:['身体の一部','身体']},
@@ -403,15 +438,34 @@ const TEST_EXPECT={
   '印象派':{first:['美術運動','絵画様式','画家の一派'],any:['美術運動','芸術運動','文化活動','絵画様式','表現','集団'],forbid:['人間']},
   '杠':{forbid:['人間','動物','生物']},
   '憂い':{first:['心配','もの悲しさ','印象'],forbid:['恰好','アトリビュート']},
-  '昇華':{first:['状態変化','変換','心理的な変化'],forbid:['移い','こと']}
+  '昇華':{first:['状態変化','変換','心理的な変化'],forbid:['移い','こと']},
+  '公衆電話':{first:['電話'],any:['電話','通信機器','機器','人工物'],forbid:['テレコミ','手段']},
+  '固定電話':{first:['電話'],any:['電話','通信機器','機器','人工物']},
+  '携帯電話':{first:['電話'],any:['電話','通信機器','機器','人工物']},
+  'デジタルカメラ':{first:['カメラ'],any:['カメラ','撮影機器','機器','人工物']},
+  '防犯カメラ':{first:['カメラ'],any:['カメラ','撮影機器','機器','人工物']},
+  '大学病院':{first:['病院'],any:['病院','医療施設','施設','場所']},
+  '電動自転車':{first:['自転車'],any:['自転車','乗り物','人工物'],forbid:['車']},
+  '赤いシャツ':{first:['シャツ'],any:['シャツ','衣類','人工物']},
+  '冷めたスープ':{first:['スープ'],any:['スープ','食べ物','食品']},
+  '壊れた電話':{first:['電話'],any:['電話','通信機器','機器','人工物']},
+  '退院':{first:['行為'],forbid:['人間']},'通院':{first:['行為'],forbid:['人間']},'就職':{first:['行為'],forbid:['人間']},'退職':{first:['行為'],forbid:['人間']},
+  '予約':{first:['行為'],forbid:['人間']},'購入':{first:['行為'],forbid:['人間']},'研究':{first:['行為'],forbid:['人間']},'分析':{first:['行為'],forbid:['人間']},'設計':{first:['行為'],forbid:['人間']},'実装':{first:['行為'],forbid:['人間']},'判断':{first:['行為'],forbid:['人間']},'分類':{first:['行為'],forbid:['人間']},
+  'キュビスム':{first:['美術運動'],forbid:['人間']},'シュルレアリスム':{first:['美術運動'],forbid:['人間']},'バウハウス':{first:['美術運動'],forbid:['人間']},'ポップアート':{first:['美術運動'],forbid:['人間']},'浮世絵':{first:['表現'],forbid:['人間']}
 };
 let testCancelRequested=false,lastTestResults=[];
 
 const COMMON_CATEGORY_PATTERNS=[
   {re:/^(電車|タクシー|飛行機|船|自転車|新幹線|バス)$/,word:'乗り物',label:'🚏 乗り物として',desc:'固有名詞ではなく、まず乗り物という一般カテゴリへ上がる。'},
   {re:/^(?:高速|路線|夜行|観光|送迎|シャトル|スクール|空港|リムジン)バス$/,word:'バス',label:'🚌 バスとして',desc:'交通の複合語だけをバスとして扱い、「キャンバス」などの末尾一致は除外する。'},
+  {re:/電話$/,word:'電話',label:'📞 通信機器として',desc:'「公衆電話」「固定電話」などは、まず中心語の電話へ戻して機器の意味を維持する。'},
+  {re:/カメラ$/,word:'カメラ',label:'📷 撮影機器として',desc:'複合カメラ名は、まずカメラへ戻して撮影機器の意味を維持する。'},
+  {re:/(?:スマートフォン|スマホ)$/,word:'スマートフォン',label:'📱 端末として',desc:'修飾付きスマートフォンは通信・電子機器として扱う。'},
   {re:/階段$/,word:'階段',label:'🏗️ 建築要素として',desc:'「非常階段」など複合語は、まず階段という一般カテゴリへ上がる。'},
-  {re:/(自動販売機|消火器|電気ケトル)$/,word:'装置',label:'⚙️ 装置として',desc:'用途名を含む複合一般名詞は、固有名詞判定より先に装置へ上がる。'},
+  {re:/(自動販売機|消火器|電気ケトル|洗濯機|炊飯器|発電機)$/,word:'装置',label:'⚙️ 装置として',desc:'用途名を含む複合一般名詞は、固有名詞判定より先に装置へ上がる。'},
+  {re:/(?:病院)$/,word:'病院',label:'🏥 医療施設として',desc:'病院の複合語は医療施設として扱う。'},
+  {re:/(?:美術館|博物館)$/,word:'文化施設',label:'🏛️ 文化施設として',desc:'美術館・博物館は文化施設として扱う。'},
+  {re:/(?:小学校|中学校|高等学校|高校|大学)$/,word:'教育施設',label:'🏫 教育施設として',desc:'学校名・学校種別は教育施設として扱う。'},
   {re:/駅$/,word:'交通施設',label:'🚉 交通施設として',desc:'駅名・駅の複合語は、交通施設という一般カテゴリへ上がる。'},
   {re:/店$/,word:'店舗',label:'🏪 店舗として',desc:'店名らしく見えても、まず店舗という一般カテゴリを候補にする。'},
   {re:/道路$/,word:'交通インフラ',label:'🛣️ 交通インフラとして',desc:'道路の複合語は、場所判定より交通インフラを優先する。'}
@@ -419,7 +473,22 @@ const COMMON_CATEGORY_PATTERNS=[
 
 const KNOWN_WORK_TITLES=new Set(['となりのトトロ','千と千尋の神隠し','風の谷のナウシカ','魔女の宅急便','ハウルの動く城','銀河鉄道の夜','ノルウェイの森','星の王子さま','君の名は','天気の子','もののけ姫','火垂るの墓','崖の上のポニョ','羅生門','人間失格','こころ','雪国','走れメロス','吾輩は猫である']);
 const BUS_FALSE_POSITIVES=new Set(['キャンバス','オムニバス','エアバス']);
-const COMMON_HEAD_NOUNS=['コーヒーカップ','アスファルト','コンビニ','高速バス','満員電車','非常階段','コーヒー','ジュース','紅茶','お茶','カップ','コップ','道路','教室','部屋','ベンチ','時計','傘','靴','家','本','窓','電車','バス','車','駅','店','学校','公園','机','椅子','花','木','森','空','海','夜','朝','雨','写真','絵','ポスター','看板','チラシ','パッケージ'];
+const COMMON_HEAD_NOUNS=['スマートフォン','コーヒーカップ','アスファルト','コンビニ','高速バス','満員電車','非常階段','公衆電話','固定電話','携帯電話','コードレス電話','衛星電話','テレビ電話','電話','デジタルカメラ','フィルムカメラ','防犯カメラ','監視カメラ','カメラ','自転車','病院','美術館','博物館','大学','コーヒー','ジュース','紅茶','お茶','ティー','スープ','カップ','コップ','道路','教室','部屋','ベンチ','時計','傘','シャツ','手袋','帽子','バッグ','靴下','靴','服','家','本','窓','電車','バス','車','駅','店','学校','公園','机','椅子','花','木','森','空','海','夜','朝','雨','写真','絵','ポスター','看板','チラシ','パッケージ'];
+const SEMANTIC_HEAD_INFO={
+  '電話':{type:'artifact',first:'通信機器'},'公衆電話':{type:'artifact',first:'電話'},'固定電話':{type:'artifact',first:'電話'},'携帯電話':{type:'artifact',first:'電話'},'コードレス電話':{type:'artifact',first:'電話'},'衛星電話':{type:'artifact',first:'電話'},'テレビ電話':{type:'artifact',first:'電話'},
+  'カメラ':{type:'artifact',first:'撮影機器'},'デジタルカメラ':{type:'artifact',first:'カメラ'},'フィルムカメラ':{type:'artifact',first:'カメラ'},'防犯カメラ':{type:'artifact',first:'カメラ'},'監視カメラ':{type:'artifact',first:'カメラ'},
+  'スマートフォン':{type:'artifact',first:'通信機器'},'洗濯機':{type:'artifact',first:'家電製品'},'炊飯器':{type:'artifact',first:'家電製品'},'発電機':{type:'artifact',first:'装置'},
+  '自転車':{type:'artifact',first:'乗り物'},'電車':{type:'artifact',first:'乗り物'},'バス':{type:'artifact',first:'乗り物'},'タクシー':{type:'artifact',first:'乗り物'},'飛行機':{type:'artifact',first:'乗り物'},'船':{type:'artifact',first:'乗り物'},'新幹線':{type:'artifact',first:'乗り物'},
+  '病院':{type:'place',first:'医療施設'},'学校':{type:'place',first:'教育施設'},'大学':{type:'place',first:'教育施設'},'美術館':{type:'place',first:'文化施設'},'博物館':{type:'place',first:'文化施設'},
+  'コーヒー':{type:'beverage',first:'飲み物'},'紅茶':{type:'beverage',first:'飲み物'},'お茶':{type:'beverage',first:'飲み物'},'ティー':{type:'beverage',first:'飲み物'},'ジュース':{type:'beverage',first:'飲料'},'スープ':{type:'food',first:'食べ物'},
+  'シャツ':{type:'artifact',first:'衣類'},'服':{type:'artifact',first:'衣類'},'靴下':{type:'artifact',first:'衣類'},'帽子':{type:'artifact',first:'衣類'},'手袋':{type:'artifact',first:'衣類'},'靴':{type:'artifact',first:'身につけるもの'},'バッグ':{type:'artifact',first:'服飾品'}
+};
+
+const COMMON_SAHEN_ACTIONS=new Set(['入院','退院','通院','出勤','退勤','登校','下校','帰宅','就職','退職','結婚','離婚','移動','予約','購入','注文','申請','登録','検索','研究','分析','設計','実装','開発','制作','作成','編集','保存','共有','分類','判断','選択','確認','比較','計算','学習','勉強','運動','旅行','散歩','掃除','洗濯','料理','撮影','印刷','送信','受信','通信','相談','説明','報告','連絡','応募','面接','契約','販売','利用','使用','交換','変更','修正','改善','管理','運用','確認']);
+const ART_MOVEMENT_TERMS=new Set(['印象派','野獣派','未来派','写実派','キュビスム','シュルレアリスム','ダダイズム','構成主義','抽象表現主義','ポップアート','ミニマリズム','バウハウス','デ・ステイル','ロシア・アヴァンギャルド']);
+const ART_FORM_TERMS=new Set(['浮世絵','版画','絵画','彫刻','写真','イラスト','グラフィックデザイン','タイポグラフィ']);
+const SEMANTIC_COMPAT={beverage:new Set(['beverage','food']),food:new Set(['food']),artifact:new Set(['artifact']),place:new Set(['place','artifact']),action:new Set(['action']),state:new Set(['state']),emotion:new Set(['emotion','state']),property:new Set(['property','state']),work:new Set(['work','artifact']),group:new Set(['group']),time:new Set(['time']),animal:new Set(['animal']),plant:new Set(['plant']),person:new Set(['person'])};
+function semanticCompatible(expected,actual){if(!expected||!actual)return true;return expected===actual||(SEMANTIC_COMPAT[expected]?.has(actual)||false)}
 
 const VIEWPOINTS={
   '面白い':[
@@ -617,7 +686,7 @@ function posOfSense(s){return s?.pos||String(s?.id||'').slice(-1)}
 function posJa(pos){return ({n:'名詞',v:'動詞',a:'形容詞',r:'副詞'})[pos]||''}
 function currentNode(){return trail[cursor]||trail[trail.length-1]}
 function rebuildVisited(){visitedSenses.clear();visitedWords.clear();for(let i=0;i<=cursor;i++){const n=trail[i];if(!n)continue;visitedWords.add(canonical(n.word));if(n.sense)visitedSenses.add(n.sense)}}
-function syncNode(n){current=n.word;currentSense=n.sense||null;currentPos=n.pos||'';rebuildVisited()}
+function syncNode(n){current=n.word;currentSense=n.sense||null;currentPos=n.pos||'';currentSemanticType=n.semanticType||'';rebuildVisited()}
 function render(){
   const info=coreInfo(current);const centerInput=$('#input');if(centerInput&&document.activeElement!==centerInput){centerInput.value=current;centerInput.classList.remove('dirty');$('#start')?.classList.remove('ready')} 
   $('#desc').textContent=info?.desc||(current.length>12?'自由入力した言葉・場面。辞書にない時は自分の抽象化で進めるで。':currentPos?`${posJa(currentPos)}の意味を固定して階層をたどっているで。`:'辞書・思考ルート・観点から上下を探せるで。');
@@ -626,8 +695,8 @@ function render(){
   $('#history').innerHTML=rows;document.querySelectorAll('[data-history]').forEach(b=>b.onclick=()=>jumpTo(+b.dataset.history));
 }
 function setStatus(t,k=''){const e=$('#status');e.textContent=t;e.className='status'+(k?' '+k:'')}
-function resetSense(){currentSense=null;currentPos=''}
-function startWord(w){w=canonical(w);if(!w)return;requestSeq++;current=w;resetSense();moves=0;trail=[{word:w,type:'start',note:'自由入力でスタート',sense:null,pos:'',source:'自由入力'}];cursor=0;rebuildVisited();setStatus('🌱 上か下を押してみてな');render();const i=$('#input');if(i){i.value=current;i.classList.remove('dirty')}$('#start')?.classList.remove('ready')} 
+function resetSense(){currentSense=null;currentPos='';currentSemanticType=''}
+function startWord(w){w=canonical(w);if(!w)return;requestSeq++;current=w;resetSense();moves=0;trail=[{word:w,type:'start',note:'自由入力でスタート',sense:null,pos:'',semanticType:'',source:'自由入力'}];cursor=0;rebuildVisited();setStatus('🌱 上か下を押してみてな');render();const i=$('#input');if(i){i.value=current;i.classList.remove('dirty')}$('#start')?.classList.remove('ready')} 
 function jumpTo(i){if(i<0||i>=trail.length)return;requestSeq++;cursor=i;syncNode(trail[cursor]);$('#modal').classList.remove('show');setStatus(`↩ 「${current}」の時点へ戻ったで`,'good');render()}
 
 async function checkWordNet(){try{const r=await fetch('/wn/meta.json',{cache:'no-store'});const m=await r.json();const e=$('#wnState');if(m.available){wordNetAvailable=true;e.textContent=`WordNet ON · ${m.words?.toLocaleString?.()||''}語`;e.className='source-pill on'}else{wordNetAvailable=false;e.textContent='WordNet ビルド失敗';e.className='source-pill off'}}catch{wordNetAvailable=false;const e=$('#wnState');e.textContent='WordNet 未接続';e.className='source-pill off'}}
@@ -689,24 +758,42 @@ const SEMANTIC_TEXT_RULES=[
   ['group',/(集団|組織|団体|一派|流派|運動|school|group|organization|movement)/i],
   ['time',/(時間|時点|瞬間|期間|時刻|time|period|moment)/i]
 ];
+function semanticTypeForWord(word){
+  const w=canonical(word),info=SEMANTIC_HEAD_INFO[w];if(info?.type)return info.type;
+  const scores={};addSemanticTextScores(scores,w,3);const top=Object.entries(scores).sort((a,b)=>b[1]-a[1])[0];return top?.[0]||'';
+}
+function semanticAnchorCandidates(word,dir){
+  if(dir!=='up')return[];const w=canonical(word),x=SEMANTIC_HEAD_INFO[w];if(!x?.first||canonical(x.first)===w)return[];
+  return [{word:x.first,source:'意味継承',badge:'🧭 意味を維持',group:'meaning',rank:1260,gloss:`「${w}」を ${SEMANTIC_TYPE_LABELS[x.type]||x.type} の意味のまま上へ進める。`,semanticType:x.type}];
+}
 function semanticFormHints(word){
   const w=norm(word),out=[];const add=(type,score,reason)=>out.push({type,score,reason});
   if(!w)return out;
   if(looksExpressionish(w))add('state',7,'活用した状態・動作表現');
+  if(COMMON_SAHEN_ACTIONS.has(w))add('action',9,'「〜する」が自然な行為・活動名');
+  if(ART_MOVEMENT_TERMS.has(w)){add('group',8,'芸術運動・流派名');add('work',7,'芸術・文化領域の語')}
+  if(ART_FORM_TERMS.has(w))add('work',8,'芸術表現・形式の語');
   if(/[ぁ-ん]い$/.test(w)&&w.length>=2){add('property',6,'形容詞らしい語形');add('emotion',2,'感情・評価形容詞の可能性')}
   if(/派$/.test(w)){add('group',8,'「〜派」は流派・集団を表しやすい');if(/(印象|野獣|未来|写実|抽象|表現)/.test(w))add('work',7,'美術運動名の語形')}
   if(/(?:ティー|コーヒー|ラテ|ジュース|ソーダ|ドリンク)$/.test(w))add('beverage',10,'飲料を表す中心語');
   if(/^(?:炭酸水|ミネラルウォーター|飲料水|天然水)$/.test(w))add('beverage',10,'飲用の水を表す語');
   if(/(?:病|症|癌|がん|腫瘍)$/.test(w))add('state',7,'病気・身体状態を表す語形');
   if(/(?:駅|道路|公園|広場|空港)$/.test(w))add('place',6,'場所・施設を表す語尾');
-  if(/(?:機|器|装置|ツール|マシン)$/.test(w))add('artifact',6,'道具・装置を表す語尾');
+  if(/(?:機|器|装置|ツール|マシン|電話|カメラ|スマートフォン|スマホ)$/.test(w))add('artifact',8,'道具・機器を表す中心語');
+  if(/(?:病院|美術館|博物館|学校|大学)$/.test(w))add('place',8,'施設を表す中心語');
+  if(/(?:シャツ|服|靴|靴下|帽子|手袋|バッグ)$/.test(w))add('artifact',7,'衣類・持ち物を表す中心語');
+  if(/(?:自転車|電車|タクシー|飛行機|新幹線)$/.test(w))add('artifact',8,'乗り物を表す中心語');
   return out;
 }
 function semanticRouterCandidates(word,dir){
   if(dir!=='up'||!canResolveIdentityNow())return[];const w=canonical(word),out=[];const push=(word,label,desc,rank,type)=>out.push({word,source:'意味ルーター',badge:label,group:'meaning',rank,gloss:desc,semanticType:type});
-  if(/(?:ティー|コーヒー|ラテ|ジュース|ソーダ|ドリンク)$/.test(w)&&w!=='コーヒー'&&w!=='ジュース')push('飲み物','🥤 飲料として','複合語の中心語と語形から、まず「飲み物」カテゴリを優先する。',1270,'beverage');
+  const hi=SEMANTIC_HEAD_INFO[w];if(hi?.first)push(hi.first,'🧭 意味を維持',`「${w}」を ${SEMANTIC_TYPE_LABELS[hi.type]||hi.type} の意味として固定し、辞書の別義へ飛ばさず上へ進める。`,1290,hi.type);
+  if(/(?:ティー|コーヒー|ラテ|ジュース|ソーダ|ドリンク)$/.test(w)&&w!=='コーヒー'&&w!=='ジュース')push('飲み物','🥤 飲料として','複合語の中心語と語形から、まず「飲み物」カテゴリを優先する。',/^[ァ-ヶー・]+$/.test(w)?1310:1270,'beverage');
   if(/^(?:炭酸水|ミネラルウォーター|飲料水|天然水)$/.test(w))push('飲み物','🥤 飲料として','「水」の意味を物質だけに寄せず、飲用語として「飲み物」を優先する。',1275,'beverage');
+  if(ART_MOVEMENT_TERMS.has(w)&&!VIEWPOINTS[w]?.length)push('美術運動','🎨 芸術運動として','芸術運動・流派の語として判定し、人名や一般物へ飛ばさない。',1250,'group');
+  if(ART_FORM_TERMS.has(w)&&!VIEWPOINTS[w]?.length)push('表現','🖼️ 表現形式として','芸術表現・形式の語として判定する。',1225,'work');
   if(/派$/.test(w)&&!VIEWPOINTS[w]?.length)push('流派','👥 流派・一派として','「〜派」は人物名にせず、まず流派・集団の可能性を優先する。',1210,'group');
+  if(COMMON_SAHEN_ACTIONS.has(w)&&!VIEWPOINTS[w]?.length)push('行為','🏃 行為・活動として','「〜する」が自然な名詞は、人物名ではなく行為・活動の意味を優先する。',1190,'action');
   if(/[ぁ-ん]い$/.test(w)&&!VIEWPOINTS[w]?.length){push('性質','✨ 性質として','形容詞らしい語形なので、人名ではなく性質・評価の方向を先に出す。',1100,'property');push('評価','⭐ 評価として','対象への評価として読む候補。',1090,'property')}
   return out;
 }
@@ -721,14 +808,41 @@ async function semanticSenseProfile(s,maxDepth=2){
 async function scoreWordNetSense(word,s){
   const hints=semanticFormHints(word),profile=await semanticSenseProfile(s,2);let score=0;
   for(const h of hints){const evidence=profile.scores[h.type]||0;if(evidence)score+=h.score*Math.min(3,evidence);else if(h.score>=7&&profile.type&&profile.type!==h.type)score-=h.score*1.5}
+  if(currentSemanticType){
+    const ev=profile.scores[currentSemanticType]||0;
+    if(ev)score+=55+Math.min(45,ev*6);
+    else if(profile.type&&semanticCompatible(currentSemanticType,profile.type))score+=18;
+    else if(profile.type&&!semanticCompatible(currentSemanticType,profile.type))score-=70;
+  }
   const pos=posOfSense(s);if(/[ぁ-ん]い$/.test(norm(word))&&pos==='a')score+=18;if(looksExpressionish(word)&&pos==='v')score+=12;
-  return {score,type:profile.type,label:SEMANTIC_TYPE_LABELS[profile.type]||''};
+  return {score,type:currentSemanticType||profile.type,label:SEMANTIC_TYPE_LABELS[currentSemanticType||profile.type]||''};
 }
-function personNameConfidence(word,hit,hasWordNet=false){
-  const w=norm(word),desc=hit?.desc||'';if(!w)return 0;if(/^[一-龠々]$/.test(w))return .15;if(/(?:派|ティー|水|階段|道路|バス)$/.test(w)||/[ぁ-ん]い$/.test(w)||looksExpressionish(w))return .1;if(hasWordNet)return .35;
-  let c=.45;if(w.length>=4)c+=.2;if(/[・A-Za-z]/.test(w))c+=.12;if(/(俳優|女優|歌手|選手|画家|作家|政治家|人物|human|person)/i.test(desc))c+=.2;return Math.min(1,c);
+function personNameConfidence(word,hit,hasWordNet=false,hasOccupation=false){
+  const w=norm(word),desc=hit?.desc||'';if(!w)return 0;
+  if(/^[一-龠々]$/.test(w)||/(?:派|ティー|水|階段|道路|バス|電話|カメラ|病院|学校|美術館|博物館)$/.test(w)||/[ぁ-ん]い$/.test(w)||looksExpressionish(w))return .05;
+  if(hasWordNet)return .20;
+  let c=.30;if(hasOccupation)c+=.38;if(/[・]/.test(w))c+=.12;if(/(俳優|女優|歌手|選手|画家|作家|政治家|人物|human|person)/i.test(desc))c+=.20;
+  return Math.min(1,c);
 }
-function looksNameish(word){const w=norm(word);if(!w||w.length>20||/[\s、。！？!?]/.test(w)||looksExpressionish(w)||BUS_FALSE_POSITIVES.has(w))return false;if(/^[一-龠々]$/.test(w))return false;if(/(?:派|ティー|コーヒー|ラテ|ジュース|ソーダ|ドリンク|階段|道路|バス)$/.test(w)||/[ぁ-ん]い$/.test(w))return false;if(/(の|が|を|に|へ|で|と|から|まで|より|して|した|いる|ある)/.test(w)&&w.length>7)return false;return /^[ぁ-んァ-ヶ一-龠々ーA-Za-z0-9・]+$/.test(w)}
+function looksNameish(word){const w=norm(word);if(!w||w.length>20||/[\s、。！？!?]/.test(w)||looksExpressionish(w)||BUS_FALSE_POSITIVES.has(w))return false;if(ALIASES[w]||semanticFormHints(w).some(h=>h.score>=6))return false;if(/^[一-龠々]$/.test(w))return false;if(/(?:派|主義|ティー|コーヒー|ラテ|ジュース|ソーダ|ドリンク|階段|道路|バス|電話|カメラ|スマートフォン|スマホ|病院|美術館|博物館|学校|大学|自転車|電車|飛行機|シャツ|バッグ|靴|帽子|手袋)$/.test(w)||/[ぁ-ん]い$/.test(w))return false;if(/(の|が|を|に|へ|で|と|から|まで|より|して|した|いる|ある)/.test(w)&&w.length>7)return false;return /^[ぁ-んァ-ヶ一-龠々ーA-Za-z0-9・]+$/.test(w)}
+function seededExampleCandidates(word,dir){
+  if(dir!=='down')return[];const w=canonical(word),rows=REAL_EXAMPLE_SEEDS[w]||[];
+  return rows.map((x,i)=>({word:x.word,source:'実在例',badge:x.badge||'🏷 固有名',group:'example',rank:1090-i,gloss:x.desc||`「${w}」に当てはまる実在の名前。`,semanticType:x.type||currentSemanticType||semanticTypeForWord(w),example:true}));
+}
+async function wikidataExampleCandidates(word,dir){
+  if(dir!=='down'||autoTestRunning)return[];const w=canonical(word),cacheKey=w.toLowerCase();if(wikidataExampleCache.has(cacheKey))return wikidataExampleCache.get(cacheKey);
+  let out=[];
+  try{
+    const hit=await wdEntityForWord(w);if(!hit?.id){wikidataExampleCache.set(cacheKey,[]);return[]}
+    const q=`SELECT DISTINCT ?item ?itemLabel ?itemDescription WHERE { { ?item wdt:P279+ wd:${hit.id}. } UNION { ?item wdt:P31/wdt:P279* wd:${hit.id}. } FILTER(?item != wd:${hit.id}) SERVICE wikibase:label { bd:serviceParam wikibase:language "ja,en". ?item rdfs:label ?itemLabel. ?item schema:description ?itemDescription. } } LIMIT 36`;
+    const url='https://query.wikidata.org/sparql?format=json&query='+encodeURIComponent(q),c=new AbortController(),t=setTimeout(()=>c.abort(),5500);
+    try{
+      const r=await fetch(url,{signal:c.signal,headers:{Accept:'application/sparql-results+json'}});if(!r.ok)throw new Error('Wikidata SPARQL '+r.status);const d=await r.json();
+      const seen=new Set();for(const b of d.results?.bindings||[]){let label=friendly(norm(b.itemLabel?.value||''));const desc=norm(b.itemDescription?.value||'');if(!label||/^Q\d+$/.test(label)||label.length>32||isHiddenLabel(label)||isNearDuplicate(label,w))continue;const k=canonical(label).toLowerCase();if(seen.has(k))continue;seen.add(k);out.push({word:label,source:'Wikidata実例',badge:'🏷 実在する例',group:'example',rank:1030-out.length,gloss:desc||`Wikidataで「${w}」の下位・実例として見つかった固有名。`,semanticType:currentSemanticType||semanticTypeForWord(w),example:true});if(out.length>=8)break}
+    }finally{clearTimeout(t)}
+  }catch{}
+  wikidataExampleCache.set(cacheKey,out);return out;
+}
 function identityGatewayCandidates(word){if(!looksNameish(word))return[];return [{word:'名前・固有名詞として見る',source:'正体判定',badge:'🏷 名前ならここ',group:'identityGate',rank:690,gloss:'普通の言葉として候補が出ない時だけ使う入口。人名・ペット名・作品名などなら押して正体を選ぶ。',promptOnly:true,revealIdentity:true,key:'identity:gate'}]}
 function unknownMeaningCandidates(word){
   if(!canResolveIdentityNow())return[];return [{word:'この言葉の意味を自分で指定',source:'意味ルーター',badge:'❓ 判定保留',group:'meaning',rank:760,gloss:`「${word}」の意味を辞書だけでは十分に絞れない。勝手に人名や概念へ進まず、自分で意味・カテゴリを書いて続ける。`,promptOnly:true,prompt:`「${word}」は何の意味？ 例：植物、道具、感情、場所、作品`,key:'meaning:unknown'}]
@@ -738,13 +852,19 @@ function isKnownWorkTitle(word){return KNOWN_WORK_TITLES.has(norm(word))}
 function workTitleCandidates(word,dir){if(dir!=='up'||!canResolveIdentityNow()||!isKnownWorkTitle(word))return[];return [{word:'作品',source:'作品名判定',badge:'🎨 作品名として',group:'entity',rank:1320,gloss:'既知の作品タイトルとして判定。文章・場面フレーズより先に「作品」へ合流する。',identity:true}]}
 function headNounOf(word){
   const w=norm(word);if(!w||isKnownWorkTitle(w)||BUS_FALSE_POSITIVES.has(w))return '';
-  const heads=[...new Set([...COMMON_HEAD_NOUNS,...Object.keys(CORE).filter(x=>x.length>=2),...Object.keys(GUIDED_UP).filter(x=>x.length>=2)])].filter(x=>x&&x!==w).sort((a,b)=>b.length-a.length);
-  for(const h of heads){if(!w.endsWith(h))continue;const pre=w.slice(0,-h.length);if(!pre)continue;if(h==='バス'&&!/^(?:高速|路線|夜行|観光|送迎|シャトル|スクール|空港|リムジン)$/.test(pre))continue;if(pre.length>=1)return canonical(h)}
+  const heads=[...new Set([...COMMON_HEAD_NOUNS,...Object.keys(SEMANTIC_HEAD_INFO),...Object.keys(CORE).filter(x=>x.length>=2),...Object.keys(GUIDED_UP).filter(x=>x.length>=2)])].filter(x=>x&&x!==w).sort((a,b)=>b.length-a.length);
+  for(const h of heads){
+    if(!w.endsWith(h))continue;const pre=w.slice(0,-h.length);if(!pre)continue;
+    if(h==='バス'&&!/^(?:高速|路線|夜行|観光|送迎|シャトル|スクール|空港|リムジン)$/.test(pre))continue;
+    if(h==='車'&&/(?:自転車|電車|列車|新幹線)$/.test(w))continue;
+    if(pre.length>=1)return canonical(h)
+  }
   return '';
 }
 function modifierHeadCandidates(word,dir){
-  if(dir!=='up'||!canResolveIdentityNow()||VIEWPOINTS[canonical(word)]?.length)return[];const h=headNounOf(word);if(!h)return[];
-  return [{word:h,source:'中心語抽出',badge:'🎯 修飾を外す',group:'thinking',rank:1280,gloss:`「${word}」の状態・色・場所などの修飾を外し、まず中心の名詞「${h}」へ一段広げる。`}]
+  if(dir!=='up'||!canResolveIdentityNow()||VIEWPOINTS[canonical(word)]?.length||ART_MOVEMENT_TERMS.has(canonical(word))||ART_FORM_TERMS.has(canonical(word)))return[];const h=headNounOf(word);if(!h)return[];
+  const semanticType=SEMANTIC_HEAD_INFO[h]?.type||semanticTypeForWord(h);
+  return [{word:h,source:'中心語抽出',badge:'🎯 修飾を外す',group:'thinking',rank:1280,gloss:`「${word}」の修飾を外して中心語「${h}」へ。意味カテゴリも次の段へ引き継ぐ。`,semanticType}]
 }
 function looksFreePhrase(word){
   const w=norm(word);if(!w||isKnownWorkTitle(w))return false;
@@ -815,6 +935,11 @@ async function expandTarget(rel,dir,sourceSense,bridge=false,depth=0,rankBoost=0
   if(isNearDuplicate(current,word)||visitedWords.has(canonical(word))){
     if(depth>=3)return[];const next=dir==='up'?(target.up||[]):(target.down||[]),nested=[];for(const n of next.slice(0,8))nested.push(...await expandTarget(n,dir,target,false,depth+1,rankBoost,semanticType));return nested;
   }
+  if(semanticType&&depth<2){
+    try{const p=await semanticSenseProfile(target,1);if(p.type&&!semanticCompatible(semanticType,p.type)&&p.strength>=6){
+      const next=dir==='up'?(target.up||[]):(target.down||[]),nested=[];for(const n of next.slice(0,6))nested.push(...await expandTarget(n,dir,target,false,depth+1,rankBoost-25,semanticType));if(nested.length)return nested;
+    }}catch{}
+  }
   const aliases=[...new Set((target.words||[]).map(friendly).filter(x=>x&&x!==word&&!isNearDuplicate(x,word)&&!isHiddenLabel(x)))].slice(0,4);
   const semLabel=SEMANTIC_TYPE_LABELS[semanticType]||'';
   return [{word,source:'WordNet',badge:relationBadge(posOfSense(sourceSense),dir,bridge)+(semLabel?` · ${semLabel}`:''),group:'wordnet',rank:(bridge?330:340)+rankBoost,gloss:target.gloss||'',targetSense:target.id,targetPos:pos,aliases,bridge,semanticType,terminal:dir==='up'&&shouldStopAbove(word)}];
@@ -822,7 +947,7 @@ async function expandTarget(rel,dir,sourceSense,bridge=false,depth=0,rankBoost=0
 async function wordNetCandidates(word,dir){
   if(dir==='up'&&shouldStopAbove(current))return[];const senses=currentSense?[await wnSense(currentSense)].filter(Boolean):await wnLookup(word),out=[];
   const scored=[];for(const s of senses){let sem={score:0,type:'',label:''};if(!currentSense){try{sem=await scoreWordNetSense(word,s)}catch{}}scored.push({s,sem})}scored.sort((a,b)=>(b.sem.score||0)-(a.sem.score||0));
-  for(const {s,sem} of scored){const pos=posOfSense(s);let rels=[],bridge=false;if(pos==='a'){if(dir==='up'){rels=s.attr||[];bridge=true}else continue}else if(pos==='n'||pos==='v'){rels=dir==='up'?(s.up||[]):(s.down||[])}else continue;const boost=Math.max(-80,Math.min(180,Math.round((sem.score||0)*3)));for(const rel of rels.slice(0,14))out.push(...await expandTarget(rel,dir,s,bridge,0,boost,sem.type||''))}
+  for(const {s,sem} of scored){const pos=posOfSense(s);let rels=[],bridge=false;if(pos==='a'){if(dir==='up'){rels=s.attr||[];bridge=true}else continue}else if(pos==='n'||pos==='v'){rels=dir==='up'?(s.up||[]):(s.down||[])}else continue;const inheritedType=currentSemanticType||sem.type||'';const boost=Math.max(-80,Math.min(180,Math.round((sem.score||0)*3)));for(const rel of rels.slice(0,14))out.push(...await expandTarget(rel,dir,s,bridge,0,boost,inheritedType))}
   return out
 }
 async function relationHints(word){
@@ -846,8 +971,8 @@ async function wikidataCandidates(word,dir){
   const push=(w,badge,rank,extra='')=>{w=friendly(w);if(!w||isHiddenLabel(w)||isNearDuplicate(w,current))return;out.push({word:w,source:'正体判定',badge,group:'entity',rank,gloss:base+(extra?' '+extra:''),entityId:hit.id,identity:true})};
   if(instances.includes('Q5')||/(人間|人物|human|person)/i.test(instanceTexts)){
     let hasWN=false;try{hasWN=(await wnLookup(word)).length>0}catch{}
-    const pc=personNameConfidence(word,hit,hasWN);
-    if(pc>=.72)push('人間','👤 人物として',980,'人物である確度が高い時だけ、自動で「人間」へ合流。');
+    const pc=personNameConfidence(word,hit,hasWN,occupations.length>0);
+    if(pc>=.78)push('人間','👤 人物として',980,'人物である確度が高い時だけ、自動で「人間」へ合流。');
     else out.push({word:'人物名として見る',source:'正体判定',badge:'👤 人物かも',group:'identityGate',rank:520,gloss:'人物候補は見つかったが一般語の可能性もあるため、自動で人間には進まない。人物名ならここから正体を選ぶ。',promptOnly:true,revealIdentity:true,key:'identity:wd-human'});
   }
   else if(instances.includes('Q144')||/(^|\s)(犬|イヌ|dog|canine)(\s|$)/i.test(instanceTexts))push('犬','🐕 犬として',980,'犬の個体名から「犬」へ合流。');
@@ -865,31 +990,32 @@ function merge(list){const m=new Map(),cur=canonical(current).toLowerCase();for(
 
 const HINTS={up:[['種類','これは何の一種？'],['役割','何のためにあるもの？'],['感情','それを人の心の側から言うと？'],['痕跡','この場面に何が残っている？'],['状態','何が起きている途中？'],['意味','この場面全体を一言で言うと？']],down:[['種類','この仲間には何がある？'],['個体','実在する「この一つ」にすると？'],['場面','どこで・誰が・何をしている？'],['五感','色・音・温度・手触りまで言うと？'],['瞬間','いつの、どの一瞬？'],['来た道','さっきの具体語へ戻るのも正解。']]};
 function showHints(dir,extra={}){const hs=HINTS[dir];let extraHtml='';if(extra.similar?.length)extraHtml+=`<div class="hint-text">↔ 近い表現：${esc(extra.similar.join(' / '))}</div>`;if(extra.entail?.length)extraHtml+=`<div class="hint-text">→ この動作に伴いやすい：${esc(extra.entail.join(' / '))}</div>`;if(extra.cause?.length)extraHtml+=`<div class="hint-text">⚡ この動作が引き起こす：${esc(extra.cause.join(' / '))}</div>`;$('#hintZone').innerHTML=`<b>🧠 答えが出ない時の思考ヒント</b><div class="hint-chips">${hs.map((h,i)=>`<button class="hint-chip" data-hi="${i}">${h[0]}</button>`).join('')}</div><div class="hint-text" id="hintText">正解は1本じゃないで。観点を変えると別の抽象化ルートも作れる。</div>${extraHtml}`;document.querySelectorAll('.hint-chip').forEach(b=>b.onclick=()=>{$('#hintText').textContent='💡 '+hs[+b.dataset.hi][1];$('#manualInput').focus()})}
-function groupName(g){return ({back:'↩ 来た道をそのまま戻る',mode:'🔎 どんな方向に具体化する？',summitStop:'✅ この軸ではここまで',summit:'🚪 分類の頂上から視点を変える',viewpoint:'🌿 観点を選ぶ',entity:'🏷 固有名詞の正体',identity:'🏷 固有名詞の正体を選ぶ',identityGate:'🏷 名前として見る？',meaning:'🧭 意味ルーター',thinking:'🧠 自然な思考ルート',wordnet:'📚 WordNetの辞書階層',core:'✅ 内蔵の確認済みルート',conceptnet:'🕸 ConceptNet補助'})[g]||'候補'}
-function badgeClass(x){return x.group==='back'?'route':x.group==='viewpoint'?'view':x.group==='entity'?'entity':x.group==='summitStop'?'route':x.group==='summit'?'summit':x.group==='mode'?'mode':x.group==='identity'?'identity':x.group==='identityGate'?'identity':x.group==='meaning'?'think':x.group==='thinking'?'think':x.source==='ConceptNet'?'cn':x.source==='内蔵'?'core':''}
-function choiceClass(x){return x.group==='back'?'back':x.group==='viewpoint'?'viewpoint':x.group==='entity'?'entity':x.group==='summitStop'?'back':x.group==='summit'?'summit':x.group==='mode'?'mode':x.group==='identity'?'identity':x.group==='identityGate'?'identity':x.group==='meaning'?'thinking':x.group==='thinking'?'thinking':''}
+function groupName(g){return ({back:'↩ 来た道をそのまま戻る',mode:'🔎 どんな方向に具体化する？',example:'🏷 実在する例・固有名',summitStop:'✅ この軸ではここまで',summit:'🚪 分類の頂上から視点を変える',viewpoint:'🌿 観点を選ぶ',entity:'🏷 固有名詞の正体',identity:'🏷 固有名詞の正体を選ぶ',identityGate:'🏷 名前として見る？',meaning:'🧭 意味ルーター',thinking:'🧠 自然な思考ルート',wordnet:'📚 WordNetの辞書階層',core:'✅ 内蔵の確認済みルート',conceptnet:'🕸 ConceptNet補助'})[g]||'候補'}
+function badgeClass(x){return x.group==='back'?'route':x.group==='viewpoint'?'view':x.group==='entity'?'entity':x.group==='summitStop'?'route':x.group==='summit'?'summit':x.group==='mode'?'mode':x.group==='identity'?'identity':x.group==='identityGate'?'identity':x.group==='example'?'example':x.group==='meaning'?'think':x.group==='thinking'?'think':x.source==='ConceptNet'?'cn':x.source==='内蔵'?'core':''}
+function choiceClass(x){return x.group==='back'?'back':x.group==='viewpoint'?'viewpoint':x.group==='entity'?'entity':x.group==='summitStop'?'back':x.group==='summit'?'summit':x.group==='mode'?'mode':x.group==='identity'?'identity':x.group==='identityGate'?'identity':x.group==='example'?'example':x.group==='meaning'?'thinking':x.group==='thinking'?'thinking':''}
 function showChoices(items,dir){
   if(!items.length){$('#choices').innerHTML='<div class="preview"><b>この方向の自然な候補はここまで。</b><br>辞書の根っこへ無理に進まず、自由入力や別の観点に切り替えてな。</div>';return}
   const groups=[];for(const x of items){let g=groups.find(z=>z.key===x.group);if(!g){g={key:x.group||'wordnet',items:[]};groups.push(g)}g.items.push(x)}
-  $('#choices').innerHTML=groups.map(g=>`<div class="group-title">${groupName(g.key)}</div>${g.items.map((x)=>{const i=items.indexOf(x);return `<button class="choice ${choiceClass(x)}" data-i="${i}"><div class="top"><span class="cw">${esc(x.word)}</span><span class="badge ${badgeClass(x)}">${esc(x.source)} · ${esc(x.badge)}</span></div>${x.gloss?`<div class="meta">${esc(x.gloss)}</div>`:''}${x.bridge?`<div class="sense">🌉 形容詞の属性を、名詞の概念へ橋渡し</div>`:''}${x.viewpoint?`<div class="sense">🌿 これは唯一の正解ではなく「この観点なら」のルート</div>`:''}${x.aliases?.length?`<div class="sense">同じ概念の言い方：${esc(x.aliases.join(' / '))}</div>`:''}${x.source==='WordNet'&&x.targetSense?`<div class="sense">🔒 この意味IDを固定して次へ進む${x.terminal?' · ここで止めるのがおすすめ':''}</div>`:''}${x.group==='back'?`<div class="sense">↩ 前に選んだ言葉を最優先。意味IDごと戻るので別の意味に化けない</div>`:''}${x.group==='entity'?`<div class="sense">🏷 Wikidataは固有名詞の「正体」だけ判定。ここから先はWordNet・思考ルートへ合流する</div>`:''}${x.group==='identity'?`<div class="sense">🏷 Wikidataにない知り合い・ペット名でも、自分で正体を選べる</div>`:''}${x.group==='identityGate'?`<div class="sense">🏷 これは自動で「人」と決めないための入口。名前の時だけ押してな</div>`:''}${x.group==='meaning'?`<div class="sense">🧭 語形・複合語・辞書の意味カテゴリを合わせた候補</div>`:''}${x.group==='summitStop'?`<div class="sense">✅ 自動ではこれ以上登らない。必要なら下にある別視点を自分で選ぶ</div>`:''}${x.group==='summit'?`<div class="sense">🚪 ここから先は分類の上下ではなく、意味・メタなど別の抽象化軸へ切り替える</div>`:''}${x.group==='mode'?`<div class="sense">🔎 これは移動せず、具体化の考え方と入力欄を切り替えるボタン</div>`:''}<div class="preview">${x.promptOnly?(x.group==='meaning'?`「${esc(current)}」の意味をここで指定する`:`「${esc(current)}」をこの方向で続ける`):(x.group==='back'?`「${esc(current)}」→ 足あと「${esc(x.word)}」へ`:(dir==='up'?`「${esc(current)}」→ より広い「${esc(x.word)}」`:`「${esc(current)}」→ より細かい「${esc(x.word)}」`))}</div></button>`}).join('')}`).join('');
+  $('#choices').innerHTML=groups.map(g=>`<div class="group-title">${groupName(g.key)}</div>${g.items.map((x)=>{const i=items.indexOf(x);return `<button class="choice ${choiceClass(x)}" data-i="${i}"><div class="top"><span class="cw">${esc(x.word)}</span><span class="badge ${badgeClass(x)}">${esc(x.source)} · ${esc(x.badge)}</span></div>${x.gloss?`<div class="meta">${esc(x.gloss)}</div>`:''}${x.bridge?`<div class="sense">🌉 形容詞の属性を、名詞の概念へ橋渡し</div>`:''}${x.viewpoint?`<div class="sense">🌿 これは唯一の正解ではなく「この観点なら」のルート</div>`:''}${x.aliases?.length?`<div class="sense">同じ概念の言い方：${esc(x.aliases.join(' / '))}</div>`:''}${x.source==='WordNet'&&x.targetSense?`<div class="sense">🔒 この意味IDを固定して次へ進む${x.terminal?' · ここで止めるのがおすすめ':''}</div>`:''}${x.group==='back'?`<div class="sense">↩ 前に選んだ言葉を最優先。意味IDごと戻るので別の意味に化けない</div>`:''}${x.group==='entity'?`<div class="sense">🏷 Wikidataは固有名詞の「正体」だけ判定。ここから先はWordNet・思考ルートへ合流する</div>`:''}${x.group==='identity'?`<div class="sense">🏷 Wikidataにない知り合い・ペット名でも、自分で正体を選べる</div>`:''}${x.group==='identityGate'?`<div class="sense">🏷 これは自動で「人」と決めないための入口。名前の時だけ押してな</div>`:''}${x.group==='example'?`<div class="sense">🏷 種類ではなく、実在の商品・作品・個体などの固有名まで具体化</div>`:''}${x.group==='meaning'?`<div class="sense">🧭 語形・複合語・辞書の意味カテゴリを合わせた候補</div>`:''}${x.group==='summitStop'?`<div class="sense">✅ 自動ではこれ以上登らない。必要なら下にある別視点を自分で選ぶ</div>`:''}${x.group==='summit'?`<div class="sense">🚪 ここから先は分類の上下ではなく、意味・メタなど別の抽象化軸へ切り替える</div>`:''}${x.group==='mode'?`<div class="sense">🔎 これは移動せず、具体化の考え方と入力欄を切り替えるボタン</div>`:''}<div class="preview">${x.promptOnly?(x.group==='meaning'?`「${esc(current)}」の意味をここで指定する`:`「${esc(current)}」をこの方向で続ける`):(x.group==='back'?`「${esc(current)}」→ 足あと「${esc(x.word)}」へ`:(dir==='up'?`「${esc(current)}」→ より広い「${esc(x.word)}」`:`「${esc(current)}」→ より細かい「${esc(x.word)}」`))}</div></button>`}).join('')}`).join('');
   document.querySelectorAll('.choice[data-i]').forEach(b=>b.onclick=()=>chooseItem(items[+b.dataset.i],dir))
 }
-function chooseItem(item,dir){if(Number.isInteger(item.returnIndex)){jumpTo(item.returnIndex);return}if(item.stopHere){$('#modal').classList.remove('show');setStatus(`✅ 「${current}」でこの抽象化軸はいったん頂上`,'good');return}if(item.revealIdentity){$('#help').textContent=`「${current}」は何の名前？ 正体を1つ選ぶと、そこから普通の概念階層へ合流するで。`;showChoices(identityFallbackCandidates(current),'up');setStatus('🏷 名前としての正体を選んでな','good');return}if(item.promptOnly){$('#manualInput').placeholder=item.prompt||'自分の言葉で続けてみる';$('#manualInput').value='';$('#manualHelp').textContent=item.gloss||'この観点で、自分の言葉を1つ書いて進めるで。';$('#manualInput').focus();setStatus(item.group==='meaning'?'🧭 意味を決め打ちせず保留したで。自分の言葉で指定してな':'🔎 方向を選んだで。自分の言葉を書いてみよ','good');return}choose(item.word,dir,item.source,item.targetSense||null,item.targetPos||'',item.badge||'')}
+function chooseItem(item,dir){if(Number.isInteger(item.returnIndex)){jumpTo(item.returnIndex);return}if(item.stopHere){$('#modal').classList.remove('show');setStatus(`✅ 「${current}」でこの抽象化軸はいったん頂上`,'good');return}if(item.revealIdentity){$('#help').textContent=`「${current}」は何の名前？ 正体を1つ選ぶと、そこから普通の概念階層へ合流するで。`;showChoices(identityFallbackCandidates(current),'up');setStatus('🏷 名前としての正体を選んでな','good');return}if(item.promptOnly){$('#manualInput').placeholder=item.prompt||'自分の言葉で続けてみる';$('#manualInput').value='';$('#manualHelp').textContent=item.gloss||'この観点で、自分の言葉を1つ書いて進めるで。';$('#manualInput').focus();setStatus(item.group==='meaning'?'🧭 意味を決め打ちせず保留したで。自分の言葉で指定してな':'🔎 方向を選んだで。自分の言葉を書いてみよ','good');return}choose(item.word,dir,item.source,item.targetSense||null,item.targetPos||'',item.badge||'',item.semanticType||'')}
 function canResolveIdentityNow(){
   // Wikidata / 正体判定は「最初に入力した語」にだけ使う。途中の一般語では絶対に再判定しない。
   return cursor===0 && trail.length===1 && trail[0]?.type==='start';
 }
 async function collectCandidates(dir){
   const wordAtOpen=current;
-  let fixed=[...routeBackCandidates(dir),...concreteModeCandidates(dir),...workTitleCandidates(wordAtOpen,dir),...modifierHeadCandidates(wordAtOpen,dir),...semanticRouterCandidates(wordAtOpen,dir),...viewpointCandidates(wordAtOpen,dir),...phraseViewpointCandidates(wordAtOpen,dir),...commonCategoryCandidates(wordAtOpen,dir),...guidedCandidates(wordAtOpen,dir),...coreCandidates(wordAtOpen,dir)];
+  let fixed=[...routeBackCandidates(dir),...seededExampleCandidates(wordAtOpen,dir),...concreteModeCandidates(dir),...workTitleCandidates(wordAtOpen,dir),...modifierHeadCandidates(wordAtOpen,dir),...semanticAnchorCandidates(wordAtOpen,dir),...semanticRouterCandidates(wordAtOpen,dir),...viewpointCandidates(wordAtOpen,dir),...phraseViewpointCandidates(wordAtOpen,dir),...commonCategoryCandidates(wordAtOpen,dir),...guidedCandidates(wordAtOpen,dir),...coreCandidates(wordAtOpen,dir)];
   let wn=[];try{wn=await wordNetCandidates(wordAtOpen,dir)}catch{}
   const semanticStrong=fixed.some(x=>x.source==='意味ルーター'&&(x.rank||0)>=1200);
   if(dir==='up'&&!currentSense&&(semanticStrong||workTitleCandidates(wordAtOpen,dir).length||modifierHeadCandidates(wordAtOpen,dir).length||VIEWPOINTS[canonical(wordAtOpen)]?.length||phraseViewpointCandidates(wordAtOpen,dir).length))wn=[]; // 意味ルーターで高確度・多義語・作品名・修飾句は、意味を選んでからWordNetへ合流する
   if(dir==='up'&&shouldStopAbove(wordAtOpen)){fixed=[...routeBackCandidates(dir),...summitCandidates(wordAtOpen,true),...viewpointCandidates(wordAtOpen,dir)];wn=[];}
   let wd=[];const titleLikePhrase=dir==='up'&&canResolveIdentityNow()&&!currentSense&&/の/.test(norm(wordAtOpen))&&norm(wordAtOpen).length<=24;
   if(dir==='up'&&canResolveIdentityNow()&&!currentSense&&((fixed.filter(x=>x.group!=='back').length===0&&wn.length===0)||titleLikePhrase)){try{wd=await wikidataCandidates(wordAtOpen,dir);if(titleLikePhrase)wd=wd.map(x=>x.word==='作品'?{...x,rank:1310}:x)}catch{}}
-  let all=merge([...fixed,...wd,...wn]);
-  if(!all.some(x=>!x.promptOnly&&x.group!=='back'&&x.group!=='mode')){let cn=[];try{cn=await conceptNetCandidates(wordAtOpen,dir)}catch{}all=merge([...fixed,...wd,...wn,...cn])}
+  let examples=[];if(dir==='down'&&!autoTestRunning){try{examples=await wikidataExampleCandidates(wordAtOpen,dir)}catch{}}
+  let all=merge([...fixed,...examples,...wd,...wn]);
+  if(!all.some(x=>!x.promptOnly&&x.group!=='back'&&x.group!=='mode')){let cn=[];try{cn=await conceptNetCandidates(wordAtOpen,dir)}catch{}all=merge([...fixed,...examples,...wd,...wn,...cn])}
   if(dir==='up'&&canResolveIdentityNow()&&!all.some(x=>!x.promptOnly&&x.group!=='back'&&x.group!=='mode')){
     all=merge([...all,...unknownMeaningCandidates(wordAtOpen),...identityGatewayCandidates(wordAtOpen)]);
   }else if(dir==='up'&&!all.some(x=>!x.promptOnly&&x.group!=='back'&&x.group!=='mode'))all=merge([...all,...summitCandidates(wordAtOpen,true)]);
@@ -902,26 +1028,26 @@ async function openChoices(dir){
   const all=await collectCandidates(dir);if(seq!==requestSeq||current!==wordAtOpen)return;
   let extra={};try{extra=await relationHints(wordAtOpen)}catch{}if(seq!==requestSeq||current!==wordAtOpen)return;showHints(dir,extra);
   showChoices(all,dir);
-  const hasBack=all.some(x=>x.group==='back'),hasView=all.some(x=>x.group==='viewpoint'||x.group==='summit'),hasEntity=all.some(x=>x.group==='entity'||x.group==='identity'),hasThink=all.some(x=>x.group==='thinking'||x.group==='meaning'),hasMode=all.some(x=>x.group==='mode');
-  setStatus(all.length?`${hasBack?'来た道＋':''}${hasMode?'具体化の方向＋':''}${hasView?'観点分岐＋':''}${hasEntity?'固有名詞＋':''}${hasThink?'思考ルート＋':''}候補を表示`:'自動候補なし · 自分の言葉で続けられる',all.length?'good':'warn')
+  const hasBack=all.some(x=>x.group==='back'),hasExample=all.some(x=>x.group==='example'),hasView=all.some(x=>x.group==='viewpoint'||x.group==='summit'),hasEntity=all.some(x=>x.group==='entity'||x.group==='identity'),hasThink=all.some(x=>x.group==='thinking'||x.group==='meaning'),hasMode=all.some(x=>x.group==='mode');
+  setStatus(all.length?`${hasBack?'来た道＋':''}${hasExample?'実在例＋':''}${hasMode?'具体化の方向＋':''}${hasView?'観点分岐＋':''}${hasEntity?'固有名詞＋':''}${hasThink?'思考ルート＋':''}候補を表示`:'自動候補なし · 自分の言葉で続けられる',all.length?'good':'warn')
 }
 
-function choose(word,dir,source='自分',targetSense=null,targetPos='',badge=''){
+function choose(word,dir,source='自分',targetSense=null,targetPos='',badge='',semanticType=''){
   if(cursor<trail.length-1)trail=trail.slice(0,cursor+1);current=canonical(word);
   const sense=(source==='WordNet'&&targetSense)?targetSense:null,pos=(source==='WordNet'&&targetSense)?(targetPos||String(targetSense).slice(-1)):'';
-  currentSense=sense;currentPos=pos;moves++;const note=`${source}${badge?' · '+badge:''} · ${dir==='up'?'上へ':'下へ'}${sense?' · 意味固定':''}`;
-  trail.push({word:current,type:dir,note,sense,pos,source});cursor=trail.length-1;rebuildVisited();$('#modal').classList.remove('show');
-  setStatus(sense?(shouldStopAbove(current)?'🔒 このあたりで止めると自然やで':'🔒 同じ意味の枝をたどってるで'):(source==='観点'?'🌿 観点を切り替えたで':source==='思考ルート'?'🧠 自然な思考ルートへ進んだで':'次の階層も探せるで 🌱'),sense?'good':'');render();
+  currentSense=sense;currentPos=pos;currentSemanticType=semanticType||((source==='WordNet'&&targetSense)?currentSemanticType:'')||semanticTypeForWord(current)||'';moves++;const note=`${source}${badge?' · '+badge:''} · ${dir==='up'?'上へ':'下へ'}${sense?' · 意味固定':''}${currentSemanticType?' · 意味継承':''}`;
+  trail.push({word:current,type:dir,note,sense,pos,semanticType:currentSemanticType,source});cursor=trail.length-1;rebuildVisited();$('#modal').classList.remove('show');
+  setStatus(sense?(shouldStopAbove(current)?'🔒 このあたりで止めると自然やで':'🔒 同じ意味の枝をたどってるで'):(source==='観点'?'🌿 観点を切り替えたで':source==='思考ルート'?'🧠 自然な思考ルートへ進んだで':(source==='実在例'||source==='Wikidata実例')?'🏷 実在する名前まで具体化したで':'次の階層も探せるで 🌱'),sense?'good':'');render();
   const card=$('#card');card.animate([{transform:dir==='up'?'translateY(18px)':'translateY(-18px)',opacity:.75},{transform:'translateY(0)',opacity:1}],{duration:320,easing:'ease-out'})
 }
-function snapshotAppState(){return {current,currentSense,currentPos,moves,lastDir,requestSeq,cursor,trail:trail.map(x=>({...x}))}}
-function restoreAppState(s){current=s.current;currentSense=s.currentSense;currentPos=s.currentPos;moves=s.moves;lastDir=s.lastDir;requestSeq=s.requestSeq;cursor=s.cursor;trail=s.trail.map(x=>({...x}));rebuildVisited();render()}
-function testStart(word){current=canonical(word);currentSense=null;currentPos='';moves=0;trail=[{word:current,type:'start',note:'自動テスト',sense:null,pos:'',source:'テスト'}];cursor=0;rebuildVisited()}
+function snapshotAppState(){return {current,currentSense,currentPos,currentSemanticType,moves,lastDir,requestSeq,cursor,trail:trail.map(x=>({...x}))}}
+function restoreAppState(s){current=s.current;currentSense=s.currentSense;currentPos=s.currentPos;currentSemanticType=s.currentSemanticType||'';moves=s.moves;lastDir=s.lastDir;requestSeq=s.requestSeq;cursor=s.cursor;trail=s.trail.map(x=>({...x}));rebuildVisited();render()}
+function testStart(word){current=canonical(word);currentSense=null;currentPos='';currentSemanticType='';moves=0;trail=[{word:current,type:'start',note:'自動テスト',sense:null,pos:'',semanticType:'',source:'テスト'}];cursor=0;rebuildVisited()}
 function testApply(item,dir){
   if(Number.isInteger(item?.returnIndex)){cursor=item.returnIndex;syncNode(trail[cursor]);return true}
   if(!item||item.promptOnly)return false;
   current=canonical(item.word);const sense=(item.source==='WordNet'&&item.targetSense)?item.targetSense:null,pos=(item.source==='WordNet'&&item.targetSense)?(item.targetPos||String(item.targetSense).slice(-1)):'';
-  currentSense=sense;currentPos=pos;trail.push({word:current,type:dir,note:`${item.source} · ${item.badge||''}`,sense,pos,source:item.source,group:item.group||''});cursor=trail.length-1;rebuildVisited();return true
+  currentSense=sense;currentPos=pos;currentSemanticType=item.semanticType||((item.source==='WordNet'&&item.targetSense)?currentSemanticType:'')||semanticTypeForWord(current)||'';trail.push({word:current,type:dir,note:`${item.source} · ${item.badge||''}`,sense,pos,semanticType:currentSemanticType,source:item.source,group:item.group||''});cursor=trail.length-1;rebuildVisited();return true
 }
 function testSeverityRank(s){return s==='FAIL'?2:s==='WARN'?1:0}
 function analyzeTestRun(start,steps,roundtrip,stoppedReason){
@@ -929,7 +1055,7 @@ function analyzeTestRun(start,steps,roundtrip,stoppedReason){
   const add=(s,msg)=>{issues.push(msg);if(testSeverityRank(s)>testSeverityRank(sev))sev=s};
   const seen=new Set();for(const w of canon){if(seen.has(w)){add('FAIL',`同じ語「${w}」を再訪してループ`);break}seen.add(w)}
   for(let i=1;i<words.length;i++)if(isNearDuplicate(words[i-1],words[i])){add('FAIL',`ほぼ同義の「${words[i-1]} → ${words[i]}」を1段として消費`);break}
-  for(const w of words)if(TEST_INTERNAL_RE.test(w)){add('FAIL',`内部語・難解語「${w}」を表示`);break}
+  for(const w of words)if(isTestInternalLabel(w)){add('FAIL',`内部語・難解語「${w}」を表示`);break}
   const SAFE_SINGLE=new Set(['物','木','花','雨','紙','髪','神','色','人','心','水','火']);const badSingle=words.find(w=>/^[一-龠々]$/.test(w)&&!SAFE_SINGLE.has(w));if(badSingle)add('FAIL',`一文字だけの辞書ラベル「${badSingle}」を階層語として表示`);
   const lateIdentity=steps.find((x,i)=>i>1&&(x.group==='entity'||x.group==='identity'||x.group==='identityGate'));if(lateIdentity)add('FAIL',`途中の「${lateIdentity.word}」で固有名詞の正体判定に戻った`);
   const badSenseWords=['密偵','代行','一統','工合','感','可変次数クラス','ウィキデータのエンティティ','倖','莫大小','下足','工率','期','患','事','質','一刻','腫瘤','花茎','幹'];const badSense=badSenseWords.find(w=>canon.includes(canonical(w)));if(badSense)add('FAIL',`既知の意味飛び・内部語「${badSense}」を通過`);
@@ -967,13 +1093,13 @@ function renderTestResults(results,running=false){
   $('#testResults').innerHTML=bad.length?bad.map(row).join(''):(running?'<div class="test-empty">いまのところ怪しい経路なし。続けてテスト中…</div>':'<div class="test-empty">🎉 怪しい経路は検出されへんかった！</div>');
   $('#testPassResults').innerHTML=results.filter(r=>r.severity==='PASS').map(row).join('')||'<div class="test-empty">PASSはまだないで。</div>';
 }
-function testReportText(results){const bad=results.filter(r=>r.severity!=='PASS');const c={FAIL:results.filter(r=>r.severity==='FAIL').length,WARN:results.filter(r=>r.severity==='WARN').length,PASS:results.filter(r=>r.severity==='PASS').length};return [`ことばズーム v10.17 TEST LAB`,`候補一覧の一番上だけを自動選択`,`FAIL ${c.FAIL} / WARN ${c.WARN} / PASS ${c.PASS}`,'',...bad.map(r=>`${r.severity} ${r.start}\n↑ ${r.steps.map(x=>x.word).join(' → ')}${r.roundtrip?.length?'\n↓ '+r.roundtrip.map(x=>`${x.expected}:${x.ok?'OK':'NG'}`).join(' / '):''}\n${r.issues.join(' / ')}`)].join('\n')}
+function testReportText(results){const bad=results.filter(r=>r.severity!=='PASS');const c={FAIL:results.filter(r=>r.severity==='FAIL').length,WARN:results.filter(r=>r.severity==='WARN').length,PASS:results.filter(r=>r.severity==='PASS').length};return [`ことばズーム v10.19 TEST LAB`,`候補一覧の一番上だけを自動選択`,`FAIL ${c.FAIL} / WARN ${c.WARN} / PASS ${c.PASS}`,'',...bad.map(r=>`${r.severity} ${r.start}\n↑ ${r.steps.map(x=>x.word).join(' → ')}${r.roundtrip?.length?'\n↓ '+r.roundtrip.map(x=>`${x.expected}:${x.ok?'OK':'NG'}`).join(' / '):''}\n${r.issues.join(' / ')}`)].join('\n')}
 async function runTestLab(){
   if(!wordNetAvailable){$('#testStatus').textContent='WordNet確認待ち…';await checkWordNet()}
   if(!wordNetAvailable){$('#testStatus').textContent='中止 · WordNet未接続';$('#testSummary').innerHTML='<span class="test-stat fail">⛔ テスト無効</span><span class="test-stat">WordNet OFF</span>';$('#testResults').innerHTML='<div class="test-empty">WordNetがOFFのまま走ると、普通の単語まで固有名詞フォールバックへ流れて誤判定するため、自動テストを中止したで。公開環境でWordNet ONを確認してから実行してな。</div>';return}
-  const snap=snapshotAppState();testCancelRequested=false;lastTestResults=[];$('#testRun').disabled=true;$('#testCancel').disabled=false;$('#testCopy').disabled=true;$('#testBar').style.width='0%';$('#testStatus').textContent='開始中…';renderTestResults([],true);
+  const snap=snapshotAppState();autoTestRunning=true;testCancelRequested=false;lastTestResults=[];$('#testRun').disabled=true;$('#testCancel').disabled=false;$('#testCopy').disabled=true;$('#testBar').style.width='0%';$('#testStatus').textContent='開始中…';renderTestResults([],true);
   try{for(let i=0;i<TEST_WORDS.length;i++){if(testCancelRequested)break;$('#testStatus').textContent=`${i+1} / ${TEST_WORDS.length} · ${TEST_WORDS[i]}`;const r=await runOneTest(TEST_WORDS[i]);lastTestResults.push(r);$('#testBar').style.width=((i+1)/TEST_WORDS.length*100)+'%';renderTestResults(lastTestResults,true);await new Promise(res=>setTimeout(res,0))}}
-  finally{restoreAppState(snap);$('#testRun').disabled=false;$('#testCancel').disabled=true;$('#testCopy').disabled=!lastTestResults.some(r=>r.severity!=='PASS');$('#testStatus').textContent=testCancelRequested?`停止 · ${lastTestResults.length}語まで`:`完了 · ${lastTestResults.length}語`;renderTestResults(lastTestResults,false)}
+  finally{autoTestRunning=false;restoreAppState(snap);$('#testRun').disabled=false;$('#testCancel').disabled=true;$('#testCopy').disabled=!lastTestResults.some(r=>r.severity!=='PASS');$('#testStatus').textContent=testCancelRequested?`停止 · ${lastTestResults.length}語まで`:`完了 · ${lastTestResults.length}語`;renderTestResults(lastTestResults,false)}
 }
 $('#up').onclick=()=>openChoices('up');$('#down').onclick=()=>openChoices('down');$('#start').onclick=()=>startWord($('#input').value);$('#input').oninput=e=>{const changed=canonical(e.target.value)!==canonical(current);e.target.classList.toggle('dirty',changed);$('#start')?.classList.toggle('ready',changed)};$('#input').onfocus=e=>{e.target.select()};$('#input').onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();startWord(e.target.value)}else if(e.key==='Escape'){e.target.value=current;e.target.classList.remove('dirty');$('#start')?.classList.remove('ready');e.target.blur()}};$('#random').onclick=()=>startWord(STARTERS[Math.floor(Math.random()*STARTERS.length)]);$('#close').onclick=()=>{$('#modal').classList.remove('show');requestSeq++};$('#modal').onclick=e=>{if(e.target.id==='modal'){$('#modal').classList.remove('show');requestSeq++}};$('#manualAdd').onclick=()=>{const w=$('#manualInput').value.trim();if(w)choose(w,lastDir,'自由入力')};$('#manualInput').onkeydown=e=>{if(e.key==='Enter')$('#manualAdd').click()};$('#testLab').onclick=()=>{$('#testModal').classList.add('show')};$('#testClose').onclick=()=>{$('#testModal').classList.remove('show')};$('#testModal').onclick=e=>{if(e.target.id==='testModal')$('#testModal').classList.remove('show')};$('#testRun').onclick=runTestLab;$('#testCancel').onclick=()=>{testCancelRequested=true;$('#testStatus').textContent='停止処理中…'};$('#testCopy').onclick=async()=>{const text=testReportText(lastTestResults);try{await navigator.clipboard.writeText(text);$('#testStatus').textContent='怪しい結果をコピーしたで ✓'}catch{$('#testStatus').textContent='コピーできへんかった'}};render();checkWordNet();
 </script>
