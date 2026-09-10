@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>ことばズーム v10.15</title>
+<title>ことばズーム v10.16</title>
 <style>
 :root{--bg:#f7f5ef;--ink:#20211e;--muted:#73736e;--line:#ddd9cf;--up:#edf0ff;--down:#fff0e9;--blue:#6f7df7;--coral:#ea8f75;--shadow:0 18px 50px rgba(40,42,65,.10)}
 *{box-sizing:border-box} html,body{margin:0;min-height:100%;font-family:Inter,"Hiragino Sans","Yu Gothic",system-ui,sans-serif;color:var(--ink)}
@@ -21,7 +21,7 @@ header{display:flex;align-items:center;justify-content:space-between;gap:12px;ma
 </head>
 <body>
 <div class="app">
-<header><div class="brand"><div class="logo">↕</div><div><h1>ことばズーム <span style="font-size:11px;color:#7e86a8">v10.15</span></h1><div class="sub">多義語・複合一般名詞・古い辞書語の事故を抑制。観点を選んで自然にズーム。</div></div></div><div class="header-actions"><button class="ghost" id="testLab">🧪 TEST LAB</button><button class="ghost" id="random">🎲 おまかせ</button></div></header>
+<header><div class="brand"><div class="logo">↕</div><div><h1>ことばズーム <span style="font-size:11px;color:#7e86a8">v10.16</span></h1><div class="sub">中心語抽出・作品名判定・活用語判定を強化。WordNetの意味飛びもさらに抑制。</div></div></div><div class="header-actions"><button class="ghost" id="testLab">🧪 TEST LAB</button><button class="ghost" id="random">🎲 おまかせ</button></div></header>
 <div class="layout">
 <main class="main"><section class="stage">
 <div class="level">ZOOM OUT · 抽象へ</div>
@@ -40,7 +40,7 @@ header{display:flex;align-items:center;justify-content:space-between;gap:12px;ma
 </aside>
 </div></div>
 <div class="modal" id="modal"><div class="dialog"><button class="close" id="close">×</button><h3 id="title"></h3><div class="help" id="help"></div><div class="choices" id="choices"></div><div class="hint-zone" id="hintZone"></div><div class="manual-zone"><div class="manual-label">✍️ 自分の言葉で続ける</div><div class="manual-row"><input id="manualInput" placeholder="自分の答えを入力"><button class="primary" id="manualAdd">この言葉へ</button></div><div class="manual-help" id="manualHelp">辞書にない答えでも、そのまま次のズームへ進めるで。</div></div></div></div>
-<div class="modal" id="testModal"><div class="dialog test-dialog"><button class="close" id="testClose">×</button><h3>🧪 TEST LAB</h3><div class="help">固定ワードを自動で流して、<b>毎回「候補一覧の一番上」だけ</b>を選ぶ回帰テスト。↑を最大7段、そのあと↓の一番上で最大3段戻して、ループ・意味飛び・Wikidata内部語・戻れない経路を洗い出すで。</div><div class="test-head"><div class="test-actions"><button class="primary" id="testRun">53語を自動テスト</button><button class="smallbtn" id="testCopy" disabled>怪しい結果をコピー</button><button class="smallbtn" id="testCancel" disabled>停止</button></div><div class="test-progress"><i id="testBar"></i></div><div class="test-statusline" id="testStatus">まだ実行してへん</div></div><div class="test-summary" id="testSummary"><span class="test-stat">候補1位だけを使用</span></div><div class="test-results" id="testResults"><div class="test-empty">「53語を自動テスト」を押すと、怪しい経路だけ上に集めるで。</div></div><details class="test-pass-details" id="testPassDetails"><summary>✅ PASSも見る</summary><div class="test-results" id="testPassResults"></div></details></div></div>
+<div class="modal" id="testModal"><div class="dialog test-dialog"><button class="close" id="testClose">×</button><h3>🧪 TEST LAB</h3><div class="help">固定ワードを自動で流して、<b>毎回「候補一覧の一番上」だけ</b>を選ぶ回帰テスト。↑を最大7段、そのあと↓の一番上で最大3段戻して、ループ・意味飛び・Wikidata内部語・戻れない経路を洗い出すで。</div><div class="test-head"><div class="test-actions"><button class="primary" id="testRun">拡張回帰テスト</button><button class="smallbtn" id="testCopy" disabled>怪しい結果をコピー</button><button class="smallbtn" id="testCancel" disabled>停止</button></div><div class="test-progress"><i id="testBar"></i></div><div class="test-statusline" id="testStatus">まだ実行してへん</div></div><div class="test-summary" id="testSummary"><span class="test-stat">候補1位だけを使用</span></div><div class="test-results" id="testResults"><div class="test-empty">「拡張回帰テスト」を押すと、怪しい経路だけ上に集めるで。</div></div><details class="test-pass-details" id="testPassDetails"><summary>✅ PASSも見る</summary><div class="test-results" id="testPassResults"></div></details></div></div>
 <div class="foot">日本語ワードネット（1.1版）© 2009-2011 NICT, 2012-2015 Francis Bond, 2016-2024 Francis Bond, Takayuki Kuribayashi · Wikidata / CC0 · ConceptNet 5 / CC BY-SA 4.0</div>
 <script>
 const CORE={
@@ -186,9 +186,29 @@ const CORE={
   '人の営み':{desc:'人が日々行う生活・活動のまとまり',emoji:'🌱',up:[],down:['暮らしの痕跡']},
   '途中':{desc:'始まったことがまだ終わっていない状態',emoji:'⏳',up:['状態'],down:[]},
   '日常':{desc:'繰り返される普段の生活',emoji:'🏠',up:['生活'],down:[]},
-  '飲み物':{desc:'飲むためのもの',emoji:'🥤',up:['飲料'],down:['コーヒー']}
+  '飲み物':{desc:'飲むためのもの',emoji:'🥤',up:['飲料'],down:['コーヒー']},
+  '病院で療養すること':{desc:'病院に滞在して治療や回復に専念すること',emoji:'🏥',up:['療養'],down:['入院']},
+  '療養':{desc:'病気やけがを治すために休み治療を受けること',emoji:'🛏️',up:['治療'],down:['病院で療養すること']},
+  '治療':{desc:'病気やけがを改善・回復させるための医療行為',emoji:'🩺',up:['医療'],down:['療養']},
+  '医療':{desc:'健康を守り、病気やけがを診断・治療する営み',emoji:'🏥',up:['活動'],down:['治療']},
+  '悪性腫瘍':{desc:'周囲へ広がる性質をもつ腫瘍',emoji:'🩺',up:['腫瘍'],down:['癌']},
+  '腫瘍':{desc:'細胞が異常に増えてできる組織のかたまり',emoji:'🧬',up:['病気'],down:['悪性腫瘍']},
+  '病気':{desc:'心身の正常な働きが損なわれた状態',emoji:'🩺',up:['健康上の異常'],down:['腫瘍']},
+  '健康上の異常':{desc:'健康な状態から外れ、治療や注意を要する状態',emoji:'🩺',up:['状態'],down:['病気']},
+  '模様':{desc:'表面に現れる形・色・線などの視覚的なパターン',emoji:'🎨',up:['装飾'],down:['花柄']},
+  '花を支える柄':{desc:'植物学で、花を支える細い柄の部分',emoji:'🌿',up:['植物器官'],down:['花柄']},
+  '植物器官':{desc:'植物の体を構成し、特定の働きを担う部分',emoji:'🌿',up:['生物の構造'],down:['花を支える柄']},
+  '玩具':{desc:'遊ぶために作られた道具や物',emoji:'🧸',up:['道具'],down:['積み木']},
+  '知育玩具':{desc:'遊びながら考える力や学びを助ける玩具',emoji:'🧩',up:['教材'],down:['積み木']},
+  '教材':{desc:'学習や教育のために使う材料や道具',emoji:'📚',up:['道具'],down:['知育玩具']},
+  'ごく短い時間':{desc:'ほとんど長さを感じないほど短い時間',emoji:'⏱️',up:['時間'],down:['瞬間']},
+  '時間':{desc:'出来事の前後や長さを捉えるための連続した広がり',emoji:'⏳',up:['時の流れ'],down:['ごく短い時間']},
+  '時の流れ':{desc:'過去から現在、未来へと続く時間の変化',emoji:'⏳',up:[],down:['時間']},
+  'カップ':{desc:'飲み物などを入れる小さな容器',emoji:'☕',up:['容器'],down:['コーヒーカップ']},
+  '容器':{desc:'物を入れたり保持したりするための道具',emoji:'🥣',up:['道具'],down:['カップ']},
+  'コーヒーカップ':{desc:'コーヒーを飲むためのカップ',emoji:'☕',up:['カップ'],down:[]}
 };
-const ALIASES={'いぬ':'犬','イヌ':'犬','わんこ':'犬','ねこ':'猫','ネコ':'猫','珈琲':'コーヒー','くろわっさん':'クロワッサン','哀しい':'悲しい','ヒト':'人間','人':'人間'};
+const ALIASES={'いぬ':'犬','イヌ':'犬','わんこ':'犬','ねこ':'猫','ネコ':'猫','珈琲':'コーヒー','くろわっさん':'クロワッサン','哀しい':'悲しい','ヒト':'人間','人':'人間','積木':'積み木','がん':'癌','ガン':'癌'};
 const STARTERS=['クロワッサン','犬','猫','家','ジュース','指','カフェ','コーヒー','窓','未来','海','椅子','嬉しい','悲しい','面白い','怖い','走る','歩く','食べる','考える'];
 const BUCKETS=128, lemmaCache=new Map(), senseCache=new Map(), wikidataCache=new Map(), wikidataLabelCache=new Map();
 let wordNetAvailable=false;
@@ -206,8 +226,8 @@ const FRIENDLY={
   '栲':'布地','レース地':'レース生地','レース布':'レース生地','工率':'仕事率',
   '倖':'喜び','莫大小':'編み物製品','下足':'履物','衣':'衣類'
 };
-const HIDE_ROOT=new Set(['実体','抽象的実体','物理的実体','存在物','属性','一統','工率','倖','莫大小','下足']);
-const INTERNAL_LABEL_RE=/(Wikidata|ウィキデータ|ウィキベース|可変次数|データモデル|基礎エンティティ|エンティティ|分類体系|文法範疇|品詞|抽象名詞|一統|営造|アーチファクト|付属肢|抽象的実体|物理的実体|栲|工率|倖|莫大小|下足)/i;
+const HIDE_ROOT=new Set(['実体','抽象的実体','物理的実体','存在物','属性','一統','工率','倖','莫大小','下足','期','患','事','感','質']);
+const INTERNAL_LABEL_RE=/(Wikidata|ウィキデータ|ウィキベース|可変次数|データモデル|基礎エンティティ|エンティティ|分類体系|文法範疇|品詞|抽象名詞|一統|営造|アーチファクト|付属肢|抽象的実体|物理的実体|栲|工率|倖|莫大小|下足|期|患|事|感|質)/i;
 const STOP_UP=new Set(['物','物質','性質','状態','感情','心の状態','心の働き','行為','活動','出来事','現象','概念','知識','生物','生命体','生物の構造','存在','経験','文化','集団','空間','役職','可能性','世界の捉え方','人の営み']);
 const STOP_FIRST=new Set(['概念','知識','存在','心の働き','可能性','状態','文化','経験','空間','集団','役職','世界の捉え方','人の営み']);
 
@@ -250,7 +270,13 @@ const GUIDED_UP={
   '階段':['建物の一部'],'建物の一部':['人工物'],'避難経路':['防災設備'],'防災設備':['安全設備'],'安全設備':['人工物'],'移動経路':['通路'],'通路':['空間'],
   '奇跡的な出来事':['出来事'],'まれなこと':['例外'],'例外':['特異な現象'],'特異な現象':['現象'],'奇跡':['超自然的な出来事'],'超自然的な出来事':['宗教的な出来事'],'宗教的な出来事':['宗教'],
   '関心':['心の状態'],'余暇活動':['活動'],'楽しみ':['生活'],'好み':['価値観'],'価値観':['心の傾向'],'心の傾向':['心の状態'],
-  '衣類':['身につけるもの'],'服飾品':['身につけるもの'],'身につけるもの':['人工物'],'編み物製品':['繊維製品'],'足を覆うもの':['身体を保護するもの'],'身体を保護するもの':['身につけるもの']
+  '衣類':['身につけるもの'],'服飾品':['身につけるもの'],'身につけるもの':['人工物'],'編み物製品':['繊維製品'],'足を覆うもの':['身体を保護するもの'],'身体を保護するもの':['身につけるもの'],
+  '病院で療養すること':['療養'],'療養':['治療'],'治療':['医療'],'医療':['活動'],
+  '悪性腫瘍':['腫瘍'],'腫瘍':['病気'],'病気':['健康上の異常'],'健康上の異常':['状態'],
+  '模様':['装飾'],'花を支える柄':['植物器官'],'植物器官':['生物の構造'],
+  '玩具':['道具'],'知育玩具':['教材'],'教材':['道具'],
+  'ごく短い時間':['時間'],'時間':['時の流れ'],
+  'コーヒーカップ':['カップ'],'カップ':['容器'],'容器':['道具']
 };
 const GUIDED_DOWN={};
 for(const [child,parents] of Object.entries(GUIDED_UP))for(const parent of parents)(GUIDED_DOWN[parent]??=[]).push(child);
@@ -315,9 +341,12 @@ const TEST_WORDS=[
   '物','代表','力','橋','あめ','はし','かみ','星','光','窓','森',
   '嬉しい','悲しい','怖い','楽しい','面白い','美しい','尊い','かわいい','寂しい','不思議',
   '走る','歩く','行く','食べる','見る','考える','作る','待つ','描く',
-  '自由','存在','生命','知識','概念','エモい','やばい','だるい','すごい','疲れた','レース','はし','あめ','かみ','総理大臣','大谷翔平','ハチ公','東京タワー','任天堂','となりのトトロ','幻','電源','飲みかけのコーヒー','飲みかけの私のコーヒーカップ','ポスター','アート','高速バス','非常階段','ミラクル','趣味','靴下'
+  '自由','存在','生命','知識','概念','エモい','やばい','だるい','すごい','疲れた','レース','はし','あめ','かみ','総理大臣','大谷翔平','ハチ公','東京タワー','任天堂','となりのトトロ','幻','電源','飲みかけのコーヒー','飲みかけの私のコーヒーカップ','ポスター','アート','高速バス','非常階段','ミラクル','趣味','靴下',
+  '入院','癌','花柄','積木','積み木','瞬間','冷めたコーヒー','赤い靴','古い家','雨に濡れた傘','止まった時計','机に置かれた本','散らかった部屋','濡れたアスファルト','開けっぱなしの窓','夜のコンビニ','公園のベンチ','雨上がりの道路',
+  'キャンバス','オムニバス','エアバス','わからない','知らない','行かない','泣いている','笑ってる','食べたい','帰りたい',
+  '千と千尋の神隠し','風の谷のナウシカ','魔女の宅急便','ハウルの動く城','銀河鉄道の夜','ノルウェイの森','星の王子さま','君の名は','天気の子','もののけ姫','火垂るの墓','崖の上のポニョ'
 ];
-const TEST_INTERNAL_RE=/(Wikidata|ウィキデータ|ウィキベース|可変次数|データモデル|基礎エンティティ|エンティティ|分類体系|文法範疇|品詞|抽象名詞|一統|営造|アーチファクト|付属肢|抽象的実体|物理的実体|工合|滋養分|栲|工率|倖|莫大小|下足)/i;
+const TEST_INTERNAL_RE=/(Wikidata|ウィキデータ|ウィキベース|可変次数|データモデル|基礎エンティティ|エンティティ|分類体系|文法範疇|品詞|抽象名詞|一統|営造|アーチファクト|付属肢|抽象的実体|物理的実体|工合|滋養分|栲|工率|倖|莫大小|下足|期|患|事|感|質)/i;
 const TEST_EXPECT={
   '犬':{first:['哺乳類'],any:['哺乳類','動物','生物'],forbid:['密偵','代行','代表']},'猫':{first:['哺乳類'],any:['哺乳類','動物','生物']},
   'ジュース':{first:['飲料','食品'],any:['飲料','食品'],forbid:['感','工合','属性']},'家':{first:['建物','住居'],any:['住居','建物','人工物']},'指':{first:['身体の一部'],any:['身体の一部','身体']},
@@ -350,19 +379,32 @@ const TEST_EXPECT={
   '非常階段':{first:['階段','避難経路','移動経路'],any:['階段','建物の一部','避難経路','防災設備','移動経路','通路'],forbid:['人間','動物','生物']},
   'ミラクル':{first:['奇跡的な出来事','まれなこと','奇跡','驚き'],any:['奇跡的な出来事','出来事','まれなこと','例外','奇跡','驚き'],forbid:['事']},
   '趣味':{first:['興味','余暇活動','楽しみ','好み'],any:['興味','関心','余暇活動','活動','楽しみ','好み','価値観']},
-  '靴下':{first:['衣類','編み物製品','足を覆うもの'],any:['衣類','身につけるもの','編み物製品','繊維製品','足を覆うもの'],forbid:['莫大小','下足']}
+  '靴下':{first:['衣類','編み物製品','足を覆うもの'],any:['衣類','身につけるもの','編み物製品','繊維製品','足を覆うもの'],forbid:['莫大小','下足']},
+  '入院':{first:['病院で療養すること','治療'],any:['療養','治療','医療'],forbid:['期','一刻','人間']},
+  '癌':{first:['悪性腫瘍','病気'],any:['悪性腫瘍','腫瘍','病気','健康上の異常'],forbid:['患','腫瘤']},
+  '花柄':{first:['模様','花を支える柄'],any:['模様','装飾','花を支える柄','植物器官'],forbid:['花茎','幹']},
+  '積み木':{first:['玩具','知育玩具'],any:['玩具','道具','人工物','知育玩具','教材'],forbid:['人間']},
+  '瞬間':{first:['ごく短い時間','時間'],any:['ごく短い時間','時間','時の流れ'],forbid:['一刻','期']},
+  '冷めたコーヒー':{first:['コーヒー'],any:['コーヒー','飲み物','飲料']},
+  '赤い靴':{first:['靴']},'古い家':{first:['家']},'雨に濡れた傘':{first:['傘']},'止まった時計':{first:['時計']},'机に置かれた本':{first:['本']},
+  'キャンバス':{forbid:['バス']},'オムニバス':{forbid:['バス']},'エアバス':{forbid:['バス']},
+  'となりのトトロ':{first:['作品'],any:['作品','表現','文化']},'千と千尋の神隠し':{first:['作品']},'風の谷のナウシカ':{first:['作品']},'魔女の宅急便':{first:['作品']},'ハウルの動く城':{first:['作品']},'銀河鉄道の夜':{first:['作品']},'ノルウェイの森':{first:['作品']},'星の王子さま':{first:['作品']}
 };
 let testCancelRequested=false,lastTestResults=[];
 
 const COMMON_CATEGORY_PATTERNS=[
   {re:/^(電車|タクシー|飛行機|船|自転車|新幹線|バス)$/,word:'乗り物',label:'🚏 乗り物として',desc:'固有名詞ではなく、まず乗り物という一般カテゴリへ上がる。'},
-  {re:/バス$/,word:'バス',label:'🚌 バスとして',desc:'「高速バス」など複合語は、まずバスという種類へ戻す。'},
+  {re:/^(?:高速|路線|夜行|観光|送迎|シャトル|スクール|空港|リムジン)バス$/,word:'バス',label:'🚌 バスとして',desc:'交通の複合語だけをバスとして扱い、「キャンバス」などの末尾一致は除外する。'},
   {re:/階段$/,word:'階段',label:'🏗️ 建築要素として',desc:'「非常階段」など複合語は、まず階段という一般カテゴリへ上がる。'},
   {re:/(自動販売機|消火器|電気ケトル)$/,word:'装置',label:'⚙️ 装置として',desc:'用途名を含む複合一般名詞は、固有名詞判定より先に装置へ上がる。'},
   {re:/駅$/,word:'交通施設',label:'🚉 交通施設として',desc:'駅名・駅の複合語は、交通施設という一般カテゴリへ上がる。'},
   {re:/店$/,word:'店舗',label:'🏪 店舗として',desc:'店名らしく見えても、まず店舗という一般カテゴリを候補にする。'},
   {re:/道路$/,word:'交通インフラ',label:'🛣️ 交通インフラとして',desc:'道路の複合語は、場所判定より交通インフラを優先する。'}
 ];
+
+const KNOWN_WORK_TITLES=new Set(['となりのトトロ','千と千尋の神隠し','風の谷のナウシカ','魔女の宅急便','ハウルの動く城','銀河鉄道の夜','ノルウェイの森','星の王子さま','君の名は','天気の子','もののけ姫','火垂るの墓','崖の上のポニョ','羅生門','人間失格','こころ','雪国','走れメロス','吾輩は猫である']);
+const BUS_FALSE_POSITIVES=new Set(['キャンバス','オムニバス','エアバス']);
+const COMMON_HEAD_NOUNS=['コーヒーカップ','アスファルト','コンビニ','高速バス','満員電車','非常階段','コーヒー','ジュース','紅茶','お茶','カップ','コップ','道路','教室','部屋','ベンチ','時計','傘','靴','家','本','窓','電車','バス','車','駅','店','学校','公園','机','椅子','花','木','森','空','海','夜','朝','雨','写真','絵','ポスター','看板','チラシ','パッケージ'];
 
 const VIEWPOINTS={
   '面白い':[
@@ -494,6 +536,26 @@ const VIEWPOINTS={
     {label:'🧶 素材・製法として',word:'編み物製品',desc:'編み物・繊維製品として見る。'},
     {label:'👣 用途として',word:'足を覆うもの',desc:'足を覆い保護する用途として見る。'}
   ],
+  '入院':[
+    {label:'🏥 療養として',word:'病院で療養すること',desc:'入院を、病院で治療や回復に専念する行為として見る。'},
+    {label:'🩺 医療として',word:'治療',desc:'入院の目的である治療・医療の側から見る。'}
+  ],
+  '癌':[
+    {label:'🩺 病気として',word:'悪性腫瘍',desc:'癌を、悪性腫瘍という病気の分類として見る。'},
+    {label:'🧬 身体の異常として',word:'病気',desc:'身体の正常な働きが損なわれた状態として見る。'}
+  ],
+  '花柄':[
+    {label:'🌸 模様として',word:'模様',desc:'日常語の「花柄」を、花をモチーフにした模様として見る。'},
+    {label:'🌿 植物の部分として',word:'花を支える柄',desc:'植物学の「花柄（かへい）」として見る。'}
+  ],
+  '積み木':[
+    {label:'🧸 ものとして',word:'玩具',desc:'積み木を、遊ぶために作られた玩具として見る。'},
+    {label:'🧩 学習として',word:'知育玩具',desc:'考える力や学びを助ける知育玩具として見る。'}
+  ],
+  '瞬間':[
+    {label:'⏱️ 時間として',word:'ごく短い時間',desc:'瞬間を、非常に短い時間の長さとして見る。'},
+    {label:'📍 時点として',word:'時間',desc:'ある一点の時を、より広い時間の概念へ上げる。'}
+  ],
   '家':[
     {label:'🧱 構造として',word:'建物',desc:'何であるか・形として上がる。'},
     {label:'🏠 用途として',word:'住居',desc:'何のための場所かで上がる。'},
@@ -561,31 +623,43 @@ function summitCandidates(word,force=false){
 }
 function concreteModeCandidates(dir){if(dir!=='down')return[];return CONCRETE_MODES.map((x,i)=>({word:x.label,source:'具体化モード',badge:'方向を選ぶ',group:'mode',rank:900-i,gloss:x.desc,promptOnly:true,prompt:x.prompt.replace('{word}',current),modeId:x.id,key:`mode:${x.id}`}))}
 function looksExpressionish(word){
-  const w=norm(word);
-  if(!w)return false;
-  if(/(?:疲れた|行きたい|眠れない|困ってる|困っている|楽しかった|嬉しかった|悲しかった|食べたい|帰りたい|眠たい)$/.test(w))return true;
-  if(/(?:している|してる|されている|されてる|していた|してた|できない|できる|られない|れない|たい|たかった|かった|くない|じゃない|ではない)$/.test(w)&&/[ぁ-ん]/.test(w))return true;
+  const w=norm(word);if(!w)return false;
+  if(/(?:疲れた|行きたい|眠れない|困ってる|困っている|楽しかった|嬉しかった|悲しかった|食べたい|帰りたい|眠たい|わからない|分からない|知らない|行かない|泣いている|泣いてる|笑っている|笑ってる)$/.test(w))return true;
+  if(/[ぁ-ん]/.test(w)&&/(?:している|してる|されている|されてる|していた|してた|できない|できる|られない|れない|ない|たい|たかった|かった|くない|じゃない|ではない|ている|てる|っている|ってる)$/.test(w))return true;
   return false;
 }
-function looksNameish(word){const w=norm(word);if(!w||w.length>20||/[\s、。！？!?]/.test(w)||looksExpressionish(w))return false;if(/(の|が|を|に|へ|で|と|から|まで|より|して|した|いる|ある)/.test(w)&&w.length>7)return false;return /^[ぁ-んァ-ヶ一-龠々ーA-Za-z0-9・]+$/.test(w)}
+function looksNameish(word){const w=norm(word);if(!w||w.length>20||/[\s、。！？!?]/.test(w)||looksExpressionish(w)||BUS_FALSE_POSITIVES.has(w))return false;if(/(の|が|を|に|へ|で|と|から|まで|より|して|した|いる|ある)/.test(w)&&w.length>7)return false;return /^[ぁ-んァ-ヶ一-龠々ーA-Za-z0-9・]+$/.test(w)}
 function identityGatewayCandidates(word){if(!looksNameish(word))return[];return [{word:'名前・固有名詞として見る',source:'正体判定',badge:'🏷 名前ならここ',group:'identityGate',rank:690,gloss:'普通の言葉として候補が出ない時だけ使う入口。人名・ペット名・作品名などなら押して正体を選ぶ。',promptOnly:true,revealIdentity:true,key:'identity:gate'}]}
 function identityFallbackCandidates(word){return IDENTITY_FALLBACK.map((x,i)=>({word:x.word,source:'正体を選ぶ',badge:x.label,group:'identity',rank:780-i,gloss:x.desc,identity:true})).concat([{word:'ほかの正体を自分で入力',source:'正体を選ぶ',badge:'✍️ その他',group:'identity',rank:720,gloss:'人・犬・場所などに当てはまらない時は、何者なのかを自分の言葉で入力。',promptOnly:true,prompt:`「${word}」は何の個体・名前？ 例：馬、店、学校、ゲーム作品`,key:'identity:other'}])}
+function isKnownWorkTitle(word){return KNOWN_WORK_TITLES.has(norm(word))}
+function workTitleCandidates(word,dir){if(dir!=='up'||!canResolveIdentityNow()||!isKnownWorkTitle(word))return[];return [{word:'作品',source:'作品名判定',badge:'🎨 作品名として',group:'entity',rank:1320,gloss:'既知の作品タイトルとして判定。文章・場面フレーズより先に「作品」へ合流する。',identity:true}]}
+function headNounOf(word){
+  const w=norm(word);if(!w||isKnownWorkTitle(w)||BUS_FALSE_POSITIVES.has(w))return '';
+  const heads=[...new Set([...COMMON_HEAD_NOUNS,...Object.keys(CORE).filter(x=>x.length>=2),...Object.keys(GUIDED_UP).filter(x=>x.length>=2)])].filter(x=>x&&x!==w).sort((a,b)=>b.length-a.length);
+  for(const h of heads){if(!w.endsWith(h))continue;const pre=w.slice(0,-h.length);if(!pre)continue;if(h==='バス'&&!/^(?:高速|路線|夜行|観光|送迎|シャトル|スクール|空港|リムジン)$/.test(pre))continue;if(pre.length>=1)return canonical(h)}
+  return '';
+}
+function modifierHeadCandidates(word,dir){
+  if(dir!=='up'||!canResolveIdentityNow()||VIEWPOINTS[canonical(word)]?.length)return[];const h=headNounOf(word);if(!h)return[];
+  return [{word:h,source:'中心語抽出',badge:'🎯 修飾を外す',group:'thinking',rank:1280,gloss:`「${word}」の状態・色・場所などの修飾を外し、まず中心の名詞「${h}」へ一段広げる。`}]
+}
 function looksFreePhrase(word){
-  const w=norm(word);if(!w)return false;
-  return w.length>=6&&(/[のをがにでへと]/.test(w)||/(かけ|途中|ながら|まま|ている|てる|した|している)/.test(w));
+  const w=norm(word);if(!w||isKnownWorkTitle(w))return false;
+  return w.length>=6&&(/[のをがにでへと]/.test(w)||/(かけ|途中|ながら|まま|ている|てる|した|している|ない|たい)/.test(w));
 }
 function phraseViewpointCandidates(word,dir){
   if(dir!=='up'||cursor!==0||trail.length!==1||trail[0]?.type!=='start')return[];const w=norm(word);if(!looksFreePhrase(w))return[];
   const out=[];const push=(word,label,desc,rank)=>out.push({word,source:'フレーズ観点',badge:label,group:'viewpoint',rank,gloss:desc,viewpoint:true});
-  if(/(かけ|途中)/.test(w)){
+  if(/(かけ|途中|まま)/.test(w)){
     push('行動の跡','👣 痕跡として','「誰かが何かをしていた」ことが残った痕跡として見る。',1140);
     push('途中','⏳ 状態として','まだ完了していない途中の状態として見る。',1139);
     push('日常','🏠 生活として','日々の暮らしの一場面として見る。',1138);
-    if(/コーヒー|珈琲|ジュース|お茶|紅茶|水/.test(w))push('飲み物','☕ 種類として','目の前の具体物を「飲むもの」という種類へ一段広げる。',1137);
+  }else if(looksExpressionish(w)||/(した|している|ている|てる)/.test(w)){
+    push('出来事','🎬 出来事として','動作や変化を含む文として、そこで起きている出来事へまとめる。',1130);
+    push('状態','🫧 状態として','その時点の状態としてまとめる。',1129);
   }else{
-    push('出来事','🎬 出来事として','文章全体を、そこで起きている出来事としてまとめる。',1130);
-    push('状態','🫧 状態として','文章全体を、その時の状態としてまとめる。',1129);
-    push('日常','🏠 生活として','生活の中の一場面としてまとめる。',1128);
+    push('状態','🫧 状態として','名詞句全体を、その時の状態・様子としてまとめる。',1129);
+    push('日常','🏠 場面として','生活の中の一場面としてまとめる。',1128);
   }
   return out;
 }
@@ -697,11 +771,12 @@ function canResolveIdentityNow(){
 }
 async function collectCandidates(dir){
   const wordAtOpen=current;
-  let fixed=[...routeBackCandidates(dir),...concreteModeCandidates(dir),...viewpointCandidates(wordAtOpen,dir),...phraseViewpointCandidates(wordAtOpen,dir),...commonCategoryCandidates(wordAtOpen,dir),...guidedCandidates(wordAtOpen,dir),...coreCandidates(wordAtOpen,dir)];
+  let fixed=[...routeBackCandidates(dir),...concreteModeCandidates(dir),...workTitleCandidates(wordAtOpen,dir),...modifierHeadCandidates(wordAtOpen,dir),...viewpointCandidates(wordAtOpen,dir),...phraseViewpointCandidates(wordAtOpen,dir),...commonCategoryCandidates(wordAtOpen,dir),...guidedCandidates(wordAtOpen,dir),...coreCandidates(wordAtOpen,dir)];
   let wn=[];try{wn=await wordNetCandidates(wordAtOpen,dir)}catch{}
-  if(dir==='up'&&!currentSense&&(VIEWPOINTS[canonical(wordAtOpen)]?.length||phraseViewpointCandidates(wordAtOpen,dir).length))wn=[]; // 多義語・自由フレーズは観点を選んでから意味を固定する
+  if(dir==='up'&&!currentSense&&(workTitleCandidates(wordAtOpen,dir).length||modifierHeadCandidates(wordAtOpen,dir).length||VIEWPOINTS[canonical(wordAtOpen)]?.length||phraseViewpointCandidates(wordAtOpen,dir).length))wn=[]; // 多義語・作品名・修飾句は観点/中心語を選んでから意味を固定する
   if(dir==='up'&&shouldStopAbove(wordAtOpen)){fixed=[...routeBackCandidates(dir),...summitCandidates(wordAtOpen,true),...viewpointCandidates(wordAtOpen,dir)];wn=[];}
-  let wd=[];if(dir==='up'&&canResolveIdentityNow()&&!currentSense&&fixed.filter(x=>x.group!=='back').length===0&&wn.length===0){try{wd=await wikidataCandidates(wordAtOpen,dir)}catch{}}
+  let wd=[];const titleLikePhrase=dir==='up'&&canResolveIdentityNow()&&!currentSense&&/の/.test(norm(wordAtOpen))&&norm(wordAtOpen).length<=24;
+  if(dir==='up'&&canResolveIdentityNow()&&!currentSense&&((fixed.filter(x=>x.group!=='back').length===0&&wn.length===0)||titleLikePhrase)){try{wd=await wikidataCandidates(wordAtOpen,dir);if(titleLikePhrase)wd=wd.map(x=>x.word==='作品'?{...x,rank:1310}:x)}catch{}}
   let all=merge([...fixed,...wd,...wn]);
   if(!all.some(x=>!x.promptOnly&&x.group!=='back'&&x.group!=='mode')){let cn=[];try{cn=await conceptNetCandidates(wordAtOpen,dir)}catch{}all=merge([...fixed,...wd,...wn,...cn])}
   if(dir==='up'&&canResolveIdentityNow()&&!all.some(x=>!x.promptOnly&&x.group!=='back'&&x.group!=='mode')&&looksNameish(wordAtOpen))all=merge([...all,...identityGatewayCandidates(wordAtOpen)]);
@@ -743,8 +818,9 @@ function analyzeTestRun(start,steps,roundtrip,stoppedReason){
   const seen=new Set();for(const w of canon){if(seen.has(w)){add('FAIL',`同じ語「${w}」を再訪してループ`);break}seen.add(w)}
   for(let i=1;i<words.length;i++)if(isNearDuplicate(words[i-1],words[i])){add('FAIL',`ほぼ同義の「${words[i-1]} → ${words[i]}」を1段として消費`);break}
   for(const w of words)if(TEST_INTERNAL_RE.test(w)){add('FAIL',`内部語・難解語「${w}」を表示`);break}
+  const SAFE_SINGLE=new Set(['物','木','花','雨','紙','髪','神','色','人','心','水','火']);const badSingle=words.find(w=>/^[一-龠々]$/.test(w)&&!SAFE_SINGLE.has(w));if(badSingle)add('FAIL',`一文字だけの辞書ラベル「${badSingle}」を階層語として表示`);
   const lateIdentity=steps.find((x,i)=>i>1&&(x.group==='entity'||x.group==='identity'||x.group==='identityGate'));if(lateIdentity)add('FAIL',`途中の「${lateIdentity.word}」で固有名詞の正体判定に戻った`);
-  const badSenseWords=['密偵','代行','一統','工合','感','可変次数クラス','ウィキデータのエンティティ','倖','莫大小','下足','工率'];const badSense=badSenseWords.find(w=>canon.includes(canonical(w)));if(badSense)add('FAIL',`既知の意味飛び・内部語「${badSense}」を通過`);
+  const badSenseWords=['密偵','代行','一統','工合','感','可変次数クラス','ウィキデータのエンティティ','倖','莫大小','下足','工率','期','患','事','質','一刻','腫瘤','花茎','幹'];const badSense=badSenseWords.find(w=>canon.includes(canonical(w)));if(badSense)add('FAIL',`既知の意味飛び・内部語「${badSense}」を通過`);
   const expect=TEST_EXPECT[canonical(start)];if(expect){const firstHop=steps[1]?.word||'';if(expect.first&&!expect.first.some(w=>canonical(w)===canonical(firstHop)))add('FAIL',`最初の候補が「${firstHop||'停止'}」。期待：${expect.first.join(' / ')}`);if(expect.any&&!expect.any.some(w=>canon.includes(canonical(w))))add('WARN',`期待する方向（${expect.any.join(' / ')}）に一度も入らない`);if(expect.forbid){const bad=expect.forbid.find(w=>canon.includes(canonical(w)));if(bad)add('FAIL',`既知の別義・事故語「${bad}」へ飛んだ`)}}
   if(words.length<=2&&stoppedReason==='end')add('WARN','1段だけで候補が尽きた');
   if(stoppedReason==='action')add('WARN','候補1位が入力式アクションで、自動追跡できなかった');
@@ -779,7 +855,7 @@ function renderTestResults(results,running=false){
   $('#testResults').innerHTML=bad.length?bad.map(row).join(''):(running?'<div class="test-empty">いまのところ怪しい経路なし。続けてテスト中…</div>':'<div class="test-empty">🎉 怪しい経路は検出されへんかった！</div>');
   $('#testPassResults').innerHTML=results.filter(r=>r.severity==='PASS').map(row).join('')||'<div class="test-empty">PASSはまだないで。</div>';
 }
-function testReportText(results){const bad=results.filter(r=>r.severity!=='PASS');const c={FAIL:results.filter(r=>r.severity==='FAIL').length,WARN:results.filter(r=>r.severity==='WARN').length,PASS:results.filter(r=>r.severity==='PASS').length};return [`ことばズーム v10.15 TEST LAB`,`候補一覧の一番上だけを自動選択`,`FAIL ${c.FAIL} / WARN ${c.WARN} / PASS ${c.PASS}`,'',...bad.map(r=>`${r.severity} ${r.start}\n↑ ${r.steps.map(x=>x.word).join(' → ')}${r.roundtrip?.length?'\n↓ '+r.roundtrip.map(x=>`${x.expected}:${x.ok?'OK':'NG'}`).join(' / '):''}\n${r.issues.join(' / ')}`)].join('\n')}
+function testReportText(results){const bad=results.filter(r=>r.severity!=='PASS');const c={FAIL:results.filter(r=>r.severity==='FAIL').length,WARN:results.filter(r=>r.severity==='WARN').length,PASS:results.filter(r=>r.severity==='PASS').length};return [`ことばズーム v10.16 TEST LAB`,`候補一覧の一番上だけを自動選択`,`FAIL ${c.FAIL} / WARN ${c.WARN} / PASS ${c.PASS}`,'',...bad.map(r=>`${r.severity} ${r.start}\n↑ ${r.steps.map(x=>x.word).join(' → ')}${r.roundtrip?.length?'\n↓ '+r.roundtrip.map(x=>`${x.expected}:${x.ok?'OK':'NG'}`).join(' / '):''}\n${r.issues.join(' / ')}`)].join('\n')}
 async function runTestLab(){
   if(!wordNetAvailable){$('#testStatus').textContent='WordNet確認待ち…';await checkWordNet()}
   if(!wordNetAvailable){$('#testStatus').textContent='中止 · WordNet未接続';$('#testSummary').innerHTML='<span class="test-stat fail">⛔ テスト無効</span><span class="test-stat">WordNet OFF</span>';$('#testResults').innerHTML='<div class="test-empty">WordNetがOFFのまま走ると、普通の単語まで固有名詞フォールバックへ流れて誤判定するため、自動テストを中止したで。公開環境でWordNet ONを確認してから実行してな。</div>';return}
