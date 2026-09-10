@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>ことばズーム v10.13</title>
+<title>ことばズーム v10.15</title>
 <style>
 :root{--bg:#f7f5ef;--ink:#20211e;--muted:#73736e;--line:#ddd9cf;--up:#edf0ff;--down:#fff0e9;--blue:#6f7df7;--coral:#ea8f75;--shadow:0 18px 50px rgba(40,42,65,.10)}
 *{box-sizing:border-box} html,body{margin:0;min-height:100%;font-family:Inter,"Hiragino Sans","Yu Gothic",system-ui,sans-serif;color:var(--ink)}
@@ -12,26 +12,26 @@ button,input{font:inherit} button{cursor:pointer}
 a{color:#5967d2}.app{max-width:1040px;margin:0 auto;padding:18px 14px 40px}
 header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px}.brand{display:flex;align-items:center;gap:10px}.logo{width:44px;height:44px;border:2px solid #242520;border-radius:14px;display:grid;place-items:center;background:#fff;font-size:22px;box-shadow:0 8px 18px #2221}h1{font-size:21px;margin:0}.sub{font-size:11px;color:var(--muted);margin-top:2px}.ghost{border:1px solid var(--line);background:#fff9;border-radius:999px;padding:9px 13px;color:#4c5fc7;font-weight:800}
 .layout{display:grid;grid-template-columns:minmax(0,1fr) 270px;gap:16px}.main,.panel{background:rgba(255,253,248,.86);border:1px solid var(--line);box-shadow:var(--shadow);backdrop-filter:blur(8px)}.main{border-radius:28px;padding:18px;overflow:hidden;position:relative}.stage{min-height:680px;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative}.stage:before{content:"";position:absolute;top:104px;bottom:110px;left:50%;width:2px;background:linear-gradient(180deg,rgba(111,125,247,.08),rgba(111,125,247,.45) 30%,rgba(234,143,117,.45) 70%,rgba(234,143,117,.08));transform:translateX(-50%);z-index:0}.level{position:relative;z-index:2;font-size:11px;font-weight:900;letter-spacing:.13em;color:var(--muted);margin:7px}.zoom{position:relative;z-index:2;width:min(470px,96%);border:1px solid var(--line);border-radius:20px;padding:16px 18px;text-align:left;display:flex;justify-content:space-between;align-items:center;transition:.2s transform,.2s box-shadow}.zoom:hover{transform:translateY(-2px);box-shadow:0 12px 28px #2221}.zoom.up{background:linear-gradient(180deg,#f4f5ff,#ebeefe)}.zoom.down{background:linear-gradient(180deg,#fff6f1,#ffede5)}.zoom b{font-size:17px}.zoom small{color:var(--muted);font-size:12px}.zoom strong{font-size:26px}.connector{position:relative;z-index:1;height:30px;width:2px;background:var(--line)}
-.card{position:relative;z-index:2;width:min(540px,98%);border:2px solid #22231f;border-radius:28px;background:#fff;box-shadow:0 14px 0 #e8e3d8,0 22px 46px rgba(55,56,75,.08);padding:28px 20px 24px;text-align:center;animation:float 4s ease-in-out infinite}@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}.eyebrow{font-size:10px;color:var(--muted);font-weight:900;letter-spacing:.12em}.word{font-size:clamp(38px,8vw,62px);font-weight:900;margin:10px 0 6px;letter-spacing:.01em}.desc{font-size:13px;line-height:1.75;color:var(--muted);max-width:420px;margin:0 auto}.emoji{font-size:48px;margin-bottom:4px;display:block}.status{display:inline-flex;align-items:center;gap:6px;margin-top:12px;border-radius:999px;padding:7px 10px;background:#f0eee8;font-size:10px;font-weight:800;color:#6f6c64}.status.good{background:#e9f6ec;color:#32623b}.status.warn{background:#fff1d8;color:#7d5c1c}.start{display:flex;gap:8px;width:min(560px,100%);margin-top:20px;position:relative;z-index:3}.start input{flex:1;border:1px solid var(--line);border-radius:14px;padding:12px 14px;background:#fff;outline:none}.start input:focus{border-color:#aaaee9;box-shadow:0 0 0 3px #e8e9ff}.primary{border:0;border-radius:14px;padding:11px 16px;background:#20231f;color:#fff;font-weight:900}
+.card{position:relative;z-index:2;width:min(540px,98%);border:2px solid #22231f;border-radius:28px;background:#fff;box-shadow:0 14px 0 #e8e3d8,0 22px 46px rgba(55,56,75,.08);padding:28px 20px 24px;text-align:center;animation:float 4s ease-in-out infinite}.center-edit{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center;width:min(430px,100%);margin:10px auto 7px}.center-edit input{min-width:0;width:100%;border:0;border-bottom:2px solid #d8d5ca;background:transparent;padding:7px 4px 8px;text-align:center;font-size:clamp(34px,7vw,58px);font-weight:900;letter-spacing:.01em;color:var(--ink);outline:none}.center-edit input:focus{border-bottom-color:#6f7df7}.center-start{border:1px solid var(--line);background:#f7f5ef;border-radius:999px;padding:9px 12px;font-size:10px;font-weight:900;white-space:nowrap}.center-edit-note{font-size:10px;color:var(--muted);margin:0 auto 8px;line-height:1.5}.center-edit input.dirty{border-bottom-color:#ea8f75}.center-start.ready{background:#20231f;color:#fff;border-color:#20231f}@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}.eyebrow{font-size:10px;color:var(--muted);font-weight:900;letter-spacing:.12em}.word{font-size:clamp(38px,8vw,62px);font-weight:900;margin:10px 0 6px;letter-spacing:.01em}.desc{font-size:13px;line-height:1.75;color:var(--muted);max-width:420px;margin:0 auto}.emoji{font-size:48px;margin-bottom:4px;display:block}.status{display:inline-flex;align-items:center;gap:6px;margin-top:12px;border-radius:999px;padding:7px 10px;background:#f0eee8;font-size:10px;font-weight:800;color:#6f6c64}.status.good{background:#e9f6ec;color:#32623b}.status.warn{background:#fff1d8;color:#7d5c1c}.start{display:flex;gap:8px;width:min(560px,100%);margin-top:20px;position:relative;z-index:3}.start input{flex:1;border:1px solid var(--line);border-radius:14px;padding:12px 14px;background:#fff;outline:none}.start input:focus{border-color:#aaaee9;box-shadow:0 0 0 3px #e8e9ff}.primary{border:0;border-radius:14px;padding:11px 16px;background:#20231f;color:#fff;font-weight:900}
 .side{display:flex;flex-direction:column;gap:12px}.panel{border-radius:20px;padding:15px}.panel h2{font-size:13px;margin:0 0 10px}.panel p{font-size:11px;line-height:1.65;color:var(--muted);margin:0}.quest{background:#202520;color:#fff}.quest p{color:#cbd1cc}.bar{height:7px;background:#414641;border-radius:999px;margin:10px 0;overflow:hidden}.bar i{display:block;height:100%;width:0;background:#fff;transition:.25s width}.history{display:flex;flex-direction:column;gap:7px;max-height:340px;overflow:auto}.h{display:grid;grid-template-columns:28px 1fr;gap:8px}.dot{width:28px;height:28px;border-radius:9px;display:grid;place-items:center;background:#eeeae0;font-size:11px;font-weight:900}.dot.up{background:#e7eaff;color:#4f5fd3}.dot.down{background:#ffe7de;color:#c8684d}.hc{border-bottom:1px solid #ece8df;padding-bottom:8px}.hc b{font-size:12px}.hc span{display:block;font-size:10px;color:var(--muted);margin-top:2px}.tip{border-radius:14px;padding:12px;background:#f3f1ec;font-size:11px;line-height:1.7;color:#66655f}.source-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}.source-pill{font-size:9px;padding:5px 7px;border-radius:999px;border:1px solid var(--line);background:#fff}.source-pill.on{background:#eaf6ec;color:#35613e;border-color:#cce8d2}.source-pill.off{background:#fff1dc;color:#805f24;border-color:#ecd6a8}.hbtn{border:0;background:transparent;width:100%;padding:0;text-align:left;color:inherit}.hbtn:hover .hc b{text-decoration:underline}.hbtn.now .hc{background:#f5f3ec;border-radius:10px;padding:6px 8px}.group-title{font-size:10px;font-weight:900;letter-spacing:.08em;color:#77766f;margin:14px 2px 6px;text-transform:uppercase}.group-title:first-child{margin-top:2px}.badge.route{background:#e9f6ec;color:#35613e}.badge.view{background:#f7eafa;color:#7a4e86}.badge.think{background:#e7f3ff;color:#35658a}.badge.entity{background:#fff3cf;color:#76590b}.badge.summit{background:#eee9ff;color:#6555a0}.badge.mode{background:#e8f5f1;color:#356d61}.badge.identity{background:#fff0df;color:#895a26}.choice.entity{background:#fffaf0}.choice.back{border-style:dashed;background:#f3fbf4}.choice.viewpoint{background:#fcf7fd}.choice.thinking{background:#f6fbff}.choice.summit{background:#f8f6ff}.choice.mode{background:#f3fbf8}.choice.identity{background:#fffaf3}
 .modal{position:fixed;inset:0;background:#17171255;display:none;place-items:center;padding:18px;z-index:20;backdrop-filter:blur(4px)}.modal.show{display:grid}.dialog{width:min(560px,100%);max-height:86vh;overflow:auto;background:#fff;border-radius:24px;padding:18px;box-shadow:0 26px 70px #1113}.dialog h3{margin:0 0 5px;font-size:25px}.help{font-size:12px;color:var(--muted);line-height:1.6}.close{float:right;border:0;background:none;font-size:24px;color:#5d7bea}.choices{display:grid;gap:9px;margin:14px 0}.choice{border:1px solid var(--line);background:#fbfaf6;border-radius:16px;padding:13px;text-align:left;transition:.18s transform,.18s box-shadow}.choice:hover{transform:translateY(-2px);box-shadow:0 12px 26px #2221}.choice .top{display:flex;justify-content:space-between;align-items:center;gap:10px}.choice .cw{font-weight:900;font-size:18px}.badge{font-size:9px;border-radius:999px;padding:4px 7px;background:#eceffd;color:#5564ca;white-space:nowrap}.badge.cn{background:#fff1dc;color:#7b5d25}.badge.core{background:#e9f6ec;color:#35613e}.meta{font-size:10px;color:var(--muted);margin-top:6px;line-height:1.55}.preview{margin-top:8px;padding:9px 10px;border-radius:12px;background:#f1f0eb;font-size:10px;color:#66655f;line-height:1.6}.sense{margin-top:7px;font-size:10px;line-height:1.55;color:#72716b;border-left:3px solid #dfe2ff;padding-left:8px}.loading{padding:16px;border:1px dashed var(--line);border-radius:14px;color:var(--muted);font-size:12px}.hint-zone{margin:12px 0;padding:13px;border-radius:16px;background:linear-gradient(180deg,#f7f7ff,#faf9f5);border:1px solid #e4e2f2}.hint-zone b{font-size:12px}.hint-chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:9px}.hint-chip{border:1px solid #d9d9ea;background:#fff;border-radius:999px;padding:7px 9px;font-size:10px;color:#5f6080}.hint-text{font-size:11px;line-height:1.65;color:#686879;margin-top:8px}.manual-zone{margin-top:14px;padding-top:14px;border-top:1px solid var(--line)}.manual-label{font-size:11px;font-weight:900;color:#64645f;margin-bottom:7px}.manual-row{display:flex;gap:8px}.manual-row input{flex:1;min-width:0;border:1px solid var(--line);border-radius:13px;padding:11px 12px;background:#fff;outline:none}.manual-row input:focus{border-color:#aaaee9;box-shadow:0 0 0 3px #e8e9ff}.manual-help{font-size:10px;line-height:1.6;color:var(--muted);margin-top:7px}.foot{max-width:1040px;margin:12px auto 0;padding:0 14px 24px;font-size:9px;color:#85847d;line-height:1.6;text-align:center}
 .header-actions{display:flex;gap:7px;flex-wrap:wrap;justify-content:flex-end}.test-dialog{width:min(780px,100%)}.test-head{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin:12px 0}.test-actions{display:flex;gap:7px;flex-wrap:wrap}.test-progress{height:9px;background:#ece9e0;border-radius:999px;overflow:hidden;flex:1;min-width:160px}.test-progress i{display:block;height:100%;width:0;background:#222820;transition:.2s width}.test-summary{display:flex;gap:7px;flex-wrap:wrap;margin:10px 0}.test-stat{border:1px solid var(--line);border-radius:999px;padding:6px 9px;font-size:10px;font-weight:900;background:#fff}.test-stat.fail{background:#ffe8e4;color:#9a3e32}.test-stat.warn{background:#fff3d9;color:#7e5d1c}.test-stat.pass{background:#e9f6ec;color:#32623b}.test-results{display:grid;gap:9px;margin-top:10px}.test-row{border:1px solid var(--line);border-radius:16px;padding:12px;background:#fbfaf6}.test-row.fail{border-color:#edb9b0;background:#fff8f6}.test-row.warn{border-color:#ead29d;background:#fffaf0}.test-row.pass{border-color:#cde4d2;background:#f7fcf8}.test-row-top{display:flex;gap:8px;justify-content:space-between;align-items:flex-start}.test-word{font-weight:900;font-size:15px}.test-sev{font-size:9px;font-weight:900;border-radius:999px;padding:4px 7px}.test-row.fail .test-sev{background:#fbdad5;color:#92392f}.test-row.warn .test-sev{background:#ffedc2;color:#795718}.test-row.pass .test-sev{background:#dcf1e1;color:#2e673a}.test-path{font-size:11px;line-height:1.7;margin-top:7px;word-break:break-word}.test-issue{font-size:10px;line-height:1.6;color:#6f6d66;margin-top:5px}.test-note{font-size:10px;line-height:1.6;color:#77746c}.test-empty{padding:18px;border:1px dashed var(--line);border-radius:14px;text-align:center;font-size:11px;color:var(--muted)}.smallbtn{border:1px solid var(--line);background:#fff;border-radius:11px;padding:8px 10px;font-size:10px;font-weight:900}.smallbtn:disabled,.primary:disabled{opacity:.5;cursor:wait}.test-pass-details{margin-top:12px}.test-pass-details summary{cursor:pointer;font-size:11px;font-weight:900;color:#4d6653}.test-statusline{font-size:10px;color:var(--muted);min-width:150px;text-align:right}
-@media(max-width:760px){.layout{grid-template-columns:1fr}.side{display:grid;grid-template-columns:1fr 1fr}.quest{grid-column:1/-1}.stage{min-height:620px}}@media(max-width:520px){.header-actions{gap:4px}.header-actions .ghost{padding:8px 9px;font-size:10px}.app{padding:12px 10px 34px}.sub{display:none}.main{padding:12px;border-radius:21px}.side{grid-template-columns:1fr}.quest{grid-column:auto}.start{flex-direction:column}.primary{width:100%}.card{padding:24px 16px 22px}.word{font-size:42px}.manual-row{flex-direction:column}}
+@media(max-width:760px){.layout{grid-template-columns:1fr}.side{display:grid;grid-template-columns:1fr 1fr}.quest{grid-column:1/-1}.stage{min-height:620px}}@media(max-width:520px){.header-actions{gap:4px}.header-actions .ghost{padding:8px 9px;font-size:10px}.app{padding:12px 10px 34px}.sub{display:none}.main{padding:12px;border-radius:21px}.side{grid-template-columns:1fr}.quest{grid-column:auto}.start{flex-direction:column}.primary{width:100%}.card{padding:24px 16px 22px}.word{font-size:42px}.manual-row{flex-direction:column}.center-edit{grid-template-columns:1fr}.center-start{width:100%}}
 </style>
 </head>
 <body>
 <div class="app">
-<header><div class="brand"><div class="logo">↕</div><div><h1>ことばズーム <span style="font-size:11px;color:#7e86a8">v10.13</span></h1><div class="sub">活用表現・多義語・メタ化の暴走を抑制。意味の分岐を選んでから自然に上がる。</div></div></div><div class="header-actions"><button class="ghost" id="testLab">🧪 TEST LAB</button><button class="ghost" id="random">🎲 おまかせ</button></div></header>
+<header><div class="brand"><div class="logo">↕</div><div><h1>ことばズーム <span style="font-size:11px;color:#7e86a8">v10.15</span></h1><div class="sub">多義語・複合一般名詞・古い辞書語の事故を抑制。観点を選んで自然にズーム。</div></div></div><div class="header-actions"><button class="ghost" id="testLab">🧪 TEST LAB</button><button class="ghost" id="random">🎲 おまかせ</button></div></header>
 <div class="layout">
 <main class="main"><section class="stage">
 <div class="level">ZOOM OUT · 抽象へ</div>
 <button class="zoom up" id="up"><span><b>↑ 抽象化する</b><br><small>上位概念＋観点を変えて広げる</small></span><strong>−</strong></button>
 <div class="connector"></div>
-<div class="card" id="card"><div class="eyebrow">NOW · 今いる階層</div><span class="emoji" id="emoji">🥐</span><div class="word" id="word">クロワッサン</div><div class="desc" id="desc"></div><div class="status" id="status">🌱 上か下を押してみてな</div></div>
+<div class="card" id="card"><div class="eyebrow">NOW · 今いる階層</div><span class="emoji" id="emoji">🥐</span><div class="center-edit"><input id="input" value="クロワッサン" aria-label="現在のことば"><button class="center-start" id="start" type="button">この語で開始</button></div><div class="center-edit-note" id="editNote">ここを書き換えて「この語で開始」を押すと、新しい言葉として履歴をリセットするで。</div><div class="desc" id="desc"></div><div class="status" id="status">🌱 上か下を押してみてな</div></div>
 <div class="connector"></div>
 <button class="zoom down" id="down"><span><b>↓ 具体化する</b><br><small>下位概念＋来た道へ戻る</small></span><strong>＋</strong></button>
 <div class="level">ZOOM IN · 具体へ</div>
-<div class="start"><input id="input" placeholder="何でも入力 例：犬、窓、飲みかけの私のコーヒーカップ"><button class="primary" id="start">この言葉で開始</button></div>
+
 </section></main>
 <aside class="side">
 <section class="panel quest"><h2>🎯 5回ズーム</h2><p>辞書の答えを選んでも、自分の言葉を書いてもOK。</p><div class="bar"><i id="bar"></i></div><p id="count">0 / 5</p></section>
@@ -203,10 +203,11 @@ const FRIENDLY={
   '身体部分':'身体の一部','身体部位':'身体の一部','肉体部分':'身体の一部',
   '営造':'建物','住居施設':'住居','アーチファクト':'人工物','ヒト':'人間','人':'人間',
   '人類':'人間','都市自治体':'都市','会社':'企業','法人':'組織','映画作品':'映画',
-  '栲':'布地','レース地':'レース生地','レース布':'レース生地','工率':'仕事率'
+  '栲':'布地','レース地':'レース生地','レース布':'レース生地','工率':'仕事率',
+  '倖':'喜び','莫大小':'編み物製品','下足':'履物','衣':'衣類'
 };
-const HIDE_ROOT=new Set(['実体','抽象的実体','物理的実体','存在物','属性','一統','工率']);
-const INTERNAL_LABEL_RE=/(Wikidata|ウィキデータ|ウィキベース|可変次数|データモデル|基礎エンティティ|エンティティ|分類体系|文法範疇|品詞|抽象名詞|一統|営造|アーチファクト|付属肢|抽象的実体|物理的実体|栲|工率)/i;
+const HIDE_ROOT=new Set(['実体','抽象的実体','物理的実体','存在物','属性','一統','工率','倖','莫大小','下足']);
+const INTERNAL_LABEL_RE=/(Wikidata|ウィキデータ|ウィキベース|可変次数|データモデル|基礎エンティティ|エンティティ|分類体系|文法範疇|品詞|抽象名詞|一統|営造|アーチファクト|付属肢|抽象的実体|物理的実体|栲|工率|倖|莫大小|下足)/i;
 const STOP_UP=new Set(['物','物質','性質','状態','感情','心の状態','心の働き','行為','活動','出来事','現象','概念','知識','生物','生命体','生物の構造','存在','経験','文化','集団','空間','役職','可能性','世界の捉え方','人の営み']);
 const STOP_FIRST=new Set(['概念','知識','存在','心の働き','可能性','状態','文化','経験','空間','集団','役職','世界の捉え方','人の営み']);
 
@@ -216,7 +217,7 @@ const GUIDED_UP={
   'ジュース':['飲料'],'飲料':['食品'],'食品':['物'],
   '家':['住居','建物'],'住居':['建物'],'建物':['人工物'],'人工物':['物'],
   '指':['身体の一部'],'身体の一部':['身体'],'身体':['生物の構造'],
-  '興味を引く性質':['魅力','性質'],'魅力':['性質'],'興味':['感情'],'喜び':['感情'],'悲しみ':['感情'],'恐怖':['感情'],'感情':['心の状態'],
+  '興味を引く性質':['魅力','性質'],'魅力':['性質'],'興味':['関心'],'喜び':['感情'],'悲しみ':['感情'],'恐怖':['感情'],'感情':['心の状態'],
   '評価':['判断'],'判断':['心の働き'],
   '気品':['性質'],'価値が高い':['価値'],'価値':['評価'],'神聖':['神聖さ'],'神聖さ':['特別性'],'特別性':['性質'],'大切に感じる':['愛着'],'愛着':['感情'],
   '居場所':['生活空間','安心'],'生活空間':['生活'],'人間':['動物','生物'],'哺乳類':['動物'],'鳥':['動物'],'魚':['動物'],'植物':['生物'],
@@ -241,7 +242,15 @@ const GUIDED_UP={
   '心に現れる像':['知覚の経験'],'知覚の経験':['心の経験'],'イメージ':['表象'],'表象':['心の内容'],'心の内容':['心の経験'],
   '虚像':['非現実のもの'],'非現実のもの':['想像上のもの'],'想像上のもの':['概念'],'はかないもの':['一時的なもの'],'一時的なもの':['状態'],
   '電力を供給する装置':['装置'],'装置':['人工物'],'電力供給':['エネルギー供給'],'エネルギー供給':['供給'],'供給':['活動'],
-  '行動の跡':['人の痕跡'],'人の痕跡':['暮らしの痕跡'],'暮らしの痕跡':['人の営み'],'途中':['状態'],'日常':['生活'],'飲み物':['飲料']
+  '行動の跡':['人の痕跡'],'人の痕跡':['暮らしの痕跡'],'暮らしの痕跡':['人の営み'],'途中':['状態'],'日常':['生活'],'飲み物':['飲料'],
+  '印刷物':['制作物'],'制作物':['人工物'],'告知':['情報伝達'],'広告':['情報伝達'],'情報伝達':['コミュニケーション'],'グラフィックデザイン':['視覚表現'],'視覚表現':['表現'],'掲示物':['情報を示すもの'],'情報を示すもの':['人工物'],
+  '良い体験':['経験'],'好ましさ':['評価'],'快':['感情'],
+  '創造物':['人工物'],'文化活動':['文化'],'美的体験':['経験'],'解釈':['意味'],
+  'バス':['乗り物'],'乗り物':['人工物'],'移動手段':['交通'],'交通':['社会インフラ'],'公共交通':['交通システム'],'交通システム':['社会インフラ'],'社会インフラ':['人工物'],'交通施設':['場所'],
+  '階段':['建物の一部'],'建物の一部':['人工物'],'避難経路':['防災設備'],'防災設備':['安全設備'],'安全設備':['人工物'],'移動経路':['通路'],'通路':['空間'],
+  '奇跡的な出来事':['出来事'],'まれなこと':['例外'],'例外':['特異な現象'],'特異な現象':['現象'],'奇跡':['超自然的な出来事'],'超自然的な出来事':['宗教的な出来事'],'宗教的な出来事':['宗教'],
+  '関心':['心の状態'],'余暇活動':['活動'],'楽しみ':['生活'],'好み':['価値観'],'価値観':['心の傾向'],'心の傾向':['心の状態'],
+  '衣類':['身につけるもの'],'服飾品':['身につけるもの'],'身につけるもの':['人工物'],'編み物製品':['繊維製品'],'足を覆うもの':['身体を保護するもの'],'身体を保護するもの':['身につけるもの']
 };
 const GUIDED_DOWN={};
 for(const [child,parents] of Object.entries(GUIDED_UP))for(const parent of parents)(GUIDED_DOWN[parent]??=[]).push(child);
@@ -306,9 +315,9 @@ const TEST_WORDS=[
   '物','代表','力','橋','あめ','はし','かみ','星','光','窓','森',
   '嬉しい','悲しい','怖い','楽しい','面白い','美しい','尊い','かわいい','寂しい','不思議',
   '走る','歩く','行く','食べる','見る','考える','作る','待つ','描く',
-  '自由','存在','生命','知識','概念','エモい','やばい','だるい','すごい','疲れた','レース','はし','あめ','かみ','総理大臣','大谷翔平','ハチ公','東京タワー','任天堂','となりのトトロ','幻','電源','飲みかけのコーヒー','飲みかけの私のコーヒーカップ'
+  '自由','存在','生命','知識','概念','エモい','やばい','だるい','すごい','疲れた','レース','はし','あめ','かみ','総理大臣','大谷翔平','ハチ公','東京タワー','任天堂','となりのトトロ','幻','電源','飲みかけのコーヒー','飲みかけの私のコーヒーカップ','ポスター','アート','高速バス','非常階段','ミラクル','趣味','靴下'
 ];
-const TEST_INTERNAL_RE=/(Wikidata|ウィキデータ|ウィキベース|可変次数|データモデル|基礎エンティティ|エンティティ|分類体系|文法範疇|品詞|抽象名詞|一統|営造|アーチファクト|付属肢|抽象的実体|物理的実体|工合|滋養分|栲|工率)/i;
+const TEST_INTERNAL_RE=/(Wikidata|ウィキデータ|ウィキベース|可変次数|データモデル|基礎エンティティ|エンティティ|分類体系|文法範疇|品詞|抽象名詞|一統|営造|アーチファクト|付属肢|抽象的実体|物理的実体|工合|滋養分|栲|工率|倖|莫大小|下足)/i;
 const TEST_EXPECT={
   '犬':{first:['哺乳類'],any:['哺乳類','動物','生物'],forbid:['密偵','代行','代表']},'猫':{first:['哺乳類'],any:['哺乳類','動物','生物']},
   'ジュース':{first:['飲料','食品'],any:['飲料','食品'],forbid:['感','工合','属性']},'家':{first:['建物','住居'],any:['住居','建物','人工物']},'指':{first:['身体の一部'],any:['身体の一部','身体']},
@@ -333,9 +342,27 @@ const TEST_EXPECT={
   '幻':{first:['心に現れる像','イメージ','虚像','はかないもの'],any:['心に現れる像','知覚の経験','イメージ','表象','虚像','非現実のもの'],forbid:['間違い']},
   '電源':{first:['電力を供給する装置','電力供給'],any:['装置','人工物','電力供給','エネルギー供給'],forbid:['工率','物理現象','自然現象']},
   '飲みかけのコーヒー':{first:['行動の跡','途中','日常','飲み物'],any:['行動の跡','人の痕跡','途中','日常','飲み物']},
-  '飲みかけの私のコーヒーカップ':{first:['行動の跡','途中','日常'],any:['行動の跡','人の痕跡','途中','日常']}
+  '飲みかけの私のコーヒーカップ':{first:['行動の跡','途中','日常'],any:['行動の跡','人の痕跡','途中','日常']},
+  'ポスター':{first:['印刷物','告知','グラフィックデザイン','掲示物'],any:['印刷物','制作物','告知','情報伝達','グラフィックデザイン','視覚表現','掲示物'],forbid:['交通']},
+  '楽しい':{first:['喜び','良い体験','好ましさ','快'],any:['喜び','感情','良い体験','経験','好ましさ','評価','快'],forbid:['倖']},
+  'アート':{first:['創造物','表現','文化活動','美的体験','解釈'],any:['創造物','人工物','表現','文化','美的体験','経験','解釈','意味']},
+  '高速バス':{first:['バス','移動手段','公共交通'],any:['バス','乗り物','移動手段','交通','公共交通','交通システム'],forbid:['場所','空間','人間']},
+  '非常階段':{first:['階段','避難経路','移動経路'],any:['階段','建物の一部','避難経路','防災設備','移動経路','通路'],forbid:['人間','動物','生物']},
+  'ミラクル':{first:['奇跡的な出来事','まれなこと','奇跡','驚き'],any:['奇跡的な出来事','出来事','まれなこと','例外','奇跡','驚き'],forbid:['事']},
+  '趣味':{first:['興味','余暇活動','楽しみ','好み'],any:['興味','関心','余暇活動','活動','楽しみ','好み','価値観']},
+  '靴下':{first:['衣類','編み物製品','足を覆うもの'],any:['衣類','身につけるもの','編み物製品','繊維製品','足を覆うもの'],forbid:['莫大小','下足']}
 };
 let testCancelRequested=false,lastTestResults=[];
+
+const COMMON_CATEGORY_PATTERNS=[
+  {re:/^(電車|タクシー|飛行機|船|自転車|新幹線|バス)$/,word:'乗り物',label:'🚏 乗り物として',desc:'固有名詞ではなく、まず乗り物という一般カテゴリへ上がる。'},
+  {re:/バス$/,word:'バス',label:'🚌 バスとして',desc:'「高速バス」など複合語は、まずバスという種類へ戻す。'},
+  {re:/階段$/,word:'階段',label:'🏗️ 建築要素として',desc:'「非常階段」など複合語は、まず階段という一般カテゴリへ上がる。'},
+  {re:/(自動販売機|消火器|電気ケトル)$/,word:'装置',label:'⚙️ 装置として',desc:'用途名を含む複合一般名詞は、固有名詞判定より先に装置へ上がる。'},
+  {re:/駅$/,word:'交通施設',label:'🚉 交通施設として',desc:'駅名・駅の複合語は、交通施設という一般カテゴリへ上がる。'},
+  {re:/店$/,word:'店舗',label:'🏪 店舗として',desc:'店名らしく見えても、まず店舗という一般カテゴリを候補にする。'},
+  {re:/道路$/,word:'交通インフラ',label:'🛣️ 交通インフラとして',desc:'道路の複合語は、場所判定より交通インフラを優先する。'}
+];
 
 const VIEWPOINTS={
   '面白い':[
@@ -421,6 +448,52 @@ const VIEWPOINTS={
     {label:'🔌 装置として',word:'電力を供給する装置',desc:'電源を、機器へ電力を送る装置として見る。'},
     {label:'⚡ 供給として',word:'電力供給',desc:'電源を、電力を届ける働き・供給として見る。'}
   ],
+  'ポスター':[
+    {label:'🖼️ ものとして',word:'印刷物',desc:'ポスターを、印刷され作られた物として見る。'},
+    {label:'📣 役割として',word:'告知',desc:'人に情報を知らせる役割として見る。'},
+    {label:'🎨 デザインとして',word:'グラフィックデザイン',desc:'視覚表現・デザインの側から見る。'},
+    {label:'📌 掲示物として',word:'掲示物',desc:'掲示して情報を示す物として見る。'}
+  ],
+  '楽しい':[
+    {label:'😊 感情として',word:'喜び',desc:'自分の内側に起きる楽しい気持ちとして見る。'},
+    {label:'🎈 体験として',word:'良い体験',desc:'楽しいと感じる経験・出来事として見る。'},
+    {label:'⭐ 評価として',word:'好ましさ',desc:'その対象を好ましいと判断する評価として見る。'},
+    {label:'🫧 心理として',word:'快',desc:'心地よさ・快の反応として見る。'}
+  ],
+  'アート':[
+    {label:'🛠️ 制作物として',word:'創造物',desc:'作られた作品・制作物として見る。'},
+    {label:'🎨 表現として',word:'表現',desc:'考えや感覚を表す行為・形式として見る。'},
+    {label:'🌍 文化として',word:'文化活動',desc:'社会や文化の中の活動として見る。'},
+    {label:'👁️ 体験として',word:'美的体験',desc:'見る人・体験する人の側から見る。'},
+    {label:'💭 意味として',word:'解釈',desc:'作品が生む意味や読み取りとして見る。'}
+  ],
+  '高速バス':[
+    {label:'🚌 ものとして',word:'バス',desc:'高速バスを、まずバスという乗り物の種類として見る。'},
+    {label:'🚏 用途として',word:'移動手段',desc:'人を移動させる手段として見る。'},
+    {label:'🛣️ 仕組みとして',word:'公共交通',desc:'社会の交通システムの一部として見る。'}
+  ],
+  '非常階段':[
+    {label:'🏗️ 構造として',word:'階段',desc:'建物を構成する階段として見る。'},
+    {label:'🚨 用途として',word:'避難経路',desc:'非常時に避難するための経路として見る。'},
+    {label:'🚶 機能として',word:'移動経路',desc:'上下階を移動するための経路として見る。'}
+  ],
+  'ミラクル':[
+    {label:'✨ 出来事として',word:'奇跡的な出来事',desc:'めったに起きない驚くべき出来事として見る。'},
+    {label:'🌟 珍しさとして',word:'まれなこと',desc:'普通ではない珍しさ・例外として見る。'},
+    {label:'🙏 宗教的に',word:'奇跡',desc:'超自然的・宗教的な奇跡として見る。'},
+    {label:'😲 感情として',word:'驚き',desc:'それを見た人の驚きという感情として見る。'}
+  ],
+  '趣味':[
+    {label:'❤️ 関心として',word:'興味',desc:'自分が関心を向ける対象として見る。'},
+    {label:'🎨 活動として',word:'余暇活動',desc:'実際に時間を使って行う活動として見る。'},
+    {label:'🌱 生活として',word:'楽しみ',desc:'暮らしの中の楽しみとして見る。'},
+    {label:'🪞 自分らしさとして',word:'好み',desc:'自分の好み・価値観の表れとして見る。'}
+  ],
+  '靴下':[
+    {label:'🧦 衣類として',word:'衣類',desc:'身につける衣類・服飾品として見る。'},
+    {label:'🧶 素材・製法として',word:'編み物製品',desc:'編み物・繊維製品として見る。'},
+    {label:'👣 用途として',word:'足を覆うもの',desc:'足を覆い保護する用途として見る。'}
+  ],
   '家':[
     {label:'🧱 構造として',word:'建物',desc:'何であるか・形として上がる。'},
     {label:'🏠 用途として',word:'住居',desc:'何のための場所かで上がる。'},
@@ -441,7 +514,7 @@ function currentNode(){return trail[cursor]||trail[trail.length-1]}
 function rebuildVisited(){visitedSenses.clear();visitedWords.clear();for(let i=0;i<=cursor;i++){const n=trail[i];if(!n)continue;visitedWords.add(canonical(n.word));if(n.sense)visitedSenses.add(n.sense)}}
 function syncNode(n){current=n.word;currentSense=n.sense||null;currentPos=n.pos||'';rebuildVisited()}
 function render(){
-  const info=coreInfo(current);$('#word').textContent=current;
+  const info=coreInfo(current);const centerInput=$('#input');if(centerInput&&document.activeElement!==centerInput){centerInput.value=current;centerInput.classList.remove('dirty');$('#start')?.classList.remove('ready')} 
   $('#desc').textContent=info?.desc||(current.length>12?'自由入力した言葉・場面。辞書にない時は自分の抽象化で進めるで。':currentPos?`${posJa(currentPos)}の意味を固定して階層をたどっているで。`:'辞書・思考ルート・観点から上下を探せるで。');
   $('#emoji').textContent=emojiFor(current);$('#bar').style.width=Math.min(100,moves/5*100)+'%';$('#count').textContent=moves>=5?'達成！ 🎉':moves+' / 5';
   const rows=trail.map((x,i)=>`<button class="h hbtn ${i===cursor?'now':''}" data-history="${i}" title="この言葉へ戻る"><div class="dot ${x.type}">${x.type==='up'?'↑':x.type==='down'?'↓':'•'}</div><div class="hc"><b>${esc(x.word)}</b><span>${esc(x.note)}${i===cursor?' · 今ここ':''}</span></div></button>`).reverse().join('');
@@ -449,7 +522,7 @@ function render(){
 }
 function setStatus(t,k=''){const e=$('#status');e.textContent=t;e.className='status'+(k?' '+k:'')}
 function resetSense(){currentSense=null;currentPos=''}
-function startWord(w){w=canonical(w);if(!w)return;requestSeq++;current=w;resetSense();moves=0;trail=[{word:w,type:'start',note:'自由入力でスタート',sense:null,pos:'',source:'自由入力'}];cursor=0;rebuildVisited();setStatus('🌱 上か下を押してみてな');render()}
+function startWord(w){w=canonical(w);if(!w)return;requestSeq++;current=w;resetSense();moves=0;trail=[{word:w,type:'start',note:'自由入力でスタート',sense:null,pos:'',source:'自由入力'}];cursor=0;rebuildVisited();setStatus('🌱 上か下を押してみてな');render();const i=$('#input');if(i){i.value=current;i.classList.remove('dirty')}$('#start')?.classList.remove('ready')} 
 function jumpTo(i){if(i<0||i>=trail.length)return;requestSeq++;cursor=i;syncNode(trail[cursor]);$('#modal').classList.remove('show');setStatus(`↩ 「${current}」の時点へ戻ったで`,'good');render()}
 
 async function checkWordNet(){try{const r=await fetch('/wn/meta.json',{cache:'no-store'});const m=await r.json();const e=$('#wnState');if(m.available){wordNetAvailable=true;e.textContent=`WordNet ON · ${m.words?.toLocaleString?.()||''}語`;e.className='source-pill on'}else{wordNetAvailable=false;e.textContent='WordNet ビルド失敗';e.className='source-pill off'}}catch{wordNetAvailable=false;const e=$('#wnState');e.textContent='WordNet 未接続';e.className='source-pill off'}}
@@ -460,6 +533,11 @@ async function wnLookup(word){const w=canonical(word),shard=await loadLemmaShard
 
 function coreCandidates(word,dir){const info=coreInfo(word),arr=dir==='up'?info?.up:info?.down;return (arr||[]).map((w,i)=>({word:w,source:'内蔵',badge:'確認済み',group:'core',rank:780-i,gloss:coreInfo(w)?.desc||'',targetSense:null,targetPos:''}))}
 function guidedCandidates(word,dir){const cw=canonical(word);if(dir==='up'&&shouldStopAbove(cw)&&!SUMMIT_VIEWPOINTS[cw]&&!/という概念$/.test(cw))return[];let arr=(dir==='up'?GUIDED_UP:GUIDED_DOWN)[cw]||[];if(dir==='up'&&/という概念$/.test(cw))arr=['概念'];if(dir==='down'&&cw==='生命')arr=['生物',...arr];if(dir==='down'&&cw==='存在')arr=['生きること','物',...arr];if(dir==='down'&&cw==='心の経験')arr=['感情','心の状態',...arr];if(dir==='down'&&cw==='概念')arr=['生物という概念','感情という概念','行為という概念',...arr];return [...new Set(arr)].map((w,i)=>({word:w,source:'思考ルート',badge:dir==='up'?'自然な抽象化':'自然な具体化',group:'thinking',rank:840-i,gloss:coreInfo(w)?.desc||'WordNetの辞書階層を、人が使いやすい現代語で補うルート。'}))}
+function commonCategoryCandidates(word,dir){
+  if(dir!=='up'||!canResolveIdentityNow())return[];const w=norm(word),out=[];
+  for(let i=0;i<COMMON_CATEGORY_PATTERNS.length;i++){const x=COMMON_CATEGORY_PATTERNS[i];if(x.re.test(w)&&canonical(x.word)!==canonical(w))out.push({word:x.word,source:'一般語判定',badge:x.label,group:'thinking',rank:1060-i,gloss:x.desc})}
+  return out;
+}
 function viewpointCandidates(word,dir){if(dir!=='up')return[];return (VIEWPOINTS[canonical(word)]||[]).map((x,i)=>({word:x.word,source:'観点',badge:x.label,group:'viewpoint',rank:1120-i,gloss:x.desc,viewpoint:true}))}
 function hasMetaInTrail(){
   return trail.slice(0,cursor+1).some(n=>/メタ化/.test(n?.note||'')||/という概念$/.test(canonical(n?.word||'')));
@@ -619,7 +697,7 @@ function canResolveIdentityNow(){
 }
 async function collectCandidates(dir){
   const wordAtOpen=current;
-  let fixed=[...routeBackCandidates(dir),...concreteModeCandidates(dir),...viewpointCandidates(wordAtOpen,dir),...phraseViewpointCandidates(wordAtOpen,dir),...guidedCandidates(wordAtOpen,dir),...coreCandidates(wordAtOpen,dir)];
+  let fixed=[...routeBackCandidates(dir),...concreteModeCandidates(dir),...viewpointCandidates(wordAtOpen,dir),...phraseViewpointCandidates(wordAtOpen,dir),...commonCategoryCandidates(wordAtOpen,dir),...guidedCandidates(wordAtOpen,dir),...coreCandidates(wordAtOpen,dir)];
   let wn=[];try{wn=await wordNetCandidates(wordAtOpen,dir)}catch{}
   if(dir==='up'&&!currentSense&&(VIEWPOINTS[canonical(wordAtOpen)]?.length||phraseViewpointCandidates(wordAtOpen,dir).length))wn=[]; // 多義語・自由フレーズは観点を選んでから意味を固定する
   if(dir==='up'&&shouldStopAbove(wordAtOpen)){fixed=[...routeBackCandidates(dir),...summitCandidates(wordAtOpen,true),...viewpointCandidates(wordAtOpen,dir)];wn=[];}
@@ -666,7 +744,7 @@ function analyzeTestRun(start,steps,roundtrip,stoppedReason){
   for(let i=1;i<words.length;i++)if(isNearDuplicate(words[i-1],words[i])){add('FAIL',`ほぼ同義の「${words[i-1]} → ${words[i]}」を1段として消費`);break}
   for(const w of words)if(TEST_INTERNAL_RE.test(w)){add('FAIL',`内部語・難解語「${w}」を表示`);break}
   const lateIdentity=steps.find((x,i)=>i>1&&(x.group==='entity'||x.group==='identity'||x.group==='identityGate'));if(lateIdentity)add('FAIL',`途中の「${lateIdentity.word}」で固有名詞の正体判定に戻った`);
-  const badSenseWords=['密偵','代行','一統','工合','感','可変次数クラス','ウィキデータのエンティティ'];const badSense=badSenseWords.find(w=>canon.includes(canonical(w)));if(badSense)add('FAIL',`既知の意味飛び・内部語「${badSense}」を通過`);
+  const badSenseWords=['密偵','代行','一統','工合','感','可変次数クラス','ウィキデータのエンティティ','倖','莫大小','下足','工率'];const badSense=badSenseWords.find(w=>canon.includes(canonical(w)));if(badSense)add('FAIL',`既知の意味飛び・内部語「${badSense}」を通過`);
   const expect=TEST_EXPECT[canonical(start)];if(expect){const firstHop=steps[1]?.word||'';if(expect.first&&!expect.first.some(w=>canonical(w)===canonical(firstHop)))add('FAIL',`最初の候補が「${firstHop||'停止'}」。期待：${expect.first.join(' / ')}`);if(expect.any&&!expect.any.some(w=>canon.includes(canonical(w))))add('WARN',`期待する方向（${expect.any.join(' / ')}）に一度も入らない`);if(expect.forbid){const bad=expect.forbid.find(w=>canon.includes(canonical(w)));if(bad)add('FAIL',`既知の別義・事故語「${bad}」へ飛んだ`)}}
   if(words.length<=2&&stoppedReason==='end')add('WARN','1段だけで候補が尽きた');
   if(stoppedReason==='action')add('WARN','候補1位が入力式アクションで、自動追跡できなかった');
@@ -701,7 +779,7 @@ function renderTestResults(results,running=false){
   $('#testResults').innerHTML=bad.length?bad.map(row).join(''):(running?'<div class="test-empty">いまのところ怪しい経路なし。続けてテスト中…</div>':'<div class="test-empty">🎉 怪しい経路は検出されへんかった！</div>');
   $('#testPassResults').innerHTML=results.filter(r=>r.severity==='PASS').map(row).join('')||'<div class="test-empty">PASSはまだないで。</div>';
 }
-function testReportText(results){const bad=results.filter(r=>r.severity!=='PASS');const c={FAIL:results.filter(r=>r.severity==='FAIL').length,WARN:results.filter(r=>r.severity==='WARN').length,PASS:results.filter(r=>r.severity==='PASS').length};return [`ことばズーム v10.13 TEST LAB`,`候補一覧の一番上だけを自動選択`,`FAIL ${c.FAIL} / WARN ${c.WARN} / PASS ${c.PASS}`,'',...bad.map(r=>`${r.severity} ${r.start}\n↑ ${r.steps.map(x=>x.word).join(' → ')}${r.roundtrip?.length?'\n↓ '+r.roundtrip.map(x=>`${x.expected}:${x.ok?'OK':'NG'}`).join(' / '):''}\n${r.issues.join(' / ')}`)].join('\n')}
+function testReportText(results){const bad=results.filter(r=>r.severity!=='PASS');const c={FAIL:results.filter(r=>r.severity==='FAIL').length,WARN:results.filter(r=>r.severity==='WARN').length,PASS:results.filter(r=>r.severity==='PASS').length};return [`ことばズーム v10.15 TEST LAB`,`候補一覧の一番上だけを自動選択`,`FAIL ${c.FAIL} / WARN ${c.WARN} / PASS ${c.PASS}`,'',...bad.map(r=>`${r.severity} ${r.start}\n↑ ${r.steps.map(x=>x.word).join(' → ')}${r.roundtrip?.length?'\n↓ '+r.roundtrip.map(x=>`${x.expected}:${x.ok?'OK':'NG'}`).join(' / '):''}\n${r.issues.join(' / ')}`)].join('\n')}
 async function runTestLab(){
   if(!wordNetAvailable){$('#testStatus').textContent='WordNet確認待ち…';await checkWordNet()}
   if(!wordNetAvailable){$('#testStatus').textContent='中止 · WordNet未接続';$('#testSummary').innerHTML='<span class="test-stat fail">⛔ テスト無効</span><span class="test-stat">WordNet OFF</span>';$('#testResults').innerHTML='<div class="test-empty">WordNetがOFFのまま走ると、普通の単語まで固有名詞フォールバックへ流れて誤判定するため、自動テストを中止したで。公開環境でWordNet ONを確認してから実行してな。</div>';return}
@@ -709,6 +787,6 @@ async function runTestLab(){
   try{for(let i=0;i<TEST_WORDS.length;i++){if(testCancelRequested)break;$('#testStatus').textContent=`${i+1} / ${TEST_WORDS.length} · ${TEST_WORDS[i]}`;const r=await runOneTest(TEST_WORDS[i]);lastTestResults.push(r);$('#testBar').style.width=((i+1)/TEST_WORDS.length*100)+'%';renderTestResults(lastTestResults,true);await new Promise(res=>setTimeout(res,0))}}
   finally{restoreAppState(snap);$('#testRun').disabled=false;$('#testCancel').disabled=true;$('#testCopy').disabled=!lastTestResults.some(r=>r.severity!=='PASS');$('#testStatus').textContent=testCancelRequested?`停止 · ${lastTestResults.length}語まで`:`完了 · ${lastTestResults.length}語`;renderTestResults(lastTestResults,false)}
 }
-$('#up').onclick=()=>openChoices('up');$('#down').onclick=()=>openChoices('down');$('#start').onclick=()=>startWord($('#input').value);$('#input').onkeydown=e=>{if(e.key==='Enter')startWord(e.target.value)};$('#random').onclick=()=>startWord(STARTERS[Math.floor(Math.random()*STARTERS.length)]);$('#close').onclick=()=>{$('#modal').classList.remove('show');requestSeq++};$('#modal').onclick=e=>{if(e.target.id==='modal'){$('#modal').classList.remove('show');requestSeq++}};$('#manualAdd').onclick=()=>{const w=$('#manualInput').value.trim();if(w)choose(w,lastDir,'自由入力')};$('#manualInput').onkeydown=e=>{if(e.key==='Enter')$('#manualAdd').click()};$('#testLab').onclick=()=>{$('#testModal').classList.add('show')};$('#testClose').onclick=()=>{$('#testModal').classList.remove('show')};$('#testModal').onclick=e=>{if(e.target.id==='testModal')$('#testModal').classList.remove('show')};$('#testRun').onclick=runTestLab;$('#testCancel').onclick=()=>{testCancelRequested=true;$('#testStatus').textContent='停止処理中…'};$('#testCopy').onclick=async()=>{const text=testReportText(lastTestResults);try{await navigator.clipboard.writeText(text);$('#testStatus').textContent='怪しい結果をコピーしたで ✓'}catch{$('#testStatus').textContent='コピーできへんかった'}};render();checkWordNet();
+$('#up').onclick=()=>openChoices('up');$('#down').onclick=()=>openChoices('down');$('#start').onclick=()=>startWord($('#input').value);$('#input').oninput=e=>{const changed=canonical(e.target.value)!==canonical(current);e.target.classList.toggle('dirty',changed);$('#start')?.classList.toggle('ready',changed)};$('#input').onfocus=e=>{e.target.select()};$('#input').onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();startWord(e.target.value)}else if(e.key==='Escape'){e.target.value=current;e.target.classList.remove('dirty');$('#start')?.classList.remove('ready');e.target.blur()}};$('#random').onclick=()=>startWord(STARTERS[Math.floor(Math.random()*STARTERS.length)]);$('#close').onclick=()=>{$('#modal').classList.remove('show');requestSeq++};$('#modal').onclick=e=>{if(e.target.id==='modal'){$('#modal').classList.remove('show');requestSeq++}};$('#manualAdd').onclick=()=>{const w=$('#manualInput').value.trim();if(w)choose(w,lastDir,'自由入力')};$('#manualInput').onkeydown=e=>{if(e.key==='Enter')$('#manualAdd').click()};$('#testLab').onclick=()=>{$('#testModal').classList.add('show')};$('#testClose').onclick=()=>{$('#testModal').classList.remove('show')};$('#testModal').onclick=e=>{if(e.target.id==='testModal')$('#testModal').classList.remove('show')};$('#testRun').onclick=runTestLab;$('#testCancel').onclick=()=>{testCancelRequested=true;$('#testStatus').textContent='停止処理中…'};$('#testCopy').onclick=async()=>{const text=testReportText(lastTestResults);try{await navigator.clipboard.writeText(text);$('#testStatus').textContent='怪しい結果をコピーしたで ✓'}catch{$('#testStatus').textContent='コピーできへんかった'}};render();checkWordNet();
 </script>
 </body></html>
